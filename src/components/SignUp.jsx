@@ -35,7 +35,7 @@ export default function SignUp(){
                 </div>
                 <div class="copyrights">
                     <p>
-                        &#169 all copyrights are reserved to kmit
+                        &copy; all copyrights are reserved to kmit
                     </p>
                 </div>
             </div>

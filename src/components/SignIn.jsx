@@ -48,7 +48,7 @@ export default function SignIn(){
                 </div>
                 <div className="copyrights">
                     <p>
-                        &#169 all copyrights are reserved to kmit
+                        &copy; all copyrights are reserved to kmit
                     </p>
                 </div>
         </div>
