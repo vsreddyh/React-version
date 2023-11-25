@@ -18,11 +18,11 @@ export default function NewUser(){
                 </p>
                 
                 <form action="/en/newuser" method="post">
-                    <input className="username" type="text" name="username" placeholder="User name" minlength="3" required />
+                    <input className="username" type="text" name="username" placeholder="User name" minLength={3}  required />
                     <br />
-                    <input type="password" name="password" placeholder="Password" minlength="3" required />
+                    <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" minLength={8} required />
                     <br />
-                    <input type="password" name="cpassword" placeholder="Confirm Password" minlength="3" required />
+                    <input type="password" name="cpassword" placeholder="Confirm Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" minLength={8} required />
                     <br />
                     <button type="submit">
                         

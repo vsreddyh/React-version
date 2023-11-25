@@ -1,7 +1,7 @@
 *{
     margin: 0px;
 }
-.abc{
+.abcd{
     margin: 0px;
     border: 0px;
     display: grid;
@@ -120,13 +120,3 @@
 #bodyy{
     background-color: #0E1525;
 }
-
-/* @media(max-width:600px){
-    body{
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr ;
-    }
-    #sider{
-        display:none;
-    }
-} */

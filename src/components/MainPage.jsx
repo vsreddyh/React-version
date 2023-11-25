@@ -7,7 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 export default function MainPage(){
     return(
-        <div>
+        <div className="abcd">
         <div className="content1" id="header">
             <div className="headerset">
                 <div className="logoset">
