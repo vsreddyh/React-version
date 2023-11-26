@@ -19,7 +19,7 @@ app.get("/",cors(),(req,res)=>
 
 mongoose.connect('mongodb://localhost:27017/projectpalace');
 
-app.use(express.static('../public'));
+app.use(express.static('../build'));
 app.use(bodyParser.json());
 app.use(session({
     secret: SESSION_KEY, // Replace with a strong secret for session encryption
@@ -39,6 +39,7 @@ const loginSchema = new mongoose.Schema({
 
 const Course = mongoose.model('student', loginSchema);
 
+//SESSION_CHECKER
 app.get('/checkSessionEndpoint',async(req,res)=>{
     if (req.session.loggedInemail) {
         // If the user is logged in (session contains loggedInUser), serve main-page.html
@@ -105,7 +106,6 @@ app.post("/en/signup",async(req,res)=>{
             };
             transporter.sendMail(message)
             req.session.loggedInemail = username;
-            console.log(req.session)
             res.json({message:"Mail Sent"})
         }
     }
@@ -142,7 +142,18 @@ app.post("/en/signin",async(req,res)=>{
     signin(req,res)
 })
 
-
+//token validation
+app.get(`/validate-token`, function(req, res) {
+  var token = req.params.token;
+  jwt.verify(token, JWT_SECRET, function(err, decoded) {
+    if (err) {
+        res.json({message:'Invalid token',email:'null'})
+    } else {
+        res.json({message:'verified',email:decoded})
+      // Token is valid, decoded object contains the user details
+    }
+  });
+});
 
 //NEW-USER
 app.post("/en/newuser",async(req,res)=>{
@@ -259,6 +270,9 @@ app.post("/",async(req,res)=>{
     }
 })
 */
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+  });
 app.listen(3000,function()
 {
     console.log("server is running")

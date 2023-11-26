@@ -3,14 +3,16 @@ import Header from "./Header";
 import Sider from "./Sider";
 import "./signin.css"
 import axios from "axios";
-import { Link , useNavigate } from "react-router-dom";
+import { Link , useNavigate ,useLocation } from "react-router-dom";
 
 export default function SignUp(){
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: ''
     });
-
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const error = queryParams.get('error');
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async (event) => {
@@ -53,6 +55,7 @@ export default function SignUp(){
                 </div>
                 <div className="err">
                     {errorMessage && <p>{errorMessage}</p>}
+                    {error && <p>{error}</p>}
                 </div>
                 <div className="sighnup">
                     <p>Already have an account?  <Link to="/">Login</Link></p>

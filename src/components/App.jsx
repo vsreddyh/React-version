@@ -5,6 +5,7 @@ import MainPage from "./MainPage";
 import CheckEmail from "./Check-Email";
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from "axios";
+import NewUser from "./NewUser";
 
 export default function App() {
     const [userData, setUserData] = useState(null);
@@ -45,6 +46,7 @@ export default function App() {
                     element={userData ? <MainPage /> : <Navigate to="/" />}
                 />
                 <Route path="/Check-email" element={<CheckEmail/>}/>
+                <Route path="/set-password/nu/:token" element={<NewUser/>}/>
             </Routes>
         </BrowserRouter>
     );
