@@ -12,9 +12,9 @@ export default function NewUser(){
             <Sider />
         
         <div className="body">
-            <div className="body-content">
+            <div id="body-content">
                 <p>
-                    
+                Create your account
                 </p>
                 
                 <form action="/en/newuser" method="post">
@@ -26,18 +26,15 @@ export default function NewUser(){
                     <br />
                     <button type="submit">
                         
-                            Log in <i class="fa-solid fa-arrow-right" style={{color: "#417ce1"}} ></i>
+                            Continue <i class="fa-solid fa-arrow-right" style={{color: "#417ce1"}} ></i>
                         
                     </button>  
                 </form>  
             </div>
-            <div className ="err">
-
-            </div>
             <div className="terms">
                <hr />
                    <p>
-                     By logging in you are accepting
+                     By creating you are accepting
                      <br /> <a href="#">Terms and conditions</a>
                    </p>
             </div>
