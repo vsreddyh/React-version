@@ -7,7 +7,7 @@
     border: 0px;
     display: grid;
     grid-template-columns: 35% 1fr;
-    grid-template-rows: 80px 1fr;
+    grid-template-rows: 65px 1fr;
     height: 100vh;
 }
 
@@ -35,9 +35,8 @@
     font-size: 40px;
     align-items: center;
     margin-left: 20px;
-    padding-top: 7px;
-    margin-bottom: 0px;
     display: flex;
+    padding-bottom: 10px;
 }
 
 #sider{
@@ -132,7 +131,7 @@ hr {
     text-align: center;
     color: rgb(134, 137, 137);
     font-size: 13px;
-    margin-top: 17%;
+    margin-top: 150px;
 }
 
 .terms a{
@@ -146,10 +145,11 @@ hr {
     color:rgb(134, 137, 137);
     font-size: 13px;
     text-align: center;
+    vertical-align: bottom;
 }
 
 @media(max-width:600px){
-    body{
+    .abc{
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr ;
     }
