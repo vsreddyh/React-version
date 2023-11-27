@@ -3,6 +3,7 @@ import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import MainPage from "./MainPage";
 import CheckEmail from "./Check-Email";
+import ForgotPassword from "./ForgotPassword";
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from "axios";
 import NewUser from "./NewUser";
@@ -48,6 +49,7 @@ export default function App() {
                 />
                 <Route path="/Check-email" element={<CheckEmail/>}/>
                 <Route path="/set-password/nu/:token" element={<NewUser/>}/>
+                <Route path="/forgot-password" element={<ForgotPassword/>}/>
             </Routes>
         </BrowserRouter>
     );

@@ -105,7 +105,6 @@ app.post("/en/signup",async(req,res)=>{
                 html: mail,
             };
             transporter.sendMail(message)
-            req.session.loggedInemail = username;
             res.json({message:"Mail Sent"})
         }
     }
@@ -186,9 +185,9 @@ app.post("/en/newuser",async(req,res)=>{
         });
     }
 })
-/*
+
 //send mail
-app.post("/",async(req,res)=>{
+app.post("/en/fpassword",async(req,res)=>{
     const { username } = req.body;
     async function checkStudent(mail) {
         const courses = await Course.find({ email_address: mail });
@@ -201,7 +200,7 @@ app.post("/",async(req,res)=>{
         var email_1 = await checkStudent(username);
 
         if (email_1 === null) {
-            res.redirect('/forgot-password.html?error=User does not exist');
+            res.json({message:'User does not exist'});
         }
         else {
             const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
@@ -246,12 +245,12 @@ app.post("/",async(req,res)=>{
                 html: mail,
             };
             transporter.sendMail(message)
-            res.sendFile(path.join(__dirname, "../check-email.html"));
+            res.json({message:"Mail Sent"});
         }
     }
     create(req,res);
 })
-
+/*
 //new-password
 app.post("/",async(req,res)=>{
     const {password} = req.body;

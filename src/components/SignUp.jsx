@@ -16,9 +16,7 @@ export default function SignUp(){
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('form succesful',formData)
         const response = await axios.post('/en/signup',formData);
-        console.log('response is',response)
         if (response.data.message==='User Already Exists'){
             setErrorMessage('User Already Exists')
         }else{
