@@ -40,6 +40,7 @@ export default function App() {
                     element={userData ? <Navigate to="/main" /> : <SignIn setUserData={setUserData} />}
                     exact
                 />
+                <Route path="/signup/:errorMessage" element={<SignUp />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route
                     path="/main"

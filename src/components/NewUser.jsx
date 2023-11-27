@@ -6,24 +6,60 @@ import "./signin.css"
 import axios from "axios";
 import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 
-
-
 export default function NewUser(){
     const navigate = useNavigate();
     const params = useParams();
     const token = params.token;
     const [errorMessage, setErrorMessage] = useState('');
+    const [error, seterror]=useState('');
+    const [email, setemail]=useState('');
     useEffect(() => {
         const validateToken = async () => {
             const response = await axios.post(`/validate-token/${token}`);
-            if (response.data.message==='Invalid Token'){
-                setErrorMessage('Invalid Token')
-                navigate('/signup')
-            } else{
-                console.log('cathaas')
+            if (response.data.message==='Invalid token'){
+                setErrorMessage(encodeURIComponent('Invalid Token'))
+            } else if(response.data.message==='Token expired'){
+                setErrorMessage(encodeURIComponent('Token Expired'))
+            }
+            else{
+                setemail(response.data.email)
             }}
             validateToken();
     }, [token]);
+    useEffect(() => {
+        if(errorMessage) {
+            navigate(`/signup/${errorMessage}`)
+        }
+    }, [errorMessage]);
+    const [formData, setFormData] = useState({
+        username: '',
+        password:'',
+        cpassword:'',
+    });
+    useEffect(() => {
+        setFormData(formData => ({ ...formData, mail: email }));
+    }, [email]);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const response = await axios.post('/en/newuser',formData);
+        if (response.data.message==='Mail already registered'){
+            setErrorMessage('Mail already registered')
+        }else if (response.data.message==='Passwords are not same'){
+            seterror('Passwords are not same')
+        }else if (response.data.message==='Username Taken'){
+            seterror('Username Taken')
+        }else{
+            navigate('/main')
+        }
+    };
+    
+
+    const handleInputChange = (event) => {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        });
+    };
     
     return(
         <div className="abcde">
@@ -36,12 +72,12 @@ export default function NewUser(){
                 Create your account
                 </p>
                 
-                <form action="/en/newuser" method="post">
-                    <input className="username" type="text" name="username" placeholder="User name" minLength={3}  required />
+                <form onSubmit={handleSubmit}>
+                    <input className="username" type="text" name="username" placeholder="User name" value={formData.username} onChange={handleInputChange} minLength={3}  required />
                     <br />
-                    <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" minLength={8} required />
+                    <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} minLength={8} required />
                     <br />
-                    <input type="password" name="cpassword" placeholder="Confirm Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" minLength={8} required />
+                    <input type="password" name="cpassword" placeholder="Confirm Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.cpassword} onChange={handleInputChange} minLength={8} required />
                     <br />
                     <button type="submit">
                         
@@ -52,6 +88,7 @@ export default function NewUser(){
             </div>
             <div className ="err">
                 {errorMessage && <p>{errorMessage}</p>}
+                {error && <p>{error}</p>}
             </div>
             <div className="terms">
                <hr />

@@ -143,43 +143,46 @@ app.post("/en/signin",async(req,res)=>{
 })
 
 //token validation
-app.get(`/validate-token`, function(req, res) {
-  var token = req.params.token;
-  jwt.verify(token, JWT_SECRET, function(err, decoded) {
-    if (err) {
-        res.json({message:'Invalid token',email:'null'})
-    } else {
-        res.json({message:'verified',email:decoded})
-      // Token is valid, decoded object contains the user details
-    }
-  });
+app.post("/validate-token/:token", function(req, res) {
+    var token = req.params.token;
+    jwt.verify(token, JWT_SECRET, function(err, decoded) {
+        if (err){
+            if (err.name === 'TokenExpiredError') {
+                res.json({message: 'Token expired', email: 'null'});
+            } else{
+                res.json({message: 'Invalid token', email: 'null'});
+            }} 
+        else {
+            res.json({message: 'verified', email: decoded.username});
+            req.session.loggedInemail=decoded.username
+        }
+    });
 });
 
 //NEW-USER
 app.post("/en/newuser",async(req,res)=>{
-    const {username} = req.body;
-    const {password} = req.body;
-    const {cpassword} = req.body;
+    const {mail, username, password, cpassword } = req.body;
+    const mails = await Course.find({ email_address: mail });
     const courses = await Course.find({ student_name: username });
-    if (req.session.loggedInemail === undefined){
-        res.redirect('/sign-up.html?error=Session expired, Try again');
+    if (mails.length!==0){
+        res.json({message:'Mail already registered'})
     } else if (password !== cpassword){
-        res.redirect('/new_user.html?error=Passwords are not same');
+        res.json({message:'Passwords are not same'})
     } else if (courses.length !== 0){
-        res.redirect('/new_user.html?error=Username taken');
+        res.json({message:'Username Taken'})
     }
      else{
         email = req.session.loggedInemail
         bcrypt.hash(password, 8, (err, hash) => {
         const course = new Course({
             student_name : username,
-            email_address : email,
+            email_address : mail,
             password : hash,
             versionKey: false
         })
         course.save();
         req.session.loggedInemail=undefined;
-        res.sendFile(path.join(__dirname, "../main-page.html"));
+        res.json({message:'success'});
         });
     }
 })
@@ -271,7 +274,7 @@ app.post("/",async(req,res)=>{
 })
 */
 app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../build/index.html'));
+    res.sendFile(path.resolve(__dirname, '../build/index.html'));
   });
 app.listen(3000,function()
 {
