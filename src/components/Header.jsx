@@ -1,5 +1,5 @@
 import React from "react";
-import "./signin.css"
+import "./signin.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 
