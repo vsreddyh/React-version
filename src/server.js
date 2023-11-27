@@ -171,7 +171,6 @@ app.post("/en/newuser",async(req,res)=>{
         res.json({message:'Username Taken'})
     }
      else{
-        email = req.session.loggedInemail
         bcrypt.hash(password, 8, (err, hash) => {
         const course = new Course({
             student_name : username,
@@ -203,7 +202,7 @@ app.post("/en/fpassword",async(req,res)=>{
             res.json({message:'User does not exist'});
         }
         else {
-            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '10m' });
             let config = {
                 service: 'gmail',
                 auth: {
@@ -229,7 +228,7 @@ app.post("/en/fpassword",async(req,res)=>{
                         button: {
                             color: "#22BC66",
                             text: "Set your new password",
-                            link: `http://localhost:5000/set-password/np/${token}`
+                            link: `http://localhost:3000/set-password/np/${token}`
                         }
                     },
                     outro: "If you did not request to set a new password, no further action is required on your part.",
@@ -250,28 +249,24 @@ app.post("/en/fpassword",async(req,res)=>{
     }
     create(req,res);
 })
-/*
+
 //new-password
-app.post("/",async(req,res)=>{
-    const {password} = req.body;
-    const {cpassword} = req.body;
-    if (req.session.loggedInemail === undefined){
-        res.redirect('/forgot-password.html?error=Session expired, Try again');
-    } else if (password !== cpassword){
-        res.redirect('/new_password.html?error=Passwords are not same');
+app.post("/newp",async(req,res)=>{
+    const {mail, username, password, cpassword } = req.body;
+    if (password !== cpassword){
+        res.json({message:'Passwords are not same'})
     } 
     else{
-        email = req.session.loggedInemail
-        let user = await Course.findOne({ email_address: email});
+        let user = await Course.findOne({ email_address: mail});
         bcrypt.hash(password, 8, (err, hash) => {
         user.password=password
         user.save();
         req.session.loggedInemail=undefined;
-        res.sendFile(path.join(__dirname, "../main-page.html"));
+        res.json({message:'success'});
         });
     }
 })
-*/
+
 app.get('*', function(req, res) {
     res.sendFile(path.resolve(__dirname, '../build/index.html'));
   });

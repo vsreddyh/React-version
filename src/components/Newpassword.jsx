@@ -2,9 +2,61 @@ import React, {useState , useEffect} from "react";
 import "./new-user.css";
 import Header from "./Header";
 import Sider from "./Sider";
-import "./signin.css"
+import axios from "axios";
+import "./signin.css";
+import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 
-function Newpasword(){
+export default function Newpasword(){
+    console.log('alalalalaa')
+    const navigate = useNavigate();
+    const params = useParams();
+    const token = params.token;
+    const [errorMessage, setErrorMessage] = useState('');
+    const [error, seterror]=useState('');
+    const [email, setemail]=useState('');
+    useEffect(() => {
+        const validateToken = async () => {
+            const response = await axios.post(`/validate-token/${token}`);
+            if (response.data.message==='Invalid token'){
+                setErrorMessage(encodeURIComponent('Invalid Token'))
+            } else if(response.data.message==='Token expired'){
+                setErrorMessage(encodeURIComponent('Token Expired'))
+            }
+            else{
+                setemail(response.data.email)
+            }}
+            validateToken();
+    }, [token]);
+    useEffect(() => {
+        if(errorMessage) {
+            navigate(`/forgot-password/${errorMessage}`)
+        }
+    }, [errorMessage]);
+    const [formData, setFormData] = useState({
+        password:'',
+        cpassword:'',
+    });
+    useEffect(() => {
+        setFormData(formData => ({ ...formData, mail: email }));
+    }, [email]);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const response = await axios.post('/newp',formData);
+        if (response.data.message==='Passwords are not same'){
+            seterror('Passwords are not same')
+        }else{
+            navigate('/')
+        }
+    };
+    
+
+    const handleInputChange = (event) => {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        });
+    };
+    
     return(
         <div className="abcde">
             <Header />
@@ -48,5 +100,3 @@ function Newpasword(){
         </div>
     );
 }
-
-export default Newpassword;

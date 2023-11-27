@@ -7,6 +7,7 @@ import ForgotPassword from "./ForgotPassword";
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from "axios";
 import NewUser from "./NewUser";
+import Newpasword from "./Newpassword";
 
 export default function App() {
     const [userData, setUserData] = useState(null);
@@ -49,7 +50,9 @@ export default function App() {
                 />
                 <Route path="/Check-email" element={<CheckEmail/>}/>
                 <Route path="/set-password/nu/:token" element={<NewUser/>}/>
+                <Route path="/forgot-password/:errorMessage" element={<ForgotPassword/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
+                <Route path="/set-password/np/:token" element={<Newpasword/>}/>
             </Routes>
         </BrowserRouter>
     );
