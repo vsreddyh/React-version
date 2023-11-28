@@ -252,7 +252,7 @@ app.post("/en/fpassword",async(req,res)=>{
 
 //new-password
 app.post("/newp",async(req,res)=>{
-    const {mail, username, password, cpassword } = req.body;
+    const {mail, password, cpassword } = req.body;
     if (password !== cpassword){
         res.json({message:'Passwords are not same'})
     } 
