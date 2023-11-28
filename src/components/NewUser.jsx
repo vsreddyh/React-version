@@ -7,6 +7,7 @@ import axios from "axios";
 import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 
 export default function NewUser(){
+    const year= new Date().getFullYear()
     const navigate = useNavigate();
     const params = useParams();
     const token = params.token;
@@ -94,12 +95,12 @@ export default function NewUser(){
                <hr />
                    <p>
                      By creating you are accepting
-                     <br /> <a href="#">Terms and conditions</a>
+                     <br /> <Link>Terms and conditions</Link>
                    </p>
             </div>
             <div className="copyrights">
                 <p>
-                    &copy; all copyrights are reserved to kmit
+                    Copyright © {year}
                 </p>
             </div>
         </div>

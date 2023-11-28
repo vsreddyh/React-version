@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link , useNavigate ,useParams } from "react-router-dom";
 
 export default function SignUp(){
+    const year= new Date().getFullYear()
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: ''
@@ -65,7 +66,7 @@ export default function SignUp(){
                 </div>
                 <div className="copyrights">
                     <p>
-                        &copy; all copyrights are reserved to kmit
+                        Copyright © {year}
                     </p>
                 </div>
             </div>

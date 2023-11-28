@@ -6,6 +6,7 @@ import "./signin.css"
 import { Link , useNavigate } from "react-router-dom";
 
 export default function SignIn({ setUserData }){
+    const year= new Date().getFullYear()
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
@@ -84,7 +85,7 @@ export default function SignIn({ setUserData }){
                 </div>
                 <div className="copyrights">
                     <p>
-                        &copy; all copyrights are reserved to kmit
+                        Copyright © {year}
                     </p>
                 </div>
         </div>

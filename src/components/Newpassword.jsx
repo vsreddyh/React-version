@@ -7,6 +7,7 @@ import "./signin.css";
 import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 
 export default function Newpasword(){
+    const year= new Date().getFullYear()
     console.log('alalalalaa')
     const navigate = useNavigate();
     const params = useParams();
@@ -88,12 +89,12 @@ export default function Newpasword(){
                <hr />
                    <p>
                      By creating you are accepting
-                     <br /> <a href="#">Terms and conditions</a>
+                     <br /> <Link>Terms and conditions</Link>
                    </p>
             </div>
             <div className="copyrights">
                 <p>
-                    &copy; all copyrights are reserved to kmit
+                    Copyright © {year}
                 </p>
             </div>
         </div>
