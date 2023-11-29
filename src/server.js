@@ -40,7 +40,7 @@ const loginSchema = new mongoose.Schema({
 const Course = mongoose.model('student', loginSchema);
 
 //SESSION_CHECKER
-app.get('/checkSessionEndpoint',async(req,res)=>{
+app.get('/en/checkSessionEndpoint',async(req,res)=>{
     if (req.session.loggedInemail) {
         // If the user is logged in (session contains loggedInUser), serve main-page.html
         res.json(req.session.loggedInemail);
@@ -142,7 +142,7 @@ app.post("/en/signin",async(req,res)=>{
 })
 
 //token validation
-app.post("/validate-token/:token", function(req, res) {
+app.post("/en/validate-token/:token", function(req, res) {
     var token = req.params.token;
     jwt.verify(token, JWT_SECRET, function(err, decoded) {
         if (err){
@@ -251,7 +251,7 @@ app.post("/en/fpassword",async(req,res)=>{
 })
 
 //new-password
-app.post("/newp",async(req,res)=>{
+app.post("/en/newp",async(req,res)=>{
     const {mail, password, cpassword } = req.body;
     if (password !== cpassword){
         res.json({message:'Passwords are not same'})

@@ -16,7 +16,7 @@ export default function NewUser(){
     const [email, setemail]=useState('');
     useEffect(() => {
         const validateToken = async () => {
-            const response = await axios.post(`/validate-token/${token}`);
+            const response = await axios.post(`/en/validate-token/${token}`);
             if (response.data.message==='Invalid token'){
                 setErrorMessage(encodeURIComponent('Invalid Token'))
             } else if(response.data.message==='Token expired'){
