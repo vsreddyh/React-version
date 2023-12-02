@@ -7,6 +7,7 @@ import "./signin.css";
 import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 
 export default function Newpasword(){
+    const year= new Date().getFullYear()
     console.log('alalalalaa')
     const navigate = useNavigate();
     const params = useParams();
@@ -16,7 +17,7 @@ export default function Newpasword(){
     const [email, setemail]=useState('');
     useEffect(() => {
         const validateToken = async () => {
-            const response = await axios.post(`/validate-token/${token}`);
+            const response = await axios.post(`/en/validate-token/${token}`);
             if (response.data.message==='Invalid token'){
                 setErrorMessage(encodeURIComponent('Invalid Token'))
             } else if(response.data.message==='Token expired'){
@@ -41,7 +42,7 @@ export default function Newpasword(){
     }, [email]);
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await axios.post('/newp',formData);
+        const response = await axios.post('/en/newp',formData);
         if (response.data.message==='Passwords are not same'){
             seterror('Passwords are not same')
         }else{
@@ -88,12 +89,12 @@ export default function Newpasword(){
                <hr />
                    <p>
                      By creating you are accepting
-                     <br /> <a href="#">Terms and conditions</a>
+                     <br /> <Link>Terms and conditions</Link>
                    </p>
             </div>
             <div className="copyrights">
                 <p>
-                    &copy; all copyrights are reserved to kmit
+                    Copyright © {year}
                 </p>
             </div>
         </div>
