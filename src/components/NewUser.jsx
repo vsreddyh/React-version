@@ -7,7 +7,6 @@ import axios from "axios";
 import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 
 export default function NewUser(){
-    const year= new Date().getFullYear()
     const navigate = useNavigate();
     const params = useParams();
     const token = params.token;
@@ -16,7 +15,7 @@ export default function NewUser(){
     const [email, setemail]=useState('');
     useEffect(() => {
         const validateToken = async () => {
-            const response = await axios.post(`/en/validate-token/${token}`);
+            const response = await axios.post(`/validate-token/${token}`);
             if (response.data.message==='Invalid token'){
                 setErrorMessage(encodeURIComponent('Invalid Token'))
             } else if(response.data.message==='Token expired'){
@@ -103,28 +102,8 @@ export default function NewUser(){
                     </p>
                 </div>
             </div>
-<<<<<<< HEAD
         
         
-=======
-            <div className ="err">
-                {errorMessage && <p>{errorMessage}</p>}
-                {error && <p>{error}</p>}
-            </div>
-            <div className="terms">
-               <hr />
-                   <p>
-                     By creating you are accepting
-                     <br /> <Link>Terms and conditions</Link>
-                   </p>
-            </div>
-            <div className="copyrights">
-                <p>
-                    Copyright © {year}
-                </p>
-            </div>
-        </div>
->>>>>>> f3dad82706209a76aa0015f53112c389da4ce37a
         </div>
     )
 }
