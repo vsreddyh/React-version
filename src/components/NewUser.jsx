@@ -62,47 +62,48 @@ export default function NewUser(){
     };
     
     return(
-        <div className="abcde">
+        <div className="abc">
             <Header />
             <Sider />
-        
-        <div className="body">
-            <div id="body-content">
-                <p>
-                Create your account
-                </p>
+            <div className="bodyy">
+                <div id="body-content">
+                    <p>
+                    Create your account
+                    </p>
                 
-                <form onSubmit={handleSubmit}>
-                    <input className="username" type="text" name="username" placeholder="User name" value={formData.username} onChange={handleInputChange} minLength={3}  required />
-                    <br />
-                    <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} minLength={8} required />
-                    <br />
-                    <input type="password" name="cpassword" placeholder="Confirm Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.cpassword} onChange={handleInputChange} minLength={8} required />
-                    <br />
-                    <button type="submit">
+                    <form onSubmit={handleSubmit}>
+                        <input className="username" type="text" name="username" placeholder="User name" value={formData.username} onChange={handleInputChange} minLength={3}  required />
+                        <br />
+                        <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} minLength={8} required />
+                        <br />
+                        <input type="password" name="cpassword" placeholder="Confirm Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.cpassword} onChange={handleInputChange} minLength={8} required />
+                        <br />
+                        <button type="submit">
                         
                             Continue <i class="fa-solid fa-arrow-right" style={{color: "#417ce1"}} ></i>
                         
-                    </button>  
-                </form>  
+                        </button>  
+                    </form>  
+                </div>
+                <div className ="err">
+                    {errorMessage && <p>{errorMessage}</p>}
+                    {error && <p>{error}</p>}
+                </div>
+                <div className="terms">
+                    <hr />
+                        <p>
+                        By creating you are accepting
+                        <br /> <a href="#">Terms and conditions</a>
+                        </p>
+                </div>
+                <div className="copyrights">
+                    <p>
+                        &copy; all copyrights are reserved to kmit
+                    </p>
+                </div>
             </div>
-            <div className ="err">
-                {errorMessage && <p>{errorMessage}</p>}
-                {error && <p>{error}</p>}
-            </div>
-            <div className="terms">
-               <hr />
-                   <p>
-                     By creating you are accepting
-                     <br /> <a href="#">Terms and conditions</a>
-                   </p>
-            </div>
-            <div className="copyrights">
-                <p>
-                    &copy; all copyrights are reserved to kmit
-                </p>
-            </div>
-        </div>
+        
+        
         </div>
     )
 }

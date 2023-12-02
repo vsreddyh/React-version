@@ -7,8 +7,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 export default function MainPage(){
     return(
-        <div className="abcd">
-        <div className="content1" id="header">
+        <div className="abc">
+        <div className="content1" id="header1">
             <div className="headerset">
                 <div className="logoset">
                     <div className="dash">
@@ -43,10 +43,10 @@ export default function MainPage(){
                 </div>
             </div>
         </div>
-        <div className="content1" id="sider">
+        <div className="content1" id="sider1">
                 
         </div>
-        <div className="content1" id="bodyy">   
+        <div className="content1" id="bodyy1">   
         </div>
         </div>
     )
