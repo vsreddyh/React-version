@@ -6,26 +6,25 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-export default function StudentLogin(){
+export default function CollegeDetails(){
     const year= new Date().getFullYear();
     
-    const [term, setTerm] = useState('');
-    const [suggestions, setSuggestions] = useState([]);
+    const [term1, setTerm1] = useState('');
+    const [suggestions1, setSuggestions1] = useState([]);
  
     const navigate =useNavigate();
     const handleInputChange= async (event) => {
         const inputValue = event.target.value;
-        setTerm(inputValue);
+        setTerm1(inputValue);
         if (inputValue.length === 0) {
-            setSuggestions([]);
+            setSuggestions1([]);
             return;
         }
     
         try {
-            const response = await axios.get(`/departments?term=${term}`);
+            const response = await axios.get(`/college-details?term1=${term1}`);
             const data = response.data; // Get data directly from the response
-            setSuggestions(data);
-            
+            setSuggestions1(data);
             
            
         } catch (error) {
@@ -35,14 +34,15 @@ export default function StudentLogin(){
     const submit = async() => {
         
         try {
-            const departmentvalue=term;
-            const response=await axios.post("/departments",{ department: departmentvalue });
+            const collegevalue=term1;
+            const response=await axios.post("/college-details",{ college: collegevalue});
             if(response.data==="user saved")
             {
-                navigate("/college-details");
+                navigate("/main");
             }
             
-        } catch (error) {
+        } 
+        catch (error) {
             console.error('Error navigating:', error);
         }
     };
@@ -51,9 +51,9 @@ export default function StudentLogin(){
     
   
       
-    const handleSuggestionClick = (suggestion) => {
-        setTerm(suggestion);
-        setSuggestions([]);
+    const handleSuggestionClick = (suggestion1) => {
+        setTerm1(suggestion1);
+        setSuggestions1([]);
         };
       
     return(
@@ -97,19 +97,19 @@ export default function StudentLogin(){
             <div class="content1" id="bodyy">
                 <div id="body-content">
                     <p class="create" >
-                        Enter your Department name 
+                        Enter your College name 
                     </p>
                     
-                    <form action="/department" method="post" onSubmit={(e) => e.preventDefault()}>
-                        <input class="collegename" type="text" id="collegeInput" placeholder="department" minlength="3" name="department" value={term} onChange={handleInputChange} required />
+                    <form action="/college-details" method="post" onSubmit={(e) => e.preventDefault()}>
+                        <input class="collegename" type="text" id="collegeInput" placeholder="college name" minlength="3" name="college" value={term1} onChange={handleInputChange} required />
                         <br />
                         
                         
                         <div id="suggestions">
-                            {suggestions.map((suggestion,index)=>
+                            {suggestions1.map((suggestion1,index)=>
                             (
-                                <p key={index} className="suggestion" onClick={()=>handleSuggestionClick(suggestion)}>
-                                    {suggestion}
+                                <p key={index} className="suggestion" onClick={()=>handleSuggestionClick(suggestion1)}>
+                                    {suggestion1}
                                 </p>
                             ))}
                             

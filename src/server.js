@@ -18,7 +18,7 @@ app.get("/",cors(),(req,res)=>
 
 })
 
-mongoose.connect('mongodb://localhost:27017/projectpalace');
+mongoose.connect('mongodb://127.0.0.1:27017/projectpalace');
 
 app.use(express.static('../build'));
 app.use(bodyParser.json());
@@ -32,244 +32,105 @@ app.use(session({
     }
 }));
 
-<<<<<<< Updated upstream
 const loginSchema = new mongoose.Schema({
     student_name : String,
     email_address : String,
     password : String,
+    field_name:String,
+    college_name:String,
 },{ versionKey: false });
-
-const Course = mongoose.model('student', loginSchema);
-
-//SESSION_CHECKER
-app.get('/checkSessionEndpoint',async(req,res)=>{
-    if (req.session.loggedInemail) {
-        // If the user is logged in (session contains loggedInUser), serve main-page.html
-        res.json(req.session.loggedInemail);
-    } else {
-        // If not logged in, serve signin.html
-        res.json("continue")
-    }
-})
-
-//LINK-MAILER
-app.post("/en/signup",async(req,res)=>{
-    const { username } = req.body;
-    async function checkStudent(mail) {
-        const courses = await Course.find({ email_address: mail });
-        if (courses.length !== 0) {
-            return null; // User found
-        }
-        return 1;
-    }
-    async function create(req, res) {
-        var email_1 = await checkStudent(username);
-        if (email_1 === null) {
-            res.json({message:"User Already Exists",username:"null"})
-        }
-        else {
-            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
-            let config = {
-                service: 'gmail',
-                auth: {
-                    user: EMAIL,
-                    pass: PASSWORD,
-                },
-            };
-            let transporter = nodemailer.createTransport(config);
-            let MailGenerator = new Mailgen({
-                theme: "default",
-                product: {
-                    name: "PROJECT PALACE",
-                    link: 'https://mailgen.js/'
-                },
-            });
-            let response = {
-                body: {
-                    name: "USER",
-                    intro: "Please click on the following link to set your password:",
-                    action: {
-                        instructions: "Click the button below to set your password:",
-                        button: {
-                            color: "#22BC66",
-                            text: "Set your password",
-                            link: `http://localhost:3000/set-password/nu/${token}`
-                        }
-                    },
-                    outro: "If you did not request to set a password, no further action is required on your part.",
-                },
-            };
-            let mail = MailGenerator.generate(response);
-            let message = {
-                from: EMAIL,
-                to: username,
-                subject: "Your OTP for Verification",
-                html: mail,
-            };
-            transporter.sendMail(message)
-            res.json({message:"Mail Sent"})
-        }
-    }
-    create(req,res);
-})
-    
-
-
-
-//LOGIN
-app.post("/en/signin",async(req,res)=>{
-    async function checkStudent(mail) {
-        const courses = await Course.find({ email_address: mail });
-        if (courses.length === 0) {
-            return null; // User not found
-        }
-        return courses[0].password;
-    }
-
-    async function signin(req, res) {
-        const { username, password } = req.body;
-
-        var userPassword = await checkStudent(username);
-        bcrypt.compare(password, userPassword, (err, result) => {
-            if (userPassword === null) {
-                res.json({message:'User Not found'})
-            } else if (result) {
-                res.json({ message: 'Login successful', user: { username: username } });
-            } else {
-                res.json({message:'Wrong Password', user: username })
-            }
-        })
-    }
-    signin(req,res)
-})
-
-//token validation
-app.post("/validate-token/:token", function(req, res) {
-    var token = req.params.token;
-    jwt.verify(token, JWT_SECRET, function(err, decoded) {
-        if (err){
-            if (err.name === 'TokenExpiredError') {
-                res.json({message: 'Token expired', email: 'null'});
-            } else{
-                res.json({message: 'Invalid token', email: 'null'});
-            }} 
-        else {
-            res.json({message: 'verified', email: decoded.username});
-            req.session.loggedInemail=decoded.username
-        }
-    });
+const CollegeSchema= new mongoose.Schema({
+    college_name:String,
+    email_address:String,
+});
+const departmentSchema=new mongoose.Schema({
+    field_name:String,
 });
 
-//NEW-USER
-app.post("/en/newuser",async(req,res)=>{
-    const {mail, username, password, cpassword } = req.body;
-    const mails = await Course.find({ email_address: mail });
-    const courses = await Course.find({ student_name: username });
-    if (mails.length!==0){
-        res.json({message:'Mail already registered'})
-    } else if (password !== cpassword){
-        res.json({message:'Passwords are not same'})
-    } else if (courses.length !== 0){
-        res.json({message:'Username Taken'})
-    }
-     else{
-        bcrypt.hash(password, 8, (err, hash) => {
-        const course = new Course({
-            student_name : username,
-            email_address : mail,
-            password : hash,
-            versionKey: false
-        })
-        course.save();
-        req.session.loggedInemail=undefined;
-        res.json({message:'success'});
-        });
-    }
-})
+const Course = mongoose.model('student', loginSchema);
+const College = mongoose.model('college',CollegeSchema);
+const Department =mongoose.model('feild',departmentSchema);
 
-//send mail
-app.post("/en/fpassword",async(req,res)=>{
-    const { username } = req.body;
-    async function checkStudent(mail) {
-        const courses = await Course.find({ email_address: mail });
-        if (courses.length === 0) {
-            return null; // User not found
-        }
-        return courses[0].password;
-    }
-    async function create(req, res) {
-        var email_1 = await checkStudent(username);
 
-        if (email_1 === null) {
-            res.json({message:'User does not exist'});
-        }
-        else {
-            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '10m' });
-            let config = {
-                service: 'gmail',
-                auth: {
-                    user: EMAIL,
-                    pass: PASSWORD,
-                },
-            };
-            let transporter = nodemailer.createTransport(config);
-
-            let MailGenerator = new Mailgen({
-                theme: "default",
-                product: {
-                    name: "PROJECT PALACE",
-                    link: 'https://mailgen.js/'
-                },
-            });
-            let response = {
-                body: {
-                    name: "USER",
-                    intro: "Please click on the following link to set your new password:",
-                    action: {
-                        instructions: "Click the button below to set your new password:",
-                        button: {
-                            color: "#22BC66",
-                            text: "Set your new password",
-                            link: `http://localhost:3000/set-password/np/${token}`
-                        }
-                    },
-                    outro: "If you did not request to set a new password, no further action is required on your part.",
-                },
-            };
+//department
+app.get("/departments", async(req,res)=>
+{
+    try{
+        const term=req.query.term;
+        const regex=new RegExp(term,'i');
+        const departments=await Department.find({field_name:regex}).select("field_name").limit(4);
+        const suggestions=departments.map(department=>department.field_name);
+        res.json(suggestions);
         
-            let mail = MailGenerator.generate(response);
         
-            let message = {
-                from: EMAIL,
-                to: username,
-                subject: "Your OTP for Verification",
-                html: mail,
-            };
-            transporter.sendMail(message)
-            res.json({message:"Mail Sent"});
+    }
+    catch(err)
+    {
+        console.error("Error retrieving departments:",err);
+        res.status(500).json({error:"Error retrieving departments"});
+    }
+});
+app.post("/departments", async (req, res) => {
+    const mail = req.session.loggedInemail; // Get the email from session
+    const result = req.body.department;
+    
+    try {
+        const user = await Course.findOne({ email_address:"stella.veronica2002@gmail.com"}); // Find user by email
+        if (user) {
+            user.field_name = result; // Update the field_name
+            await user.save(); // Save changes to the database
+            console.log("User saved:", user);
+            res.json("user saved");
+        } else {
+            res.status(404).json({ message: 'User not found' });
         }
+    } catch (err) {
+        console.error("Error updating user:", err);
+        res.status(500).json({ error: "Error updating user" });
     }
-    create(req,res);
-})
+});
 
-//new-password
-app.post("/newp",async(req,res)=>{
-    const {mail, password, cpassword } = req.body;
-    if (password !== cpassword){
-        res.json({message:'Passwords are not same'})
-    } 
-    else{
-        let user = await Course.findOne({ email_address: mail});
-        bcrypt.hash(password, 8, (err, hash) => {
-        user.password=password
-        user.save();
-        req.session.loggedInemail=undefined;
-        res.json({message:'success'});
-        });
+//college-details
+app.get("/college-details",async (req,res)=>
+{
+   
+    try{
+        const term1=req.query.term1;
+        const regex1 =new RegExp(term1,'i');
+        const colleges=await College.find({college_name:regex1}).select('college_name').limit(10);
+        const suggestions1=colleges.map(college=>college.college_name);
+        res.json(suggestions1);
+    
     }
-})
-=======
->>>>>>> Stashed changes
+    catch(err)
+    {
+        console.error('Error retrieving colleges:',err);
+        res.status(500).json({error:'Error in retriveing colleges'});
+
+    }
+});
+app.post("/college-details",async (req,res)=>
+{
+    const mail = req.session.loggedInemail; // Get the email from session
+    const result = req.body.college;
+    
+    try {
+        const user = await Course.findOne({ email_address:"stella.veronica2002@gmail.com"}); // Find user by email
+        if (user) {
+            user.college_name = result; // Update the field_name
+            await user.save(); // Save changes to the database
+            console.log("User saved:", user);
+            res.json("user saved");
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (err) {
+        console.error("Error updating user:", err);
+        res.status(500).json({ error: "Error updating user" });
+    }
+    
+});
+
 
 app.use("/en",approute);
 app.get('*', function(req, res) {
