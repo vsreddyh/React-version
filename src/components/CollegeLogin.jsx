@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function CollegeLogin(){
     const year= new Date().getFullYear()
+    
     return(
         <div className="fakebody">
             <div className="content1" id="header">

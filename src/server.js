@@ -17,7 +17,7 @@ app.get("/",cors(),(req,res)=>
 
 })
 
-mongoose.connect('mongodb://localhost:27017/projectpalace');
+mongoose.connect('mongodb://127.0.0.1:27017/projectpalace');
 
 app.use(express.static('../build'));
 app.use(bodyParser.json());
@@ -35,9 +35,20 @@ const loginSchema = new mongoose.Schema({
     student_name : String,
     email_address : String,
     password : String,
+    field_name:String,
+    college_name:String,
 },{ versionKey: false });
+const CollegeSchema= new mongoose.Schema({
+    college_name:String,
+    email_address:String,
+});
+const departmentSchema=new mongoose.Schema({
+    field_name:String,
+});
 
 const Course = mongoose.model('student', loginSchema);
+const College = mongoose.model('college',CollegeSchema);
+const Department =mongoose.model('feild',departmentSchema);
 
 //SESSION_CHECKER
 app.get('/checkSessionEndpoint',async(req,res)=>{
@@ -183,6 +194,7 @@ app.post("/en/newuser",async(req,res)=>{
         res.json({message:'success'});
         });
     }
+    req.session.loggedInemail=mail
 })
 
 //send mail
@@ -266,6 +278,85 @@ app.post("/newp",async(req,res)=>{
         });
     }
 })
+//department
+app.get("/departments", async(req,res)=>
+{
+    try{
+        const term=req.query.term;
+        const regex=new RegExp(term,'i');
+        const departments=await Department.find({field_name:regex}).select("field_name").limit(4);
+        const suggestions=departments.map(department=>department.field_name);
+        res.json(suggestions);
+        
+        
+    }
+    catch(err)
+    {
+        console.error("Error retrieving departments:",err);
+        res.status(500).json({error:"Error retrieving departments"});
+    }
+});
+app.post("/departments", async (req, res) => {
+    const mail = req.session.loggedInemail; // Get the email from session
+    const result = req.body.department;
+    
+    try {
+        const user = await Course.findOne({ email_address:"stella.veronica2002@gmail.com"}); // Find user by email
+        if (user) {
+            user.field_name = result; // Update the field_name
+            await user.save(); // Save changes to the database
+            console.log("User saved:", user);
+            res.json("user saved");
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (err) {
+        console.error("Error updating user:", err);
+        res.status(500).json({ error: "Error updating user" });
+    }
+});
+
+//college-details
+app.get("/college-details",async (req,res)=>
+{
+   
+    try{
+        const term1=req.query.term1;
+        const regex1 =new RegExp(term1,'i');
+        const colleges=await College.find({college_name:regex1}).select('college_name').limit(10);
+        const suggestions1=colleges.map(college=>college.college_name);
+        res.json(suggestions1);
+    
+    }
+    catch(err)
+    {
+        console.error('Error retrieving colleges:',err);
+        res.status(500).json({error:'Error in retriveing colleges'});
+
+    }
+});
+app.post("/college-details",async (req,res)=>
+{
+    const mail = req.session.loggedInemail; // Get the email from session
+    const result = req.body.college;
+    
+    try {
+        const user = await Course.findOne({ email_address:"stella.veronica2002@gmail.com"}); // Find user by email
+        if (user) {
+            user.college_name = result; // Update the field_name
+            await user.save(); // Save changes to the database
+            console.log("User saved:", user);
+            res.json("user saved");
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (err) {
+        console.error("Error updating user:", err);
+        res.status(500).json({ error: "Error updating user" });
+    }
+    
+});
+
 
 app.get('*', function(req, res) {
     res.sendFile(path.resolve(__dirname, '../build/index.html'));

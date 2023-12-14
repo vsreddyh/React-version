@@ -49,7 +49,7 @@ export default function NewUser(){
         }else if (response.data.message==='Username Taken'){
             seterror('Username Taken')
         }else{
-            navigate('/main')
+            navigate('/department')
         }
     };
     
@@ -65,7 +65,7 @@ export default function NewUser(){
         <div className="abc">
             <Header />
             <Sider />
-            <div className="bodyy">
+            <div id="bodyy" className="content1">
                 <div id="body-content">
                     <p>
                     Create your account
