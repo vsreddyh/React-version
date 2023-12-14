@@ -24,7 +24,6 @@ export default function SignUp(){
             navigate('/Check-email')
         }   
     };
-
     const handleInputChange = (event) => {
         setFormData({
             ...formData,

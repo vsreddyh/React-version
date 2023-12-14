@@ -8,6 +8,8 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import axios from "axios";
 import NewUser from "./NewUser";
 import Newpasword from "./Newpassword";
+import CollegeLogin from "./CollegeLogin";
+import Newpasword_email from "./newpassword_email";
 
 export default function App() {
     const [userData, setUserData] = useState(null);
@@ -49,10 +51,12 @@ export default function App() {
                     element={userData ? <MainPage /> : <Navigate to="/" />}
                 />
                 <Route path="/Check-email" element={<CheckEmail/>}/>
+                <Route path="/college-signup" element={<CollegeLogin/>}/>
                 <Route path="/set-password/nu/:token" element={<NewUser/>}/>
                 <Route path="/forgot-password/:errorMessage" element={<ForgotPassword/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
                 <Route path="/set-password/np/:token" element={<Newpasword/>}/>
+                <Route path="/set-password/ne/:token" element={<Newpasword_email/>}/>
             </Routes>
         </BrowserRouter>
     );

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const mongoose = require('mongoose')
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -31,6 +32,7 @@ app.use(session({
     }
 }));
 
+<<<<<<< Updated upstream
 const loginSchema = new mongoose.Schema({
     student_name : String,
     email_address : String,
@@ -266,7 +268,10 @@ app.post("/newp",async(req,res)=>{
         });
     }
 })
+=======
+>>>>>>> Stashed changes
 
+app.use("/en",approute);
 app.get('*', function(req, res) {
     res.sendFile(path.resolve(__dirname, '../build/index.html'));
   });

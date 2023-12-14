@@ -25,6 +25,12 @@ export default function SignIn({ setUserData }){
             else if(response.data.message === 'Wrong Password'){
                 setErrorMessage('Wrong Password')
             }
+            //students login
+            else if(response.data.checkstudent===0){
+                setUserData(response.data.user);
+                navigate('/main');
+            }
+            //college login
             else{
                 setUserData(response.data.user);
                 navigate('/main');
