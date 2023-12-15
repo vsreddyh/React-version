@@ -71,7 +71,6 @@ export default function NewUser(){
                     Create your account
                     </p>
                 
-<<<<<<< Updated upstream
                     <form onSubmit={handleSubmit}>
                         <input className="username" type="text" name="username" placeholder="User name" value={formData.username} onChange={handleInputChange} minLength={3}  required />
                         <br />
@@ -102,20 +101,6 @@ export default function NewUser(){
                         &copy; all copyrights are reserved to kmit
                     </p>
                 </div>
-=======
-                <form onSubmit={handleSubmit}>
-                    <input className="username" type="text" name="username" placeholder="User name" value={formData.username} onChange={handleInputChange} minLength={3}  required />
-                    <br />
-                    <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} minLength={8} required />
-                    <br />
-                    <input type="password" name="cpassword" placeholder="Confirm Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.cpassword} onChange={handleInputChange} minLength={8} required />
-                    <br />
-                    <button type="submit">
-                               Next <i className="fa-solid fa-arrow-right"></i>
-                    </button>
-  
-                </form>  
->>>>>>> Stashed changes
             </div>
         
         
