@@ -70,7 +70,7 @@ const signup_college = async(req,res)=>{
     const College = mongoose.model('college', collegeSchema);
     try {
         // Find the document based on the provided college name
-        const result = await College.findOne({ college_name: serverCollegeName });
+        const result = await college.findOne({ college_name: serverCollegeName });
         console.log(result.password)
         if (result.password !== undefined) {
             // User already has a password
@@ -136,7 +136,7 @@ const signup = async(req,res)=>{
     const { username } = req.body;
     async function checkStudent(mail) {
         const courses = await Course.find({ email_address: mail });
-        const result = await college.findOne({ email_address: mail });
+        const result = await college.find({ email_address: mail });
         if (courses.length !== 0) {
             return null; // User found
         }
@@ -423,7 +423,7 @@ const collegeDetails = async(req,res)=>{
     try{
         const term1=req.query.term1;
         const regex1 =new RegExp(term1,'i');
-        const colleges=await College.find({college_name:regex1}).select('college_name').limit(10);
+        const colleges=await college.find({college_name:regex1}).select('college_name').limit(10);
         const suggestions1=colleges.map(college=>college.college_name);
         res.json(suggestions1);
     

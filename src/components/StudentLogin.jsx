@@ -22,7 +22,7 @@ export default function StudentLogin(){
         }
     
         try {
-            const response = await axios.get(`/departments?term=${term}`);
+            const response = await axios.get(`/en/departments?term=${term}`);
             const data = response.data; // Get data directly from the response
             setSuggestions(data);
             
@@ -36,7 +36,7 @@ export default function StudentLogin(){
         
         try {
             const departmentvalue=term;
-            const response=await axios.post("/departments",{ department: departmentvalue });
+            const response=await axios.post("/en/departments",{ department: departmentvalue });
             if(response.data==="user saved")
             {
                 navigate("/college-details");
