@@ -15,7 +15,7 @@ export default function NewUser(){
     const [email, setemail]=useState('');
     useEffect(() => {
         const validateToken = async () => {
-            const response = await axios.post(`/validate-token/${token}`);
+            const response = await axios.post(`/en/validate-token/${token}`);
             if (response.data.message==='Invalid token'){
                 setErrorMessage(encodeURIComponent('Invalid Token'))
             } else if(response.data.message==='Token expired'){
@@ -41,6 +41,7 @@ export default function NewUser(){
     }, [email]);
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log("i am here");
         const response = await axios.post('/en/newuser',formData);
         if (response.data.message==='Mail already registered'){
             setErrorMessage('Mail already registered')

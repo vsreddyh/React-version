@@ -234,6 +234,7 @@ const signin = async(req,res)=>{
 
 //token validation
 const validate_token = function(req, res) {
+    console.log("hello");
     var token = req.params.token;
     jwt.verify(token, JWT_SECRET, function(err, decoded) {
         if (err){
@@ -286,6 +287,7 @@ const newuser = async(req,res)=>{
         res.json({message:'Username Taken'})
     }
      else{
+        console.log(mail)
         bcrypt.hash(password, 8, (err, hash) => {
         const course = new Course({
             student_name : username,
