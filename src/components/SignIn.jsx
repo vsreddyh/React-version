@@ -76,7 +76,7 @@ export default function SignIn({ setUserData }){
                 </div>
                 <div className="sighnup">
                 <p>
-                    New to project?<Link to="/signup">Sign up</Link>
+                    New to project?<Link to="/">Sign up</Link>
                     
                 </p>
                 <Link to="/forgot-password">Forgot Password</Link>

@@ -1,12 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import "./wru.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { Link } from "react-router-dom";
-
-export default function Wru(){
+export default function Category(){
     const year= new Date().getFullYear()
+    const navigate=useNavigate();
+    const [formData,setFormData]=useState({
+            year:"Student"
+    });
+    const handle = async(event)=>{
+        event.preventDefault();
+        console.log("form data is");
+        console.log(formData);
+        try{
+            if(formData.year==='Student'){
+                navigate('/signup');
+            }
+            else if(formData.year==='Hr'){
+                navigate('/signup');
+            }
+            else{
+                navigate('/college-signup');
+            }
+        }
+        catch (error) {
+            console.log(error);
+          }
+        };
+    const handleInputChange = (event) => {
+        setFormData({
+          ...formData,
+          [event.target.name]: event.target.value
+        });
+        console.log(event.target.value)
+      };
+
+
+
+
     return(
         <div className="fakebody">
             <div className="content1" id="header">
@@ -54,14 +87,14 @@ export default function Wru(){
                         select who you are?
                     </p>
                     
-                    <form action="/url" method="GET">
-                        <select  name="year" id="college">
+                    <form onSubmit={handle} method="post">
+                        <select  name="year" id="college" placeholder="category" value={formData.year} onChange={handleInputChange} required>
                             <option value="Student">Student</option>
                             <option value="College">College</option>
                             <option value="Hr">Hr</option>
                         </select>
                         <br />
-                        <button onclick="window.location.href='otp.html'">
+                        <button type="submit">
                             
                             Next <i className="fa-solid fa-arrow-right" style={{color: "#417ce1"}}></i>
                             

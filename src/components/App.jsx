@@ -13,6 +13,7 @@ import Newpasword_email from "./newpassword_email";
 import College from "./CollegeLogin";
 import StudentLogin from "./StudentLogin";
 import CollegeDetails from "./College-details";
+import Category from "./wru";
 
 export default function App() {
     const [userData, setUserData] = useState(null);
@@ -44,7 +45,7 @@ export default function App() {
             <Routes>
                 <Route
                     path="/"
-                    element={userData ? <Navigate to="/main" /> : <SignIn setUserData={setUserData} />}
+                    element={userData ? <Navigate to="/main" /> : <Category setUserData={setUserData} />}
                     exact
                 />
                 <Route path="/signup/:errorMessage" element={<SignUp />} />
@@ -63,6 +64,8 @@ export default function App() {
                 <Route path="/college-login" element={<College />}/>
                 <Route path="/department" element={<StudentLogin/>}/>
                 <Route path="/college-details" element={<CollegeDetails/>}/>
+                <Route path="SignIn" element={<SignIn/>}/>
+
                
             </Routes>
         </BrowserRouter>

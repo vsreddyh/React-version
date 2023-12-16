@@ -96,6 +96,9 @@ export default function CollegeLogin() {
                     {errorMessage && <p>{errorMessage}</p>}
                 </div>
         </div>
+        <div className="sighnup">
+                    <p>Already have an account?  <Link to="/SignIn">Login</Link></p>
+                </div>
 
         <div className="terms">
           <hr />

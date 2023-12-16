@@ -245,7 +245,6 @@ const validate_token = function(req, res) {
             }} 
         else {
             res.json({message: 'verified', email: decoded.username});
-            console.log("i am going to this");
             req.session.loggedInemail=decoded.username
             console.log(decoded.username);
         }

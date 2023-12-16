@@ -54,7 +54,7 @@ export default function SignUp(){
                     {errorMessage && <p>{errorMessage}</p>}
                 </div>
                 <div className="sighnup">
-                    <p>Already have an account?  <Link to="/">Login</Link></p>
+                    <p>Already have an account?  <Link to="/SignIn">Login</Link></p>
                 </div>
                 <div className="terms">
                    <hr />
