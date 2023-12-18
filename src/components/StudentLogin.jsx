@@ -32,11 +32,12 @@ export default function StudentLogin(){
             console.error('Error fetching autocomplete data:', error);
         }
     };
-    const submit = async() => {
-        
+    const submit = async(event) => {
+        event.preventDefault();
         try {
             const departmentvalue=term;
             const response=await axios.post("/en/departments",{ department: departmentvalue });
+            console.log(response)
             if(response.data==="user saved")
             {
                 navigate("/college-details");
@@ -100,7 +101,7 @@ export default function StudentLogin(){
                         Enter your Department name 
                     </p>
                     
-                    <form action="/department" method="post" onSubmit={(e) => e.preventDefault()}>
+                    <form onSubmit={submit}>
                         <input class="collegename" type="text" id="collegeInput" placeholder="department" minlength="3" name="department" value={term} onChange={handleInputChange} required />
                         <br />
                         
@@ -115,7 +116,7 @@ export default function StudentLogin(){
                             
                         </div>
                         <br />
-                        <button type="submit" value="submit" class="submit" onClick={submit}>Next</button>
+                        <button type="submit" value="submit" class="submit">Next</button>
                     </form>  
                 </div>
             

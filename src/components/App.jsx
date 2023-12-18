@@ -64,7 +64,7 @@ export default function App() {
                 <Route path="/college-login" element={<College />}/>
                 <Route path="/department" element={<StudentLogin/>}/>
                 <Route path="/college-details" element={<CollegeDetails/>}/>
-                <Route path="SignIn" element={<SignIn/>}/>
+                <Route path="/SignIn" element={<SignIn/>}/>
 
                
             </Routes>

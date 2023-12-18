@@ -286,7 +286,6 @@ const newuser = async(req,res)=>{
         res.json({message:'Username Taken'})
     }
      else{
-        console.log(mail)
         bcrypt.hash(password, 8, (err, hash) => {
         const course = new Course({
             student_name : username,
@@ -295,6 +294,7 @@ const newuser = async(req,res)=>{
             versionKey: false
         })
         course.save();
+        req.session.loggedInemail=mail
         res.json({message:'success'});
         });
     }
@@ -386,9 +386,8 @@ const newp = async(req,res)=>{
 const departments =async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.department;
-    
     try {
-        const user = await Course.findOne({ email_address:"stella.veronica2002@gmail.com"}); // Find user by email
+        const user = await Course.findOne({ email_address:mail}); // Find user by email
         if (user) {
             user.field_name = result; // Update the field_name
             await user.save(); // Save changes to the database
