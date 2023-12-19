@@ -89,7 +89,6 @@ const checkSessionEndpoint = async(req,res)=>{
 const signup_college = async(req,res)=>{
     
     const CollegeName  = req.body.serverCollegeName;
-    const college = mongoose.model('college', collegeSchema);
     try {
         // Find the document based on the provided college name
         const result = await college.findOne({ college_name: CollegeName });
@@ -318,6 +317,7 @@ const newuser = async(req,res)=>{
             versionKey: false
         })
         course.save();
+        req.session.loggedInemail=mail
         res.json({message:'success'});
         });
     }
