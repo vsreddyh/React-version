@@ -43,10 +43,10 @@ const handleSuggestionClick = (suggestion1) => {
 const handle = async (event) => {
   event.preventDefault();
   try {
-    console.log('data is', formData);
-    const response = await axios.post('/en/signup_college', formData);
+    const CollegeName=term;
+    const response = await axios.post('/en/signup_college',{serverCollegeName:CollegeName});
 
-    console.log(response.data.message);
+   
     if (response.data.message === 'User already registered') {
       setErrorMessage('User Already Exists');
     }
@@ -56,6 +56,7 @@ const handle = async (event) => {
     }catch (error) {
       console.log(error);
     }
+    
   };
 
   

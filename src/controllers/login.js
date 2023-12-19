@@ -87,7 +87,7 @@ const checkSessionEndpoint = async(req,res)=>{
 //colege send mailer
 
 const signup_college = async(req,res)=>{
-    console.log(req.body);
+    
     const CollegeName  = req.body.serverCollegeName;
     const college = mongoose.model('college', collegeSchema);
     try {
@@ -297,6 +297,7 @@ const mailpass = async(req,res)=>{
 
 //NEW-USER
 const newuser = async(req,res)=>{
+    
     const {mail,username, password, cpassword } = req.body;
     const mails = await Course.find({ email_address: mail });
     const courses = await Course.find({ student_name: username });
@@ -320,6 +321,7 @@ const newuser = async(req,res)=>{
         res.json({message:'success'});
         });
     }
+    req.session.loggedInemail=mail;
 }
 
 

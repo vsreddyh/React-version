@@ -101,7 +101,7 @@ export default function StudentLogin(){
                         Enter your Department name 
                     </p>
                     
-                    <form onSubmit={submit}>
+                    <form  action="/departments" method="post" onSubmit={submit}>
                         <input class="collegename" type="text" id="collegeInput" placeholder="department" minlength="3" name="department" value={term} onChange={handleInputChange} required />
                         <br />
                         
