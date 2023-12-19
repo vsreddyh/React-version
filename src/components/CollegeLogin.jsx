@@ -13,30 +13,52 @@ export default function CollegeLogin() {
   });
   const { errorMessage: initialErrorMessage } = useParams();
   const [errorMessage, setErrorMessage] = useState(initialErrorMessage ? decodeURIComponent(initialErrorMessage) : '');
-
-  const handle = async (event) => {
-    event.preventDefault();
-    try {
-      console.log('data is', formData);
-      const response = await axios.post('/en/signup_college', formData);
-      console.log(response.data.message);
-      if (response.data.message === 'User already registered') {
-        setErrorMessage('User Already Exists');
+  const [term,setTerm]=useState('');
+  const [suggestions1, setSuggestions1] = useState([]);
+  const handleInputChange= async (event) => {
+    const inputValue = event.target.value;
+    setTerm(inputValue);
+    if (inputValue.length === 0) {
+        setSuggestions1([]);
+        return;
     }
-     else {
-        navigate('/check-email');
-      }
+
+    try {
+        const response = await axios.get(`/en/signup_college?term=${term}`);
+        const data = response.data; // Get data directly from the response
+        setSuggestions1(data);
+        
+       
     } catch (error) {
+        console.error('Error fetching autocomplete data:', error);
+    }
+};
+
+
+const handleSuggestionClick = (suggestion1) => {
+  setTerm(suggestion1);
+  setSuggestions1([]);
+  };
+
+const handle = async (event) => {
+  event.preventDefault();
+  try {
+    console.log('data is', formData);
+    const response = await axios.post('/en/signup_college', formData);
+
+    console.log(response.data.message);
+    if (response.data.message === 'User already registered') {
+      setErrorMessage('User Already Exists');
+    }
+   else {
+      navigate('/check-email');
+      }
+    }catch (error) {
       console.log(error);
     }
   };
 
-  const handleInputChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value
-    });
-  };
+  
 
   return (
     <div className="fakebody">
@@ -83,9 +105,17 @@ export default function CollegeLogin() {
           </p>
 
           <form onSubmit={handle} method="post">
-            <input name="serverCollegeName" className="collegename" type="text" id="collegeInput" placeholder="College Name" onChange={handleInputChange} minLength="3" required />
+            <input name="serverCollegeName" className="collegename" type="text" id="collegeInput" placeholder="College Name"  value={term} onChange={handleInputChange} minLength="3" required />
             <br />
-            <div id="suggestions"></div>
+            <div id="suggestions">
+                            {suggestions1.map((suggestion1,index)=>
+                            (
+                                <p key={index} className="suggestion" onClick={()=>handleSuggestionClick(suggestion1)}>
+                                    {suggestion1}
+                                </p>
+                            ))}
+                            
+                        </div>
             <button type="submit">
 
               Next <i className="fa-solid fa-arrow-right"></i>

@@ -52,6 +52,28 @@ const Course = mongoose.model('student', loginSchema);
 const college=mongoose.model('college',collegeSchema);
 const Department =mongoose.model('feild',departmentSchema);
 
+const getsignupCollege=async(req,res)=>
+{
+    
+    try{
+        const term1=req.query.term;
+        const regex1 =new RegExp(term1,'i');
+        const colleges=await college.find({college_name:regex1}).select('college_name').limit(10);
+        const suggestions1=colleges.map(college=>college.college_name);
+        res.json(suggestions1);
+    
+    }
+    catch(err)
+    {
+        console.error('Error retrieving colleges:',err);
+        res.status(500).json({error:'Error in retriveing colleges'});
+
+    }
+
+
+
+}
+
 //SESSION_CHECKER
 const checkSessionEndpoint = async(req,res)=>{
     if (req.session.loggedInemail) {
@@ -66,15 +88,15 @@ const checkSessionEndpoint = async(req,res)=>{
 
 const signup_college = async(req,res)=>{
     console.log(req.body);
-    const { serverCollegeName } = req.body;
-    const College = mongoose.model('college', collegeSchema);
+    const CollegeName  = req.body.serverCollegeName;
+    const college = mongoose.model('college', collegeSchema);
     try {
         // Find the document based on the provided college name
-        const result = await college.findOne({ college_name: serverCollegeName });
-        console.log(result.password)
+        const result = await college.findOne({ college_name: CollegeName });
+        //console.log(result.password)
         if (result.password !== undefined) {
             // User already has a password
-            res.json({message: "User already registered", serverCollegeName: "null"});
+            res.json({message: "User already registered", CollegeName: "null"});
         }
         else if (result) {
         const username = result.email_address;
@@ -97,7 +119,7 @@ const signup_college = async(req,res)=>{
                 });
                 let response = {
                 body: {
-                    name: serverCollegeName,
+                    name: CollegeName,
                     intro: "Please click on the following link to set your password:",
                     action: {
                         instructions: "Click the button below to set your password:",
@@ -286,6 +308,7 @@ const newuser = async(req,res)=>{
         res.json({message:'Username Taken'})
     }
      else{
+        console.log(mail)
         bcrypt.hash(password, 8, (err, hash) => {
         const course = new Course({
             student_name : username,
@@ -294,7 +317,6 @@ const newuser = async(req,res)=>{
             versionKey: false
         })
         course.save();
-        req.session.loggedInemail=mail
         res.json({message:'success'});
         });
     }
@@ -386,6 +408,7 @@ const newp = async(req,res)=>{
 const departments =async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.department;
+    
     try {
         const user = await Course.findOne({ email_address:mail}); // Find user by email
         if (user) {
@@ -419,7 +442,7 @@ const get_departments = async(req,res)=>{
     }
 
 }
-const collegeDetails = async(req,res)=>{
+const getCollegeDetails = async(req,res)=>{
     try{
         const term1=req.query.term1;
         const regex1 =new RegExp(term1,'i');
@@ -436,12 +459,12 @@ const collegeDetails = async(req,res)=>{
     }
 
 }
-const getCollegeDetails = async(req,res)=>{
+const collegeDetails = async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.college;
     
     try {
-        const user = await Course.findOne({ email_address:"stella.veronica2002@gmail.com"}); // Find user by email
+        const user = await Course.findOne({ email_address:mail}); // Find user by email
         if (user) {
             user.college_name = result; // Update the field_name
             await user.save(); // Save changes to the database
@@ -468,6 +491,6 @@ module.exports = {
     departments,
     get_departments,
     collegeDetails,
-    getCollegeDetails
-    
+    getCollegeDetails,
+    getsignupCollege
 };

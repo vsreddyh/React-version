@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {signin, signup, fpassword, validate_token, checkSessionEndpoint , newuser, newp, signup_college, mailpass,departments,get_departments,collegeDetails,getCollegeDetails} = require('./controllers/login.js')
+const {signin, signup, fpassword, validate_token, checkSessionEndpoint , newuser, newp, signup_college, mailpass,departments,get_departments,collegeDetails,getCollegeDetails,getsignupCollege} = require('./controllers/login.js')
 
 /** HTTP Reqeust */
 router.post('/signin', signin);
@@ -16,4 +16,5 @@ router.post('/departments',departments);
 router.get('/departments',get_departments);
 router.post('/college-details',collegeDetails)
 router.get('/college-details',getCollegeDetails);
+router.get('/signup_college',getsignupCollege);
 module.exports = router;
