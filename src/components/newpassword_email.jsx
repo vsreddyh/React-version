@@ -64,11 +64,11 @@ const handleInputChange = (event) => {
 };
 
 return(
-    <div className="abcde">
+    <div className="abc">
         <Header />
         <Sider />
     
-    <div className="body">
+    <div id="bodyy" className="content1">
         <div id="body-content">
             <p>
             Create your account

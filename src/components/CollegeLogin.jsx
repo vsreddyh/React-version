@@ -59,10 +59,10 @@ const handle = async (event) => {
     
   };
 
-  
+
 
   return (
-    <div className="fakebody">
+    <div className="abc">
       <div className="content1" id="header">
         <div className="header-logo">
           <div className="logo">

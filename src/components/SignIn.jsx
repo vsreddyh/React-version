@@ -19,6 +19,7 @@ export default function SignIn({ setUserData }){
 
         try {
             const response = await axiosInstance.post('/en/signin', formData);
+            console.log("res[ponse is",response)
             if (response.data.message==='User Not found'){
                 setErrorMessage('User Doesn\'t exist');
             }
@@ -27,14 +28,19 @@ export default function SignIn({ setUserData }){
             }
             //students login
             else if(response.data.checkstudent===0){
-                setUserData(response.data.user);
+                setUserData(response.data.user.username);
                 navigate('/main');
             }
             //college login
-            else{
-                setUserData(response.data.user);
+            else if(response.data.checkstudent===1){
+
+                setUserData(response.data.user.username);
                 navigate('/main');
             }
+            else{
+                console.log(response.data.user.username);
+            }
+
             // Handle successful login (e.g., set user session, redirect, etc.)
         } catch (error) {
             console.log('catch working')

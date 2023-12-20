@@ -2,7 +2,6 @@ import React, {useState , useEffect} from "react";
 import "./new-user.css";
 import Header from "./Header";
 import Sider from "./Sider";
-import "./signin.css"
 import axios from "axios";
 import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 

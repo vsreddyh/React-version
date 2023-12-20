@@ -45,7 +45,7 @@ export default function App() {
             <Routes>
                 <Route
                     path="/"
-                    element={userData ? <Navigate to="/main" /> : <Category setUserData={setUserData} />}
+                    element={userData ? <Navigate to="/main" /> : <Category  />}
                     exact
                 />
                 <Route path="/signup/:errorMessage" element={<SignUp />} />
@@ -64,7 +64,7 @@ export default function App() {
                 <Route path="/college-login" element={<College />}/>
                 <Route path="/department" element={<StudentLogin/>}/>
                 <Route path="/college-details" element={<CollegeDetails/>}/>
-                <Route path="/SignIn" element={<SignIn/>}/>
+                <Route path="/SignIn" element={<SignIn setUserData={setUserData}/>}/>
 
                
             </Routes>
