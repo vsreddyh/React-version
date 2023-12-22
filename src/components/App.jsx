@@ -14,6 +14,7 @@ import College from "./CollegeLogin";
 import StudentLogin from "./StudentLogin";
 import CollegeDetails from "./College-details";
 import Category from "./wru";
+import HRMAIN from "./hrmain";
 
 export default function App() {
     const [userData, setUserData] = useState(null);
@@ -65,7 +66,7 @@ export default function App() {
                 <Route path="/department" element={<StudentLogin/>}/>
                 <Route path="/college-details" element={<CollegeDetails/>}/>
                 <Route path="/SignIn" element={<SignIn setUserData={setUserData}/>}/>
-
+                <Route path="/hrmain" element={<HRMAIN/>}/>
                
             </Routes>
         </BrowserRouter>

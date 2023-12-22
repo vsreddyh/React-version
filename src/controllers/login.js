@@ -9,14 +9,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const Mailgen = require('mailgen');
 const nodemailer = require('nodemailer');
-const {EMAIL, PASSWORD, JWT_SECRET, SESSION_KEY} = require('../settings/env.js');
+const {EMAIL, PASSWORD, JWT_SECRET, SESSION_KEY,Course,college,Department} = require('../settings/env.js');
 require('dotenv').config();
-
-app.use(cors())
-app.get("/",cors(),(req,res)=>
-{
-
-})
 
 mongoose.connect('mongodb://127.0.0.1:27017/projectpalace');
 
@@ -32,25 +26,7 @@ app.use(session({
     }
 }));
 
-const loginSchema = new mongoose.Schema({
-    student_name : String,
-    email_address : String,
-    password : String,
-    field_name:String,
-    college_name:String,
-},{ versionKey: false });
-const collegeSchema = new mongoose.Schema({
-    college_name: String,
-    email_address: String,
-    password:String,
-  });
-  const departmentSchema=new mongoose.Schema({
-    field_name:String,
-});
 
-const Course = mongoose.model('student', loginSchema);
-const college=mongoose.model('college',collegeSchema);
-const Department =mongoose.model('feild',departmentSchema);
 
 const getsignupCollege=async(req,res)=>
 {
@@ -407,6 +383,7 @@ const newp = async(req,res)=>{
         });
     }
 }
+//department update
 const departments =async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.department;
@@ -427,6 +404,7 @@ const departments =async(req,res)=>{
     }
 
 }
+//department suggestions
 const get_departments = async(req,res)=>{
     try{
         const term=req.query.term;
@@ -444,6 +422,7 @@ const get_departments = async(req,res)=>{
     }
 
 }
+//suggest colleges
 const getCollegeDetails = async(req,res)=>{
     try{
         const term1=req.query.term1;
@@ -461,6 +440,7 @@ const getCollegeDetails = async(req,res)=>{
     }
 
 }
+//save collegedetails
 const collegeDetails = async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.college;

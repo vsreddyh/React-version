@@ -18,6 +18,7 @@ export default function SignIn({ setUserData }){
         event.preventDefault();
 
         try {
+            console.log(formData)
             const response = await axiosInstance.post('/en/signin', formData);
             console.log("res[ponse is",response)
             if (response.data.message==='User Not found'){
@@ -29,7 +30,7 @@ export default function SignIn({ setUserData }){
             //students login
             else if(response.data.checkstudent===0){
                 setUserData(response.data.user.username);
-                navigate('/main');
+                navigate('/hrmain');
             }
             //college login
             else if(response.data.checkstudent===1){
