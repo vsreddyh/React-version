@@ -61,50 +61,54 @@ function HRMAIN(){
             setCurrentPage(prevPage => prevPage - 1);
         }
     };
-    const [display, setDisplay]= useState(0)
+    const [display, setDisplay]= useState(2)
     console.log("curr is",currentPage,"tot is",totalPages)
     return(
         <div className="body">
         <Header takedata={CategoryData}/>
         <div className="bodyy">
             <Filters sendDataToParent={FilterData}/>
-            {display === 1 ? <StudentProfile /> :
-                (<div>
-                <div className="grid-container">
-                    {projects.map((project, index) => (
-                        <div key={index} className="grid-item">
-                        <div>
-                            <div class="project-card">
-                                <div class="cardpart">
-                                    <img class="profile-picture" src={`/en/image/${project.photo}`} alt="Profile Picture"/>
-                                    <div class="pdiscript">
-                                        <p>
-                                        {project.Description}
-                                        </p>
+            {display === 1 ? (
+                <StudentProfile />
+            ) : display === 0 ? (
+                <div>
+                    <div className="grid-container">
+                        {projects.map((project, index) => (
+                            <div key={index} className="grid-item">
+                                <div>
+                                    <div className="project-card">
+                                        <div className="cardpart">
+                                            <img className="profile-picture" src={`/en/image/${project.photo}`} alt="Profile Picture"/>
+                                            <div className="pdiscript">
+                                                <p>
+                                                    {project.Description}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="pname">
+                                            <p>
+                                                {project.Project_Name}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="pname">
-                                    <p>
-                                        {project.Project_Name}
-                                    </p>
-                                </div>
                             </div>
-                        </div>
-                        </div>
-                    ))}
-                  
-                   
+                        ))}
+                    </div>
+                    <div className="navbuttons">
+                        {currentPage > 1 && (
+                            <button className="prevbutton" onClick={handlePreviousPage}><FontAwesomeIcon icon={faArrowLeft} /></button>
+                        )}
+                        {currentPage < totalPages && (
+                            <button className="nextbutton" onClick={handleNextPage}><FontAwesomeIcon icon={faArrowRight} /></button>
+                        )}
+                    </div>
                 </div>
-                <div className="navbuttons">
-                {currentPage > 1 &&
-                <button className="prevbutton" onClick={handlePreviousPage}><FontAwesomeIcon icon={faArrowLeft} /></button>}
-                
-                {currentPage < totalPages &&
-                <button className="nextbutton" onClick={handleNextPage}><FontAwesomeIcon icon={faArrowRight} /></button>}
+            ) : (
+                <div>
+                    <img src='https://www.shutterstock.com/shutterstock/photos/2315292249/display_1500/stock-photo-cute-baby-monkey-playing-in-indian-forest-2315292249.jpg' alt="Monkey"/>
                 </div>
-                </div>
-                )
-            }
+            )}
         </div>
         </div>
     );

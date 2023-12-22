@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId;
+mongoose.connect('mongodb://127.0.0.1:27017/projectpalace');
 const loginSchema = new mongoose.Schema({
     student_name : String,
     email_address : String,

@@ -12,7 +12,7 @@ const nodemailer = require('nodemailer');
 const {EMAIL, PASSWORD, JWT_SECRET, SESSION_KEY,Course,college,Department} = require('../settings/env.js');
 require('dotenv').config();
 
-mongoose.connect('mongodb://127.0.0.1:27017/projectpalace');
+
 
 app.use(express.static('../build'));
 app.use(bodyParser.json());
@@ -386,6 +386,7 @@ const newp = async(req,res)=>{
 //department update
 const departments =async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
+    console.log(mail)
     const result = req.body.department;
     
     try {
