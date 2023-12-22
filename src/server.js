@@ -2,17 +2,26 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const cors=require("cors")
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const approute=require("./route.js")
 
 require('dotenv').config();
+const {SESSION_KEY} = require('./settings/env.js');
 app.use(cors())
 app.get("/",cors(),(req,res)=>
 {
 
 })
-
-
+app.use(session({
+  secret: SESSION_KEY, // Replace with a strong secret for session encryption
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      secure: false, // Set it to true if your app is served over HTTPS
+      maxAge: 60 * 60 * 1000 // 1 day (session expiration time)
+  }
+}));
 
 app.use(express.static('../build'));
 app.use(bodyParser.json());
