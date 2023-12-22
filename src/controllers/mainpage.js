@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.static('./public'));
 const cors=require("cors")
-const conn = mongoose.createConnection('mongodb://localhost:27017/projectpalace');
+const conn = mongoose.createConnection('mongodb://127.0.0.1:27017/projectpalace');
 let gfs;
 conn.once('open', () => {
   // Init stream
@@ -23,21 +23,26 @@ conn.once('open', () => {
 
 
 const getdata = async(req,res)=>{
-    const {state}=req.query;
-    let statequery={state:state}
-    if (state==='Any'){
-        res.json();
-    }
-    const list = await college.find(statequery).select('college_name');
-    const suggestions = list.map(college => college.college_name);
-    res.json(suggestions);
+    try{
+        const term=req.query.term;
+        const regex=new RegExp(term,"i");
+        const colleges=await college.find({college_name:regex}).select("college_name").limit(10);
+        const sugesstions=colleges.map(college=>college.college_name);
+        res.json(sugesstions);
+       }
+       catch(error)
+       {
+        
+        console.log("error",error);
+       }
+    
 }
 const projectlist = async(req,res)=>{
-    let {category,search,state,college_name,sort_by,order,page} = req.query
+    let {category,search,college_name,sort_by,order,page} = req.query
     console.log(req.query)
     searchquery={Skills:search}
     catquery={Domain:category}
-    statequery={State:state}
+    
     clgquery={College:college_name}
     sortquery={}
     u_limit=page*10
@@ -46,9 +51,7 @@ const projectlist = async(req,res)=>{
         if (category==='Any'){
             catquery={}
         }
-        if (state==='Any'){
-            statequery={}
-        }
+        
         if (college_name==='Any'){
             clgquery={}
         }
@@ -67,8 +70,8 @@ const projectlist = async(req,res)=>{
         else if (sort_by==='Upload Date'){
             sortquery={Date:order}
         }
-        console.log(catquery,statequery,clgquery,sortquery)
-        const projlists = await projects.find({$and:[statequery,clgquery,catquery]}).sort(sortquery).select('_id photo Project_Name Description')
+        console.log(catquery,clgquery,sortquery)
+        const projlists = await projects.find({$and:[clgquery,catquery]}).sort(sortquery).select('_id photo Project_Name Description')
         console.log(l_limit,u_limit)
         const a=~~((projlists.length)/10)
         console.log(a)

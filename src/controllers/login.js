@@ -298,6 +298,7 @@ const newuser = async(req,res)=>{
         });
     }
     req.session.loggedInemail=mail;
+    
 }
 
 

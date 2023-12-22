@@ -14,9 +14,10 @@ export default function Filters({ sendDataToParent }) {
         order: true
     });
 
-    const [inputValue, setInputValue] = useState('Any');
-    const [dropdownOptions, setDropdownOptions] = useState([]);
-
+    //const [inputValue, setInputValue] = useState('Any');
+    //const [dropdownOptions, setDropdownOptions] = useState([]);
+    const [term, setTerm] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({
@@ -24,8 +25,33 @@ export default function Filters({ sendDataToParent }) {
             [name]: value
         });
     };
+    const handleChange1 = async (event) => {
+        const inputdata = event.target.value;
+        setTerm(inputdata);
+        
+        if (inputdata.length === 0) {
+            setSuggestions([]);
+            return;
+        }
+        
+        try {
+            const response = await axios.get(`/en/data?term=${inputdata}`);
+            const data = response.data;
+            setSuggestions(data);
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
+    const handleSuggestionClick = (selectedSuggestion) => {
+        setFormData({
+            ...formData,
+            ["college_name"]: selectedSuggestion
+        });
+        setTerm(selectedSuggestion);
+        setSuggestions([]);
+    };
     
-    useEffect(() => {
+    /*useEffect(() => {
         const fetchData = async () => {
             try {
                 if (inputValue === 'Any') {
@@ -44,7 +70,7 @@ export default function Filters({ sendDataToParent }) {
         };
 
         fetchData();
-    }, [inputValue]);
+    }, [inputValue]);*/
 
     useEffect(() => {
         sendDataToParent(formData);
@@ -56,23 +82,30 @@ export default function Filters({ sendDataToParent }) {
             order: !formData.order
         });
     };
+    // const change=(event) => {
+    //     const { name, value } = event.target;
+    //     setFormData({
+    //         ...formData,
+    //         [name]: value
+    //     });
 
     return (
         <div className="filters">
             <div className="filter1">
-                <input type="text" spellCheck="false" placeholder="search for institutions"></input>
+                <input type="text" spellCheck="false" placeholder="search for institutions" name="college_name" value={term} onChange={handleChange1}></input>
             </div>
             <div className="suggestions">
+            {suggestions.map((suggestion, index) => (
+                    <p key={index} className="suggestion" onClick={() => handleSuggestionClick(suggestion)}>
+                        {suggestion}
+                    </p>
+                ))}
                 
             </div>
             <div className="filter2">
                 <select name="college_name" id="year" value={formData.college_name} onChange={handleChange}>
                     <option value="Any">Any</option>
-                    {dropdownOptions.map((option, index) => (
-                        <option key={index} value={option}>
-                            {option}
-                        </option>
-                    ))}
+                    
                 </select>
             </div>
             <div className="filter3">
