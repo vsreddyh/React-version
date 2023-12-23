@@ -116,7 +116,7 @@ export default function Filters({ sendDataToParent }) {
             </div>
             <div className="filter4">
                 <button name="order" onClick={handleToggle}>
-                {formData.order ? <> Asending  <FontAwesomeIcon icon={faArrowUp} /></> :<> Descending  <FontAwesomeIcon icon={faArrowDown} /></>}
+                {formData.order ? <> Ascending  <FontAwesomeIcon icon={faArrowUp} /></> :<> Descending  <FontAwesomeIcon icon={faArrowDown} /></>}
                 </button>
             </div>
         </div>
