@@ -61,7 +61,7 @@ function HRMAIN(){
             setCurrentPage(prevPage => prevPage - 1);
         }
     };
-    const [display, setDisplay]= useState(2)
+    const [display, setDisplay]= useState(0)
     console.log("curr is",currentPage,"tot is",totalPages)
     return(
         <div className="body">

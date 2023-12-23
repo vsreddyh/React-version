@@ -8,7 +8,6 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 export default function Filters({ sendDataToParent }) {
     const [formData, setFormData] = useState({
-        state: 'Any',
         college_name: 'Any',
         sort_by: 'Name',
         order: true

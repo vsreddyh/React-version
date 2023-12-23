@@ -200,14 +200,15 @@ const signup = async(req,res)=>{
 const signin = async(req,res)=>{
     async function checkStudent(mail) {
         const courses = await Course.find({ email_address: mail });
-        const result = await college.findOne({ email_address: mail });
+        const result = await college.find({ email_address: mail });
         if (courses.length !== 0) {
+            console.log(result)
             return [courses[0].password,0];
         }
         if(result.length!==0){
-            return [result.password,1];
+            return [result[0].password,1];
         }
-        return NULL;
+        return 'NULL';
         
     }
 
@@ -215,9 +216,8 @@ const signin = async(req,res)=>{
         const { username, password } = req.body;
 
         var userPassword = await checkStudent(username);
-
         bcrypt.compare(password, userPassword[0], (err, result) => {
-            if (userPassword === null) {
+            if (userPassword==='NULL') {
                 res.json({message:'User Not found'})
             } else if (result) {
                 res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
