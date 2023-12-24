@@ -73,8 +73,14 @@ const projectlist = async(req,res)=>{
         const projlists = await projects.find({$and:[clgquery,catquery]}).sort(sortquery).select('photo Project_Name Description')
         console.log(l_limit,u_limit)
         const a=~~((projlists.length)/10)
-        console.log(projlists[0])
-        res.json({list:projlists.slice(l_limit,u_limit),total_pages:a+1})
+        let m;
+        if (projlists.length===0){
+            m=2;
+        }
+        else{
+            m=0;
+        }
+        res.json({list:projlists.slice(l_limit,u_limit),total_pages:a+1,display:m})
     }
 }
 const image = async(req, res) => {

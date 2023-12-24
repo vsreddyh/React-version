@@ -20,11 +20,13 @@ function HRMAIN(){
     const FilterData = useCallback((data) => {
         updateReceivedData(data);
         setCurrentPage(1);
+        setDisplay(0)
     }, []);
 
     const CategoryData = useCallback((data) => {
         updateReceivedData(data);
         setCurrentPage(1);
+        setDisplay(0)
     }, []);
     const updateReceivedData = (data) => {
         setReceivedData(prevData => ({ ...prevData, ...data }));
@@ -32,6 +34,7 @@ function HRMAIN(){
     const [projects, setProjects] = useState([]);
     useEffect(() => {
         console.log("after", receivedData);
+        console.log('dis is',display)
     }, [receivedData]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -44,6 +47,7 @@ function HRMAIN(){
             const response = await axios.get(`/en/projects?${queryParams}`);
             setProjects(response.data.list);
             setTotalPages(response.data.total_pages);
+            setDisplay(response.data.display)
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -62,6 +66,7 @@ function HRMAIN(){
         }
     };
     const [display, setDisplay]= useState(0)
+    console.log(display)
     console.log("curr is",currentPage,"tot is",totalPages)
     return(
         <div className="body">

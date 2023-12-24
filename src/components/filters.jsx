@@ -30,6 +30,10 @@ export default function Filters({ sendDataToParent }) {
         
         if (inputdata.length === 0) {
             setSuggestions([]);
+            setFormData({
+                ...formData,
+                ["college_name"]: "Any"
+            });
             return;
         }
         
