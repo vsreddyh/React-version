@@ -5,7 +5,7 @@ import Sider from "./Sider";
 import axios from "axios";
 import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 
-export default function NewUser(){
+export default function Newhr(){
     const navigate = useNavigate();
     const params = useParams();
     const token = params.token;
@@ -27,7 +27,7 @@ export default function NewUser(){
     }, [token]);
     useEffect(() => {
         if(errorMessage) {
-            navigate(`/signup/${errorMessage}`)
+            navigate(`/hrsignup/${errorMessage}`)
         }
     }, [errorMessage]);
     const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ export default function NewUser(){
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log("i am here");
-        const response = await axios.post('/en/newuser',formData);
+        const response = await axios.post('/en/newhr',formData);
         if (response.data.message==='Mail already registered'){
             setErrorMessage('Mail already registered')
         }else if (response.data.message==='Passwords are not same'){
@@ -49,7 +49,7 @@ export default function NewUser(){
         }else if (response.data.message==='Username Taken'){
             seterror('Username Taken')
         }else{
-            navigate('/department')
+            navigate('/hrmain')
         }
     };
     

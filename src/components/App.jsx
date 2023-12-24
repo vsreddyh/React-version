@@ -15,6 +15,8 @@ import StudentLogin from "./StudentLogin";
 import CollegeDetails from "./College-details";
 import Category from "./wru";
 import HRMAIN from "./hrmain";
+import HrSignUp from "./hrsignup";
+import Newhr from "./Newhr";
 
 export default function App() {
     const [userData, setUserData] = useState(null);
@@ -26,11 +28,13 @@ export default function App() {
 
     const checkSession = async () => {
         try {
+            console.log('calling')
             // Make an API call to check for user session data
-            const response = await axios.get('/checkSessionEndpoint');
-            if (response.data) {
+            const respons = await axios.get('/en/checkSessionEndpoint');
+            console.log(respons)
+            if (respons.data) {
                 // If user data is available, set it in state
-                setUserData(response.data);
+                setUserData(respons.data);
             } else {
                 // If no user data, set userData as null
                 setUserData(null);
@@ -40,7 +44,7 @@ export default function App() {
             setUserData(null);
         }
     };
-
+    console.log('userdata is',userData)
     return (
         <BrowserRouter>
             <Routes>
@@ -67,6 +71,9 @@ export default function App() {
                 <Route path="/college-details" element={<CollegeDetails/>}/>
                 <Route path="/SignIn" element={<SignIn setUserData={setUserData}/>}/>
                 <Route path="/hrmain" element={<HRMAIN/>}/>
+                <Route path="/hrsignup/:errorMessage" element={<HrSignUp />} />
+                <Route path="/hrsignup" element={<HrSignUp />} />
+                <Route path="/set-password/nh/:token" element={<Newhr/>}/>
                
             </Routes>
         </BrowserRouter>

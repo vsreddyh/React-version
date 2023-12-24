@@ -13,6 +13,12 @@ const collegeSchema = new mongoose.Schema({
     email_address: String,
     password:String,
   });
+const hrSchema = new mongoose.Schema({
+    hr_name : String,
+    email_address : String,
+    password : String,
+    company:String,
+},{ versionKey: false });
 const departmentSchema=new mongoose.Schema({
     field_name:String,
 });
@@ -30,6 +36,7 @@ const projectschema = new mongoose.Schema({
 });
 
 const Course = mongoose.model('student', loginSchema);
+const recruiter = mongoose.model('head_recruiter', hrSchema);
 const college=mongoose.model('college',collegeSchema);
 const Department =mongoose.model('feild',departmentSchema);
 const projects = mongoose.model('project',projectschema);
@@ -41,5 +48,6 @@ module.exports = {
     Course:Course,
     college:college,
     Department:Department,
-    projects:projects
+    projects:projects,
+    recruiter:recruiter
 }

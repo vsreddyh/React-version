@@ -30,13 +30,19 @@ export default function SignIn({ setUserData }){
             //students login
             else if(response.data.checkstudent===0){
                 setUserData(response.data.user.username);
-                navigate('/hrmain');
+                navigate('/main');
             }
             //college login
             else if(response.data.checkstudent===1){
 
                 setUserData(response.data.user.username);
                 navigate('/main');
+            }
+            //hr login
+            else if(response.data.checkstudent===2){
+
+                setUserData(response.data.user.username);
+                navigate('/hrmain');
             }
             else{
                 console.log(response.data.user.username);
@@ -69,7 +75,7 @@ export default function SignIn({ setUserData }){
                     <form onSubmit={handleSubmit}>
                         <input className="username" type="email" name="username" placeholder="Email" minLength={3} value={formData.username} onChange={handleInputChange} required />
                         <br />
-                        <input type="password" name="password" placeholder="Password" minLength={8} pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} required />
+                        <input type="password" name="password" placeholder="Password" minLength={8} pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} required autoComplete="new-password"/>
                         <br />
                         <button type="submit">
                             

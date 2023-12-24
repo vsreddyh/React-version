@@ -5,7 +5,7 @@ import "./signin.css"
 import axios from "axios";
 import { Link , useNavigate ,useParams } from "react-router-dom";
 
-export default function SignUp(){
+export default function HrSignUp(){
     const year= new Date().getFullYear()
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ export default function SignUp(){
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await axios.post('/en/signup',formData);
+        const response = await axios.post('/en/hrsignup',formData);
         if (response.data.message==='User Already Exists'){
             setErrorMessage('User Already Exists')
         }else{
@@ -41,7 +41,7 @@ export default function SignUp(){
                     </p>
                     
                     <form onSubmit={handleSubmit}>
-                        <input className="username" type="email" name="username" placeholder="Email" minLength={3} value={formData.username} onChange={handleInputChange} required autoComplete="new-password"/>
+                        <input className="username" type="email" name="username" placeholder="Email" minLength={3} value={formData.username} onChange={handleInputChange} required />
                         <br />
                         <button type="submit">
                             

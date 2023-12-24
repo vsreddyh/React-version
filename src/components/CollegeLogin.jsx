@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./collegelogin-page.css";
+import "./signin.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate, useParams } from "react-router-dom";

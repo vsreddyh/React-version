@@ -19,7 +19,7 @@ export default function Category(){
                 navigate('/signup');
             }
             else if(formData.year==='Hr'){
-                navigate('/signup');
+                navigate('/hrsignup');
             }
             else{
                 navigate('/college-signup');

@@ -4,12 +4,11 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const app = express();
-const cors=require("cors")
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const Mailgen = require('mailgen');
 const nodemailer = require('nodemailer');
-const {EMAIL, PASSWORD, JWT_SECRET, SESSION_KEY,Course,college,Department} = require('../settings/env.js');
+const {EMAIL, PASSWORD, JWT_SECRET, SESSION_KEY,Course,college,Department,recruiter} = require('../settings/env.js');
 require('dotenv').config();
 
 
@@ -54,10 +53,11 @@ const getsignupCollege=async(req,res)=>
 const checkSessionEndpoint = async(req,res)=>{
     if (req.session.loggedInemail) {
         // If the user is logged in (session contains loggedInUser), serve main-page.html
+        console.log('mail is', req.session.loggedInemail)
         res.json(req.session.loggedInemail);
     } else {
         // If not logged in, serve signin.html
-        res.json("continue")
+        res.json(null)
     }
 }
 //colege send mailer
@@ -134,8 +134,12 @@ const signup = async(req,res)=>{
     async function checkStudent(mail) {
         const courses = await Course.find({ email_address: mail });
         const result = await college.find({ email_address: mail });
+        const recruiters = await recruiter.find({ email_address: mail });
         if (courses.length !== 0) {
             return null; // User found
+        }
+        else if (recruiters.length!==0){
+            return null;
         }
         else if (result.length!==0){
             return null;
@@ -193,7 +197,74 @@ const signup = async(req,res)=>{
     create(req,res);
 }
     
-
+//hr LINK-MAILER
+const hrsignup = async(req,res)=>{
+    const { username } = req.body;
+    async function checkStudent(mail) {
+        const courses = await Course.find({ email_address: mail });
+        const result = await college.find({ email_address: mail });
+        const recruiters = await recruiter.find({ email_address: mail });
+        if (courses.length !== 0) {
+            return null; // User found
+        }
+        else if (recruiters.length!==0){
+            return null;
+        }
+        else if (result.length!==0){
+            return null;
+        }
+        return 1;
+    }
+    async function create(req, res) {
+        var email_1 = await checkStudent(username);
+        if (email_1 === null) {
+            res.json({message:"User Already Exists",username:"null"})
+        }
+        else {
+            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
+            let config = {
+                service: 'gmail',
+                auth: {
+                    user: EMAIL,
+                    pass: PASSWORD,
+                },
+            };
+            let transporter = nodemailer.createTransport(config);
+            let MailGenerator = new Mailgen({
+                theme: "default",
+                product: {
+                    name: "PROJECT PALACE",
+                    link: 'https://mailgen.js/'
+                },
+            });
+            let response = {
+                body: {
+                    name: "USER",
+                    intro: "Please click on the following link to set your password:",
+                    action: {
+                        instructions: "Click the button below to set your password:",
+                        button: {
+                            color: "#22BC66",
+                            text: "Set your password",
+                            link: `http://localhost:3000/set-password/nh/${token}`
+                        }
+                    },
+                    outro: "If you did not request to set a password, no further action is required on your part.",
+                },
+            };
+            let mail = MailGenerator.generate(response);
+            let message = {
+                from: EMAIL,
+                to: username,
+                subject: "Your OTP for Verification",
+                html: mail,
+            };
+            transporter.sendMail(message)
+            res.json({message:"Mail Sent"})
+        }
+    }
+    create(req,res);
+}
 
 
 //LOGIN
@@ -201,12 +272,15 @@ const signin = async(req,res)=>{
     async function checkStudent(mail) {
         const courses = await Course.find({ email_address: mail });
         const result = await college.find({ email_address: mail });
+        const recruiters = await recruiter.find({ email_address: mail });
         if (courses.length !== 0) {
-            console.log(result)
             return [courses[0].password,0];
         }
         if(result.length!==0){
             return [result[0].password,1];
+        }
+        if(recruiters.length!==0){
+            return [recruiters[0].password,2];
         }
         return 'NULL';
         
@@ -221,6 +295,8 @@ const signin = async(req,res)=>{
                 res.json({message:'User Not found'})
             } else if (result) {
                 res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
+                req.session.loggedInemail=username;
+                req.session.typeofuser=userPassword[1];
             } else {
                 res.json({message:'Wrong Password', user: username })
             }
@@ -242,8 +318,6 @@ const validate_token = function(req, res) {
             }} 
         else {
             res.json({message: 'verified', email: decoded.username});
-            req.session.loggedInemail=decoded.username
-            console.log(decoded.username);
         }
     });
 };
@@ -256,7 +330,8 @@ const mailpass = async(req,res)=>{
     }
     else {
         bcrypt.hash(password, 8, async (err, hash) => {
-
+            req.session.loggedInemail=mail
+            req.session.typeofuser=1;
             const result = await college.updateOne(
                 { 'email_address': mail }, 
                 { $set: { 'password': hash } }
@@ -276,11 +351,14 @@ const newuser = async(req,res)=>{
     const {mail,username, password, cpassword } = req.body;
     const mails = await Course.find({ email_address: mail });
     const courses = await Course.find({ student_name: username });
+    const recruiters = await recruiter.find({hr_name:username});
     if (mails.length!==0){
         res.json({message:'Mail already registered'})
     } else if (password !== cpassword){
         res.json({message:'Passwords are not same'})
     } else if (courses.length !== 0){
+        res.json({message:'Username Taken'})
+    } else if (recruiters.length !== 0){
         res.json({message:'Username Taken'})
     }
      else{
@@ -293,26 +371,66 @@ const newuser = async(req,res)=>{
             versionKey: false
         })
         course.save();
-        req.session.loggedInemail=mail
+        req.session.loggedInemail=mail;
+        req.session.typeofuser=0;
         res.json({message:'success'});
         });
     }
-    req.session.loggedInemail=mail;
+    
+}
+
+//NEW-hr
+const newhr = async(req,res)=>{
+    
+    const {mail,username, password, cpassword } = req.body;
+    const mails = await recruiter.find({ email_address: mail });
+    const courses = await Course.find({ student_name: username });
+    const recruiters = await recruiter.find({hr_name:username});
+    if (mails.length!==0){
+        res.json({message:'Mail already registered'})
+    } else if (password !== cpassword){
+        res.json({message:'Passwords are not same'})
+    } else if (courses.length !== 0){
+        res.json({message:'Username Taken'})
+    } else if (recruiters.length !== 0){
+        res.json({message:'Username Taken'})
+    }
+     else{
+        console.log(mail)
+        bcrypt.hash(password, 8, (err, hash) => {
+        const course = new recruiter({
+            hr_name : username,
+            email_address : mail,
+            password : hash,
+            versionKey: false
+        })
+        course.save();
+        req.session.loggedInemail=mail;
+        req.session.typeofuser=2;
+        res.json({message:'success'});
+        });
+    }
     
 }
 
 
-
-
-//send mail
+//send mail for forgot password
 const fpassword = async(req,res)=>{
     const { username } = req.body;
     async function checkStudent(mail) {
         const courses = await Course.find({ email_address: mail });
-        if (courses.length === 0) {
-            return null; // User not found
+        const result = await college.find({ email_address: mail });
+        const recruiters = await recruiter.find({ email_address: mail });
+        if (courses.length !== 0) {
+            return courses[0].password;
         }
-        return courses[0].password;
+        if(result.length!==0){
+            return result[0].password;
+        }
+        if(recruiters.length!==0){
+            return recruiters[0].password;
+        }
+        return null;
     }
     async function create(req, res) {
         var email_1 = await checkStudent(username);
@@ -372,11 +490,26 @@ const fpassword = async(req,res)=>{
 //new-password
 const newp = async(req,res)=>{
     const {mail, password, cpassword } = req.body;
+    async function checkStudent(mail) {
+        const courses = await Course.find({ email_address: mail });
+        const result = await college.find({ email_address: mail });
+        const recruiters = await recruiter.find({ email_address: mail });
+        if (courses.length !== 0) {
+            return courses[0];
+        }
+        if(result.length!==0){
+            return result[0];
+        }
+        if(recruiters.length!==0){
+            return recruiters[0];
+        }
+        return null;
+    }
     if (password !== cpassword){
         res.json({message:'Passwords are not same'})
     } 
     else{
-        let user = await Course.findOne({ email_address: mail});
+        let user = await checkStudent(mail);
         bcrypt.hash(password, 8, (err, hash) => {
             user.password=hash
             user.save();
@@ -414,8 +547,6 @@ const get_departments = async(req,res)=>{
         const departments=await Department.find({field_name:regex}).select("field_name").limit(4);
         const suggestions=departments.map(department=>department.field_name);
         res.json(suggestions);
-        
-        
     }
     catch(err)
     {
@@ -476,5 +607,7 @@ module.exports = {
     get_departments,
     collegeDetails,
     getCollegeDetails,
-    getsignupCollege
+    getsignupCollege,
+    hrsignup,
+    newhr
 };
