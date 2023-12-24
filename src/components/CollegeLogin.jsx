@@ -8,9 +8,7 @@ import axios from "axios";
 export default function CollegeLogin() {
   const year = new Date().getFullYear();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    serverCollegeName: '' // Updated to match the input field name
-  });
+  console.log(useParams)
   const { errorMessage: initialErrorMessage } = useParams();
   const [errorMessage, setErrorMessage] = useState(initialErrorMessage ? decodeURIComponent(initialErrorMessage) : '');
   const [term,setTerm]=useState('');

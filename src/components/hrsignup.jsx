@@ -41,7 +41,7 @@ export default function HrSignUp(){
                     </p>
                     
                     <form onSubmit={handleSubmit}>
-                        <input className="username" type="email" name="username" placeholder="Email" minLength={3} value={formData.username} onChange={handleInputChange} required />
+                        <input className="username" type="email" name="username" placeholder="Email" minLength={3} value={formData.username} onChange={handleInputChange} required autoComplete="username"/>
                         <br />
                         <button type="submit">
                             

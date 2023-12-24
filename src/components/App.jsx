@@ -28,7 +28,6 @@ export default function App() {
 
     const checkSession = async () => {
         try {
-            console.log('calling')
             // Make an API call to check for user session data
             const respons = await axios.get('/en/checkSessionEndpoint');
             console.log(respons)
@@ -44,7 +43,6 @@ export default function App() {
             setUserData(null);
         }
     };
-    console.log('userdata is',userData)
     return (
         <BrowserRouter>
             <Routes>
@@ -61,6 +59,7 @@ export default function App() {
                 />
                 <Route path="/Check-email" element={<CheckEmail/>}/>
                 <Route path="/college-signup" element={<CollegeLogin/>}/>
+                <Route path="/college-signup/:errorMessage" element={<CollegeLogin/>}/>
                 <Route path="/set-password/nu/:token" element={<NewUser/>}/>
                 <Route path="/forgot-password/:errorMessage" element={<ForgotPassword/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>

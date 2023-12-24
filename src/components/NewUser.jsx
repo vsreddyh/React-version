@@ -72,7 +72,7 @@ export default function NewUser(){
                     </p>
                 
                     <form onSubmit={handleSubmit}>
-                        <input className="username" type="text" name="username" placeholder="User name" value={formData.username} onChange={handleInputChange} minLength={3}  required />
+                        <input className="username" type="text" name="username" placeholder="User name" value={formData.username} onChange={handleInputChange} minLength={3}  required autoComplete="name"/>
                         <br />
                         <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} minLength={8} required autoComplete="new-password"/>
                         <br />

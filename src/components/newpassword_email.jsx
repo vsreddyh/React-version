@@ -30,7 +30,7 @@ useEffect(() => {
 }, [token]);
 useEffect(() => {
     if(errorMessage) {
-        navigate(`/signup/${errorMessage}`)
+        navigate(`/college-signup/${errorMessage}`)
     }
 }, [errorMessage]);
 const [formData, setFormData] = useState({
