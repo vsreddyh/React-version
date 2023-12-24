@@ -9,7 +9,6 @@ const GridFS = Grid(mongoose.connection, mongoose.mongo);
 const {college,projects} = require('../settings/env.js');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 app.use(express.static('./public'));
 const cors=require("cors")
 const conn = mongoose.createConnection('mongodb://127.0.0.1:27017/projectpalace');
@@ -71,10 +70,10 @@ const projectlist = async(req,res)=>{
             sortquery={Date:order}
         }
         console.log(catquery,clgquery,sortquery)
-        const projlists = await projects.find({$and:[clgquery,catquery]}).sort(sortquery).select('_id photo Project_Name Description')
+        const projlists = await projects.find({$and:[clgquery,catquery]}).sort(sortquery).select('photo Project_Name Description')
         console.log(l_limit,u_limit)
         const a=~~((projlists.length)/10)
-        console.log(a)
+        console.log(projlists[0])
         res.json({list:projlists.slice(l_limit,u_limit),total_pages:a+1})
     }
 }

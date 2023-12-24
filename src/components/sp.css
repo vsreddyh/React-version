@@ -197,7 +197,7 @@ body{
 
 .pdiscript{
     width: calc(100% - 140px);
-    max-height: 140px;
+    max-height: 135px;
     border-top-right-radius: 20px;
     overflow: hidden;
     padding: 10px;
