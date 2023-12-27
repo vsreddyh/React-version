@@ -11,20 +11,8 @@ const nodemailer = require('nodemailer');
 const {EMAIL, PASSWORD, JWT_SECRET, SESSION_KEY,Course,college,Department,recruiter} = require('../settings/env.js');
 require('dotenv').config();
 
-
-
 app.use(express.static('../build'));
 app.use(bodyParser.json());
-app.use(session({
-    secret: SESSION_KEY, // Replace with a strong secret for session encryption
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: false, // Set it to true if your app is served over HTTPS
-        maxAge: 60 * 60 * 1000 // 1 day (session expiration time)
-    }
-}));
-
 
 
 const getsignupCollege=async(req,res)=>
@@ -51,6 +39,7 @@ const getsignupCollege=async(req,res)=>
 
 //SESSION_CHECKER
 const checkSessionEndpoint = async(req,res)=>{
+    console.log('joke is',req.session)
     if (req.session.loggedInemail) {
         // If the user is logged in (session contains loggedInUser), serve main-page.html
         console.log('mail is', req.session.loggedInemail)
@@ -297,6 +286,7 @@ const signin = async(req,res)=>{
                 res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
                 req.session.loggedInemail=username;
                 req.session.typeofuser=userPassword[1];
+                console.log('signin is',req.session)
             } else {
                 res.json({message:'Wrong Password', user: username })
             }
