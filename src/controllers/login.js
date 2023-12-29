@@ -281,10 +281,11 @@ const signin = async(req,res)=>{
         bcrypt.compare(password, userPassword[0], (err, result) => {
             if (userPassword==='NULL') {
                 res.json({message:'User Not found'})
-            } else if (result) {
+            } else if (result) { 
                 req.session.loggedInemail=username;
                 req.session.typeofuser=userPassword[1];
                 res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
+                console.log('signin is',req.session)
             } else {
                 res.json({message:'Wrong Password', user: username })
             }

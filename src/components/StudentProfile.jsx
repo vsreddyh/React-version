@@ -31,6 +31,19 @@ export default function StudentProfile(props){
     return(
         <div>
             <div className="sprofile">
+            <div className="sbuttons">
+                    <div className="stubutton">
+                        <div className="bookmark">
+                            <div className="nby"><p>Bookmark <span>&#9734;</span></p></div>
+                            <div className="nby"><p>Download <span>&#11123;</span></p></div>
+                        </div>
+                        <div className="exit">
+                            <div className="nbu"><p>Share<span>&#10150;</span></p></div>
+                            <div className="nbu"><p>Exit <span>&#x2715;</span></p></div>    
+                        </div>
+                    </div>
+                </div>
+
                 <div className="studetails">
                     <div className="sdetails">
                         <div className="probackground"></div>
