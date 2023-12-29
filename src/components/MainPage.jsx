@@ -23,7 +23,7 @@ export default function MainPage(){
                 </div>
                 <div className="searchbarset">
                     <div className="searchbar">
-                        <input type="search" className="searchs" placeholder="Search for projects" />
+                        <input type="search" className="searchs" placeholder="Search for projects"  />
                         <div className="search-icon">
                             <i className="fa-solid fa-magnifying-glass" style={{color: "#7190c6"}}></i>
                         </div>
