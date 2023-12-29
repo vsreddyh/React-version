@@ -7,12 +7,12 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const Grid = require('gridfs-stream');
 const GridFS = Grid(mongoose.connection, mongoose.mongo);
-const {college,projects,Course} = require('../settings/env.js');
+const {college,projects,Course,url} = require('../settings/env.js');
 
 const app = express();
 app.use(express.static('./public'));
 app.use(bodyParser.json());
-const conn = mongoose.createConnection('mongodb://127.0.0.1:27017/projectpalace');
+const conn = mongoose.createConnection(url);
 let gfs;
 conn.once('open', () => {
   // Init stream

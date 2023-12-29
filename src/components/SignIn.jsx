@@ -29,19 +29,19 @@ export default function SignIn({ setUserData }){
             }
             //students login
             else if(response.data.checkstudent===0){
-                setUserData(response.data.user.username);
+                setUserData([response.data.user.username,0]);
                 navigate('/main');
             }
             //college login
             else if(response.data.checkstudent===1){
 
-                setUserData(response.data.user.username);
-                navigate('/main');
+                setUserData([response.data.user.username,1]);
+                navigate('/clgmain');
             }
             //hr login
             else if(response.data.checkstudent===2){
 
-                setUserData(response.data.user.username);
+                setUserData([response.data.user.username,2]);
                 navigate('/hrmain');
             }
             else{

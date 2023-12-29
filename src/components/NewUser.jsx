@@ -5,7 +5,7 @@ import Sider from "./Sider";
 import axios from "axios";
 import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 
-export default function NewUser(){
+export default function NewUser({ setUserData }){
     const navigate = useNavigate();
     const params = useParams();
     const token = params.token;
@@ -49,6 +49,7 @@ export default function NewUser(){
         }else if (response.data.message==='Username Taken'){
             seterror('Username Taken')
         }else{
+            setUserData([response.data.email,0])
             navigate('/department')
         }
     };

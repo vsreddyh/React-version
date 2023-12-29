@@ -39,9 +39,10 @@ const getsignupCollege=async(req,res)=>
 
 //SESSION_CHECKER
 const checkSessionEndpoint = async(req,res)=>{
+    console.log(req.session)
     if (req.session.loggedInemail) {
         // If the user is logged in (session contains loggedInUser), serve main-page.html
-        res.json(req.session.loggedInemail);
+        res.json([req.session.loggedInemail,req.session.typeofuser]);
     } else {
         // If not logged in, serve signin.html
         res.json(null)

@@ -5,7 +5,7 @@ import Sider from "./Sider";
 import axios from "axios";
 import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 
-export default function Newhr(){
+export default function Newhr({ setUserData }){
     const navigate = useNavigate();
     const params = useParams();
     const token = params.token;
@@ -21,6 +21,7 @@ export default function Newhr(){
                 setErrorMessage(encodeURIComponent('Token Expired'))
             }
             else{
+                setUserData([response.data.email,2])
                 setemail(response.data.email)
             }}
             validateToken();

@@ -18,9 +18,10 @@ import HRMAIN from "./hrmain";
 import HrSignUp from "./hrsignup";
 import Newhr from "./Newhr";
 import Company from "./choosecompany";
+import ClgMainPage from "./clgmainpage";
 
 export default function App() {
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState([]);
 
     useEffect(() => {
         // Check user session when the component mounts
@@ -60,19 +61,20 @@ export default function App() {
                 <Route path="/Check-email" element={<CheckEmail/>}/>
                 <Route path="/college-signup" element={<CollegeLogin/>}/>
                 <Route path="/college-signup/:errorMessage" element={<CollegeLogin/>}/>
-                <Route path="/set-password/nu/:token" element={<NewUser/>}/>
+                <Route path="/set-password/nu/:token" element={<NewUser setUserData={setUserData}/>}/>
                 <Route path="/forgot-password/:errorMessage" element={<ForgotPassword/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
                 <Route path="/set-password/np/:token" element={<Newpasword/>}/>
-                <Route path="/set-password/ne/:token" element={<Newpasword_email/>}/>
+                <Route path="/set-password/ne/:token" element={<Newpasword_email setUserData={setUserData}/>}/>
                 <Route path="/college-login" element={<College />}/>
                 <Route path="/department" element={<StudentLogin/>}/>
                 <Route path="/college-details" element={<CollegeDetails/>}/>
                 <Route path="/SignIn" element={<SignIn setUserData={setUserData}/>}/>
                 <Route path="/hrmain" element={<HRMAIN/>}/>
+                <Route path="/clgmain" element={<ClgMainPage/>}/>
                 <Route path="/hrsignup/:errorMessage" element={<HrSignUp />} />
                 <Route path="/hrsignup" element={<HrSignUp />} />
-                <Route path="/set-password/nh/:token" element={<Newhr/>}/>
+                <Route path="/set-password/nh/:token" element={<Newhr setUserData={setUserData}/>}/>
                 <Route path="/company" element={<Company/>}/>
                 <Route path="/*" element={<Navigate to="/" />} />
             </Routes>

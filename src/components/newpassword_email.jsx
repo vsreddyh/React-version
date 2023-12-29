@@ -6,7 +6,7 @@ import "./signin.css"
 import axios from "axios";
 import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 
-export default function Newpasword_email(){
+export default function Newpasword_email({ setUserData }){
 const year= new Date().getFullYear()
 const navigate = useNavigate();
 const params = useParams();
@@ -24,6 +24,7 @@ useEffect(() => {
             setErrorMessage(encodeURIComponent('Token Expired'))
         }
         else{
+            setUserData([response.data.email,1])
             setemail(response.data.email)
         }}
         validateToken();
@@ -50,7 +51,7 @@ const handleSubmit = async (event) => {
         }else if (response.data.message==='college has been registered'){
             seterror('College registered')
         }else{
-            navigate('/main')
+            navigate('/clgmain')
         }
 };
 
