@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./sp.css"
+import { Link } from "react-router-dom";
 
-export default function StudentProfile(){
+export default function StudentProfile(props){
+    const receivedData = props.studata;
+    let [studata,setstudata]=useState('null')
+    let [projects,setprojects]=useState([])
+    console.log('allo',receivedData)
+    const handleclick=(data)=>{
+        console.log(data)
+    }
+    useEffect(() => {
+        console.log('wtf1')
+        const fetchData = async () => {
+            const response = await axios.post('/en/getstudendata', { data: receivedData });
+            setstudata(response.data); // Assuming you want to log the response data
+        };
+    
+        fetchData();
+    }, [receivedData]);
+    useEffect(()=>{
+        console.log("entering")
+        const fetchprojdata = async () => {
+            const response = await axios.post('/en/fetchprojdata',{data: studata.projects})
+            setprojects(response.data)
+        }
+        fetchprojdata();
+    },[studata])
     return(
         <div>
             <div className="sprofile">
@@ -9,21 +35,25 @@ export default function StudentProfile(){
                     <div className="sdetails">
                         <div className="probackground"></div>
                         <div className="sphoto">
-    
                         </div>
                         <div className="sname">
-                                <p>Vishnu Shouryan Reddy Hanumandla</p>
-                                <p>vishnushouryan@gmail.com</p>
-                                <p>Keshav Memorial Institute of Technology</p>                          
+                                <p>{studata.student_name}</p>
+                                <p>{studata.email_address}</p>
+                                <p>{studata.college_name}</p>                          
                         </div>
                     </div>
                     <div className="sprojects">
                         <div className="sprojectdetails">
-                            <p>No. of Projects:</p>
+                            <p>No. of Projects: {studata.projects?.length || 0}</p>
                             <h4>Active Domains worked for</h4>
                             <ul>
-                                <li>Machine Learning</li>
-                                <li>Artificial Intelligence</li>
+                                {(studata.Domains && studata.Domains.length > 0) ? (
+                                    studata.Domains.map((domain, index) => (
+                                        <li key={index}>{domain}</li>
+                                    ))
+                                ) : (
+                                    <li>None</li>
+                                )}
                             </ul>
 
                         </div>
@@ -31,42 +61,55 @@ export default function StudentProfile(){
                 </div>
                 <div className="sbio">
                     <div className="stubio">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda nulla deserunt nam eaque aliquid architecto rerum quos, enim dolorem suscipit. Esse, pariatur nemo veniam cumque eius accusamus natus unde sapiente. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita deleniti nihil voluptates corporis iste amet, labore illo optio fugit distinctio, et consequatur doloremque ab ad atque incidunt maxime sit unde. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quos minus laborum molestiae velit officia rem unde, nisi harum nihil consequatur id officiis, dolores, impedit esse tenetur labore odio quaerat.</p>
+                        <p>{studata.Description}</p>
                     </div>
 
                 </div>
                 <div className="stuskill">
                     <div className="sskill">
                         <div>
-                            <p>Project name in the domain of machine learning</p>
                             <h4>Skills:</h4>
                             <ul>
-                                <li>Skill1</li>
-                                <li>Skill2</li>
-                                <li>Skill3</li>
+                                {(studata.skills && Array.isArray(studata.skills) && studata.skills.length > 0) ? (
+                                    studata.skills.map((skill, index) => (
+                                        <li key={index}>{skill}</li>
+                                    ))
+                                ) : (
+                                    <li>None</li>
+                                )}
                             </ul>
                         </div>
                     </div>
 
                 </div>
-                <div className="project-card1">
-                    <div className="cardpart1">
-                        <img className="profile-picture1" src="https://placekitten.com/300/200" alt="Profile Picture1" />
-                        <div className="pdiscript1">
-                            <p>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam, maxime, ipsa cum sit in hic, 
-                               nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae quasi corrupti quod. Lorem
-                                ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab enim eius suscipit, impedit 
-                                consectetur ullam
-                               . Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo velit!
-                            </p>
-                        </div>
-                    </div>
-                    <div className="pname1">
-                        <p>
-                            Project palace
-                        </p>
-                    </div>
+                <div className="proj-container">
+                    {projects.length > 0 ? (
+                        projects.map((project, index) => (
+                        <Link onClick={() => handleclick(project._id)}>
+                            <div key={index} className="proj-item">
+                                <div>
+                                    <div className="project-card">
+                                        <div className="cardpart">
+                                            <img className="profile-picture" src={`/en/image/${project.photo}`} alt="Profile Picture"/>
+                                            <div className="pdiscript">
+                                                <p>
+                                                    {project.Description}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="pname">
+                                            <p>
+                                                {project.Project_Name}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                    ))
+                    ): (
+                        <p>Loading projects...</p>
+                    )}
                 </div>
             </div>
         </div>

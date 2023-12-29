@@ -7,6 +7,7 @@ import StudentProfile from "./StudentProfile";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
 
 function HRMAIN(){
     const [receivedData, setReceivedData] = useState({
@@ -31,6 +32,10 @@ function HRMAIN(){
     const updateReceivedData = (data) => {
         setReceivedData(prevData => ({ ...prevData, ...data }));
     };
+    const handleclick=(data)=>{
+        setDisplay(1);
+        setSendDataToStudent('655b208c015f16eaac361773');
+    }
     const [projects, setProjects] = useState([]);
     useEffect(() => {
         console.log("after", receivedData);
@@ -38,6 +43,7 @@ function HRMAIN(){
     }, [receivedData]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    const [sendDataToStudent, setSendDataToStudent] = useState(null);
     const fetchData = useCallback(async () => {
         try {
             const queryParams = new URLSearchParams({
@@ -66,38 +72,39 @@ function HRMAIN(){
         }
     };
     const [display, setDisplay]= useState(0)
-    console.log(display)
-    console.log("curr is",currentPage,"tot is",totalPages)
+    console.log(projects[0])
     return(
         <div className="body">
         <Header takedata={CategoryData}/>
         <div className="bodyy">
             <Filters sendDataToParent={FilterData}/>
             {display === 1 ? (
-                <StudentProfile />
+                <StudentProfile studata={sendDataToStudent}/>
             ) : display === 0 ? (
                 <div>
                     <div className="grid-container">
                         {projects.map((project, index) => (
-                            <div key={index} className="grid-item">
-                                <div>
-                                    <div className="project-card">
-                                        <div className="cardpart">
-                                            <img className="profile-picture" src={`/en/image/${project.photo}`} alt="Profile Picture"/>
-                                            <div className="pdiscript">
+                            <Link onClick={() => handleclick(project._id)}>
+                                <div key={index} className="grid-item">
+                                    <div>
+                                        <div className="project-card">
+                                            <div className="cardpart">
+                                                <img className="profile-picture" src={`/en/image/${project.photo}`} alt="Profile Picture"/>
+                                                <div className="pdiscript">
+                                                    <p>
+                                                        {project.Description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className="pname">
                                                 <p>
-                                                    {project.Description}
+                                                    {project.Project_Name}
                                                 </p>
                                             </div>
                                         </div>
-                                        <div className="pname">
-                                            <p>
-                                                {project.Project_Name}
-                                            </p>
-                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                     <div className="navbuttons">
