@@ -350,6 +350,17 @@ body{
     color: #a6a5a5;
 }
 
+.proj-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;  /* Spacing between grid items */
+}
+  
+.proj-item {
+    /* border: 3px solid #20283b; */
+    padding-right: 20px;
+}
+
 .project-card1{
     height: 200px;
     background-color: #141e2f;

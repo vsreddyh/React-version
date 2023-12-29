@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const Mailgen = require('mailgen');
 const nodemailer = require('nodemailer');
-const {EMAIL, PASSWORD, JWT_SECRET, SESSION_KEY,Course,college,Department,recruiter} = require('../settings/env.js');
+const {EMAIL, PASSWORD, JWT_SECRET, SESSION_KEY,Course,college,Department,recruiter,companies} = require('../settings/env.js');
 require('dotenv').config();
 
 app.use(express.static('../build'));
@@ -283,9 +283,9 @@ const signin = async(req,res)=>{
             if (userPassword==='NULL') {
                 res.json({message:'User Not found'})
             } else if (result) {
-                res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
                 req.session.loggedInemail=username;
                 req.session.typeofuser=userPassword[1];
+                res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
                 console.log('signin is',req.session)
             } else {
                 res.json({message:'Wrong Password', user: username })
@@ -583,6 +583,59 @@ const collegeDetails = async(req,res)=>{
         res.status(500).json({ error: "Error updating user" });
     }
 }
+//suggest companies
+const getCompanyDetails = async(req,res)=>{
+    try{
+        const term1=req.query.term1;
+        const regex1 =new RegExp(term1,'i');
+        console.log(regex1)
+        const colleges=await companies.find({company_name:regex1}).select('company_name').limit(10);
+        const suggestions1=colleges.map(college=>college.company_name);
+        console.log(suggestions1)
+        res.json(suggestions1);
+    
+    }
+    catch(err)
+    {
+        console.error('Error retrieving colleges:',err);
+        res.status(500).json({error:'Error in retriveing colleges'});
+
+    }
+
+}
+//save companydetails
+const companyDetails = async(req,res)=>{
+    const mail = req.session.loggedInemail; // Get the email from session
+    console.log(mail)
+    const result = req.body.college;
+    
+    try {
+        const user = await recruiter.findOne({ email_address:mail}); // Find user by email
+        const company = await companies.findOne({company_name:result}).select('company_name')
+        console.log('company is',company)
+        if (user) {
+            user.company_name = result; // Update the field_name
+            await user.save(); // Save changes to the database
+            console.log("User saved:", user);
+            res.json("user saved");
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+        if (company){
+
+        }
+        else{
+            const comp = new companies({
+                company_name: result,
+                versionKey: false
+            })
+            comp.save()
+        }
+    } catch (err) {
+        console.error("Error updating user:", err);
+        res.status(500).json({ error: "Error updating user" });
+    }
+}
 module.exports = {
     signin,
     checkSessionEndpoint,
@@ -599,5 +652,7 @@ module.exports = {
     getCollegeDetails,
     getsignupCollege,
     hrsignup,
-    newhr
+    newhr,
+    companyDetails,
+    getCompanyDetails
 };

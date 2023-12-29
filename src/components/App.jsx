@@ -17,6 +17,7 @@ import Category from "./wru";
 import HRMAIN from "./hrmain";
 import HrSignUp from "./hrsignup";
 import Newhr from "./Newhr";
+import Company from "./choosecompany";
 
 export default function App() {
     const [userData, setUserData] = useState(null);
@@ -74,6 +75,7 @@ export default function App() {
                 <Route path="/hrsignup/:errorMessage" element={<HrSignUp />} />
                 <Route path="/hrsignup" element={<HrSignUp />} />
                 <Route path="/set-password/nh/:token" element={<Newhr/>}/>
+                <Route path="/company" element={<Company/>}/>
                 <Route path="/*" element={<Navigate to="/" />} />
             </Routes>
         </BrowserRouter>

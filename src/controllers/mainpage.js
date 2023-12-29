@@ -3,14 +3,15 @@ const express = require('express');
 const path = require('path');
 require('dotenv').config();
 const session = require('express-session');
+const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const Grid = require('gridfs-stream');
 const GridFS = Grid(mongoose.connection, mongoose.mongo);
-const {college,projects} = require('../settings/env.js');
+const {college,projects,Course} = require('../settings/env.js');
 
 const app = express();
 app.use(express.static('./public'));
-const cors=require("cors")
+app.use(bodyParser.json());
 const conn = mongoose.createConnection('mongodb://127.0.0.1:27017/projectpalace');
 let gfs;
 conn.once('open', () => {
@@ -28,16 +29,14 @@ const getdata = async(req,res)=>{
         const colleges=await college.find({college_name:regex}).select("college_name").limit(10);
         const sugesstions=colleges.map(college=>college.college_name);
         res.json(sugesstions);
-       }
-       catch(error)
-       {
-        
+    }
+    catch(error){
         console.log("error",error);
-       }
+    }
     
 }
 const projectlist = async(req,res)=>{
-    console.log(req.session)
+    // console.log(req.session)
     let {category,search,college_name,sort_by,order,page} = req.query
     searchquery={Skills:search}
     catquery={Domain:category}
@@ -83,9 +82,28 @@ const image = async(req, res) => {
     const fileId = new mongoose.Types.ObjectId(req.params.id);
     gfs.openDownloadStream(fileId).pipe(res);
 };
-
+const getstudata = async(req,res)=>{
+    const data =req.body.data;
+    const studentId = new mongoose.Types.ObjectId(data);
+    const stinfo = await Course.findOne({_id:studentId});
+    res.json(stinfo)
+    console.log(req.session)
+}
+const fetchprojdata = async(req,res)=>{
+    const datas = req.body.data;
+    const array = [];
+    for(let key in datas){
+        let data = datas[key];
+        let projId = new mongoose.Types.ObjectId(data);
+        let projinfo = await projects.findOne({_id:projId});
+        array.push(projinfo)
+    }
+    res.json(array)
+}
 module.exports = {
     getdata,
     projectlist,
     image,
+    getstudata,
+    fetchprojdata,
 };

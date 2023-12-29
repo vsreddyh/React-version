@@ -49,7 +49,7 @@ export default function Newhr(){
         }else if (response.data.message==='Username Taken'){
             seterror('Username Taken')
         }else{
-            navigate('/hrmain')
+            navigate('/company')
         }
     };
     
