@@ -39,10 +39,8 @@ const getsignupCollege=async(req,res)=>
 
 //SESSION_CHECKER
 const checkSessionEndpoint = async(req,res)=>{
-    console.log('joke is',req.session)
     if (req.session.loggedInemail) {
         // If the user is logged in (session contains loggedInUser), serve main-page.html
-        console.log('mail is', req.session.loggedInemail)
         res.json(req.session.loggedInemail);
     } else {
         // If not logged in, serve signin.html
@@ -286,7 +284,6 @@ const signin = async(req,res)=>{
                 req.session.loggedInemail=username;
                 req.session.typeofuser=userPassword[1];
                 res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
-                console.log('signin is',req.session)
             } else {
                 res.json({message:'Wrong Password', user: username })
             }
@@ -297,7 +294,6 @@ const signin = async(req,res)=>{
 
 //token validation
 const validate_token = function(req, res) {
-    console.log("hello");
     var token = req.params.token;
     jwt.verify(token, JWT_SECRET, function(err, decoded) {
         if (err){
@@ -352,7 +348,6 @@ const newuser = async(req,res)=>{
         res.json({message:'Username Taken'})
     }
      else{
-        console.log(mail)
         bcrypt.hash(password, 8, (err, hash) => {
         const course = new Course({
             student_name : username,
@@ -386,7 +381,6 @@ const newhr = async(req,res)=>{
         res.json({message:'Username Taken'})
     }
      else{
-        console.log(mail)
         bcrypt.hash(password, 8, (err, hash) => {
         const course = new recruiter({
             hr_name : username,
@@ -510,7 +504,6 @@ const newp = async(req,res)=>{
 //department update
 const departments =async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
-    console.log(mail)
     const result = req.body.department;
     
     try {
@@ -518,7 +511,6 @@ const departments =async(req,res)=>{
         if (user) {
             user.field_name = result; // Update the field_name
             await user.save(); // Save changes to the database
-            console.log("User saved:", user);
             res.json("user saved");
         } else {
             res.status(404).json({ message: 'User not found' });
@@ -573,7 +565,6 @@ const collegeDetails = async(req,res)=>{
         if (user) {
             user.college_name = result; // Update the field_name
             await user.save(); // Save changes to the database
-            console.log("User saved:", user);
             res.json("user saved");
         } else {
             res.status(404).json({ message: 'User not found' });
@@ -588,10 +579,8 @@ const getCompanyDetails = async(req,res)=>{
     try{
         const term1=req.query.term1;
         const regex1 =new RegExp(term1,'i');
-        console.log(regex1)
         const colleges=await companies.find({company_name:regex1}).select('company_name').limit(10);
         const suggestions1=colleges.map(college=>college.company_name);
-        console.log(suggestions1)
         res.json(suggestions1);
     
     }
@@ -606,17 +595,14 @@ const getCompanyDetails = async(req,res)=>{
 //save companydetails
 const companyDetails = async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
-    console.log(mail)
     const result = req.body.college;
     
     try {
         const user = await recruiter.findOne({ email_address:mail}); // Find user by email
         const company = await companies.findOne({company_name:result}).select('company_name')
-        console.log('company is',company)
         if (user) {
             user.company_name = result; // Update the field_name
             await user.save(); // Save changes to the database
-            console.log("User saved:", user);
             res.json("user saved");
         } else {
             res.status(404).json({ message: 'User not found' });

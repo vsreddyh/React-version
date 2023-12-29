@@ -8,14 +8,14 @@ const approute=require("./route.js")
 var MongoDBStore = require('connect-mongodb-session')(session);
 
 require('dotenv').config();
-const {SESSION_KEY} = require('./settings/env.js');
+const {SESSION_KEY,url} = require('./settings/env.js');
 app.use(cors())
 app.get("/",cors(),(req,res)=>
 {
 
 })
 var store = new MongoDBStore({
-  uri: 'mongodb://127.0.0.1:27017/projectpalace',
+  uri: url,
   collection: 'mySessions'
 });
 

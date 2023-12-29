@@ -87,7 +87,6 @@ const getstudata = async(req,res)=>{
     const studentId = new mongoose.Types.ObjectId(data);
     const stinfo = await Course.findOne({_id:studentId});
     res.json(stinfo)
-    console.log(req.session)
 }
 const fetchprojdata = async(req,res)=>{
     const datas = req.body.data;

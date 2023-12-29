@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId;
-mongoose.connect('mongodb://127.0.0.1:27017/projectpalace');
+url='mongodb+srv://Project:Florencemidhebaramvesam@project.tbx2krn.mongodb.net/projectpalace'
+mongoose.connect(url);
 const loginSchema = new mongoose.Schema({
     student_name : String,
     email_address : String,
@@ -59,5 +60,6 @@ module.exports = {
     Department:Department,
     projects:projects,
     recruiter:recruiter,
-    companies:companies
+    companies:companies,
+    url:url,
 }

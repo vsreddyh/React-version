@@ -30,9 +30,7 @@ export default function App() {
     const checkSession = async () => {
         try {
             // Make an API call to check for user session data
-            console.log('calling all updates')
             const respons = await axios.get('/en/checkSessionEndpoint');
-            console.log('respons is',respons)
             if (respons.data) {
                 // If user data is available, set it in state
                 setUserData(respons.data);
