@@ -6,7 +6,7 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-export default function CollegeDetails(setUserData){
+export default function CollegeDetails({setUserData}){
     const year= new Date().getFullYear();
     
     const [term1, setTerm1] = useState('');
