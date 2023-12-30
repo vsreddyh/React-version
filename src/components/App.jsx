@@ -52,13 +52,13 @@ export default function App() {
                         userData[1]===0 ?
                             userData[2]===0?
                                 userData[3]?
-                                <CollegeDetails/>
-                                :<StudentLogin/>
+                                <CollegeDetails setUserData={setUserData}/>
+                                :<StudentLogin setUserData={setUserData}/>
                             :<Navigate to="/main" />
                         :userData[1]===1 ?
                         <Navigate to="/clgmain" />
                         :userData[2]===0?
-                        <Company/>
+                        <Company setUserData={setUserData}/>
                         :<Navigate to="/hrmain" />
                     : <Category  />}
                     exact/>

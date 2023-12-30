@@ -6,7 +6,7 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-export default function Company(){
+export default function Company(setUserData){
     const year= new Date().getFullYear();
     
     const [term1, setTerm1] = useState('');
@@ -36,8 +36,9 @@ export default function Company(){
         try {
             const collegevalue=term1;
             const response=await axios.post("/en/company-details",{ college: collegevalue});
-            if(response.data==="user saved")
+            if(response.data.message==="user saved")
             {
+                setUserData([response.data.email,2,1])
                 navigate("/hrmain");
             }
             
@@ -101,7 +102,7 @@ export default function Company(){
                     </p>
                     
                     <form action="/college-details" method="post" onSubmit={(e) => e.preventDefault()}>
-                        <input class="collegename" type="text" id="collegeInput" placeholder="college name" minlength="3" name="college" value={term1} onChange={handleInputChange} required />
+                        <input class="collegename" type="text" id="collegeInput" placeholder="company name" minlength="3" name="college" value={term1} onChange={handleInputChange} required />
                         <br />
                         
                         

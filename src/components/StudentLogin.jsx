@@ -6,7 +6,7 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-export default function StudentLogin(){
+export default function StudentLogin({setUserData}){
     const year= new Date().getFullYear();
     
     const [term, setTerm] = useState('');
@@ -38,8 +38,9 @@ export default function StudentLogin(){
             const departmentvalue=term;
             const response=await axios.post("/en/departments",{ department: departmentvalue });
             console.log(response)
-            if(response.data==="user saved")
+            if(response.data.message==="user saved")
             {
+                setUserData([response.data.email,0,0,departmentvalue])
                 navigate("/college-details");
             }
             

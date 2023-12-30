@@ -498,7 +498,7 @@ const departments =async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.department;
     req.session.third=result;
-    res.json("user saved");
+    res.json({message:"user saved",email:mail});
 }
 //department suggestions
 const get_departments = async(req,res)=>{
@@ -549,7 +549,7 @@ const collegeDetails = async(req,res)=>{
         })
         await course.save();
         req.session.status=1;
-        res.json("user saved");
+        res.json({message:"user saved",email:req.session.username});
     } catch (err) {
         console.error("Error updating user:", err);
         res.status(500).json({ error: "Error updating user" });
