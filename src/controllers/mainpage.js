@@ -80,7 +80,7 @@ const projectlist = async(req,res)=>{
 }
 const image = async(req, res) => {
     const fileId = new mongoose.Types.ObjectId(req.params.id);
-    gfs.openDownloadStream(fileId).pipe(res);
+    await gfs.openDownloadStream(fileId).pipe(res);
 };
 const getstudata = async(req,res)=>{
     const data =req.body.data;
