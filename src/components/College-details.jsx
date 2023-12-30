@@ -47,11 +47,6 @@ export default function CollegeDetails(setUserData){
             console.error('Error navigating:', error);
         }
     };
-        
-    
-    
-  
-      
     const handleSuggestionClick = (suggestion1) => {
         setTerm1(suggestion1);
         setSuggestions1([]);

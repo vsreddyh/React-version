@@ -549,7 +549,7 @@ const collegeDetails = async(req,res)=>{
         })
         await course.save();
         req.session.status=1;
-        res.json({message:"user saved",email:req.session.username});
+        res.json({message:"user saved",email:req.session.loggedInemail});
     } catch (err) {
         console.error("Error updating user:", err);
         res.status(500).json({ error: "Error updating user" });
@@ -600,7 +600,7 @@ const companyDetails = async(req,res)=>{
             comp.save()
         }
         req.session.status=1;
-        res.json("user saved");
+        res.json({message:"user saved",email:req.session.loggedInemail});
     } catch (err) {
         console.error("Error updating user:", err);
         res.status(500).json({ error: "Error updating user" });
