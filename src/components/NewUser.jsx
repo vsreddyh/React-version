@@ -49,7 +49,7 @@ export default function NewUser({ setUserData }){
         }else if (response.data.message==='Username Taken'){
             seterror('Username Taken')
         }else{
-            setUserData([response.data.email,0])
+            setUserData([response.data.email,0,0])
             navigate('/department')
         }
     };

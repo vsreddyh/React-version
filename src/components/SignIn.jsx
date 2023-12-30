@@ -41,7 +41,7 @@ export default function SignIn({ setUserData }){
             //hr login
             else if(response.data.checkstudent===2){
 
-                setUserData([response.data.user.username,2]);
+                setUserData([response.data.user.username,2,1]);
                 navigate('/hrmain');
             }
             else{

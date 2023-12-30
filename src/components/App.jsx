@@ -10,7 +10,6 @@ import NewUser from "./NewUser";
 import Newpasword from "./Newpassword";
 import CollegeLogin from "./CollegeLogin";
 import Newpasword_email from "./newpassword_email";
-import College from "./CollegeLogin";
 import StudentLogin from "./StudentLogin";
 import CollegeDetails from "./College-details";
 import Category from "./wru";
@@ -21,7 +20,7 @@ import Company from "./choosecompany";
 import ClgMainPage from "./clgmainpage";
 
 export default function App() {
-    const [userData, setUserData] = useState([]);
+    const [userData, setUserData] = useState(null);
 
     useEffect(() => {
         // Check user session when the component mounts
@@ -44,38 +43,42 @@ export default function App() {
             setUserData(null);
         }
     };
+    console.log(userData)
     return (
         <BrowserRouter>
             <Routes>
-                <Route
-                    path="/"
-                    element={userData ? <Navigate to="/main" /> : <Category  />}
-                    exact
-                />
-                <Route path="/signup/:errorMessage" element={<SignUp />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route
-                    path="/main"
-                    element={userData ? <MainPage /> : <Navigate to="/" />}
-                />
-                <Route path="/Check-email" element={<CheckEmail/>}/>
-                <Route path="/college-signup" element={<CollegeLogin/>}/>
-                <Route path="/college-signup/:errorMessage" element={<CollegeLogin/>}/>
-                <Route path="/set-password/nu/:token" element={<NewUser setUserData={setUserData}/>}/>
+                <Route path="/" element=
+                    {userData ?
+                        userData[1]===0 ?
+                            userData[2]===0?
+                                userData[3]?
+                                <CollegeDetails/>
+                                :<StudentLogin/>
+                            :<Navigate to="/main" />
+                        :userData[1]===1 ?
+                        <Navigate to="/clgmain" />
+                        :userData[2]===0?
+                        <Company/>
+                        :<Navigate to="/hrmain" />
+                    : <Category  />}
+                    exact/>
+                <Route path="/hrmain" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN /> : <Navigate to="/" />}/>
+                <Route path="/clgmain" element={(userData && userData[1]===1 && userData[2]===1) ? <ClgMainPage /> : <Navigate to="/" />}/>
+                <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? <MainPage /> : <Navigate to="/" />}/>
+                <Route path="/signup/:errorMessage" element={userData ? <Navigate to="/" /> : <SignUp/>} />
+                <Route path="/signup" element={userData ? <Navigate to="/" /> : <SignUp/>} />
+                <Route path="/Check-email" element={userData ? <Navigate to="/" />: <CheckEmail/>}/>
+                <Route path="/college-signup" element={userData ? <Navigate to="/" /> : <CollegeLogin/>}/>
+                <Route path="/college-signup/:errorMessage" element={userData ? <Navigate to="/" /> : <CollegeLogin/>}/>
                 <Route path="/forgot-password/:errorMessage" element={<ForgotPassword/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
                 <Route path="/set-password/np/:token" element={<Newpasword/>}/>
-                <Route path="/set-password/ne/:token" element={<Newpasword_email setUserData={setUserData}/>}/>
-                <Route path="/college-login" element={<College />}/>
-                <Route path="/department" element={<StudentLogin/>}/>
-                <Route path="/college-details" element={<CollegeDetails/>}/>
-                <Route path="/SignIn" element={<SignIn setUserData={setUserData}/>}/>
-                <Route path="/hrmain" element={<HRMAIN/>}/>
-                <Route path="/clgmain" element={<ClgMainPage/>}/>
-                <Route path="/hrsignup/:errorMessage" element={<HrSignUp />} />
-                <Route path="/hrsignup" element={<HrSignUp />} />
-                <Route path="/set-password/nh/:token" element={<Newhr setUserData={setUserData}/>}/>
-                <Route path="/company" element={<Company/>}/>
+                <Route path="/set-password/nu/:token" element={userData ? <Navigate to="/" /> :<NewUser setUserData={setUserData}/>}/>
+                <Route path="/set-password/ne/:token" element={userData ? <Navigate to="/" /> : <Newpasword_email setUserData={setUserData}/>}/>
+                <Route path="/set-password/nh/:token" element={userData ? <Navigate to="/" /> : <Newhr setUserData={setUserData}/>}/>
+                <Route path="/SignIn" element={userData ? <Navigate to="/" /> : <SignIn setUserData={setUserData}/>}/>
+                <Route path="/hrsignup/:errorMessage" element={userData ? <Navigate to="/" /> :<HrSignUp />} />
+                <Route path="/hrsignup" element={userData ? <Navigate to="/" /> : <HrSignUp />} />
                 <Route path="/*" element={<Navigate to="/" />} />
             </Routes>
         </BrowserRouter>

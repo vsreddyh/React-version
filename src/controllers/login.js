@@ -32,17 +32,13 @@ const getsignupCollege=async(req,res)=>
         res.status(500).json({error:'Error in retriveing colleges'});
 
     }
-
-
-
 }
 
 //SESSION_CHECKER
 const checkSessionEndpoint = async(req,res)=>{
-    console.log(req.session)
     if (req.session.loggedInemail) {
         // If the user is logged in (session contains loggedInUser), serve main-page.html
-        res.json([req.session.loggedInemail,req.session.typeofuser]);
+        res.json([req.session.loggedInemail,req.session.typeofuser,req.session.status,req.session.third,req.session.fourth]);
     } else {
         // If not logged in, serve signin.html
         res.json(null)
@@ -64,7 +60,7 @@ const signup_college = async(req,res)=>{
         else if (result) {
         const username = result.email_address;
         //mail has found
-        const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '10m' });
         let config = {
             service: 'gmail',
             auth: {
@@ -140,7 +136,7 @@ const signup = async(req,res)=>{
             res.json({message:"User Already Exists",username:"null"})
         }
         else {
-            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '10m' });
             let config = {
                 service: 'gmail',
                 auth: {
@@ -209,7 +205,7 @@ const hrsignup = async(req,res)=>{
             res.json({message:"User Already Exists",username:"null"})
         }
         else {
-            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '10m' });
             let config = {
                 service: 'gmail',
                 auth: {
@@ -284,6 +280,7 @@ const signin = async(req,res)=>{
             } else if (result) { 
                 req.session.loggedInemail=username;
                 req.session.typeofuser=userPassword[1];
+                req.session.status=1;
                 res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
                 console.log('signin is',req.session)
             } else {
@@ -320,11 +317,12 @@ const mailpass = async(req,res)=>{
         bcrypt.hash(password, 8, async (err, hash) => {
             req.session.loggedInemail=mail
             req.session.typeofuser=1;
+            req.session.status=1;
             const result = await college.updateOne(
                 { 'email_address': mail }, 
                 { $set: { 'password': hash } }
             );
-            res.send({message:'ok'});
+            res.send({message:'ok',email:mail});
         
     });
 
@@ -351,16 +349,12 @@ const newuser = async(req,res)=>{
     }
      else{
         bcrypt.hash(password, 8, (err, hash) => {
-        const course = new Course({
-            student_name : username,
-            email_address : mail,
-            password : hash,
-            versionKey: false
-        })
-        course.save();
         req.session.loggedInemail=mail;
         req.session.typeofuser=0;
-        res.json({message:'success'});
+        req.session.status=0;
+        req.session.username=username;
+        req.session.password=hash;
+        res.json({message:'success',email:mail});
         });
     }
     
@@ -384,16 +378,12 @@ const newhr = async(req,res)=>{
     }
      else{
         bcrypt.hash(password, 8, (err, hash) => {
-        const course = new recruiter({
-            hr_name : username,
-            email_address : mail,
-            password : hash,
-            versionKey: false
-        })
-        course.save();
         req.session.loggedInemail=mail;
         req.session.typeofuser=2;
-        res.json({message:'success'});
+        req.session.status=0;
+        req.session.username=username;
+        req.session.password=hash;
+        res.json({message:'success',email:mail});
         });
     }
     
@@ -507,21 +497,8 @@ const newp = async(req,res)=>{
 const departments =async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.department;
-    
-    try {
-        const user = await Course.findOne({ email_address:mail}); // Find user by email
-        if (user) {
-            user.field_name = result; // Update the field_name
-            await user.save(); // Save changes to the database
-            res.json("user saved");
-        } else {
-            res.status(404).json({ message: 'User not found' });
-        }
-    } catch (err) {
-        console.error("Error updating user:", err);
-        res.status(500).json({ error: "Error updating user" });
-    }
-
+    req.session.third=result;
+    res.json("user saved");
 }
 //department suggestions
 const get_departments = async(req,res)=>{
@@ -559,18 +536,20 @@ const getCollegeDetails = async(req,res)=>{
 }
 //save collegedetails
 const collegeDetails = async(req,res)=>{
-    const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.college;
-    
+    req.session.fourth=result;
     try {
-        const user = await Course.findOne({ email_address:mail}); // Find user by email
-        if (user) {
-            user.college_name = result; // Update the field_name
-            await user.save(); // Save changes to the database
-            res.json("user saved");
-        } else {
-            res.status(404).json({ message: 'User not found' });
-        }
+        const course = new Course({
+            student_name : req.session.username,
+            email_address : req.session.loggedInemail,
+            password : req.session.password,
+            field_name:req.session.third,
+            college_name:req.session.fourth,
+            versionKey: false
+        })
+        await course.save();
+        req.session.status=1;
+        res.json("user saved");
     } catch (err) {
         console.error("Error updating user:", err);
         res.status(500).json({ error: "Error updating user" });
@@ -598,17 +577,18 @@ const getCompanyDetails = async(req,res)=>{
 const companyDetails = async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.college;
+    req.session.third=result;
     
     try {
-        const user = await recruiter.findOne({ email_address:mail}); // Find user by email
+        const course = new recruiter({
+            hr_name : req.session.username,
+            email_address : req.session.loggedInemail,
+            password : req.session.password,
+            company_name:req.session.third,
+            versionKey: false
+        })
+        await course.save();
         const company = await companies.findOne({company_name:result}).select('company_name')
-        if (user) {
-            user.company_name = result; // Update the field_name
-            await user.save(); // Save changes to the database
-            res.json("user saved");
-        } else {
-            res.status(404).json({ message: 'User not found' });
-        }
         if (company){
 
         }
@@ -619,6 +599,8 @@ const companyDetails = async(req,res)=>{
             })
             comp.save()
         }
+        req.session.status=1;
+        res.json("user saved");
     } catch (err) {
         console.error("Error updating user:", err);
         res.status(500).json({ error: "Error updating user" });

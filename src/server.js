@@ -27,7 +27,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
       secure: false, // Set it to true if your app is served over HTTPS
-      maxAge: 8 * 60 * 60 * 1000 // 8 hours (session expiration time)
+      maxAge: 6 * 60 * 60 * 1000 // 6 hours (session expiration time)
   }
 }));
 app.use(express.static('../build'));

@@ -31,7 +31,7 @@ export default function MainPage(){
                 </div>
                 <div className="profileset">
                     <div className="addproject">
-                        <button onclick="window.location.href='username.html'">
+                        <button onClick="window.location.href='username.html'">
                             <p>
                                 add project
                             </p>

@@ -21,7 +21,6 @@ export default function Newhr({ setUserData }){
                 setErrorMessage(encodeURIComponent('Token Expired'))
             }
             else{
-                setUserData([response.data.email,2])
                 setemail(response.data.email)
             }}
             validateToken();
@@ -50,6 +49,7 @@ export default function Newhr({ setUserData }){
         }else if (response.data.message==='Username Taken'){
             seterror('Username Taken')
         }else{
+            setUserData([response.data.email,2,0])
             navigate('/company')
         }
     };

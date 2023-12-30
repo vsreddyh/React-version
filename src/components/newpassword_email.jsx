@@ -24,7 +24,6 @@ useEffect(() => {
             setErrorMessage(encodeURIComponent('Token Expired'))
         }
         else{
-            setUserData([response.data.email,1])
             setemail(response.data.email)
         }}
         validateToken();
@@ -51,6 +50,7 @@ const handleSubmit = async (event) => {
         }else if (response.data.message==='college has been registered'){
             seterror('College registered')
         }else{
+            setUserData([response.data.email,1,0])
             navigate('/clgmain')
         }
 };
