@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const Grid = require('gridfs-stream');
 const GridFS = Grid(mongoose.connection, mongoose.mongo);
-const {college,projects,Course,url} = require('../settings/env.js');
+const {college,projects,Course,url, recruiter} = require('../settings/env.js');
 
 const app = express();
 app.use(express.static('./public'));
@@ -99,10 +99,44 @@ const fetchprojdata = async(req,res)=>{
     }
     res.json(array)
 }
+const addbookmark = async(req,res)=>{
+    const mail = req.session.loggedInemail;
+    const id = req.body.data;
+    const oid = new mongoose.Types.ObjectId(id);
+    const user = await recruiter.findOne({email_address:mail})
+    const list = user.bookmarks
+    list.push(oid);
+    user.bookmarks=list;
+    user.save()
+    res.json("success")
+}
+const removebookmark = async(req,res)=>{
+    const mail = req.session.loggedInemail;
+    const id = req.body.data;
+    const oid = new mongoose.Types.ObjectId(id);
+    const user = await recruiter.findOne({email_address:mail})
+    const list = user.bookmarks
+    var index = list.indexOf(oid);
+    list.splice(index, 1);
+    user.bookmarks=list;
+    user.save()
+    res.json("success")
+}
+const checkbookmark = async(req,res)=>{
+    const mail = req.session.loggedInemail;
+    const id = req.body.data;
+    const oid = new mongoose.Types.ObjectId(id);
+    const user = await recruiter.findOne({email_address:mail})
+    const list = user.bookmarks
+    res.json(Number(list.includes(oid)))
+}
 module.exports = {
     getdata,
     projectlist,
     image,
     getstudata,
     fetchprojdata,
+    addbookmark,
+    removebookmark,
+    checkbookmark,
 };

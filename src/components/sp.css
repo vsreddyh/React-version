@@ -381,7 +381,6 @@ body{
     padding: 10px;
     display: flex;
 }
-
 .pdiscript1{
     width: calc(100% - 140px);
     max-height: 140px;

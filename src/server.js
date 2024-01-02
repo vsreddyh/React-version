@@ -21,13 +21,14 @@ var store = new MongoDBStore({
 });
 
 app.use(session({
-  secret: SESSION_KEY, // Replace with a strong secret for session encryption
+  secret: SESSION_KEY, 
   resave: false,
   store: store,
   saveUninitialized: false,
   cookie: {
-      secure: false, // Set it to true if your app is served over HTTPS
-      maxAge: 6 * 60 * 60 * 1000 // 6 hours (session expiration time)
+      secure: false, 
+      maxAge: 6 * 60 * 60 * 1000,
+      rolling:true
   }
 }));
 app.use(express.static('../build'));

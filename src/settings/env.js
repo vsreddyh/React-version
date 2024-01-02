@@ -24,6 +24,7 @@ const hrSchema = new mongoose.Schema({
     email_address : String,
     password : String,
     company_name:String,
+    bookmarks:[ObjectId]
 },{ versionKey: false });
 const departmentSchema=new mongoose.Schema({
     field_name:String,

@@ -26,7 +26,6 @@ export default function App() {
         // Check user session when the component mounts
         checkSession();
     }, []);
-
     const checkSession = async () => {
         try {
             // Make an API call to check for user session data
@@ -47,21 +46,7 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element=
-                    {userData ?
-                        userData[1]===0 ?
-                            userData[2]===0?
-                                userData[3]?
-                                <CollegeDetails setUserData={setUserData}/>
-                                :<StudentLogin setUserData={setUserData}/>
-                            :<Navigate to="/main" />
-                        :userData[1]===1 ?
-                        <Navigate to="/clgmain" />
-                        :userData[2]===0?
-                        <Company setUserData={setUserData}/>
-                        :<Navigate to="/hrmain" />
-                    : <Category  />}
-                    exact/>
+                <Route path="/hrmain/:projid" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN /> : <Category/>}/>
                 <Route path="/hrmain" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN /> : <Navigate to="/" />}/>
                 <Route path="/clgmain" element={(userData && userData[1]===1 && userData[2]===1) ? <ClgMainPage /> : <Navigate to="/" />}/>
                 <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? <MainPage /> : <Navigate to="/" />}/>
@@ -80,6 +65,21 @@ export default function App() {
                 <Route path="/hrsignup/:errorMessage" element={userData ? <Navigate to="/" /> :<HrSignUp />} />
                 <Route path="/hrsignup" element={userData ? <Navigate to="/" /> : <HrSignUp />} />
                 <Route path="/*" element={<Navigate to="/" />} />
+                <Route path="/" element=
+                    {userData ?
+                        userData[1]===0 ?
+                            userData[2]===0?
+                                userData[3]?
+                                <CollegeDetails setUserData={setUserData}/>
+                                :<StudentLogin setUserData={setUserData}/>
+                            :<Navigate to="/main" />
+                        :userData[1]===1 ?
+                        <Navigate to="/clgmain"/>
+                        :userData[2]===0?
+                        <Company setUserData={setUserData}/>
+                        :<Navigate to="/hrmain"/>
+                    : <Category  />}
+                exact/>
             </Routes>
         </BrowserRouter>
     );

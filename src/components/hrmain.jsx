@@ -7,7 +7,7 @@ import StudentProfile from "./StudentProfile";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function HRMAIN(){
     const [receivedData, setReceivedData] = useState({
@@ -37,10 +37,6 @@ function HRMAIN(){
         setSendDataToStudent('655b208c015f16eaac361773');
     }
     const [projects, setProjects] = useState([]);
-    useEffect(() => {
-        console.log("after", receivedData);
-        console.log('dis is',display)
-    }, [receivedData]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [sendDataToStudent, setSendDataToStudent] = useState(null);
@@ -71,15 +67,27 @@ function HRMAIN(){
             setCurrentPage(prevPage => prevPage - 1);
         }
     };
+    const killpage = () => {
+        console.log('yo')
+        setDisplay(0);
+        projid=null;
+    }
     const [display, setDisplay]= useState(0)
-    console.log(projects[0])
+    let {projid}=useParams();
+    useEffect(()=>{
+        if(projid){
+            setDisplay(1)
+            setSendDataToStudent(projid)
+        }
+    })
+    console.log('a',projid)
     return(
         <div className="body">
         <Header takedata={CategoryData}/>
         <div className="bodyy">
             <Filters sendDataToParent={FilterData}/>
             {display === 1 ? (
-                <StudentProfile studata={sendDataToStudent}/>
+                <StudentProfile studata={sendDataToStudent} dis={killpage}/>
             ) : display === 0 ? (
                 <div>
                     <div className="grid-container">
