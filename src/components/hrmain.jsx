@@ -106,7 +106,6 @@ function HRMAIN(){
                 <div>
                     <div className="grid-container">
                         {projects.map((project, index) => (
-                            <Link onClick={() => handleclick(project._id)}>
                                 <div key={index} className="grid-item">
                                     <div>
                                         <div className="project-card">
@@ -118,7 +117,7 @@ function HRMAIN(){
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div className="pname">
+                                            <div className="pname" onClick={() => handleclick(project._id)}>
                                                 <p>
                                                     {project.Project_Name}
                                                 </p>
@@ -126,7 +125,6 @@ function HRMAIN(){
                                         </div>
                                     </div>
                                 </div>
-                            </Link>
                         ))}
                     </div>
                     <div className="navbuttons">

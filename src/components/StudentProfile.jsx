@@ -146,7 +146,6 @@ export default function StudentProfile({ dis, ...props }){
                     <div className="proj-container">
                         {projects.length > 0 ? (
                             projects.map((project, index) => (
-                            <Link onClick={() => handleclick(project._id)}>
                                 <div key={index} className="proj-item">
                                     <div>
                                         <div className="project-card1">
@@ -158,7 +157,7 @@ export default function StudentProfile({ dis, ...props }){
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div className="pname1">
+                                            <div className="pname1" onClick={() => handleclick(project._id)}>
                                                 <p>
                                                     {project.Project_Name}
                                                 </p>
@@ -166,7 +165,6 @@ export default function StudentProfile({ dis, ...props }){
                                         </div>
                                     </div>
                                 </div>
-                            </Link>
                         ))
                         ): (
                             <p>Loading projects...</p>
