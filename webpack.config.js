@@ -10,7 +10,10 @@ module.exports = {
     fallback: {
       "net": require.resolve("stream-browserify"),
       "http": require.resolve("stream-http"),
-      "path": require.resolve("path-browserify")
+      "path": require.resolve("path-browserify"),
+      "fs": false,
+      "os": false,
+      "path": false,
     }
   }
 };

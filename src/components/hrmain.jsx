@@ -7,9 +7,12 @@ import StudentProfile from "./StudentProfile";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
 
 function HRMAIN(){
+    const navigate = useNavigate();
+    const [display, setDisplay]= useState(2)
+    console.log("setting state")
     const [receivedData, setReceivedData] = useState({
         category:'Any',
         search:'',
@@ -25,6 +28,7 @@ function HRMAIN(){
     }, []);
 
     const CategoryData = useCallback((data) => {
+        console.log('updating')
         updateReceivedData(data);
         setCurrentPage(1);
         setDisplay(0)
@@ -36,27 +40,36 @@ function HRMAIN(){
         setDisplay(1);
         setSendDataToStudent('655b208c015f16eaac361773');
     }
+    let { projid } = useParams();
     const [projects, setProjects] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [sendDataToStudent, setSendDataToStudent] = useState(null);
-    const fetchData = useCallback(async () => {
+    const fetchData = async () => {
         try {
-            const queryParams = new URLSearchParams({
-                ...receivedData,
-                page: currentPage
-            });
-            const response = await axios.get(`/en/projects?${queryParams}`);
-            setProjects(response.data.list);
-            setTotalPages(response.data.total_pages);
-            setDisplay(response.data.display)
+            if(projid){
+                console.log("setting display as 1")
+                setDisplay(1)
+                setSendDataToStudent(projid)
+            }
+            else{
+                const queryParams = new URLSearchParams({
+                    ...receivedData,
+                    page: currentPage
+                });
+                const response = await axios.get(`/en/projects?${queryParams}`);
+                setProjects(response.data.list);
+                setTotalPages(response.data.total_pages);
+                setDisplay(response.data.display)
+                console.log("fetching")
+            }
         } catch (error) {
             console.error('Error fetching data:', error);
         }
-    }, [receivedData, currentPage]);
+    };
     useEffect(() => {
         fetchData();
-    }, [fetchData]);
+    }, [receivedData, currentPage, projid]);
     const handleNextPage = () => {
         if (currentPage < totalPages) {
             setCurrentPage(prevPage => prevPage + 1);
@@ -69,18 +82,19 @@ function HRMAIN(){
     };
     const killpage = () => {
         console.log('yo')
-        setDisplay(0);
-        projid=null;
-    }
-    const [display, setDisplay]= useState(0)
-    let {projid}=useParams();
-    useEffect(()=>{
         if(projid){
-            setDisplay(1)
-            setSendDataToStudent(projid)
+            navigate('/hrmain')
         }
-    })
-    console.log('a',projid)
+        setDisplay(0)
+        setSendDataToStudent(null)
+    }
+    useEffect(() => {
+        if (!projid) {
+            setDisplay(0); // Reset display to 0 when projid is null
+            setSendDataToStudent(null);
+        }
+    }, [projid]);
+    console.log('a',projid,display,sendDataToStudent)
     return(
         <div className="body">
         <Header takedata={CategoryData}/>

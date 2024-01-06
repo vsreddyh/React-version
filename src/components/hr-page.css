@@ -401,36 +401,6 @@
     display: table;
     clear: both;
 }
-.nby{
-    float: left;
-    margin: 3px 10px;
-    padding: 2px 5px;
-    border: 0.1px solid #3C445C;
-    border-radius: 5px;
-    color: aliceblue;
-
-}
-
-.nby:hover{
-    background-color:  #141e2f;
-    border-color:#4e5569 ;
-}
-
-.nbu{
-    float: right;
-    margin: 3px 10px;
-    padding:2px 5px ;
-    border: 0.1px solid #3C445C;
-    border-radius: 5px;
-    color: aliceblue;
-}
-
-.nbu:hover{
-    background-color:  #141e2f;
-    border-color:#4e5569 ;
-}
-
-
 .studetails{
     display: flex;
     flex-direction: row;
@@ -839,5 +809,10 @@
         width: 100%;
         min-width: 0px;
         height: auto;
+    }
+}
+@media print {
+    .header ,.filters{
+        display: none !important;
     }
 }
