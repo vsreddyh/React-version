@@ -11,7 +11,7 @@ export default function ProjectUploadForm(){
 
     
     
-
+    const [file,setFile]=useState(null);
     const [formData,setFormData]=useState({
         category: 'Any',
         search:'',
@@ -43,6 +43,32 @@ export default function ProjectUploadForm(){
             category: event.target.value
         });
         adjustSelectSize();
+    };
+    function handlechange(event) {
+        const selectedFile = event.target.files[0]; // Get the first selected file
+        if (selectedFile) {
+          console.log('Selected file:', selectedFile);
+          // You can perform further actions with the selected file here
+        } else {
+          console.log('No file selected');
+        }
+      }
+    const uploadFolder = async (event) => {
+        event.preventDefault();
+        if (!file) {
+            console.error("No file selected.");
+            return;
+        }
+        
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        try {
+            const response = await axios.post('/upload', formData);
+            console.log(response.data);
+        } catch (error) {
+            console.error("Error occurred:", error);
+        }
     };
 
     return(
@@ -80,7 +106,7 @@ export default function ProjectUploadForm(){
                         <input type="search" className="searchs" spellcheck="false" placeholder="Search for projects"></input>
                     </div>
                     <div className="search-icon">
-                        <FontAwesomeIcon className="i" icon={faSearch} style={{color: "white"}}/>
+                        <FontAwesomeIcon className="search-icon-i" icon={faSearch} style={{color: "white"}}/>
                     </div>
                 </div>
                 <div className="profileset">
@@ -183,21 +209,25 @@ export default function ProjectUploadForm(){
                             </p>
                             <div className="dscrpt">
                                 <p className="description">
-                                    <label for="description">Description:</label>
+                                    <label htmlFor="description">Description:</label>
                                     <textarea name="description" id="description" rows="5" required="" className="dscrpt-textarea"></textarea>
                                 </p>
-                                    <div className="file-upload">
-                                        <p className="file-upload-p">
-                                            <input type="file" id="file-upload" className="file-upload-input" />
-                                            <label for="file-upload">
-                                                <button onclick="selectFolder()" className="file-upload-button">
-                                                    Upload folder
-                                                </button>
-                                            </label>
-                                            <br />
-                                            drag files here
-                                        </p>
-                                    </div>
+                                <div className="file-upload">
+                                    <label htmlFor="file-upload" className="file-upload-label">
+                                        Upload files
+                                    </label>
+                                    <input type="file" id="file-upload" className="file-upload-input" accept=".zip" onChange={handlechange} />
+                                    <button onClick={uploadFolder} className="file-upload-button">
+                                        Upload folder
+                                    </button>
+                                    <p>
+                                        Drag files here
+                                    </p>
+                                </div>
+
+
+
+
                             </div>
                             <div className="lang">
                                 <p className="lang-p">
@@ -212,14 +242,27 @@ export default function ProjectUploadForm(){
                             <div className="media-upload">
                                 <p className="video">
                                     Upload media:
-                                    <button onclick="selectFolder()" className="media-upload-button">
+                                    
+                                    <br />
+                                    <label htmlFor="video-upload" className="media-upload-label">
+                                        Upload video
+                                    </label>
+                                    <input type="file" className="media-upload-input" accept="video/*" onChange={handlechange} />
+                                    <button onClick={uploadFolder} className="media-upload-button">
                                         Upload video
                                     </button>
-                                    <button onclick="selectFolder()" className="media-upload-button">
+                                    
+                                    <br />
+
+                                    <label htmlFor="photo-upload" className="media-upload-label">
+                                        Upload photos
+                                    </label>
+                                    <input type="file" className="media-upload-input" accept="image/*" onChange={handlechange} />
+                                    <button onClick={uploadFolder} className="media-upload-button">
                                         Upload photos
                                     </button>
-                                </p>
-                            </div>
+                                    </p>
+                        </div>
                             <div className="team-mem">
                                 <p>
                                     Add your team members:

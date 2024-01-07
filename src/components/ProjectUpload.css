@@ -139,7 +139,7 @@
     border: 1px solid #7190c6;
 }
 
-.search-icon i{
+.search-icon-i{
     margin-top: 10px;
     margin-left: 5px;
     border: 5px;
@@ -372,9 +372,7 @@
     border:2px solid rgb(66, 157, 237);
 }
 
-.file-upload-input{
-    display: none;
-}
+
 
 #searchbarContainer {
     display: flex;
