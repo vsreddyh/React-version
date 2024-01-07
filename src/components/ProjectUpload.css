@@ -86,23 +86,43 @@
     display: flex;
 }
 
-.searchbar input{
+#searchContainer {
+    display: flex;
+    align-items: center;
     height: 35px;
-    width: 100%;
     margin-top: 15px;
-    margin-left: 0px;
+    width: 100%;
     background-color: #21293b;
     box-sizing: border-box;
-    border: 0.5px solid;
-    border-color: rgb(4, 67, 112);
+    border: 0.5px solid rgb(6, 60, 107);;
     padding: 10px;
-    outline: rgb(255, 255, 255);
-    color: #a6a5a5;
+    color: #cfcbcb;
+    font-size: 23px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
-.searchbar input:hover {
-    border: 1px solid #7190c6; /* Add border on hover */
+#searchContainer:hover{
+    border: 1px solid #7190c6;
 }
+
+#searchbarInput {
+    height: 33px;
+    width: 100px;
+    margin: 7px;
+    overflow-x: hidden;
+    margin-left: 0px;
+    box-sizing: border-box;
+    background-color: #20293d;
+    border: 0px;
+    border-radius: 5px;
+    padding: 10px;
+    color: #cfcbcb;
+    font-size: 23px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+
+
 .search-icon{
     margin-top: 15px;
     font-size: 17px;
@@ -351,18 +371,39 @@
 .file-upload-button:active {
     border:2px solid rgb(66, 157, 237);
 }
+.file-upload-input {
+    display: none;
+  }
+.media-upload-input {
+    display: none; /* Hide the file input */
+}
 
-
+.media-upload-label {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: rgb(24, 106, 177);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+  
+  /* Style the label to resemble a button */
+.file-upload-label {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color:rgb(24, 106, 177);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+ 
 
 #searchbarContainer {
     display: flex;
     flex-wrap: wrap;
     padding: 5px;
     align-items: center;
-}
-
-
-.lang{
     display: flex;
 }
 
@@ -419,6 +460,7 @@
 .media-upload-button:active {
     border:2px solid rgb(66, 157, 237);
 }
+
 
 .team-mem{
     height:200px;

@@ -18,6 +18,7 @@ import HrSignUp from "./hrsignup";
 import Newhr from "./Newhr";
 import Company from "./choosecompany";
 import ClgMainPage from "./clgmainpage";
+import ProjectUploadForm from "./ProjectUploadForm";
 
 export default function App() {
     const [userData, setUserData] = useState(null);
@@ -64,6 +65,7 @@ export default function App() {
                 <Route path="/SignIn" element={userData ? <Navigate to="/" /> : <SignIn setUserData={setUserData}/>}/>
                 <Route path="/hrsignup/:errorMessage" element={userData ? <Navigate to="/" /> :<HrSignUp />} />
                 <Route path="/hrsignup" element={userData ? <Navigate to="/" /> : <HrSignUp />} />
+                <Route path="/ProjectUploadForm" element={<ProjectUploadForm/>}/>
                 <Route path="/*" element={<Navigate to="/" />} />
                 <Route path="/" element=
                     {userData ?

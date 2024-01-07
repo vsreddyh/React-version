@@ -11,7 +11,9 @@ export default function ProjectUploadForm(){
 
     
     
-    const [file,setFile]=useState(null);
+   
+    const[photo,selectedPhoto]=useState(null);
+    const[video,selectedVideo]=useState(null);
     const [formData,setFormData]=useState({
         category: 'Any',
         search:'',
@@ -19,6 +21,26 @@ export default function ProjectUploadForm(){
     // useEffect(() => {
     //     takedata(formData);
     // }, [formData, takedata]);
+    function handleVideoChange(event) {
+        const selectedVideo = event.target.files[0]; // Get the selected video file
+        if (selectedVideo) {
+            console.log('Selected video:', selectedVideo);
+            // Perform further actions with the selected video here
+        } else {
+            console.log('No video selected');
+        }
+    }
+    
+    function handlePhotoChange(event) {
+        const selectedPhoto = event.target.files[0]; // Get the selected photo file
+        if (selectedPhoto) {
+            console.log('Selected photo:', selectedPhoto);
+            // Perform further actions with the selected photo here
+        } else {
+            console.log('No photo selected');
+        }
+    }
+    
     function adjustSelectSize() {
         const selectElement = document.getElementById('cars');
         const selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -44,6 +66,15 @@ export default function ProjectUploadForm(){
         });
         adjustSelectSize();
     };
+    /*const handleVideoUploadClick = () => {
+        // Trigger the input click event for video upload
+        document.getElementById('video-upload').click();
+    };
+
+    const handlePhotoUploadClick = () => {
+        // Trigger the input click event for photo upload
+        document.getElementById('photo-upload').click();
+    };*/
     function handlechange(event) {
         const selectedFile = event.target.files[0]; // Get the first selected file
         if (selectedFile) {
@@ -53,23 +84,7 @@ export default function ProjectUploadForm(){
           console.log('No file selected');
         }
       }
-    const uploadFolder = async (event) => {
-        event.preventDefault();
-        if (!file) {
-            console.error("No file selected.");
-            return;
-        }
-        
-        const formData = new FormData();
-        formData.append('file', file);
-        
-        try {
-            const response = await axios.post('/upload', formData);
-            console.log(response.data);
-        } catch (error) {
-            console.error("Error occurred:", error);
-        }
-    };
+    
 
     return(
     <div className="bod">
@@ -213,13 +228,11 @@ export default function ProjectUploadForm(){
                                     <textarea name="description" id="description" rows="5" required="" className="dscrpt-textarea"></textarea>
                                 </p>
                                 <div className="file-upload">
-                                    <label htmlFor="file-upload" className="file-upload-label">
+                                    <label htmlFor="file-upload" className="file-upload-label"  >
                                         Upload files
                                     </label>
                                     <input type="file" id="file-upload" className="file-upload-input" accept=".zip" onChange={handlechange} />
-                                    <button onClick={uploadFolder} className="file-upload-button">
-                                        Upload folder
-                                    </button>
+                                    
                                     <p>
                                         Drag files here
                                     </p>
@@ -242,27 +255,16 @@ export default function ProjectUploadForm(){
                             <div className="media-upload">
                                 <p className="video">
                                     Upload media:
-                                    
-                                    <br />
-                                    <label htmlFor="video-upload" className="media-upload-label">
+                                    <label htmlFor="video-upload" className="media-upload-label" >
                                         Upload video
                                     </label>
-                                    <input type="file" className="media-upload-input" accept="video/*" onChange={handlechange} />
-                                    <button onClick={uploadFolder} className="media-upload-button">
-                                        Upload video
-                                    </button>
-                                    
-                                    <br />
-
-                                    <label htmlFor="photo-upload" className="media-upload-label">
-                                        Upload photos
+                                    <input type="file" id="video-upload" className="media-upload-input" accept="video/*" onChange={handleVideoChange} />
+                                    <label htmlFor="photo-upload" className="media-upload-label" >
+                                     Upload photos
                                     </label>
-                                    <input type="file" className="media-upload-input" accept="image/*" onChange={handlechange} />
-                                    <button onClick={uploadFolder} className="media-upload-button">
-                                        Upload photos
-                                    </button>
-                                    </p>
-                        </div>
+                                    <input type="file" id="photo-upload" className="media-upload-input" accept="image/*" onChange={handlePhotoChange} />
+                                </p>
+                            </div>
                             <div className="team-mem">
                                 <p>
                                     Add your team members:

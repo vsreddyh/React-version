@@ -34,15 +34,16 @@ const companySchema=new mongoose.Schema({
 },{ versionKey: false });
 const projectschema = new mongoose.Schema({
     Domain:String,
-    Skills:String, //change in future
+    Skills:Array, //charraange in future
     College:String,
     Project_Name:String,
     Likes:Number,
     Description:String,
     Date:Date,
-    state:String,
     photo:ObjectId,
-    Students:String, //change in future
+    video:ObjectId,
+    comments:Array,
+    Students:Array//change in future
 });
 
 const Course = mongoose.model('student', loginSchema);
