@@ -9,6 +9,7 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 export default function Filters({ sendDataToParent }) {
     const [formData, setFormData] = useState({
         college_name: 'Any',
+        type:'Any',
         sort_by: 'Name',
         order: true
     });
@@ -91,7 +92,7 @@ export default function Filters({ sendDataToParent }) {
     //         ...formData,
     //         [name]: value
     //     });
-
+    console.log(formData)
     return (
         <div className="filters">
             <div className="filter1">
@@ -106,9 +107,9 @@ export default function Filters({ sendDataToParent }) {
                 
             </div>
             <div className="filter2">
-                <select name="college_name" id="year" value={formData.college_name} onChange={handleChange}>
+                <select name="type" id="year" value={formData.type} onChange={handleChange}>
                     <option value="Any">Any</option>
-                    
+                    <option value="Bookmarked">Bookmarked</option>
                 </select>
             </div>
             <div className="filter3">

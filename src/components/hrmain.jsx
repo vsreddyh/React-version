@@ -4,6 +4,7 @@ import Header from "./hrheader";
 import Filters from "./filters"
 import axios from "axios";
 import StudentProfile from "./StudentProfile";
+import ProjectPortfolio from "./ProjectPortfolio";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -16,7 +17,7 @@ function HRMAIN(){
     const [receivedData, setReceivedData] = useState({
         category:'Any',
         search:'',
-        state: 'Any',
+        type: 'Any',
         college_name: 'Any',
         sort_by:'Relevance',
         order:true
@@ -101,6 +102,7 @@ function HRMAIN(){
         <div className="bodyy">
             <Filters sendDataToParent={FilterData}/>
             {display === 1 ? (
+                // <ProjectPortfolio/>
                 <StudentProfile studata={sendDataToStudent} dis={killpage}/>
             ) : display === 0 ? (
                 <div>

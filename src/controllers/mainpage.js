@@ -37,14 +37,15 @@ const getdata = async(req,res)=>{
 }
 const projectlist = async(req,res)=>{
     // console.log(req.session)
-    let {category,search,college_name,sort_by,order,page} = req.query
+    mail=req.session.loggedInemail
+    let {category,search,college_name,type,sort_by,order,page} = req.query
     searchquery={Skills:search}
     catquery={Domain:category}
     clgquery={College:college_name}
     sortquery={}
     u_limit=page*10
     l_limit=u_limit-10
-    if (search===''){
+    if (search==='' && type==='Any'){
         if (category==='Any'){
             catquery={}
         }
@@ -76,6 +77,21 @@ const projectlist = async(req,res)=>{
             m=0;
         }
         res.json({list:projlists.slice(l_limit,u_limit),total_pages:a+1,display:m})
+    }
+    else{
+        let projelists=[]
+        const stulists = await Course.find()
+        if (type==="Bookmarked"){
+            const bookmarklists = await recruiter.findOne({email_address:mail}).select('bookmarks')
+            for(y of stulists){
+                    if (bookmarklists.bookmarks.includes(y._id)){
+                        projelists.push(y)
+                    }
+            }
+        }
+        else{
+            
+        }
     }
 }
 const image = async(req, res) => {
