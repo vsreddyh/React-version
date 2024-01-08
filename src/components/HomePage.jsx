@@ -5,7 +5,7 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { faSearch, faUser, faUserPlus, faBars, faHeart} from '@fortawesome/free-solid-svg-icons';
 import "./HomePage.css"
 
-export default function HomePage(){
+export default function HomePage (){
 
 
     const [isSiderVisible, setIsSiderVisible] = useState(true);

@@ -29,7 +29,7 @@ export default function SignIn({ setUserData }){
             }
             //students login
             else if(response.data.checkstudent===0){
-                setUserData([response.data.user.username,,1]);
+                setUserData([response.data.user.username,0,1]);
                 navigate('/main');
             }
             //college login
