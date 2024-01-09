@@ -41,18 +41,18 @@ export default function Header({takedata}){
         adjustSelectSize();
     };
     return(
-        <div className="header">
-            <div className="headerset">
-                <div className="logoset">
-                    <div className="logo">
+        <div className="header1">
+            <div className="headerset1">
+                <div className="logoset1">
+                    <div className="logo1">
                         <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} />
                     </div>
-                    <div className="title">
+                    <div className="title1">
                         <p>Project</p>
                     </div>
                 </div>
-                <div className="searchbarset">
-                    <div className="domain">
+                <div className="searchbarset1">
+                    <div className="domain1">
                         <form id="domain">
                             <select name="category" id="cars" onChange={save}>
                                 <option value="Any">Any</option>
@@ -70,14 +70,14 @@ export default function Header({takedata}){
                         </form>
                     </div>
             
-                    <div className="searchbar">
-                        <input type="search" className="searchs" spellcheck="false" placeholder="Search for projects"></input>
+                    <div className="searchbar1">
+                        <input type="search" className="searchs1" spellcheck="false" placeholder="Search for projects"></input>
                     </div>
-                    <div className="search-icon">
+                    <div className="search-icon1">
                         <FontAwesomeIcon className="i" icon={faSearch} style={{color: "white"}}/>
                     </div>
                 </div>
-                <div className="profileset">
+                <div className="profileset1">
                 <p>
 
                 </p>

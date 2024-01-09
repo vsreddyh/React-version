@@ -23,25 +23,25 @@
     background: #212f46; 
   }
 
-.body{
+.body1{
     margin: 0px;
     border: 0px;
     height: 100vh;
 }
 
-.header{
+.header1{
     background-color: #1c2333 ;
     border: 0px;
     height: 65px;
 }
 
-.logo{
+.logo1{
     font-size: 40px;
     margin-top: 16px;
     margin-left: 20px;
 }
 
-.title {
+.title1 {
     font-size: 1.15rem;
     font-weight: 1000;
     color: aliceblue;
@@ -50,35 +50,35 @@
     margin-top: 28px;
 }
 
-.logoset{
+.logoset1{
     display: flex;
     width: 30%;
     height: 100%;
 }
 
-.searchbarset{
+.searchbarset1{
     width: 40%;
     display: flex;
 }
 
-.profileset{
+.profileset1{
     width: 30%;
     height: 100%;
 }
 
-.profileset p{
+.profileset1 p{
     text-align: right;
     margin-right: 10px;
     margin-top: 13px;
 }
 
-.headerset { 
+.headerset1 { 
     font-size: 25px;
     align-items: center;
     display: flex;
 }
 
-.domain select{
+.domain1 select{
     height: 35px;
     width: 70px;
     margin-top: 15px;
@@ -95,16 +95,16 @@
     color: #a6a5a5;
     outline: rgb(255, 255, 255);
 }
-.domain select:hover {
+.domain1 select:hover {
     border: 1px solid #7190c6;
 }
 
-.searchbar {
+.searchbar1 {
     width: 100%;
     display: flex;
 }
 
-.searchbar input{
+.searchbar1 input{
     height: 35px;
     width: 100%;
     margin-top: 15px;
@@ -119,11 +119,11 @@
     border-radius: 0px;
 }
 
-.searchbar input:hover {
+.searchbar1 input:hover {
     border: 1px solid #7190c6; /* Add border on hover */
 }
 
-.search-icon{
+.search-icon1{
     margin-top: 15px;
     font-size: 17px;
     height: 35px;
@@ -135,7 +135,7 @@
     border-top-right-radius: 5px;
 }
 
-.search-icon:hover {
+.search-icon1:hover {
     border: 1px solid #7190c6;
 }
 
@@ -145,7 +145,7 @@
     border: 5px;
 }
 
-.bodyy{
+.bodyy1{
     background-color: #0E1525;
     height: auto;
     padding: 30px;
@@ -270,17 +270,17 @@
     display: flex;
     margin-top: 5px;
 } */
-.grid-container {
+.grid-container1 {
     display: grid;
     grid-template-columns: 1fr 1fr;  /* Two columns */
     gap: 10px;  /* Spacing between grid items */
 }
   
-.grid-item {
+.grid-item1 {
     /* border: 3px solid #20283b; */
     padding-right: 20px;
 }
-.project-card{
+.project-card2{
     height: 200px;
     width: 100%;
     background-color: #141e2f;
@@ -289,11 +289,11 @@
     margin: 10px;
 }
 
-.cardpart{
+.cardpart2{
     display: flex;
 }
 
-.profile-picture{
+.profile-picture2{
     width: 130px;
     height: 130px;
     object-fit: cover;
@@ -302,7 +302,7 @@
     display: flex;
 }
 
-.pdiscript{
+.pdiscript2{
     width: calc(100% - 140px);
     max-height: 135px;
     border-top-right-radius: 20px;
@@ -315,7 +315,7 @@
     display: flex;
 } */
 
-.pname p{
+.pname2 p{
     color: #cfcfcf;
     height: 50px;
     font-size: 20px;
@@ -337,7 +337,7 @@
     }
 } */
 
-.prevbutton, .nextbutton{
+.prevbutton1, .nextbutton1{
     height: 40px;
     width: 50px;
     background-color:rgb(4, 67, 112);
@@ -345,40 +345,40 @@
     border-radius: 5px;
 
 }
-.navbuttons {
+.navbuttons1 {
     display: flex;
     justify-content: center;
     margin-top: 20px; 
 }
 
-.nextbutton {
+.nextbutton1 {
     background-color: rgb(4, 67, 112);
     border: none;
     border-radius: 5px;
     margin-left: 125px;
 }
 
-.prevbutton{
+.prevbutton1{
     margin-right: 125px;
 }
 
-.nextbutton:hover, .prevbutton:hover{
+.nextbutton1:hover, .prevbutton1:hover{
     background-color:  rgb(14, 104, 169);
 }
 
-.nextbutton:active, .prevbutton:active{
+.nextbutton1:active, .prevbutton1:active{
     border: 2px solid #7190c6;
 }
 @media only screen and (max-width:800px){
-    .grid-container{
+    .grid-container1{
         grid-template-columns: 1fr;
     }
-    .navbuttons {
+    .navbuttons1 {
         justify-content: center; 
         
     }
 
-    .nextbutton {
+    .nextbutton1 {
         margin-left: 180px;
     }
 }

@@ -97,29 +97,29 @@ function HRMAIN(){
     }, [projid]);
     console.log('a',projid,display,sendDataToStudent)
     return(
-        <div className="body">
+        <div className="body1">
         <Header takedata={CategoryData}/>
-        <div className="bodyy">
+        <div className="bodyy1">
             <Filters sendDataToParent={FilterData}/>
             {display === 1 ? (
                 // <ProjectPortfolio/>
                 <StudentProfile studata={sendDataToStudent} dis={killpage}/>
             ) : display === 0 ? (
                 <div>
-                    <div className="grid-container">
+                    <div className="grid-container1">
                         {projects.map((project, index) => (
-                                <div key={index} className="grid-item">
+                                <div key={index} className="grid-item1">
                                     <div>
-                                        <div className="project-card">
-                                            <div className="cardpart">
-                                                <img className="profile-picture" src={`/en/image/${project.photo}`} alt="Profile Picture"/>
-                                                <div className="pdiscript">
+                                        <div className="project-card2">
+                                            <div className="cardpart2">
+                                                <img className="profile-picture2" src={`/en/image/${project.photo}`} alt="Profile Picture"/>
+                                                <div className="pdiscript2">
                                                     <p>
                                                         {project.Description}
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div className="pname" onClick={() => handleclick(project._id)}>
+                                            <div className="pname2" onClick={() => handleclick(project._id)}>
                                                 <p>
                                                     {project.Project_Name}
                                                 </p>
@@ -129,12 +129,12 @@ function HRMAIN(){
                                 </div>
                         ))}
                     </div>
-                    <div className="navbuttons">
+                    <div className="navbuttons1">
                         {currentPage > 1 && (
-                            <button className="prevbutton" onClick={handlePreviousPage}><FontAwesomeIcon icon={faArrowLeft} /></button>
+                            <button className="prevbutton1" onClick={handlePreviousPage}><FontAwesomeIcon icon={faArrowLeft} /></button>
                         )}
                         {currentPage < totalPages && (
-                            <button className="nextbutton" onClick={handleNextPage}><FontAwesomeIcon icon={faArrowRight} /></button>
+                            <button className="nextbutton1" onClick={handleNextPage}><FontAwesomeIcon icon={faArrowRight} /></button>
                         )}
                     </div>
                 </div>
