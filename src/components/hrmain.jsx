@@ -39,7 +39,7 @@ function HRMAIN(){
     };
     const handleclick=(data)=>{
         setDisplay(1);
-        setSendDataToStudent('655b208c015f16eaac361773');
+        setSendDataToStudent(data);
     }
     let { projid } = useParams();
     const [projects, setProjects] = useState([]);
@@ -49,9 +49,17 @@ function HRMAIN(){
     const fetchData = async () => {
         try {
             if(projid){
-                console.log("setting display as 1")
-                setDisplay(1)
-                setSendDataToStudent(projid)
+                const response = await axios.get(`/en/validateurl?${projid}`)
+                if (response.data===1){
+                    console.log("setting display as 1")
+                    setDisplay(1)
+                    setSendDataToStudent(projid)
+                }
+                else if(response.data==2){
+                    console.log("setting display as 2")
+                    setDisplay(3)
+                    setSendDataToStudent(projid)
+                }
             }
             else{
                 const queryParams = new URLSearchParams({
@@ -102,7 +110,8 @@ function HRMAIN(){
         <div className="bodyy1">
             <Filters sendDataToParent={FilterData}/>
             {display === 1 ? (
-                // <ProjectPortfolio/>
+                <ProjectPortfolio studata={sendDataToStudent} dis={killpage}/>
+            ) : display === 3 ? (
                 <StudentProfile studata={sendDataToStudent} dis={killpage}/>
             ) : display === 0 ? (
                 <div>

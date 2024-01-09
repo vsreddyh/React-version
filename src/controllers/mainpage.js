@@ -146,6 +146,26 @@ const checkbookmark = async(req,res)=>{
     const list = user.bookmarks
     res.json(Number(list.includes(oid)))
 }
+const validateurl = async(req,res)=>{
+    let {projid}=req.query;
+    try{
+        const oid = new mongoose.Types.ObjectId(projid);
+    const projlist = await projects.find({_id:oid})
+    const stulist = await Course.find({_id:oid})
+    if (projlist.length!==0){
+        res.json(1)
+    }
+    else if(stulist.length!==0){
+        res.json(2)
+    }
+    else{
+        res.json(0)
+    }
+    }
+    catch(error){
+        res.json(0)
+    }
+}
 module.exports = {
     getdata,
     projectlist,
@@ -155,4 +175,5 @@ module.exports = {
     addbookmark,
     removebookmark,
     checkbookmark,
+    validateurl
 };

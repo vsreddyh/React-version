@@ -4,14 +4,12 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { faSearch, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import "./ProjectPortfolio.css"
 
-export default function ProjectPortfolio(){
+export default function ProjectPortfolio({studata,dis}){
 
     const [formData,setFormData]=useState({
         category: 'Any',
         search:''
     });
-
-
     function adjustSelectSize() {
         const selectElement = document.getElementById('cars');
         const selectedOption = selectElement.options[selectElement.selectedIndex];
