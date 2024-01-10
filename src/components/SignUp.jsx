@@ -36,7 +36,7 @@ export default function SignUp(){
             <Sider />
             <div class="content1" id="bodyy">
                 <div id="body-content">
-                    <p>
+                    <p className="create">
                         Create your account
                     </p>
                     

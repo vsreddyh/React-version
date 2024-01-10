@@ -80,7 +80,7 @@ export default function Category(){
             </div>
             <div className="content1" id="bodyy">
                 <div id="body-content">
-                    <p>
+                    <p className="create">
                         Create your account
                     </p>
                     <p className="select" style={{fontSize: "20px", marginTop: "2px", color: "rgb(141, 141, 141)"}}>

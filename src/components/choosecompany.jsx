@@ -97,7 +97,7 @@ export default function Company({setUserData}){
             </div>
             <div class="content1" id="bodyy">
                 <div id="body-content">
-                    <p class="create" >
+                    <p class="create">
                         Enter your Company name 
                     </p>
                     

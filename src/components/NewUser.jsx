@@ -68,7 +68,7 @@ export default function NewUser({ setUserData }){
             <Sider />
             <div id="bodyy" className="content1">
                 <div id="body-content">
-                    <p>
+                    <p className="create">
                     Create your account
                     </p>
                 

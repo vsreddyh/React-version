@@ -68,7 +68,7 @@ export default function SignIn({ setUserData }){
             <Sider />
             <div className="content1" id="bodyy">
                 <div id="body-content">
-                    <p>
+                    <p className="create">
                         Log in to your account
                     </p>
                     

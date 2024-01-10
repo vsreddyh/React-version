@@ -40,7 +40,7 @@ export default function ForgotPassword(){
         <Sider />
         <div className="content1" id="bodyy">
                 <div id="body-content">
-                    <p>
+                    <p className="create">
                         Enter registered mail
                     </p>
                     

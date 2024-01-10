@@ -62,7 +62,7 @@
     font-family:'Courier New', Courier, monospace;
     margin-left: 10px;
 }
-#body-content p{
+.create{
     color: white;
     font-size: 25px;
     margin-top: 15%; 
