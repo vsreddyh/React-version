@@ -1,26 +1,76 @@
-import React,{useState} from "react";
+import React,{useState,useCallback} from "react";
 // import Header from "./header";
 import "./ProjectUpload.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { faSearch, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-
+import Header from './hrheader'
+import Filters from "./filters";
 
 
 export default function ProjectUploadForm(){
 
     
-    
-   
     const[photo,selectedPhoto]=useState(null);
     const[video,selectedVideo]=useState(null);
     const [formData,setFormData]=useState({
         category: 'Any',
         search:'',
     });
+    const FilterData = useCallback((data) => {
+        
+    }, []);
+
+    const CategoryData = useCallback((data) => {
+        
+    }, []);
     // useEffect(() => {
     //     takedata(formData);
     // }, [formData, takedata]);
+    const [languages, setLanguages] = useState([]);
+    const [teams, setTeams] = useState([]);
+    const [inputValue, setInputValue] = useState("");
+    const [teamInputValue, setTeamInputValue] = useState("");
+
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    const handleTeamInputChange = (event) => {
+        setTeamInputValue(event.target.value);
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter" && inputValue.trim() !== "") {
+            addLanguage(inputValue.trim());
+            setInputValue("");
+        }
+    };
+
+    const handleTeamKeyDown = (event) => {
+        if (event.key === "Enter" && teamInputValue.trim() !== "") {
+            addTeamMember(teamInputValue.trim());
+            setTeamInputValue("");
+        }
+    };
+
+    const addLanguage = (newLanguage) => {
+        setLanguages([...languages, newLanguage]);
+    };
+
+    const addTeamMember = (newTeamMember) => {
+        setTeams([...teams, newTeamMember]);
+    };
+
+    const removeLanguage = (indexToRemove) => {
+        const updatedLanguages = languages.filter((_, index) => index !== indexToRemove);
+        setLanguages(updatedLanguages);
+    };
+
+    const removeTeamMember = (indexToRemove) => {
+        const updatedTeams = teams.filter((_, index) => index !== indexToRemove);
+        setTeams(updatedTeams);
+    };
     function handleVideoChange(event) {
         const selectedVideo = event.target.files[0]; // Get the selected video file
         if (selectedVideo) {
@@ -40,7 +90,7 @@ export default function ProjectUploadForm(){
             console.log('No photo selected');
         }
     }
-    
+
     function adjustSelectSize() {
         const selectElement = document.getElementById('cars');
         const selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -88,93 +138,9 @@ export default function ProjectUploadForm(){
 
     return(
     <div className="bod">
-            <div className="header">
-                <div className="headerset">
-                <div className="logoset">
-                    <div className="logo">
-                        <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} />
-                    </div>
-                    <div className="title">
-                        <p>Project</p>
-                    </div>
-                </div>
-                <div className="searchbarset">
-                    <div className="domain">
-                        <form id="domain">
-                            <select name="category" id="cars" onChange={save}>
-                                <option value="Any">Any</option>
-                                <option value="Web development">Web development</option>
-                                <option value="App development">App development</option>
-                                <option value="Data Science and Analytics">Data Science and Analytics</option>
-                                <option value="Game development">Game development</option>
-                                <option value="Cyber Security">Cyber Security</option>
-                                <option value="Artificial Intelligence and Robotic">Artificial Intelligence and Robotics</option>
-                                <option value="Embedded systems and IOT(Sensors)">Embedded systems and IOT(Sensors)</option>
-                                <option value="E-Commerce and Marketplace development">E-Commerce and Marketplace development</option>
-                                <option value="Healthcare">Healthcare</option>
-                                <option value="Software development">Software development</option>
-                            </select>
-                        </form>
-                    </div>
-            
-                    <div className="searchbar">
-                        <input type="search" className="searchs" spellcheck="false" placeholder="Search for projects"></input>
-                    </div>
-                    <div className="search-icon">
-                        <FontAwesomeIcon className="search-icon-i" icon={faSearch} style={{color: "white"}}/>
-                    </div>
-                </div>
-                <div className="profileset">
-                <p className="profileset-p">
-                    <FontAwesomeIcon icon={faUser} className="profileset-icon"/>
-                </p>
-                
-                </div>
-    
-            </div>
-        
-            </div>
-
-
-        <div className="bodyy"> 
-            <div className="filters">
-                <div className="filter1">
-                    <select name="year" id="college">
-                        <option value="volvo">
-                            
-                                ascending 
-                        </option>
-                        <option value="saab">decsending</option>
-                        
-                    </select>
-                </div>
-                <div className="filter2">
-                    <select name="year" id="year">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="opel">Opelufkuygarkfyugaery</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                </div>
-                <div className="filter3">
-                    <select name="year" id="year">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="opel">Opelufkuygarkfyugaery</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                </div>
-                <div className="filter4">
-                    <select name="year" id="sortby">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="opel">Opelufkuygarkfyugaery</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                </div>
-            </div>
-             
-            
+        <Header takedata={CategoryData}/>
+        <div className="bodyy">
+            <Filters sendDataToParent={FilterData}/>
                 <div className="studetails">
                     <div className="sdetails">
                         <div className="probackground">
@@ -248,8 +214,18 @@ export default function ProjectUploadForm(){
                                 </p>
                                 <div id="langContainer">
                                     
-                                    <input type="text" id="searchInput" placeholder="Add languages..." />
-                                    <div id="tagContainer"></div>
+                                    <input type="text" id="searchInput" placeholder="Add languages..." value={inputValue} onChange={handleInputChange} onKeyDown={handleKeyDown}/>
+                                    <div id="tagContainer">
+                                    {languages.map((language, index) => (
+                                        <div key={index} className="tagContainer">
+                                            <span className="tagText">{language}</span>
+                                            <button className="removeTag" onClick={() => removeLanguage(index)}>X</button>
+                                        </div>
+                                    ))}
+                                    </div>
+                                </div>
+                                <div id="suggestions">
+                                        
                                 </div>
                             </div>
                             <div className="media-upload">
@@ -269,10 +245,20 @@ export default function ProjectUploadForm(){
                                 <p>
                                     Add your team members:
                                 </p>
-                                    <div id="groupContainer">
-                                        <div id="tagGroupmem"></div>
-                                        <input type="text" id="searchGroupmem" placeholder="Search..." />
+                                <div id="groupContainer">
+                                    <div id="tagGroupmem">
+                                        {teams.map((teamMember, index) => (
+                                            <div key={index} className="team-member-tag">
+                                                <span>{teamMember}</span>
+                                                <button onClick={() => removeTeamMember(index)}>X</button>
+                                            </div>
+                                        ))}
                                     </div>
+                                    <input type="text" id="searchGroupmem" placeholder="Search..." value={teamInputValue} onChange={handleTeamInputChange} onKeyDown={handleTeamKeyDown}/>
+                                    <div id="suggestions">
+                                         
+                                    </div>
+                                </div>
                             </div>
 
                            
@@ -280,7 +266,7 @@ export default function ProjectUploadForm(){
 
                             
                             
-                    </div>
+                </div>
                     
             
             

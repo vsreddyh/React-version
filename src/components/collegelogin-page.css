@@ -78,6 +78,45 @@
     border-radius: 5px;
     padding: 10px;
 }
+#suggestions::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+#suggestions::-webkit-scrollbar-thumb {
+    background-color: rgb(15, 83, 142);
+    border-radius: 6px;
+  }
+  
+#suggestions::-webkit-scrollbar-track {
+    background-color: #1c2333;
+    border-radius: 8px;
+}
+#suggestions {
+    display: block;
+    position: absolute;
+    margin-left: auto;
+    background-color: #1c2333;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    max-height: 150px;
+    width: 150;
+    overflow-y: auto;
+    z-index: 1000;
+    cursor: default; /* Set default cursor for the suggestion box */
+}
+.suggestion {
+    display: block;
+    color: #f2f2f2;
+    padding: 8px 12px;
+    margin: 0;
+    margin-top: 0;
+    cursor: pointer; /* Set pointer cursor for suggestions */
+  }
+
+.suggestion:hover {
+    background-color: rgb(6, 60, 107);
+    border-radius: 5px;
+  }
 #body-content button{
     background-color:#004182 ;
     height: 40px;
