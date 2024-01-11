@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const Mailgen = require('mailgen');
 const nodemailer = require('nodemailer');
-const {EMAIL, PASSWORD, JWT_SECRET, SESSION_KEY,Course,college,Department,recruiter,companies} = require('../settings/env.js');
+const {EMAIL, PASSWORD, JWT_SECRET, SESSION_KEY,Course,college,Department,recruiter,companies,skills} = require('../settings/env.js');
 require('dotenv').config();
 
 app.use(express.static('../build'));
@@ -247,7 +247,7 @@ const hrsignup = async(req,res)=>{
             res.json({message:"Mail Sent"})
         }
     }
-    create(req,res);
+    create(req,res); 
 }
 
 
@@ -272,13 +272,15 @@ const signin = async(req,res)=>{
 
     async function signin(req, res) {
         const { username, password } = req.body;
-
+        const colleges= await college.findOne({email_address:username});
         var userPassword = await checkStudent(username);
         bcrypt.compare(password, userPassword[0], (err, result) => {
             if (userPassword==='NULL') {
                 res.json({message:'User Not found'})
             } else if (result) { 
+                
                 req.session.loggedInemail=username;
+                req.session.loggedInCollege=colleges.college_name;
                 req.session.typeofuser=userPassword[1];
                 req.session.status=1;
                 res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
@@ -606,6 +608,55 @@ const companyDetails = async(req,res)=>{
         res.status(500).json({ error: "Error updating user" });
     }
 }
+//displaying projects in home page after clicking
+const homepage=async (req,res)=>
+{
+    const {term}=req.query;
+    console.log(term);
+}
+const getSkill=async (req,res)=>
+{
+    try{
+        const term1=req.query.term;
+        console.log(term1);
+        const regex1 =new RegExp(term1,'i');
+        const Skills=await skills.find({skill_name:regex1}).select('skill_name').limit(5);
+        const suggestions2=Skills.map(Skill=>Skill.skill_name);
+        console.log(suggestions2);
+        res.json(suggestions2);
+    
+    }
+    catch(err)
+    {
+        console.error('Error retrieving colleges:',err);
+        res.status(500).json({error:'Error in retriveing colleges'});
+
+    }
+
+}
+const getteam = async (req, res) => {
+    try {
+        const term1 = req.query.term;
+        console.log(term1);
+
+       
+        console.log(req.session);
+
+        const regex1 = new RegExp(term1, 'i');
+        const teams = await Course.find({
+            college_name: req.session.loggedInCollege,
+            student_name: regex1
+        }).select('student_name').limit(3);
+
+        const suggestions3 = teams.map(team => team.student_name);
+        console.log(suggestions3);
+        res.json(suggestions3);
+    } catch (err) {
+        console.error('Error retrieving colleges:', err);
+        res.status(500).json({ error: 'Error in retrieving colleges' });
+    }
+};
+
 module.exports = {
     signin,
     checkSessionEndpoint,
@@ -624,5 +675,8 @@ module.exports = {
     hrsignup,
     newhr,
     companyDetails,
-    getCompanyDetails
+    getCompanyDetails,
+    homepage,
+    getSkill,
+    getteam
 };

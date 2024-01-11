@@ -6,6 +6,7 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { faSearch, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import Header from './hrheader'
 import Filters from "./filters";
+import axios from "axios";
 
 
 export default function ProjectUploadForm(){
@@ -31,14 +32,49 @@ export default function ProjectUploadForm(){
     const [teams, setTeams] = useState([]);
     const [inputValue, setInputValue] = useState("");
     const [teamInputValue, setTeamInputValue] = useState("");
+    const [sugesstions2,setSugesstions2]=useState([]);
+    const [sugesstions3,setSugesstions3]=useState([]);
 
-    const handleInputChange = (event) => {
-        setInputValue(event.target.value);
+    
+    const handleInputChange = async (event) => {
+        const inputValue = event.target.value;
+        setInputValue(inputValue);
+    
+        
+        if (inputValue.trim() === "") {
+            setSugesstions2([]);
+            return;
+        }
+    
+        try {
+            const response = await axios.get(`/en/getskills?term=${inputValue}`);
+            const data = response.data;
+            setSugesstions2(data);
+        } catch (error) {
+            console.error('Error fetching suggestions:', error);
+        }
     };
-
-    const handleTeamInputChange = (event) => {
-        setTeamInputValue(event.target.value);
+    
+    const handleTeamInputChange = async (event) => {
+        const teamInputValue = event.target.value;
+        setTeamInputValue(teamInputValue);
+    
+        
+        if (teamInputValue.trim() === "") {
+            setSugesstions3([]);
+            return;
+        }
+    
+        try {
+            const response = await axios.get(`/en/getteam?term=${teamInputValue}`);
+            const data = response.data;
+            setSugesstions3(data);
+        } catch (error) {
+            console.log("Error fetching suggestions:", error);
+        }
     };
+    
+    
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter" && inputValue.trim() !== "") {
@@ -225,6 +261,12 @@ export default function ProjectUploadForm(){
                                     </div>
                                 </div>
                                 <div id="suggestions">
+                                    {sugesstions2.map((sugesstion,index)=>
+                                    (
+                                        <div key={index} className="skills">
+                                            <p>{sugesstion}</p>
+                                        </div>
+                                    ))}
                                         
                                 </div>
                             </div>
@@ -256,6 +298,12 @@ export default function ProjectUploadForm(){
                                     </div>
                                     <input type="text" id="searchGroupmem" placeholder="Search..." value={teamInputValue} onChange={handleTeamInputChange} onKeyDown={handleTeamKeyDown}/>
                                     <div id="suggestions">
+                                        {sugesstions3.map((sugesstion,index)=>(
+                                            <div key={index} className="team_member">
+                                                <p>{sugesstion}</p>
+                                            </div>
+                                        ))}
+                                    
                                          
                                     </div>
                                 </div>

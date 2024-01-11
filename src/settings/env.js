@@ -47,6 +47,10 @@ const projectschema = new mongoose.Schema({
     comments:Array,
     Students:Array//change in future
 });
+const skillSchema=new mongoose.Schema({
+    skill_name:String,
+
+})
 
 const Course = mongoose.model('student', loginSchema);
 const recruiter = mongoose.model('head_recruiter', hrSchema);
@@ -54,6 +58,8 @@ const college=mongoose.model('college',collegeSchema);
 const Department =mongoose.model('feild',departmentSchema);
 const companies =mongoose.model('companie',companySchema);
 const projects = mongoose.model('project',projectschema);
+const skills=mongoose.model('skill',skillSchema);
+
 module.exports = {
     EMAIL : 'freemovies5247@gmail.com',
     PASSWORD : 'btjqbzhxpulroavl',
@@ -65,5 +71,6 @@ module.exports = {
     projects:projects,
     recruiter:recruiter,
     companies:companies,
+    skills:skills,
     url:url,
 }
