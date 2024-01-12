@@ -19,7 +19,7 @@ export default function HomeComponents() {
     };
 
 
-    const [component, setComponent] = useState(2)
+    const [display, setDisplay] = useState(2)
 
 
     return (
@@ -61,7 +61,7 @@ export default function HomeComponents() {
                 </header>
             </div>
 
-            <div className="content14" id="sider4" style={{ component: isSiderVisible ? 'block' : 'none' }}>
+            <div className="content14" id="sider4" style={{ display: isSiderVisible ? 'block' : 'none' }}>
                 <div id="option1" className="option">
                     <p>
                         Home
@@ -91,9 +91,9 @@ export default function HomeComponents() {
             </div>
 
             <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
-                {component === 0 && <HomePage />}
-                {component === 1 && <StudentProfile />}
-                {component === 2 && <ProjectDisplay />}
+                {display === 0 && <HomePage />}
+                {display === 1 && <StudentProfile />}
+                {display === 2 && <ProjectDisplay />}
 
             </div>
         </div>
