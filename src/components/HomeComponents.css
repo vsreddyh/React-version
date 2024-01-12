@@ -1,0 +1,598 @@
+*{
+    margin: 0px;
+}
+
+.body{
+    margin: 0px;
+    border: 0px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 65px 1fr;
+    height: 100vh;
+    /* overflow-y: auto; */
+    overflow: hidden;
+}
+
+#header4{
+    background-color: #1c2333 ;
+    grid-column: span 2;
+    border: 0px;
+    position: sticky;
+}
+
+.logo4{
+    margin-top: 14px;
+    margin-left: 5px;
+}
+
+.title4 {
+    font-size: 1rem;
+    font-weight: 1000;
+    color: aliceblue;
+    font-family:'Courier New', Courier, monospace;
+    margin-left: 5px;
+    margin-top: 18px;
+}
+
+.logoset4{
+    display: flex;
+    width: 30%;
+    height: 100%;
+}
+
+.searchbarset4{
+    width: 40%;
+}
+
+.profileset4{
+    width:28.5%;
+    align-items: end;
+    justify-content: right;
+    padding-left: 10px;
+}
+.dash4{
+    margin-top: 10px;
+    margin-left: 8px;
+}
+.headerset4 { 
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+}
+.searchbar4 {
+    width: 100%;
+    display: flex;
+}
+
+.searchbar4 input{
+    height: 35px;
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: #21293b;
+    box-sizing: border-box;
+    border: 0.5px solid;
+    border-color: rgb(4, 67, 112);
+    border-right: 0px;
+    border-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 10px;
+}
+
+.search-icon4{
+    margin-top: 15px;
+    font-size: 17px;
+    height: 35px;
+    width: 30px;
+    border: 5px;
+    border-color: aliceblue;
+    background-color:rgb(4, 67, 112) ;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.search-icon4 i{
+    margin-top: 10px;
+    margin-left: 5px;
+    border: 5px;
+}
+
+.profileset4{
+    margin: 0%;
+    display: flex;
+}
+
+.addproject4 button{
+    background-color:#1c2333 ;
+    height: 20px;
+    width: 100px;
+    margin: 7px;
+    margin-top: 22px;
+    margin-right: 8px;
+    border: 1px;
+    border-radius: 5px;
+}
+
+.addproject4 button p{
+    font-size: 12px;
+    color:rgb(191, 194, 197);
+    font-family:'Courier New', Courier, monospace;
+    font-weight: 600;
+}
+.profile4{
+    margin-bottom: 3px;
+    margin-right: 5px;
+
+}
+
+#sider4{
+    background-color: #0E1525;
+    border-right: 5px solid rgb(53, 64, 72);
+}
+
+.option{
+    height:40px;
+    background-color:#0E1525;
+    margin: 8px;
+    border: 1px solid rgb(63, 83, 99);
+    justify-content: center;
+    border-radius: 5px;
+    align-items: center;
+    display: flex;
+}
+
+
+
+#sider p{
+    text-align: center;
+    color: aliceblue;
+}
+
+#option:hover{
+    border:1.5px solid rgb(37, 101, 147) ;
+
+}
+
+#option:active{
+    border:2.5px solid rgb(37, 101, 147) ;
+}
+#bodyy4{
+    background-color:   #0E1525;
+    overflow-y: auto;
+    display: flexbox;
+}
+
+.total{
+    margin: 50px 5%;
+    box-sizing: border-box;
+}
+
+.Homee{
+    display: block;
+    margin: 25px;
+    padding: 20px;
+    color: aliceblue;
+    font-size: 25px;
+
+}
+.homeelements{
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+.basicgrid {
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap; /* Allow flex items to wrap to the next row */
+    justify-content: space-between; /* Distribute items evenly */
+}
+
+.bgridelements {
+    background-color: #141e2f;
+    flex: 1 1 calc(33.33% - 10px); /* Each item takes up one-third of the container minus some spacing */
+    margin: 10px 5px ;
+    height: 230px;
+    border: 0.1px solid #2a2f3e;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.bgridelements:hover{
+    border-color: #4e5569;
+}
+.bgridelements:active{
+    border-color:  #0053A6;
+}
+.forpic {
+    width: 100%;
+    height: 80%;
+    margin: 10px auto;
+    box-sizing: border-box;
+}
+
+.forpic img {
+    max-width: 100%; 
+    height: 100%;
+    display: block; 
+    margin: 0 auto; 
+}
+
+.forname {
+    display: flex;
+    margin: 5px auto;
+    color: white;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+    .bgridelements {
+        flex-basis: calc(50% - 10px); 
+    }
+}
+
+@media (max-width: 900px) {
+    .bgridelements {
+        flex-basis: 100%; 
+    }
+}
+
+.newcmt{
+    color: white;
+}
+
+.maincard{
+    margin: 20px;
+}
+.maincard1{
+    margin: 10px;
+}
+
+.project-card{
+    height: 200px;
+    border: 0.1px solid #2a2f3e;
+    width: 100%;
+    background-color: #141e2f;
+    border-radius: 20px;  
+    color:#a6a5a5;
+    margin: 10px 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+}
+
+.project-card:hover{
+    border: 1px solid rgb(36, 90, 138);
+}
+
+.project-card:active{
+    border: 1px solid rgb(47, 114, 173);
+}
+.cardpart{
+    display: flex;
+}
+
+.profile-picture{
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin: 10px;
+    display: flex;
+}
+
+.profile-section i{
+    text-align: center;
+    margin-left: 10px;
+    cursor: pointer; 
+}
+
+.pdiscript{
+    max-height: 140px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
+    padding: 0px;
+    padding-right:5px ;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+}
+.pname p{
+    color: #cfcfcf;
+    font-size: 28px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    font-family: 'Times New Roman', Times, serif;
+    padding-left: 10px;
+    overflow: hidden;
+}
+
+.seemore{
+    margin: 15px;
+    display: inline-block;
+    border: 0.1px solid rgb(28, 60, 88);
+    width: auto;
+}
+.seemore p{
+    margin: 5px;
+    color: aliceblue;
+}
+
+.details{
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.detailphoto{
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background-color: #4e5569;
+    border: 2px solid white;
+}
+
+#bodyy4::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+#bodyy4::-webkit-scrollbar-thumb {
+    background-color: rgb(15, 83, 142);
+    border-radius: 6px;
+  }
+  
+#bodyy4::-webkit-scrollbar-track {
+    background-color: #1c2333;
+    border-radius: 8px;
+}
+
+.nprojects{
+    margin: 50px 5%;
+    box-sizing: border-box;
+    display:flex ;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.nrealheading, .nsheading {
+    display: block;
+    margin: 10px 15px;
+    padding: 10px 25px;
+    color: aliceblue;
+    font-size: 25px;
+
+}
+.techflex{
+    margin: 10px;
+    box-sizing: border-box;
+}
+.techflexele {
+    margin: 10px 25px;
+    display: flex;
+    flex-wrap: wrap; /* Allow flex items to wrap to the next row */
+    justify-content: space-between; /* Distribute items evenly */
+}
+
+.ntechelements {
+    background-color: #141e2f;
+    flex-basis: calc(100%/7); /* Each item takes up one-third of the container minus some spacing */
+    margin: 10px 5px ;
+    height: 100px;
+    border: 0.1px solid #2a2f3e;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+.ntechelements img{
+    max-width: 100%; 
+    height: 100%;
+    display: block; 
+    margin: 0 auto; 
+}
+#nmean{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 1100px) {
+    .ntechelements {
+         flex: 1 1 calc(33.33% - 10px);  
+    }
+}
+@media (max-width:850px){
+    .ntechelements {
+        flex-basis: calc(50% - 10px); 
+    }
+}
+
+@media (max-width: 650px) {
+    .ntechelements {
+        flex-basis: 100%; 
+    }
+}
+
+.tagsearch{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 10px 15px;
+        padding: 10px 25px;
+        color: aliceblue;
+        font-size: 25px;
+    
+    
+}
+.searchbar1 {
+    width: 100%;
+    display: flex;
+}
+
+.searchbar1 input{
+    display: flex;
+    height: 35px;
+    width: 500px;
+    margin-top: 15px;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: #21293b;
+    box-sizing: border-box;
+    border: 0.5px solid;
+    border-color: rgb(4, 67, 112);
+    border-right: 0px;
+    border-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 10px;
+}
+
+.search-icon1{
+    margin-top: 15px;
+    font-size: 17px;
+    height: 35px;
+    width: 30px;
+    border: 5px;
+    border-color: aliceblue;
+    background-color:rgb(4, 67, 112) ;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.search-icon1 i{
+    margin-top: 10px;
+    margin-left: 5px;
+    border: 5px;
+}
+@media only screen and (max-width:768px){
+    .searchbar1 input{
+        width: 100%;
+    }
+
+}
+.tags {
+    display: flex;
+    flex-wrap: nowrap; /* Ensures items stay in a single row /  / Hides overflowing content */
+    margin: 15px 25px;
+    overflow: hidden;
+    animation: moveRight 30s linear infinite;
+}
+.tagelements {
+    flex: 1;
+    margin: 10px 25px;
+    padding: 10px;
+    color: aliceblue;
+    border: 1px solid rgb(253, 250, 250);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* white-space: nowrap; Prevents text from wrapping */
+    /* overflow: hidden;     Hides overflowing text */
+    /* text-overflow: ellipsis; Truncates text with ellipsis */
+}
+@keyframes moveRight {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+
+/* this css is for the next page*/
+.mprofile{
+    margin: 50px 5%;
+    box-sizing: border-box;
+    display:flex ;
+    flex-direction: row;
+    
+    
+}
+.mpcontainer{  
+    width: 450px;
+    display: flex;
+    margin: 10px;
+    height: 400px;
+    box-sizing: border-box;
+    justify-content: center;
+    position: fixed;
+    top: 100px;
+    z-index: 1000;
+}
+.mpprofile {
+    margin: 10px 25px;
+    width: 100%;
+    border: 2px solid white;
+    height: auto;
+    min-height: 300px;
+    position: relative;
+ 
+}
+
+.mpbg{
+    top: 0px;
+    height: 110px;
+    width: 100%;
+    background: linear-gradient(to right,rgb(60, 249, 8),rgb(78, 236, 131));
+}
+
+.mpphoto{
+    display: block;
+    position: absolute;
+    background-color: #0053A6;
+    left: 100px;
+    transform: translate(-50%, -50%);
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border-color: white;
+}
+.mpdetails{
+
+    margin: 50px 5px 5px 5px;
+}
+
+
+
+.mpname{
+    font-size: 35px;
+    font-weight: 300;
+    color: rgb(248, 250, 250);
+}
+.mpdet p{
+    color: #a6a5a5;
+
+}
+.mpprojects{
+    flex-grow: 1;
+    margin-left: 500px;
+}
+@media only screen and (max-width:900px){
+    .mprofile{
+        flex-direction: column;
+    }
+    .mpcontainer{  
+        width: 100%;
+        display: flex;
+        margin: 10px;
+        min-height: 300px;
+        height: auto;
+        box-sizing: border-box;
+        justify-content: center;
+        position: static;
+
+    }
+    .mpprojects{
+        width: 100%;
+        margin: 10px;
+        
+        
+    }
+
+
+}
