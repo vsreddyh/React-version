@@ -36,12 +36,13 @@ export default function ProjectUploadForm(){
     const [sugesstions3,setSugesstions3]=useState([]);
 
     
+    
     const handleInputChange = async (event) => {
         const inputValue = event.target.value;
         setInputValue(inputValue);
     
-        
-        if (inputValue.trim() === "") {
+        if (inputValue.length === 0) {
+            console.log("Input is empty");
             setSugesstions2([]);
             return;
         }
@@ -49,6 +50,7 @@ export default function ProjectUploadForm(){
         try {
             const response = await axios.get(`/en/getskills?term=${inputValue}`);
             const data = response.data;
+            console.log("Suggestions data:", data);
             setSugesstions2(data);
         } catch (error) {
             console.error('Error fetching suggestions:', error);
@@ -59,8 +61,8 @@ export default function ProjectUploadForm(){
         const teamInputValue = event.target.value;
         setTeamInputValue(teamInputValue);
     
-        
-        if (teamInputValue.trim() === "") {
+        if (teamInputValue.length === 0) {
+            console.log("Team input is empty");
             setSugesstions3([]);
             return;
         }
@@ -68,11 +70,14 @@ export default function ProjectUploadForm(){
         try {
             const response = await axios.get(`/en/getteam?term=${teamInputValue}`);
             const data = response.data;
+            console.log("Team suggestions data:", data);
             setSugesstions3(data);
         } catch (error) {
-            console.log("Error fetching suggestions:", error);
+            console.log("Error fetching team suggestions:", error);
         }
     };
+    
+    
     
     
 
@@ -171,6 +176,18 @@ export default function ProjectUploadForm(){
         }
       }
     
+   
+    const handlechangeskills=(sugesstion)=>
+    {
+        setInputValue(sugesstion);
+        setSugesstions2([]);
+    }
+    const handlechangeteam=(sugesstion)=>
+    {
+        setTeamInputValue(sugesstion);
+        setSugesstions3([]);
+    }
+    
 
     return(
     <div className="bod">
@@ -210,7 +227,7 @@ export default function ProjectUploadForm(){
                     <div className="pform">
                             <p>
                                 Select project domain:
-                                <select name="category" id="cars" onchange="adjustSelectSize()" className="pform-select">  
+                                <select name="category" id="cars" onChange="adjustSelectSize()" className="pform-select">  
                                     <option value="Web development">Web development</option>
                                     <option value="App development">App development</option>
                                     <option value="Data Science and Analytics">Data Science and Analytics</option>
@@ -260,11 +277,12 @@ export default function ProjectUploadForm(){
                                     ))}
                                     </div>
                                 </div>
-                                <div id="suggestions">
+                                <div id="suggestions" >
                                     {sugesstions2.map((sugesstion,index)=>
                                     (
                                         <div key={index} className="skills">
-                                            <p>{sugesstion}</p>
+                                            <p onClick={() => handlechangeskills(sugesstion)}>{sugesstion}</p>
+
                                         </div>
                                     ))}
                                         
@@ -300,7 +318,7 @@ export default function ProjectUploadForm(){
                                     <div id="suggestions">
                                         {sugesstions3.map((sugesstion,index)=>(
                                             <div key={index} className="team_member">
-                                                <p>{sugesstion}</p>
+                                                <p onClick={() => handlechangeteam(sugesstion)}>{sugesstion}</p>
                                             </div>
                                         ))}
                                     

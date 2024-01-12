@@ -618,11 +618,11 @@ const getSkill=async (req,res)=>
 {
     try{
         const term1=req.query.term;
-        console.log(term1);
+        
         const regex1 =new RegExp(term1,'i');
         const Skills=await skills.find({skill_name:regex1}).select('skill_name').limit(5);
         const suggestions2=Skills.map(Skill=>Skill.skill_name);
-        console.log(suggestions2);
+       
         res.json(suggestions2);
     
     }
@@ -637,10 +637,7 @@ const getSkill=async (req,res)=>
 const getteam = async (req, res) => {
     try {
         const term1 = req.query.term;
-        console.log(term1);
-
-       
-        console.log(req.session);
+        
 
         const regex1 = new RegExp(term1, 'i');
         const teams = await Course.find({
@@ -649,7 +646,7 @@ const getteam = async (req, res) => {
         }).select('student_name').limit(3);
 
         const suggestions3 = teams.map(team => team.student_name);
-        console.log(suggestions3);
+        
         res.json(suggestions3);
     } catch (err) {
         console.error('Error retrieving colleges:', err);
