@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-export default function HomePage() {
+export default function HomePage({ handleOptionClick }) {
 
     return (
         <div class="total">
@@ -60,8 +60,8 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-                <div class="seemore">
-                    <p>See more</p>
+                <div class="seemore" onClick={() => handleOptionClick(2)}>
+                    <p> See more</p>
                 </div>
             </div>
             <div class="maincard">

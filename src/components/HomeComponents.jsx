@@ -95,7 +95,7 @@ export default function HomeComponents() {
             </div>
 
             <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
-                {display === 0 && <HomePage />}
+                {display === 0 && <HomePage  handleOptionClick={handleOptionClick} />}
                 {display === 1 && <StudentProfile />}
                 {display === 2 && <ProjectDisplay />}
 
