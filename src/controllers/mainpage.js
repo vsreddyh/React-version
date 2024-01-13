@@ -6,7 +6,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const Grid = require('gridfs-stream');
-const natural = require('natural');
+
 const GridFS = Grid(mongoose.connection, mongoose.mongo);
 const {college,projects,Course,url, recruiter} = require('../settings/env.js');
 
@@ -169,12 +169,11 @@ const validateurl = async(req,res)=>{
 }
 
 
-const tokenizer = new natural.WordTokenizer();
+
 const getDomainProjects = async (req, res) => {
     const term = req.query.term;
-    console.log(term);
-    const tokens = tokenizer.tokenize(term);
-    const term1= await projects.find({ $text: { $search: tokens.join(' ') } });
+    const regex=RegExp(term,'i');
+    const term1= await projects.find({Domain:regex});
 
     
     console.log(term1);

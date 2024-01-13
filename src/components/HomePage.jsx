@@ -11,7 +11,7 @@ export default function HomePage({ handleOptionClick ,handleDomainClick}) {
             </div>
             <div class="homeelements">
                 <div class="basicgrid">
-                    <div class="bgridelements" onClick={() => handleDomainClick("Artificial Intelligence and Robotics")}>
+                    <div class="bgridelements" onClick={() => handleDomainClick("Healthcare")}>
                         <div class="forpic">
                             <img src="https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/machine-learning-pillar-page-overview.jpeg" alt="none" />
                         </div>
