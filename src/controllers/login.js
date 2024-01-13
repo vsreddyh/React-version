@@ -618,8 +618,8 @@ const getSkill=async (req,res)=>
 {
     try{
         const term1=req.query.term;
-        
-        const regex1 =new RegExp(term1,'i');
+        const escapedSearchString = term1.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex1 =new RegExp(escapedSearchString,'i');
         const Skills=await skills.find({skill_name:regex1}).select('skill_name').limit(5);
         const suggestions2=Skills.map(Skill=>Skill.skill_name);
        
@@ -638,7 +638,6 @@ const getteam = async (req, res) => {
     try {
         const term1 = req.query.term;
         
-
         const regex1 = new RegExp(term1, 'i');
         const teams = await Course.find({
             college_name: req.session.loggedInCollege,
