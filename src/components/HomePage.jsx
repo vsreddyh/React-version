@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-export default function HomePage({ handleOptionClick }) {
+export default function HomePage({ handleOptionClick ,handleDomainClick}) {
 
     return (
         <div class="total">
@@ -11,7 +11,7 @@ export default function HomePage({ handleOptionClick }) {
             </div>
             <div class="homeelements">
                 <div class="basicgrid">
-                    <div class="bgridelements">
+                    <div class="bgridelements" onClick={() => handleDomainClick("Artificial Intelligence and Robotics")}>
                         <div class="forpic">
                             <img src="https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/machine-learning-pillar-page-overview.jpeg" alt="none" />
                         </div>
@@ -19,7 +19,7 @@ export default function HomePage({ handleOptionClick }) {
                             <p>Machine Learning</p>
                         </div>
                     </div>
-                    <div class="bgridelements">
+                    <div class="bgridelements" onClick={() => handleDomainClick("Artificial Intelligence and Robotics")}>
                         <div class="forpic">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUv1JtGaG2DK9V4Q9_PAYxMj6uHZS8oq7-WkcApanancD3q1ihSQlaRLV4dyzMbCJZYnk&usqp=CAU" alt="none" />
                         </div>
@@ -27,7 +27,7 @@ export default function HomePage({ handleOptionClick }) {
                             <p>Artificial Intelligence</p>
                         </div>
                     </div>
-                    <div class="bgridelements">
+                    <div class="bgridelements" onClick={() => handleDomainClick("Web development")}>
                         <div class="forpic">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg0VBtW3kMK5jp6VrWS2avscSxR4_ib5Sy1PipbpHx7TpCy50v1H64usM5UUAvtY1NfIQ&usqp=CAU" alt="none" />
                         </div>
@@ -35,7 +35,7 @@ export default function HomePage({ handleOptionClick }) {
                             <p>Web Development</p>
                         </div>
                     </div>
-                    <div class="bgridelements">
+                    <div class="bgridelements" onClick={() => handleDomainClick("App Development")}>
                         <div class="forpic">
                             <img src="https://img.freepik.com/free-vector/app-development-illustration_52683-47931.jpg?size=626&ext=jpg&ga=GA1.1.1412446893.1705017600&semt=ais" alt="none" />
                         </div>
@@ -43,7 +43,7 @@ export default function HomePage({ handleOptionClick }) {
                             <p>App Development</p>
                         </div>
                     </div>
-                    <div class="bgridelements">
+                    <div class="bgridelements" onClick={() => handleDomainClick("AR/VR")}>
                         <div class="forpic">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlYxXaofgCn-BmScnX87kn_LH0qZh3ar9-s5g4pzZDSCbKk1nEvhRmRUhsG8yIbflkPok&usqp=CAU" alt="none" />
                         </div>
@@ -51,7 +51,7 @@ export default function HomePage({ handleOptionClick }) {
                             <p>AR/VR Projects</p>
                         </div>
                     </div>
-                    <div class="bgridelements">
+                    <div class="bgridelements" onClick={() => handleDomainClick("cyber security")}>
                         <div class="forpic">
                             <img src="https://images.spiceworks.com/wp-content/uploads/2022/10/04121130/Concept-depicting-block-validation-in-the-blockchain-and-digital-ledger.jpg" alt="" />
                         </div>

@@ -6,7 +6,9 @@ import "./HomeComponents.css";
 import HomePage from "./HomePage.jsx"
 import StudentProfile from "./StudentProfile.jsx";
 import ProjectDisplay from "./ProjectDisplay.jsx";
-
+import { Input } from "@mui/material";
+import DomainClick from "./DomainClick.jsx";
+import axios from 'axios';
 export default function HomeComponents() {
 
 
@@ -20,11 +22,38 @@ export default function HomeComponents() {
 
 
     const [display, setDisplay] = useState(0);
+    const [term,setTerm]=useState("");
+    const [searchterm,setSearchterm]=useState("");
+    const [sugesstions,setSugesstions]=useState([]);
     const handleOptionClick=(index)=>
     {
         setDisplay(index);
     }
-
+    const handleDomainClick = async (inputData) => {
+        setTerm(inputData);
+        try {
+            
+    
+            const response = await axios.get(`/en/getdomainbyclick?term=${inputData}`);
+            const data=response.data;
+            setSugesstions(data);
+            setDisplay(4);
+        } catch (error) {
+            console.error("Error fetching suggestions:", error);
+        }
+    };
+    const handlesearchchange=async (event)=>
+    {
+        event.preventDefault();
+        setSearchterm(event.target.value);
+        if (event.target.value.trim() === "") {
+            setDisplay(0);
+            return;
+}
+    }
+    
+    
+    
 
     return (
         <div className="body">
@@ -44,8 +73,8 @@ export default function HomeComponents() {
                     </div>
                     <div className="searchbarset4">
                         <div className="searchbar4">
-                            <input type="search" className="searchs4" placeholder="Search for projects" />
-                            <div className="search-icon4">
+                            <input type="search" className="searchs4" placeholder="Search for projects"  value={searchterm} onChange={handlesearchchange} />
+                            <div className="search-icon4" onClick={()=>{handleDomainClick(searchterm)}}>
                                 <FontAwesomeIcon className="search-icon4-i" icon={faSearch} style={{ color: "white" }} />
                             </div>
                         </div>
@@ -95,9 +124,10 @@ export default function HomeComponents() {
             </div>
 
             <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
-                {display === 0 && <HomePage  handleOptionClick={handleOptionClick} />}
+                {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick}/>}
                 {display === 1 && <StudentProfile />}
                 {display === 2 && <ProjectDisplay />}
+                {display===4 && <DomainClick sugesstions={sugesstions}/>}
 
             </div>
         </div>

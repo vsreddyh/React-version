@@ -1,0 +1,56 @@
+.project-card{
+    height: 200px;
+    width: 100%;
+    background-color: #141e2f;
+    border-radius: 20px;  
+    color:#a6a5a5;
+    margin: 10px;
+}
+
+.cardpart{
+    display: flex;
+}
+
+.profile-picture{
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+}
+
+.pdiscript{
+    width: calc(100% - 140px);
+    max-height: 135px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
+    padding: 10px;
+    padding-left: 0px;
+}
+
+/* .row1{
+    display: flex;
+} */
+
+.pname p{
+    color: #cfcfcf;
+    height: 50px;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    padding-left: 10px;
+    overflow: hidden;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* Two columns */
+    gap: 10px;  /* Spacing between grid items */
+}
+  
+.grid-item {
+    /* border: 3px solid #20283b; */
+    padding-right: 20px;
+}

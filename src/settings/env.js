@@ -47,6 +47,14 @@ const projectschema = new mongoose.Schema({
     comments:Array,
     Students:Array//change in future
 });
+projectschema.index({
+    Project_Name: 'text',
+    College: 'text',
+    Description: 'text',
+    Domain: 'text',
+    Comments: 'text',
+    State:'text'
+});
 const skillSchema=new mongoose.Schema({
     skill_name:String,
 

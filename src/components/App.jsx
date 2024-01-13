@@ -20,7 +20,6 @@ import Company from "./choosecompany";
 import ClgMainPage from "./clgmainpage";
 import ProjectUploadForm from "./ProjectUploadForm";
 
-import NewPage from "./NewPage";
 import HomeComponents from "./HomeComponents";
 
 export default function App() {
@@ -69,7 +68,7 @@ export default function App() {
                 <Route path="/hrsignup/:errorMessage" element={userData ? <Navigate to="/" /> :<HrSignUp />} />
                 <Route path="/hrsignup" element={userData ? <Navigate to="/" /> : <HrSignUp />} />
                 <Route path="/ProjectUploadForm" element={<ProjectUploadForm/>}/>
-                <Route path="/newpage" element={<NewPage/>}/>
+               
                 <Route path="/*" element={<Navigate to="/" />} />
                 <Route path="/" element=
                     {userData ?
