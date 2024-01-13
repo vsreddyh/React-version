@@ -4,7 +4,7 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { faSearch, faUser, faUserPlus, faBars, faHeart } from '@fortawesome/free-solid-svg-icons';
 import "./HomeComponents.css";
 import HomePage from "./HomePage.jsx"
-import StudentProfile from "./StudentProfile";
+import StudentProfile from "./StudentProfile.jsx";
 import ProjectDisplay from "./ProjectDisplay.jsx";
 
 export default function HomeComponents() {
@@ -19,7 +19,11 @@ export default function HomeComponents() {
     };
 
 
-    const [display, setDisplay] = useState(2)
+    const [display, setDisplay] = useState(0);
+    const handleOptionClick=(index)=>
+    {
+        setDisplay(index);
+    }
 
 
     return (
@@ -62,27 +66,27 @@ export default function HomeComponents() {
             </div>
 
             <div className="content14" id="sider4" style={{ display: isSiderVisible ? 'block' : 'none' }}>
-                <div id="option1" className="option">
+                <div id="option1" className="option" onClick={() => handleOptionClick(0)}>
                     <p>
                         Home
                     </p>
                 </div>
-                <div id="option2" className="option">
+                <div id="option2" className="option" onClick={() => handleOptionClick(1)}>
                     <p>
                         My project
                     </p>
                 </div>
-                <div id="option3" className="option">
+                <div id="option3" className="option" onClick={() => handleOptionClick(2)}>
                     <p>
                         likes
                     </p>
                 </div>
-                <div id="option4" className="option">
+                <div id="option4" className="option" onClick={() => handleOptionClick(3)}>
                     <p>
                         comments
                     </p>
                 </div>
-                <div id="option5" className="option">
+                <div id="option5" className="option" onClick={() => handleOptionClick(4)}>
                     <p>
                         about us
                     </p>

@@ -19,8 +19,9 @@ import Newhr from "./Newhr";
 import Company from "./choosecompany";
 import ClgMainPage from "./clgmainpage";
 import ProjectUploadForm from "./ProjectUploadForm";
-import HomePage from "./HomePage";
+
 import NewPage from "./NewPage";
+import HomeComponents from "./HomeComponents";
 
 export default function App() {
     const [userData, setUserData] = useState(null);
@@ -52,7 +53,7 @@ export default function App() {
                 <Route path="/hrmain/:projid" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN /> : <Category/>}/>
                 <Route path="/hrmain" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN /> : <Navigate to="/" />}/>
                 <Route path="/clgmain" element={(userData && userData[1]===1 && userData[2]===1) ? <ClgMainPage /> : <Navigate to="/" />}/>
-                <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? <HomePage /> : <Navigate to="/" />}/>
+                <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents/> : <Navigate to="/" />}/>
                 <Route path="/signup/:errorMessage" element={userData ? <Navigate to="/" /> : <SignUp/>} />
                 <Route path="/signup" element={userData ? <Navigate to="/" /> : <SignUp/>} />
                 <Route path="/Check-email" element={userData ? <Navigate to="/" />: <CheckEmail/>}/>
