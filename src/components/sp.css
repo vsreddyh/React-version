@@ -104,14 +104,14 @@
     flex-shrink: 1;
 }
 
-.sname{
+.sname1{
     position: absolute;
     top: 190px;
     left:20px ;
     overflow: hidden;
 }
 
-.sname p{
+.sname1 p{
     color:#a6a5a5;
 }
 

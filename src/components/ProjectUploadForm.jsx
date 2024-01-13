@@ -35,25 +35,24 @@ export default function ProjectUploadForm(){
     const [sugesstions2,setSugesstions2]=useState([]);
     const [sugesstions3,setSugesstions3]=useState([]);
 
-    
-    
+        
     const handleInputChange = async (event) => {
         const inputValue = event.target.value;
         setInputValue(inputValue);
     
-        if (inputValue.length === 0) {
-            console.log("Input is empty");
-            setSugesstions2([]);
+        
+        if (inputValue.trim() === "") {
+                        setSugesstions2([]);
             return;
         }
-    
+    else{
         try {
             const response = await axios.get(`/en/getskills?term=${inputValue}`);
             const data = response.data;
-            console.log("Suggestions data:", data);
-            setSugesstions2(data);
+                        setSugesstions2(data);
         } catch (error) {
             console.error('Error fetching suggestions:', error);
+}
         }
     };
     
@@ -61,38 +60,34 @@ export default function ProjectUploadForm(){
         const teamInputValue = event.target.value;
         setTeamInputValue(teamInputValue);
     
-        if (teamInputValue.length === 0) {
-            console.log("Team input is empty");
-            setSugesstions3([]);
+        
+        if (teamInputValue.trim() === "") {
+                        setSugesstions3([]);
             return;
         }
-    
+    else{
         try {
             const response = await axios.get(`/en/getteam?term=${teamInputValue}`);
             const data = response.data;
-            console.log("Team suggestions data:", data);
-            setSugesstions3(data);
+                        setSugesstions3(data);
         } catch (error) {
-            console.log("Error fetching team suggestions:", error);
+            console.log("Error fetching suggestions:", error);
+            }
         }
     };
     
     
     
-    
-
-    const handleKeyDown = (event) => {
-        if (event.key === "Enter" && inputValue.trim() !== "") {
-            addLanguage(inputValue.trim());
+    const handleKeyDown = (sugesstion) => {
+            addLanguage(sugesstion.trim());
             setInputValue("");
-        }
+        setSugesstions2([])
     };
 
-    const handleTeamKeyDown = (event) => {
-        if (event.key === "Enter" && teamInputValue.trim() !== "") {
-            addTeamMember(teamInputValue.trim());
+    const handleTeamKeyDown = (sugesstion) => {
+            addTeamMember(sugesstion);
             setTeamInputValue("");
-        }
+        setSugesstions3([])
     };
 
     const addLanguage = (newLanguage) => {
@@ -174,19 +169,7 @@ export default function ProjectUploadForm(){
         } else {
           console.log('No file selected');
         }
-      }
-    
-   
-    const handlechangeskills=(sugesstion)=>
-    {
-        setInputValue(sugesstion);
-        setSugesstions2([]);
-    }
-    const handlechangeteam=(sugesstion)=>
-    {
-        setTeamInputValue(sugesstion);
-        setSugesstions3([]);
-    }
+          }
     
 
     return(
@@ -227,7 +210,7 @@ export default function ProjectUploadForm(){
                     <div className="pform">
                             <p>
                                 Select project domain:
-                                <select name="category" id="cars" onChange="adjustSelectSize()" className="pform-select">  
+                                <select name="category" id="cars" onchange="adjustSelectSize()" className="pform-select">  
                                     <option value="Web development">Web development</option>
                                     <option value="App development">App development</option>
                                     <option value="Data Science and Analytics">Data Science and Analytics</option>
@@ -267,7 +250,7 @@ export default function ProjectUploadForm(){
                                 </p>
                                 <div id="langContainer">
                                     
-                                    <input type="text" id="searchInput" placeholder="Add languages..." value={inputValue} onChange={handleInputChange} onKeyDown={handleKeyDown}/>
+                                    <input type="text" id="searchInput" placeholder="Add languages..." value={inputValue} onChange={handleInputChange}/>
                                     <div id="tagContainer">
                                     {languages.map((language, index) => (
                                         <div key={index} className="tagContainer">
@@ -277,12 +260,11 @@ export default function ProjectUploadForm(){
                                     ))}
                                     </div>
                                 </div>
-                                <div id="suggestions" >
+                                <div id="suggestions">
                                     {sugesstions2.map((sugesstion,index)=>
                                     (
-                                        <div key={index} className="skills">
-                                            <p onClick={() => handlechangeskills(sugesstion)}>{sugesstion}</p>
-
+                                        <div key={index} className="skills" onClick={() => handleKeyDown(sugesstion)}>
+                                            <p>{sugesstion}</p>
                                         </div>
                                     ))}
                                         
@@ -314,11 +296,11 @@ export default function ProjectUploadForm(){
                                             </div>
                                         ))}
                                     </div>
-                                    <input type="text" id="searchGroupmem" placeholder="Search..." value={teamInputValue} onChange={handleTeamInputChange} onKeyDown={handleTeamKeyDown}/>
+                                    <input type="text" id="searchGroupmem" placeholder="Search..." value={teamInputValue} onChange={handleTeamInputChange} />
                                     <div id="suggestions">
                                         {sugesstions3.map((sugesstion,index)=>(
-                                            <div key={index} className="team_member">
-                                                <p onClick={() => handlechangeteam(sugesstion)}>{sugesstion}</p>
+                                            <div key={index} className="team_member" onClick={() => handleTeamKeyDown(sugesstion)}>
+                                                <p>{sugesstion}</p>
                                             </div>
                                         ))}
                                     

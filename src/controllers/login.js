@@ -280,8 +280,10 @@ const signin = async(req,res)=>{
             } else if (result) { 
                 
                 req.session.loggedInemail=username;
-                req.session.loggedInCollege=colleges.college_name;
                 req.session.typeofuser=userPassword[1];
+                if (userPassword[1]===1){
+                    req.session.loggedInCollege=colleges.college_name;
+                }
                 req.session.status=1;
                 res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
                 console.log('signin is',req.session)

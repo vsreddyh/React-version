@@ -3,7 +3,7 @@ import "./hr-page.css";
 import Header from "./hrheader";
 import Filters from "./filters"
 import axios from "axios";
-import StudentProfile from "./StudentProfile";
+import StudentData from "./StudentData";
 import ProjectPortfolio from "./ProjectPortfolio";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -49,7 +49,8 @@ function HRMAIN(){
     const fetchData = async () => {
         try {
             if(projid){
-                const response = await axios.get(`/en/validateurl?${projid}`)
+                console.log(projid)
+                const response = await axios.get(`/en/validateurl?projid=${projid}`)
                 if (response.data===1){
                     console.log("setting display as 1")
                     setDisplay(1)
@@ -59,6 +60,9 @@ function HRMAIN(){
                     console.log("setting display as 2")
                     setDisplay(3)
                     setSendDataToStudent(projid)
+                }
+                else{
+                    navigate('hrmain')
                 }
             }
             else{
@@ -112,7 +116,7 @@ function HRMAIN(){
             {display === 1 ? (
                 <ProjectPortfolio studata={sendDataToStudent} dis={killpage}/>
             ) : display === 3 ? (
-                <StudentProfile studata={sendDataToStudent} dis={killpage}/>
+                <StudentData studata={sendDataToStudent} dis={killpage}/>
             ) : display === 0 ? (
                 <div>
                     <div className="grid-container1">
