@@ -41,7 +41,7 @@ export default function ProjectDisplay() {
                     <div className="searchbar1">
                         <input type="search" className="searchs1" placeholder="Search for projects" />
                         <div className="search-icon1">
-                            <FontAwesomeIcon className="search-icon-i" icon={faSearch} style={{ color: "white" }} />
+                            <FontAwesomeIcon className="search-icon1-i" icon={faSearch} style={{ color: "white" }} />
                         </div>
                     </div>
                 </div>

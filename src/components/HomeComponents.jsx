@@ -42,7 +42,7 @@ export default function HomeComponents() {
                         <div className="searchbar4">
                             <input type="search" className="searchs4" placeholder="Search for projects" />
                             <div className="search-icon4">
-                                <FontAwesomeIcon className="search-icon-i" icon={faSearch} style={{ color: "white" }} />
+                                <FontAwesomeIcon className="search-icon4-i" icon={faSearch} style={{ color: "white" }} />
                             </div>
                         </div>
                     </div>
