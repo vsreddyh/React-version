@@ -1,5 +1,5 @@
 import React from "react";
-
+import './domainclick.css';
 export default function DomainClick({ sugesstions }) {
     return (
         <div>
