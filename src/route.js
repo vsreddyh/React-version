@@ -37,4 +37,5 @@ router.get("/getteam",getteam);
 router.get("/getdomainbyclick",getDomainProjects);
 router.get("/getstudentdetails",getstudentdetails);
 router.get("/getstudentproject",getstudentproject);
+
 module.exports = router;

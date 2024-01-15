@@ -16,6 +16,7 @@ export default function HomeComponents() {
     const [bodyGridColumn, setBodyGridColumn] = useState('span 1');
     const [studentproj,setStudentproj]=useState([]);
     const [studentdetail,setStudentdetail]=useState("");
+    
     const toggleDashboard = () => {
         setIsSiderVisible(prevState => !prevState);
         setBodyGridColumn(prevState => prevState === 'span 1' ? 'span 2' : 'span 1');
@@ -26,6 +27,7 @@ export default function HomeComponents() {
     const [term,setTerm]=useState("");
     const [searchterm,setSearchterm]=useState("");
     const [sugesstions,setSugesstions]=useState([]);
+    
     const handleOptionClick=(index)=>
     {
         setDisplay(index);
@@ -52,6 +54,8 @@ export default function HomeComponents() {
             return;
 }
     }
+    
+    
     
     const handlestudentdetail=async ()=>
     {
@@ -142,7 +146,7 @@ export default function HomeComponents() {
                         comments
                     </p>
                 </div>
-                <div id="option5" className="option" onClick={() => handleOptionClick(4)}>
+                <div id="option5" className="option" onClick={() => handleOptionClick(5)}>
                     <p>
                         about us
                     </p>
@@ -154,7 +158,7 @@ export default function HomeComponents() {
                 {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick}/>}
                 {display === 1 && <StudentProfile  studentproj={studentproj} studentdetail={studentdetail}/>}
                 {display === 2 && <ProjectDisplay />}
-                {display===4 && <DomainClick sugesstions={sugesstions} />}
+                {display===4 && <DomainClick sugesstions={sugesstions} handleOptionClick={handleOptionClick}/>}
 
             </div>
         </div>

@@ -171,8 +171,8 @@ const validateurl = async(req,res)=>{
 
 
 
-    const tokenizer = new natural.WordTokenizer();
-    const getDomainProjects = async (req, res) => {
+const tokenizer = new natural.WordTokenizer();
+const getDomainProjects = async (req, res) => {
     const term = req.query.term;
     console.log(term);
     const tokens = tokenizer.tokenize(term);
@@ -196,12 +196,13 @@ const getstudentproject=async(req,res)=>
     const search=await Course.findOne({email_address:email});
     const user=search.student_name;
     const sugesstion = await projects.find({ Students: { $elemMatch: { stuname: user } } }); //to find element in obj we use elematch
-    
+   
     console.log(sugesstion);
     res.json(sugesstion);
 
 
 }
+
 
 module.exports = {
     getdata,

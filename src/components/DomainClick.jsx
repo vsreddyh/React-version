@@ -1,11 +1,11 @@
 import React from "react";
 import "./domainclick.css";
 
-export default function DomainClick({ sugesstions }) {
+export default function DomainClick({ sugesstions ,handleOptionClick}) {
     return (
         <div className="sgtotal">
             <div className="sbackbutton">
-                <p><span>&#8592;</span>Go Back</p>
+                <p onClick={()=>handleOptionClick(0)}><span>&#8592;</span>Go Back</p>
             </div>
             {sugesstions && sugesstions.map((suggestion, index) => (
                 <div key={index} className="grid-item">
