@@ -24,7 +24,7 @@ export default function ProjectPortfolio() {
 
 
                         </div>
-                        <div className="projectvideo">
+                        <div className="opprojectvideo">
                             <video height="500px" width="600px" src="../samplevideo.mp4" type="video/mp4" controls />
                         </div>
                         <img src="Shouryan.jpg" alt="VS" className="slectimage" />
