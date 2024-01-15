@@ -194,8 +194,8 @@ const getstudentproject=async(req,res)=>
 {
     const email=req.session.loggedInemail;
     const search=await Course.findOne({email_address:email});
-    const user=search.student_name;
-    const sugesstion = await projects.find({ Students: { $elemMatch: { stuname: user } } }); //to find element in obj we use elematch
+    const user=search.projects;
+    const sugesstion = await projects.find({_id: user }); 
    
     console.log(sugesstion);
     res.json(sugesstion);
