@@ -174,12 +174,8 @@ const validateurl = async(req,res)=>{
 const tokenizer = new natural.WordTokenizer();
 const getDomainProjects = async (req, res) => {
     const term = req.query.term;
-    console.log(term);
     const tokens = tokenizer.tokenize(term);
     const term1= await projects.find({ $text: { $search: tokens.join(' ') } });
-
-    
-    console.log(term1);
     res.json(term1);
 };
 
@@ -195,9 +191,7 @@ const getstudentproject=async(req,res)=>
     const email=req.session.loggedInemail;
     const search=await Course.findOne({email_address:email});
     const user=search.projects;
-    const sugesstion = await projects.find({_id: user }); 
-   
-    console.log(sugesstion);
+    const sugesstion = await projects.find({_id: user });
     res.json(sugesstion);
 
 
