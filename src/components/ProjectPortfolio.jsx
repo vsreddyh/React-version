@@ -1,26 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ProjectPortfolio.css"
 
 export default function ProjectPortfolio() {
 
+    const [formData, setFormData] = useState({
+        comment: "",
+    });
+
+    function handleChange(event) {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [event.target.name]: event.target.value
+        }));
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        
+    }
+
+    useEffect(() => {
+        console.log(formData);
+    }, [formData]);
 
 
     return (
-        <div class="ourprojectdetails">
-            <div class="opbuttons">
-                <div class="opbtn">
-                    <div class="opback" style={{ color: "aliceblue" }}>
+        <div className="ourprojectdetails">
+            <div className="opbuttons">
+                <div className="opbtn">
+                    <div className="opback" style={{ color: "aliceblue" }}>
                         <p><span>&#8592;</span>Go Back</p>
                     </div>
-                    <div class="opshare" style={{ color: "aliceblue" }} >
+                    <div className="opshare" style={{ color: "aliceblue" }} >
                         <p>Share<span>&#10150;</span></p>
                     </div>
                 </div>
             </div>
-            <div class="opprojects">
-                <div class="opdiv">
-                    <div class="opimvid">
-                        <div class="opvidname">
+            <div className="opprojects">
+                <div className="opdiv">
+                    <div className="opimvid">
+                        <div className="opvidname">
 
 
                         </div>
@@ -30,129 +49,129 @@ export default function ProjectPortfolio() {
                         <img src="Shouryan.jpg" alt="VS" className="slectimage" />
 
                     </div>
-                    <div class="opdetail">
-                        <div class="opprojectname">
-                            <div class="oppic">
+                    <div className="opdetail">
+                        <div className="opprojectname">
+                            <div className="oppic">
 
                             </div>
-                            <div class="oprealpro">
+                            <div className="oprealpro">
                                 <p>AI PLATFORM FOR PROJECTS</p>
                             </div>
                         </div>
-                        <div class="oppostedby">
+                        <div className="oppostedby">
                             <p>Keshav Memorial Institute of Technology   </p>
                         </div>
-                        <div class="gettingdate">
+                        <div className="gettingdate">
                             <div><p> Posted on 23 Dec    <span>23 Likes</span> </p></div>
                         </div>
-                        <div class="gettingdescription">
+                        <div className="gettingdescription">
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt, perferendis exercitationem ad laborum asperiores modi nesciunt aliquam porro magnam dolores molestias repellat rerum hic, quas ut nam minima numquam debitis animi magni nulla! Corrupti, harum omnis quae esse quas magnam fuga est dolorum nulla, alias eveniet dolore consequuntur cumque. Eum aspernatur eveniet doloremque amet laborum cupiditate dolores laboriosam, quidem fuga tempore dolorum labore repellendus ab sint nihil quo illum doloribus repudiandae odit hic rem quas porro? Quia quibusdam commodi laboriosam vitae odit dolorem ipsa, animi odio neque aut quos provident officia sequi quae voluptates tempore sint architecto! Perspiciatis, ab distinctio.</p>
                         </div>
-                        <div class="opfolder">
+                        <div className="opfolder">
                             <p>FOLDER<span>&#128193;</span></p>
                         </div>
-                        <div class="ourdomain">
+                        <div className="ourdomain">
                             <p>DOMAIN:</p>
                         </div>
-                        <div class="ourtechnology">
+                        <div className="ourtechnology">
                             <p>Technologies used: </p>
                         </div>
-                        <div class="studentsworking">
+                        <div className="studentsworking">
                             <h3>Students worked:</h3>
-                            <div class="names"><p>Naga Sai</p></div>
-                            <div class="names"><p>Nithin</p></div>
-                            <div class="names"><p>Vishnu</p></div>
-                            <div class="names"><p>Florence</p></div>
-                            <div class="names"><p>Sanjeeva</p></div>
-                            <div class="names"><p>Hrishita</p></div>
+                            <div className="names"><p>Naga Sai</p></div>
+                            <div className="names"><p>Nithin</p></div>
+                            <div className="names"><p>Vishnu</p></div>
+                            <div className="names"><p>Florence</p></div>
+                            <div className="names"><p>Sanjeeva</p></div>
+                            <div className="names"><p>Hrishita</p></div>
                         </div>
-                        <div class="commentsection">
-                            <div class="noofcomment">
+                        <div className="commentsection">
+                            <div className="noofcomment">
                                 <p>43 comments</p>
                             </div>
-                            <div class="thereal">
-                                <input type="text" placeholder="Comment" class="commentinput" />
+                            <div className="thereal">
+                                <input type="text" placeholder="Comment" className="commentinput" onChange={handleChange} name="comment" value={formData.comment}/>
                             </div>
-                            <div class="decide">
-                                <button type="submit" >Submit</button>
+                            <div className="decide">
+                                {formData.comment !== "" && <button type="submit" onClick={handleSubmit}>Submit</button>}
                             </div>
-                            <div class="personcomments">
-                                <div class="commentdetails">
-                                    <div class="commentpic">
+                            <div className="personcomments">
+                                <div className="commentdetails">
+                                    <div className="commentpic">
                                         <img src="Shouryan.jpg" alt="VS" className="slectimage" />
                                     </div>
-                                    <div class="commentname">
+                                    <div className="commentname">
                                         <p>VIshnuuuuu</p>
                                     </div>
-                                    <div class="commentdate">
+                                    <div className="commentdate">
                                         <p>23dec</p>
                                     </div>
                                 </div>
-                                <div class="realcomment">
+                                <div className="realcomment">
                                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ratione.</p>
                                 </div>
                             </div>
-                            <div class="personcomments">
-                                <div class="commentdetails">
-                                    <div class="commentpic">
+                            <div className="personcomments">
+                                <div className="commentdetails">
+                                    <div className="commentpic">
                                         <img src="Shouryan.jpg" alt="VS" className="slectimage" />
                                     </div>
-                                    <div class="commentname">
+                                    <div className="commentname">
                                         <p>VIshnuuuuu</p>
                                     </div>
-                                    <div class="commentdate">
+                                    <div className="commentdate">
                                         <p>23dec</p>
                                     </div>
                                 </div>
-                                <div class="realcomment">
+                                <div className="realcomment">
                                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ratione.</p>
                                 </div>
                             </div>
-                            <div class="personcomments">
-                                <div class="commentdetails">
-                                    <div class="commentpic">
+                            <div className="personcomments">
+                                <div className="commentdetails">
+                                    <div className="commentpic">
                                         <img src="Shouryan.jpg" alt="VS" className="slectimage" />
                                     </div>
-                                    <div class="commentname">
+                                    <div className="commentname">
                                         <p>VIshnuuuuu</p>
                                     </div>
-                                    <div class="commentdate">
+                                    <div className="commentdate">
                                         <p>23dec</p>
                                     </div>
                                 </div>
-                                <div class="realcomment">
+                                <div className="realcomment">
                                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ratione.</p>
                                 </div>
                             </div>
-                            <div class="personcomments">
-                                <div class="commentdetails">
-                                    <div class="commentpic">
+                            <div className="personcomments">
+                                <div className="commentdetails">
+                                    <div className="commentpic">
                                         <img src="Shouryan.jpg" alt="VS" className="slectimage" />
                                     </div>
-                                    <div class="commentname">
+                                    <div className="commentname">
                                         <p>VIshnuuuuu</p>
                                     </div>
-                                    <div class="commentdate">
+                                    <div className="commentdate">
                                         <p>23dec</p>
                                     </div>
                                 </div>
-                                <div class="realcomment">
+                                <div className="realcomment">
                                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ratione.</p>
                                 </div>
                             </div>
-                            <div class="personcomments">
-                                <div class="commentdetails">
-                                    <div class="commentpic">
+                            <div className="personcomments">
+                                <div className="commentdetails">
+                                    <div className="commentpic">
                                         <img src="Shouryan.jpg" alt="VS" className="slectimage" />
                                     </div>
-                                    <div class="commentname">
+                                    <div className="commentname">
                                         <p>VIshnuuuuu</p>
                                     </div>
-                                    <div class="commentdate">
+                                    <div className="commentdate">
                                         <p>23dec</p>
                                     </div>
                                 </div>
-                                <div class="realcomment">
+                                <div className="realcomment">
                                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ratione.</p>
                                 </div>
                             </div>
