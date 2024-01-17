@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const {signin, signup, hrsignup, fpassword, validate_token, checkSessionEndpoint , newuser, newhr, newp, signup_college, mailpass,departments,get_departments,collegeDetails,getCollegeDetails,getCompanyDetails,companyDetails,getsignupCollege,homepage,getSkill,getteam} = require('./controllers/login.js')
-const {getdata,projectlist,image,getstudata,fetchprojdata,addbookmark,removebookmark,checkbookmark,validateurl, getDomainProjects,getstudentdetails,getstudentproject} = require('./controllers/mainpage.js')
+const {getdata,projectlist,image,getstudata,getprojectdata,fetchprojdata,addbookmark,removebookmark,checkbookmark,validateurl, getDomainProjects,getstudentdetails,getstudentproject} = require('./controllers/mainpage.js')
 
 /** HTTP Reqeust */
 router.post('/signin', signin);
@@ -24,6 +24,7 @@ router.get('/image/:id',image)
 router.post('/hrsignup', hrsignup);
 router.post('/newhr', newhr);
 router.post('/getstudendata',getstudata)
+router.post('/getprojectdata',getprojectdata)
 router.post('/fetchprojdata',fetchprojdata)
 router.post('/company-details',companyDetails)
 router.get('/company-details',getCompanyDetails);

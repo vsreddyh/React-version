@@ -13,7 +13,6 @@ import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
 function HRMAIN(){
     const navigate = useNavigate();
     const [display, setDisplay]= useState(2)
-    console.log("setting state")
     const [receivedData, setReceivedData] = useState({
         category:'Any',
         search:'',
@@ -29,7 +28,6 @@ function HRMAIN(){
     }, []);
 
     const CategoryData = useCallback((data) => {
-        console.log('updating')
         updateReceivedData(data);
         setCurrentPage(1);
         setDisplay(0)
@@ -49,15 +47,12 @@ function HRMAIN(){
     const fetchData = async () => {
         try {
             if(projid){
-                console.log(projid)
                 const response = await axios.get(`/en/validateurl?projid=${projid}`)
                 if (response.data===1){
-                    console.log("setting display as 1")
                     setDisplay(1)
                     setSendDataToStudent(projid)
                 }
                 else if(response.data==2){
-                    console.log("setting display as 2")
                     setDisplay(3)
                     setSendDataToStudent(projid)
                 }
@@ -74,7 +69,6 @@ function HRMAIN(){
                 setProjects(response.data.list);
                 setTotalPages(response.data.total_pages);
                 setDisplay(response.data.display)
-                console.log("fetching")
             }
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -94,7 +88,6 @@ function HRMAIN(){
         }
     };
     const killpage = () => {
-        console.log('yo')
         if(projid){
             navigate('/hrmain')
         }
@@ -107,7 +100,6 @@ function HRMAIN(){
             setSendDataToStudent(null);
         }
     }, [projid]);
-    console.log('a',projid,display,sendDataToStudent)
     return(
         <div className="body1">
         <Header takedata={CategoryData}/>

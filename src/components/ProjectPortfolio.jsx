@@ -1,19 +1,91 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./ProjectPortfolio.css"
+import { GoLink } from "react-icons/go";
+import axios from "axios";
+import { AddComment } from "@mui/icons-material";
 
-export default function ProjectPortfolio() {
+export default function ProjectPortfolio({ dis, ...props }) {
+    const projid = props.studata;
+    const [photolist,setphotolist] = useState([])
+    const [comments,setcomments]=useState([])
+    const [skills,setskills]=useState([])
+    const [students,setstudents]=useState([])
+    const [showCopyMessage, setShowCopyMessage] = useState(false);
+    const [commentdata,setcommentdata]= useState(null)
+    const exit = async () => {
+        console.log('yo')
+        dis()
+    }
+    const share = async () => {
+        navigator.clipboard.writeText(`http://localhost:3000/hrmain/${projid}`)
+            .then(() => {
+                setShowCopyMessage(true);
+            })
+            .catch((err) => {
+                console.error('Failed to copy: ', err);
+            });
+    }
+    let [projdata, setprojdata] = useState(null)
+    const handleclick = (data) => {
+        console.log(data)//need to link to students
+    }
+    const handlecomment = async (event) =>{
+        setcommentdata(event.target.value)
+    }
+    const AddComment = async (event) => {
+        event.preventDefault();
+    }
+    const transformdate = (date)=>{
+        const dateObj = new Date(date);
+        const day = dateObj.getDate();
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const month = monthNames[dateObj.getMonth()];
+        const year = dateObj.getFullYear();
 
+        // Add correct suffix to day
+        let dayWithSuffix;
+        if (day === 11 || day === 12 || day === 13) {
+            dayWithSuffix = day + 'th';
+        } else {
+            switch (day % 10) {
+            case 1:
+                dayWithSuffix = day + 'st';
+                break;
+            case 2:
+                dayWithSuffix = day + 'nd';
+                break;
+            case 3:
+                dayWithSuffix = day + 'rd';
+                break;
+            default:
+                dayWithSuffix = day + 'th';
+            }
+        }
 
+        return `${dayWithSuffix} ${month} ${year}`;
+    }
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.post('/en/getprojectdata', { data: projid });
+            setprojdata(response.data);
+            setphotolist(response.data.photos)
+            setcomments(response.data.Comments)
+            setskills(response.data.Skills)
+            setstudents(response.data.Students)
+        };
 
+        fetchData();
+    }, [projid]);
+    console.log(projdata)
     return (
         <div class="ourprojectdetails">
             <div class="opbuttons">
                 <div class="opbtn">
-                    <div class="opback" style={{ color: "aliceblue" }}>
+                    <div class="opback" onClick={() => exit()} style={{ color: "aliceblue" }}>
                         <p><span>&#8592;</span>Go Back</p>
                     </div>
-                    <div class="opshare" style={{ color: "aliceblue" }} >
-                        <p>Share<span>&#10150;</span></p>
+                    <div class="opshare" onClick={() => share()} style={{ color: "aliceblue" }} >
+                        <p>{showCopyMessage === false ? 'Copy Link ' : 'Link Copied'}<GoLink /></p>
                     </div>
                 </div>
             </div>
@@ -25,141 +97,90 @@ export default function ProjectPortfolio() {
 
                         </div>
                         <div className="opprojectvideo">
-                            <video height="500px" width="600px" src="../samplevideo.mp4" type="video/mp4" controls />
+                            {projdata&&(<video height="500px" width="600px" src={`/en/image/${projdata.Video}`} type="video/mp4" controls />)}
                         </div>
-                        <img src="Shouryan.jpg" alt="VS" className="slectimage" />
-
+                        {(photolist.length!==0)&&(
+                            photolist.map((photo,index)=>(
+                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="slectimage" />
+                            ))
+                        )}
                     </div>
-                    <div class="opdetail">
+                    {projdata && (<div class="opdetail">
                         <div class="opprojectname">
                             <div class="oppic">
-
+                            {projdata&&(<img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage" />)}
                             </div>
                             <div class="oprealpro">
-                                <p>AI PLATFORM FOR PROJECTS</p>
+                                <p>{projdata.Project_Name}</p>
                             </div>
                         </div>
                         <div class="oppostedby">
-                            <p>Keshav Memorial Institute of Technology   </p>
+                            <p>{projdata.College}</p>
                         </div>
                         <div class="gettingdate">
-                            <div><p> Posted on 23 Dec    <span>23 Likes</span> </p></div>
+                            <div><p> Posted on {transformdate(new Date(projdata.Date))}<span>{projdata.Likes} Likes</span> </p></div>
                         </div>
                         <div class="gettingdescription">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt, perferendis exercitationem ad laborum asperiores modi nesciunt aliquam porro magnam dolores molestias repellat rerum hic, quas ut nam minima numquam debitis animi magni nulla! Corrupti, harum omnis quae esse quas magnam fuga est dolorum nulla, alias eveniet dolore consequuntur cumque. Eum aspernatur eveniet doloremque amet laborum cupiditate dolores laboriosam, quidem fuga tempore dolorum labore repellendus ab sint nihil quo illum doloribus repudiandae odit hic rem quas porro? Quia quibusdam commodi laboriosam vitae odit dolorem ipsa, animi odio neque aut quos provident officia sequi quae voluptates tempore sint architecto! Perspiciatis, ab distinctio.</p>
+                            <p>{projdata.Description}</p>
                         </div>
                         <div class="opfolder">
                             <p>FOLDER<span>&#128193;</span></p>
+                            {/* need to add explorer hyper link here */}
                         </div>
                         <div class="ourdomain">
-                            <p>DOMAIN:</p>
+                            <p>DOMAIN:{projdata.Domain}</p>
                         </div>
                         <div class="ourtechnology">
                             <p>Technologies used: </p>
+                            <ul>
+                                {skills.map((skill,index)=>(
+                                    <li key={index}>{skill}</li>
+                                ))}
+                            </ul>
                         </div>
                         <div class="studentsworking">
                             <h3>Students worked:</h3>
-                            <div class="names"><p>Naga Sai</p></div>
-                            <div class="names"><p>Nithin</p></div>
-                            <div class="names"><p>Vishnu</p></div>
-                            <div class="names"><p>Florence</p></div>
-                            <div class="names"><p>Sanjeeva</p></div>
-                            <div class="names"><p>Hrishita</p></div>
+                            {students.map((student,index)=>(
+                                    <div class="names" key={index}><p>{student.stuname}</p></div>
+                            ))}
                         </div>
                         <div class="commentsection">
                             <div class="noofcomment">
-                                <p>43 comments</p>
+                                <p>{comments.length} comments</p>
                             </div>
+                            <form onSubmit={AddComment}>
                             <div class="thereal">
-                                <input type="text" placeholder="Comment" class="commentinput" />
+                                <input type="text" placeholder="Comment" class="commentinput" onChange={handlecomment} required/>
                             </div>
                             <div class="decide">
                                 <button type="submit" >Submit</button>
                             </div>
-                            <div class="personcomments">
-                                <div class="commentdetails">
-                                    <div class="commentpic">
-                                        <img src="Shouryan.jpg" alt="VS" className="slectimage" />
+                            </form>
+                            {(comments.length!==0)&&(
+                                comments.map((comment,index)=>(
+                                    <div class="personcomments" key={index}>
+                                        <div class="commentdetails">
+                                            <div class="commentpic">
+                                                <img src={`/en/image/${comment.photoid}`} alt="VS" className="slectimage" />
+                                            </div>
+                                            <div class="commentname">
+                                                <p>{comment.studentname}</p>
+                                            </div>
+                                            <div class="commentdate">
+                                                <p>{transformdate(new Date(comment.Date))}</p>
+                                            </div>
+                                        </div>
+                                        <div class="realcomment">
+                                            <p>{comment.comment}</p>
+                                        </div>
                                     </div>
-                                    <div class="commentname">
-                                        <p>VIshnuuuuu</p>
-                                    </div>
-                                    <div class="commentdate">
-                                        <p>23dec</p>
-                                    </div>
-                                </div>
-                                <div class="realcomment">
-                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ratione.</p>
-                                </div>
-                            </div>
-                            <div class="personcomments">
-                                <div class="commentdetails">
-                                    <div class="commentpic">
-                                        <img src="Shouryan.jpg" alt="VS" className="slectimage" />
-                                    </div>
-                                    <div class="commentname">
-                                        <p>VIshnuuuuu</p>
-                                    </div>
-                                    <div class="commentdate">
-                                        <p>23dec</p>
-                                    </div>
-                                </div>
-                                <div class="realcomment">
-                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ratione.</p>
-                                </div>
-                            </div>
-                            <div class="personcomments">
-                                <div class="commentdetails">
-                                    <div class="commentpic">
-                                        <img src="Shouryan.jpg" alt="VS" className="slectimage" />
-                                    </div>
-                                    <div class="commentname">
-                                        <p>VIshnuuuuu</p>
-                                    </div>
-                                    <div class="commentdate">
-                                        <p>23dec</p>
-                                    </div>
-                                </div>
-                                <div class="realcomment">
-                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ratione.</p>
-                                </div>
-                            </div>
-                            <div class="personcomments">
-                                <div class="commentdetails">
-                                    <div class="commentpic">
-                                        <img src="Shouryan.jpg" alt="VS" className="slectimage" />
-                                    </div>
-                                    <div class="commentname">
-                                        <p>VIshnuuuuu</p>
-                                    </div>
-                                    <div class="commentdate">
-                                        <p>23dec</p>
-                                    </div>
-                                </div>
-                                <div class="realcomment">
-                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ratione.</p>
-                                </div>
-                            </div>
-                            <div class="personcomments">
-                                <div class="commentdetails">
-                                    <div class="commentpic">
-                                        <img src="Shouryan.jpg" alt="VS" className="slectimage" />
-                                    </div>
-                                    <div class="commentname">
-                                        <p>VIshnuuuuu</p>
-                                    </div>
-                                    <div class="commentdate">
-                                        <p>23dec</p>
-                                    </div>
-                                </div>
-                                <div class="realcomment">
-                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ratione.</p>
-                                </div>
-                            </div>
+                                ))
+                            )}
+                            
                         </div>
 
 
-                    </div>
+                    </div>)}
 
                 </div>
 

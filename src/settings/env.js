@@ -36,16 +36,17 @@ const companySchema=new mongoose.Schema({
 const projectschema = new mongoose.Schema({
     _id:ObjectId,
     Domain:String,
-    Skills:Array, //charraange in future
+    Skills:Array,
     College:String,
     Project_Name:String,
     Likes:Number,
     Description:String,
     Date:Date,
     photo:ObjectId,
-    video:ObjectId,
-    comments:Array,
-    Students:Array//change in future
+    Video:ObjectId,
+    Comments:Array,
+    Students:Array,
+    photos:Array
 });
 projectschema.index({
     Project_Name: 'text',

@@ -196,13 +196,19 @@ const getstudentproject=async(req,res)=>
 
 
 }
-
+const getprojectdata = async(req,res)=>{
+    const data =req.body.data;
+    const projId = new mongoose.Types.ObjectId(data);
+    const projinfo = await projects.findOne({_id:projId});
+    res.json(projinfo)
+}
 
 module.exports = {
     getdata,
     projectlist,
     image,
     getstudata,
+    getprojectdata,
     fetchprojdata,
     addbookmark,
     removebookmark,

@@ -50,18 +50,17 @@ export default function StudentData({ dis, ...props }) {
     let [studata, setstudata] = useState('null')
     let [projects, setprojects] = useState([])
     const handleclick = (data) => {
-        console.log(data)
+        console.log(data)//need to link to projectportfolio
     }
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.post('/en/getstudendata', { data: projid });
-            setstudata(response.data); // Assuming you want to log the response data
+            setstudata(response.data);
         };
 
         fetchData();
     }, [projid]);
     useEffect(() => {
-        console.log("entering")
         const fetchprojdata = async () => {
             const response = await axios.post('/en/fetchprojdata', { data: studata.projects })
             setprojects(response.data)
