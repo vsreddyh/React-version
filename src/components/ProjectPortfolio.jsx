@@ -89,10 +89,10 @@ export default function ProjectPortfolio({ dis, ...props }) {
                     </div>
                 </div>
             </div>
-            <div class="opprojects">
-                <div class="opdiv">
-                    <div class="opimvid">
-                        <div class="opvidname">
+            <div className="opprojects">
+                <div className="opdiv">
+                    <div className="opimvid">
+                        <div className="opvidname">
 
 
                         </div>
@@ -123,14 +123,14 @@ export default function ProjectPortfolio({ dis, ...props }) {
                         <div class="gettingdescription">
                             <p>{projdata.Description}</p>
                         </div>
-                        <div class="opfolder">
+                        <div className="opfolder">
                             <p>FOLDER<span>&#128193;</span></p>
                             {/* need to add explorer hyper link here */}
                         </div>
                         <div class="ourdomain">
                             <p>DOMAIN:{projdata.Domain}</p>
                         </div>
-                        <div class="ourtechnology">
+                        <div className="ourtechnology">
                             <p>Technologies used: </p>
                             <ul>
                                 {skills.map((skill,index)=>(
@@ -138,7 +138,7 @@ export default function ProjectPortfolio({ dis, ...props }) {
                                 ))}
                             </ul>
                         </div>
-                        <div class="studentsworking">
+                        <div className="studentsworking">
                             <h3>Students worked:</h3>
                             {students.map((student,index)=>(
                                     <div class="names" key={index}><p>{student.stuname}</p></div>
@@ -152,8 +152,8 @@ export default function ProjectPortfolio({ dis, ...props }) {
                             <div class="thereal">
                                 <input type="text" placeholder="Comment" class="commentinput" onChange={handlecomment} required/>
                             </div>
-                            <div class="decide">
-                                <button type="submit" >Submit</button>
+                            <div className="decide">
+                                {formData.comment !== "" && <button type="submit" onClick={handleSubmit}>Submit</button>}
                             </div>
                             </form>
                             {(comments.length!==0)&&(
