@@ -264,6 +264,8 @@ export default function ProjectUploadForm(){
         <Header takedata={CategoryData}/>
         <div className="bodyy">
             <Filters sendDataToParent={FilterData}/>
+            
+            <form onSubmit={handleSubmit}>
                 <div className="studetails">
                     <div className="sdetails">
                         <div className="probackground">
@@ -281,12 +283,12 @@ export default function ProjectUploadForm(){
                                     add photo 
                                 </p>
                             </label>
-                            <input type="file" name="profilePic" id="profilePic" accept="image/*" className="sphoto-input" onChange={handleProfilePhoto}/>
+                            <input type="file" name="profilePic" id="profilePic" accept="image/*" className="sphoto-input" onChange={handleProfilePhoto} required/>
                          
                         </div>
                         <div className="sname">
                             
-                                <p>project title:   <input type="text" spellcheck="false" className="sname-input" onChange={(e) => setTitle(e.target.value)}/></p>
+                                <p>project title:   <input type="text" spellcheck="false" className="sname-input" onChange={(e) => setTitle(e.target.value)} required/></p>
 
                             
                         </div>
@@ -297,7 +299,7 @@ export default function ProjectUploadForm(){
                     <div className="pform">
                             <p>
                                 Select project domain:
-                                <select name="category" id="cars" onChange={(e) => setDomain(e.target.value)} className="pform-select">  
+                                <select name="category" id="cars" onChange={(e) => setDomain(e.target.value)} className="pform-select"  required>  
                                     <option value="Web development">Web development</option>
                                     <option value="App development">App development</option>
                                     <option value="Data Science and Analytics">Data Science and Analytics</option>
@@ -314,7 +316,7 @@ export default function ProjectUploadForm(){
                             <div className="dscrpt">
                                 <p className="description">
                                     <label htmlFor="description">Description:</label>
-                                    <textarea name="description" id="description" rows="5" required="" className="dscrpt-textarea" onChange={(e) => setDescription(e.target.value)} ></textarea>
+                                    <textarea name="description" id="description" rows="5" required className="dscrpt-textarea" onChange={(e) => setDescription(e.target.value)}></textarea>
                                 </p>
                                 <div className="file-upload">
                                     <label htmlFor="file-upload" className="file-upload-label"  >
@@ -367,7 +369,7 @@ export default function ProjectUploadForm(){
                                     <label htmlFor="photo-upload" className="media-upload-label" >
                                      Upload photos
                                     </label>
-                                    <input type="file" id="photo-upload" className="media-upload-input" accept="image/*" onChange={handlePhotoChange} required/>
+                                    <input type="file" id="photo-upload" className="media-upload-input" accept="image/*" onChange={handlePhotoChange}/>
                                 </p>
                             </div>
                             <div className="team-mem">
@@ -393,9 +395,9 @@ export default function ProjectUploadForm(){
                                     
                                     
                                     </div>
-                                    <form onSubmit={handleSubmit}>
-                                    <button type="submit" className="submit-button">Submit</button>
-                                    </form>
+                                    <div>
+                                        <button type="submit" className="submit-button">Submit</button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -405,9 +407,7 @@ export default function ProjectUploadForm(){
                             
                             
                 </div>
-                    
-            
-            
+                </form>
         </div>
     </div>
     );
