@@ -11,6 +11,7 @@ var MongoDBStore = require('connect-mongodb-session')(session);
 require('dotenv').config();
 const {SESSION_KEY,url} = require('./settings/env.js');
 app.use(cors())
+app.use(bodyParser.json({ limit: '50mb' }));
 app.get("/",cors(),(req,res)=>
 {
 

@@ -12,8 +12,13 @@ import axios from "axios";
 export default function ProjectUploadForm(){
 
     
-    const[photo,selectedPhoto]=useState(null);
-    const[video,selectedVideo]=useState(null);
+    const [photo, setPhoto] = useState(null);
+    const [video, setVideo] = useState(null);
+    const[file,setFile]=useState(null);
+    const [profilePhoto, setProfilePhoto] = useState(null);
+    const[photoname,setPhotoName]=useState('');
+    const[videoname,setVideoName]=useState('');
+    const[filename,setFileName]=useState('');
     const [formData,setFormData]=useState({
         category: 'Any',
         search:'',
@@ -25,6 +30,11 @@ export default function ProjectUploadForm(){
     const CategoryData = useCallback((data) => {
         
     }, []);
+
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevents the default form submission behavior
+        saveDetails(event);
+      };
     // useEffect(() => {
     //     takedata(formData);
     // }, [formData, takedata]);
@@ -34,11 +44,15 @@ export default function ProjectUploadForm(){
     const [teamInputValue, setTeamInputValue] = useState("");
     const [sugesstions2,setSugesstions2]=useState([]);
     const [sugesstions3,setSugesstions3]=useState([]);
+    const [title,setTitle]=useState("");
+    const [description,setDescription]=useState("");
+    const [domain,setDomain]=useState("");
 
         
     const handleInputChange = async (event) => {
         const inputValue = event.target.value;
         setInputValue(inputValue);
+        console.log(inputValue);
     
         
         if (inputValue.trim() === "") {
@@ -50,6 +64,7 @@ export default function ProjectUploadForm(){
             const response = await axios.get(`/en/getskills?term=${inputValue}`);
             const data = response.data;
                         setSugesstions2(data);
+                        console.log(data);
         } catch (error) {
             console.error('Error fetching suggestions:', error);
 }
@@ -92,6 +107,7 @@ export default function ProjectUploadForm(){
 
     const addLanguage = (newLanguage) => {
         setLanguages([...languages, newLanguage]);
+        console.log(newLanguage);
     };
 
     const addTeamMember = (newTeamMember) => {
@@ -101,29 +117,65 @@ export default function ProjectUploadForm(){
     const removeLanguage = (indexToRemove) => {
         const updatedLanguages = languages.filter((_, index) => index !== indexToRemove);
         setLanguages(updatedLanguages);
+    
     };
 
     const removeTeamMember = (indexToRemove) => {
         const updatedTeams = teams.filter((_, index) => index !== indexToRemove);
         setTeams(updatedTeams);
     };
+
+    function handleProfilePhoto(event) {
+        const selectedProfilePhoto = event.target.files[0]; // Get the selected photo file
+        if (selectedProfilePhoto) {
+            const reader=new FileReader();
+            reader.onloadend = () => {
+                setProfilePhoto(reader.result.split(',')[1]);
+              };
+              reader.readAsDataURL(selectedProfilePhoto);
+            // Perform further actions with the selected photo here
+        } else {
+            alert('No photo selected');
+        }
+    }
+
+
+
+
     function handleVideoChange(event) {
         const selectedVideo = event.target.files[0]; // Get the selected video file
         if (selectedVideo) {
-            console.log('Selected video:', selectedVideo);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setVideo(reader.result.split(',')[1]);
+              };
+              reader.readAsDataURL(selectedVideo);
+              let temp3=event.target.value;
+              const videoname=temp3.replace("C:\\fakepath\\", "");
+              setVideoName(videoname);
+
+            
             // Perform further actions with the selected video here
         } else {
-            console.log('No video selected');
+            alert('No video selected');
         }
     }
     
     function handlePhotoChange(event) {
         const selectedPhoto = event.target.files[0]; // Get the selected photo file
         if (selectedPhoto) {
-            console.log('Selected photo:', selectedPhoto);
+            const reader=new FileReader();
+            reader.onloadend = () => {
+                setPhoto(reader.result.split(',')[1]);
+              };
+              reader.readAsDataURL(selectedPhoto);
+              let temp2=event.target.value;
+              const photoname=temp2.replace("C:\\fakepath\\", "");
+              setPhotoName(photoname);
+
             // Perform further actions with the selected photo here
         } else {
-            console.log('No photo selected');
+            alert('No photo selected');
         }
     }
 
@@ -163,13 +215,48 @@ export default function ProjectUploadForm(){
     };*/
     function handlechange(event) {
         const selectedFile = event.target.files[0]; // Get the first selected file
-        if (selectedFile) {
-          console.log('Selected file:', selectedFile);
+        if (selectedFile && selectedFile.name.endsWith('.zip')) {
+            const reader=new FileReader();
+            reader.onloadend=()=>{
+                setFile(reader.result.split(',')[1]);
+            };
+            reader.readAsDataURL(selectedFile);
+            let temp1=event.target.value;
+            const zipname=temp1.replace("C:\\fakepath\\", "");
+            setFileName(zipname);
+            console.log(filename);
           // You can perform further actions with the selected file here
         } else {
-          console.log('No file selected');
+          alert('please select a valid .zip file');
         }
           }
+
+
+          function saveDetails(event) {
+            try {
+              const response = axios.post(`/en/uploadDetails`, {
+                videoname: videoname,
+                photoname: photoname,
+                filename: filename,
+                video: video,
+                photo: photo,
+                file: file,
+                title:title,
+                description:description,
+                profilePhoto:profilePhoto,
+                languages:languages,
+                domain:domain,
+                teams:teams,
+              });
+              console.log("Successfully uploaded");
+            } catch (error) {
+              console.log("Error uploading details:", error);
+            }
+          }
+
+
+
+              
     
 
     return(
@@ -194,12 +281,12 @@ export default function ProjectUploadForm(){
                                     add photo 
                                 </p>
                             </label>
-                            <input type="file" name="profilePic" id="profilePic" accept="image/*" className="sphoto-input"/>
+                            <input type="file" name="profilePic" id="profilePic" accept="image/*" className="sphoto-input" onChange={handleProfilePhoto}/>
                          
                         </div>
                         <div className="sname">
                             
-                                <p>project title:   <input type="text" spellcheck="false" className="sname-input"/></p>
+                                <p>project title:   <input type="text" spellcheck="false" className="sname-input" onChange={(e) => setTitle(e.target.value)}/></p>
 
                             
                         </div>
@@ -210,7 +297,7 @@ export default function ProjectUploadForm(){
                     <div className="pform">
                             <p>
                                 Select project domain:
-                                <select name="category" id="cars" onchange="adjustSelectSize()" className="pform-select">  
+                                <select name="category" id="cars" onChange={(e) => setDomain(e.target.value)} className="pform-select">  
                                     <option value="Web development">Web development</option>
                                     <option value="App development">App development</option>
                                     <option value="Data Science and Analytics">Data Science and Analytics</option>
@@ -227,13 +314,13 @@ export default function ProjectUploadForm(){
                             <div className="dscrpt">
                                 <p className="description">
                                     <label htmlFor="description">Description:</label>
-                                    <textarea name="description" id="description" rows="5" required="" className="dscrpt-textarea"></textarea>
+                                    <textarea name="description" id="description" rows="5" required="" className="dscrpt-textarea" onChange={(e) => setDescription(e.target.value)} ></textarea>
                                 </p>
                                 <div className="file-upload">
                                     <label htmlFor="file-upload" className="file-upload-label"  >
                                         Upload files
                                     </label>
-                                    <input type="file" id="file-upload" className="file-upload-input" accept=".zip" onChange={handlechange} />
+                                    <input type="file" id="file-upload" className="file-upload-input" accept=".zip" onChange={handlechange} required />
                                     
                                     <p>
                                         Drag files here
@@ -276,11 +363,11 @@ export default function ProjectUploadForm(){
                                     <label htmlFor="video-upload" className="media-upload-label" >
                                         Upload video
                                     </label>
-                                    <input type="file" id="video-upload" className="media-upload-input" accept="video/*" onChange={handleVideoChange} />
+                                    <input type="file" id="video-upload" className="media-upload-input" accept="video/*" onChange={handleVideoChange} required/>
                                     <label htmlFor="photo-upload" className="media-upload-label" >
                                      Upload photos
                                     </label>
-                                    <input type="file" id="photo-upload" className="media-upload-input" accept="image/*" onChange={handlePhotoChange} />
+                                    <input type="file" id="photo-upload" className="media-upload-input" accept="image/*" onChange={handlePhotoChange} required/>
                                 </p>
                             </div>
                             <div className="team-mem">
@@ -304,14 +391,17 @@ export default function ProjectUploadForm(){
                                             </div>
                                         ))}
                                     
-                                         
+                                    
                                     </div>
+                                    <form onSubmit={handleSubmit}>
+                                    <button type="submit" className="submit-button">Submit</button>
+                                    </form>
                                 </div>
                             </div>
 
                            
                             
-
+                           
                             
                             
                 </div>
@@ -321,5 +411,5 @@ export default function ProjectUploadForm(){
         </div>
     </div>
     );
+                                        }                                      
 
-}
