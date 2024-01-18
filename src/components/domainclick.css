@@ -1,3 +1,23 @@
+.sgtotal{
+    margin: 50px 5%;
+}
+.sbackbutton{
+    display: flex;
+    width: 100%;
+    color: aliceblue;
+    margin: 10px;
+    
+}
+.sbackbutton p{
+    border: 0.1px solid #2a2f3e;
+    border-radius:10px ;
+    padding: 10px;
+}
+
+.sbackbutton p:hover{
+    border-color: #4e5569;
+}
+
 .project-card{
     height: 200px;
     width: 100%;

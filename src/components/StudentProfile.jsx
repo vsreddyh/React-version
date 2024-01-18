@@ -2,286 +2,53 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-
-export default function StudentProfile() {
+export default function StudentProfile({ studentproj, studentdetail }) {
     return (
-        <div class="mprofile">
-            <div class="mpcontainer">
-                <div class="mpprofile">
-                    <div class="mpbg">
-
-                    </div>
-                    <div class="mpphoto">
-
-                    </div>
-                    <div class="mpdetails">
-                        <div class="mpdet">
-                            <p class="mpname">Sugandham Hrishita</p>
-                            <p>@sugandhamhridhi</p>
-                            <p>Computer Science Engineering</p>
-                            <p>Keshav Memorial institute of technology</p>
-
+        <div className="mprofile">
+            <div className="mpcontainer">
+                <div className="mpprofile">
+                    <div className="mpbg"></div>
+                    <div className="mpphoto"></div>
+                    <div className="mpdetails">
+                        <div className="mpdet">
+                            <p className="mpname">{studentdetail.student_name}</p>
+                            <p>{studentdetail.email_address}</p>
+                            <p>{studentdetail.field_name}</p>
+                            <p>{studentdetail.college_name}</p>
                         </div>
                     </div>
                 </div>
-
             </div>
-            <div class="mpprojects">
-                <div class="mpheading">
+            <div className="mpprojects">
+                <div className="mpheading">
                     <h5>MY PROJECTS</h5>
                 </div>
-
-                <div class="project-card">
-                    <div class="cardpart">
-                        <div class="profile-section">
-                            <img class="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div class="pnamedis">
-                            <div class="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div class="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae
-                                    quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab enim
-                                    eius suscipit, impedit
-                                    consectetur ullam
-                                    .Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo
-                                    velit!
-                                </p>
+                <div>
+                    {studentproj && studentproj.map((project, index) => (
+                        <div key={index} className="grid-item">
+                            <div>
+                                <div className="project-card">
+                                    <div className="cardpart">
+                                        <div className="profile-section">
+                                            <img className="profile-picture" src={`/en/image/${project.photo}`} alt="Profile Picture" />
+                                            <br />
+                                            <span><FontAwesomeIcon icon={faHeart} /></span>
+                                        </div>
+                                        <div className="pnamedis">
+                                            <div className="pname">
+                                                <p>{project.Project_Name}</p> 
+                                            </div>
+                                            <div className="pdiscript">
+                                                <p>{project.Description}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-
+                    ))}
                 </div>
-                <div class="project-card">
-                    <div class="cardpart">
-                        <div class="profile-section">
-                            <img class="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div class="pnamedis">
-                            <div class="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div class="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae
-                                    quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab enim
-                                    eius suscipit, impedit
-                                    consectetur ullam
-                                    .Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo
-                                    velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="project-card">
-                    <div class="cardpart">
-                        <div class="profile-section">
-                            <img class="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div class="pnamedis">
-                            <div class="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div class="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae
-                                    quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab enim
-                                    eius suscipit, impedit
-                                    consectetur ullam
-                                    .Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo
-                                    velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="project-card">
-                    <div class="cardpart">
-                        <div class="profile-section">
-                            <img class="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div class="pnamedis">
-                            <div class="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div class="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae
-                                    quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab enim
-                                    eius suscipit, impedit
-                                    consectetur ullam
-                                    .Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo
-                                    velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="project-card">
-                    <div class="cardpart">
-                        <div class="profile-section">
-                            <img class="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div class="pnamedis">
-                            <div class="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div class="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae
-                                    quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab enim
-                                    eius suscipit, impedit
-                                    consectetur ullam
-                                    .Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo
-                                    velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="project-card">
-                    <div class="cardpart">
-                        <div class="profile-section">
-                            <img class="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div class="pnamedis">
-                            <div class="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div class="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae
-                                    quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab enim
-                                    eius suscipit, impedit
-                                    consectetur ullam
-                                    .Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo
-                                    velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="project-card">
-                    <div class="cardpart">
-                        <div class="profile-section">
-                            <img class="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div class="pnamedis">
-                            <div class="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div class="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae
-                                    quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab enim
-                                    eius suscipit, impedit
-                                    consectetur ullam
-                                    .Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo
-                                    velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="project-card">
-                    <div class="cardpart">
-                        <div class="profile-section">
-                            <img class="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div class="pnamedis">
-                            <div class="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div class="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae
-                                    quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab enim
-                                    eius suscipit, impedit
-                                    consectetur ullam
-                                    .Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo
-                                    velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
             </div>
-
         </div>
-    )
+    );
 }

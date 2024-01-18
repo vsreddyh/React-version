@@ -14,7 +14,9 @@ export default function HomeComponents() {
 
     const [isSiderVisible, setIsSiderVisible] = useState(true);
     const [bodyGridColumn, setBodyGridColumn] = useState('span 1');
-
+    const [studentproj,setStudentproj]=useState([]);
+    const [studentdetail,setStudentdetail]=useState("");
+    
     const toggleDashboard = () => {
         setIsSiderVisible(prevState => !prevState);
         setBodyGridColumn(prevState => prevState === 'span 1' ? 'span 2' : 'span 1');
@@ -25,6 +27,7 @@ export default function HomeComponents() {
     const [term,setTerm]=useState("");
     const [searchterm,setSearchterm]=useState("");
     const [sugesstions,setSugesstions]=useState([]);
+    
     const handleOptionClick=(index)=>
     {
         setDisplay(index);
@@ -52,6 +55,34 @@ export default function HomeComponents() {
 }
     }
     
+    
+    
+    const handlestudentdetail=async ()=>
+    {
+        
+        try{
+            const response=await axios.get("/en/getstudentdetails");
+            const data=response.data;
+            setStudentdetail(data);
+        }
+        catch(error)
+        {
+            console.error("error occured:",error);
+        }
+    }
+    const handlegetproject=async ()=>
+    {
+        try{
+            const response=await axios.get("/en/getstudentproject");
+            const data=response.data;
+            setStudentproj(data);
+
+        }
+        catch(error)
+        {
+            console.error("error occured:",error);
+        }
+    }
     
     
 
@@ -100,7 +131,7 @@ export default function HomeComponents() {
                         Home
                     </p>
                 </div>
-                <div id="option2" className="option" onClick={() => handleOptionClick(1)}>
+                <div id="option2" className="option" onClick={() => {handleOptionClick(1) ; handlestudentdetail();handlegetproject();}} >
                     <p>
                         My project
                     </p>
@@ -115,7 +146,7 @@ export default function HomeComponents() {
                         comments
                     </p>
                 </div>
-                <div id="option5" className="option" onClick={() => handleOptionClick(4)}>
+                <div id="option5" className="option" onClick={() => handleOptionClick(5)}>
                     <p>
                         about us
                     </p>
@@ -125,9 +156,9 @@ export default function HomeComponents() {
 
             <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
                 {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick}/>}
-                {display === 1 && <StudentProfile />}
+                {display === 1 && <StudentProfile  studentproj={studentproj} studentdetail={studentdetail}/>}
                 {display === 2 && <ProjectDisplay />}
-                {display===4 && <DomainClick sugesstions={sugesstions}/>}
+                {display===4 && <DomainClick sugesstions={sugesstions} handleOptionClick={handleOptionClick}/>}
 
             </div>
         </div>

@@ -148,6 +148,7 @@
 .bodyy1{
     background-color: #0E1525;
     width: calc(100%-100px);
+    min-height: 100%;
     height: auto;
     padding: 30px;
     padding-top: 0px;

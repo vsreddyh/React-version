@@ -24,6 +24,7 @@ router.get('/image/:id',image)
 router.post('/hrsignup', hrsignup);
 router.post('/newhr', newhr);
 router.post('/getstudendata',getstudata)
+router.post('/getprojectdata',getprojectdata)
 router.post('/fetchprojdata',fetchprojdata)
 router.post('/company-details',companyDetails)
 router.get('/company-details',getCompanyDetails);

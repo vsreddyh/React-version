@@ -92,7 +92,6 @@ export default function Filters({ sendDataToParent }) {
     //         ...formData,
     //         [name]: value
     //     });
-    console.log(formData)
     return (
         <div className="filters">
             <div className="filter1">
