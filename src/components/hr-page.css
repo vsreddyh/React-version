@@ -27,6 +27,7 @@
     margin: 0px;
     border: 0px;
     height: 100vh;
+    box-sizing: border-box;
 }
 
 .header1{
@@ -147,8 +148,7 @@
 
 .bodyy1{
     background-color: #0E1525;
-    width: calc(100%-100px);
-    min-height: 100%;
+    min-height: calc(100%-96px);
     height: auto;
     padding: 30px;
     padding-top: 0px;
