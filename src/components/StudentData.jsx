@@ -3,8 +3,10 @@ import axios from "axios";
 import "./sp.css";
 import { Link } from "react-router-dom";
 import { GoLink } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
 export default function StudentData({ dis, ...props }) {
+    const navigate = useNavigate()
     const projid = props.studata;
     const [bookmark, setbookmark] = useState(0)
     const [showCopyMessage, setShowCopyMessage] = useState(false);
@@ -159,7 +161,7 @@ export default function StudentData({ dis, ...props }) {
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div className="pname1" onClick={() => handleclick(project._id)}>
+                                            <div className="pname1" onClick={()=>navigate(`/hrmain/${project._id}`)}>
                                                 <p>
                                                     {project.Project_Name}
                                                 </p>

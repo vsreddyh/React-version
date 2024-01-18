@@ -19,9 +19,10 @@ const collegeSchema = new mongoose.Schema({
     college_name: String,
     email_address: String,
     password:String,
-  });
+  },{ versionKey: false });
 const hrSchema = new mongoose.Schema({
     hr_name : String,
+    photo : ObjectId,
     email_address : String,
     password : String,
     company_name:String,
@@ -47,19 +48,11 @@ const projectschema = new mongoose.Schema({
     Comments:Array,
     Students:Array,
     photos:Array
-});
-projectschema.index({
-    Project_Name: 'text',
-    College: 'text',
-    Description: 'text',
-    Domain: 'text',
-    Comments: 'text',
-    State:'text'
-});
+},{ versionKey: false });
 const skillSchema=new mongoose.Schema({
     skill_name:String,
 
-})
+},{ versionKey: false })
 
 const Course = mongoose.model('student', loginSchema);
 const recruiter = mongoose.model('head_recruiter', hrSchema);

@@ -203,6 +203,31 @@ const getprojectdata = async(req,res)=>{
     res.json(projinfo)
 }
 
+const addcomment = async(req,res)=>{
+    const {projid,commentdata} = req.body;
+    mail=req.session.loggedInemail
+    const Daate = new Date()
+    const projId = new mongoose.Types.ObjectId(projid);
+    const projinfo = await projects.findOne({_id:projId});
+    let comments = projinfo.Comments
+    if (req.session.typeofuser===0){
+        const stuinfo = await Course.findOne({email_address:mail})
+        const naame = stuinfo.student_name
+        const photo = stuinfo.photo
+        comments.push({id:projid,photoid:photo,studentname:naame,Date:Daate,comment:commentdata})
+        projinfo.Comments=comments
+        projinfo.save()
+    }
+    else{
+        const stuinfo = await recruiter.findOne({email_address:mail})
+        const naame =  stuinfo.hr_name
+        const photo = stuinfo.photo
+        comments.push({id:projid,photoid:photo,studentname:naame,Date:Daate,comment:commentdata})
+        projinfo.Comments=comments
+        projinfo.save()
+    }
+    res.json("success")
+}
 module.exports = {
     getdata,
     projectlist,
@@ -216,5 +241,6 @@ module.exports = {
     validateurl,
     getDomainProjects,
     getstudentdetails,
-    getstudentproject
+    getstudentproject,
+    addcomment
 };

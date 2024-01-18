@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from "react";
 import "./ProjectPortfolio.css"
+import { useNavigate } from "react-router-dom";
 import { GoLink } from "react-icons/go";
 import axios from "axios";
-import { AddComment } from "@mui/icons-material";
 
 export default function ProjectPortfolio({ dis, ...props }) {
     const projid = props.studata;
@@ -11,7 +11,8 @@ export default function ProjectPortfolio({ dis, ...props }) {
     const [skills,setskills]=useState([])
     const [students,setstudents]=useState([])
     const [showCopyMessage, setShowCopyMessage] = useState(false);
-    const [commentdata,setcommentdata]= useState("")
+    const [commentdata,setcommentdata]= useState('')
+    const navigate = useNavigate();
     const exit = async () => {
         console.log('yo')
         dis()
@@ -26,14 +27,14 @@ export default function ProjectPortfolio({ dis, ...props }) {
             });
     }
     let [projdata, setprojdata] = useState(null)
-    const handleclick = (data) => {
-        console.log(data)//need to link to students
-    }
     const handlecomment = async (event) =>{
         setcommentdata(event.target.value)
     }
     const AddComment = async (event) => {
         event.preventDefault();
+        const response = await axios.post('/en/addcomment',{commentdata,projid})
+        setcommentdata('')
+        fetchData()
     }
     const transformdate = (date)=>{
         const dateObj = new Date(date);
@@ -64,16 +65,15 @@ export default function ProjectPortfolio({ dis, ...props }) {
 
         return `${dayWithSuffix} ${month} ${year}`;
     }
+    const fetchData = async () => {
+        const response = await axios.post('/en/getprojectdata', { data: projid });
+        setprojdata(response.data);
+        setphotolist(response.data.photos)
+        setcomments(response.data.Comments)
+        setskills(response.data.Skills)
+        setstudents(response.data.Students)
+    };
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.post('/en/getprojectdata', { data: projid });
-            setprojdata(response.data);
-            setphotolist(response.data.photos)
-            setcomments(response.data.Comments)
-            setskills(response.data.Skills)
-            setstudents(response.data.Students)
-        };
-
         fetchData();
     }, [projid]);
     console.log(projdata)
@@ -148,7 +148,7 @@ export default function ProjectPortfolio({ dis, ...props }) {
                         <div className="studentsworking">
                             <h3>Students worked:</h3>
                             {students.map((student,index)=>(
-                                    <div class="names" key={index}><p>{student.stuname}</p></div>
+                                    <div class="names" key={index} onClick={()=>navigate(`/hrmain/${student.id}`)}><p>{student.stuname}</p></div>
                             ))}
                         </div>
                         <div class="commentsection">
@@ -157,10 +157,10 @@ export default function ProjectPortfolio({ dis, ...props }) {
                             </div>
                             <form onSubmit={AddComment}>
                             <div class="thereal">
-                                <input type="text" placeholder="Comment" class="commentinput" onChange={handlecomment} required/>
+                                <input type="text" placeholder="Comment" class="commentinput" value={commentdata} onChange={handlecomment} required/>
                             </div>
                             <div className="decide">
-                                {commentdata !== "" && <button type="submit" onClick={handleSubmit}>Submit</button>}
+                                <button type="submit">Submit</button>
                             </div>
                             </form>
                             {(comments.length!==0)&&(
