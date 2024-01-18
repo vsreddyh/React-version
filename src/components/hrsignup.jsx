@@ -34,7 +34,7 @@ export default function HrSignUp(){
         <div className="abc">
             <Header />
             <Sider />
-            <div class="content1" id="bodyy">
+            <div className="content1" id="bodyy">
                 <div id="body-content">
                     <p className="create">
                         Create your account

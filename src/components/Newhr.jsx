@@ -81,7 +81,7 @@ export default function Newhr({ setUserData }){
                         <br />
                         <button type="submit">
                         
-                            Continue <i class="fa-solid fa-arrow-right" style={{color: "#417ce1"}} ></i>
+                            Continue <i className="fa-solid fa-arrow-right" style={{color: "#417ce1"}} ></i>
                         
                         </button>  
                     </form>  

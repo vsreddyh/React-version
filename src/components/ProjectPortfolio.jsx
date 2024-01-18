@@ -85,13 +85,13 @@ export default function ProjectPortfolio({ dis, ...props }) {
 
     
     return (
-        <div class="ourprojectdetails">
-            <div class="opbuttons">
-                <div class="opbtn">
-                    <div class="opback" onClick={() => exit()} style={{ color: "aliceblue" }}>
+        <div className="ourprojectdetails">
+            <div className="opbuttons">
+                <div className="opbtn">
+                    <div className="opback" onClick={() => exit()} style={{ color: "aliceblue" }}>
                         <p><span>&#8592;</span>Go Back</p>
                     </div>
-                    <div class="opshare" onClick={() => share()} style={{ color: "aliceblue" }} >
+                    <div className="opshare" onClick={() => share()} style={{ color: "aliceblue" }} >
                         <p>{showCopyMessage === false ? 'Copy Link ' : 'Link Copied'}<GoLink /></p>
                     </div>
                 </div>
@@ -112,29 +112,29 @@ export default function ProjectPortfolio({ dis, ...props }) {
                             ))
                         )}
                     </div>
-                    {projdata && (<div class="opdetail">
-                        <div class="opprojectname">
-                            <div class="oppic">
+                    {projdata && (<div className="opdetail">
+                        <div className="opprojectname">
+                            <div className="oppic">
                             {projdata&&(<img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage" />)}
                             </div>
-                            <div class="oprealpro">
+                            <div className="oprealpro">
                                 <p>{projdata.Project_Name}</p>
                             </div>
                         </div>
-                        <div class="oppostedby">
+                        <div className="oppostedby">
                             <p>{projdata.College}</p>
                         </div>
-                        <div class="gettingdate">
+                        <div className="gettingdate">
                             <div><p> Posted on {transformdate(new Date(projdata.Date))}<span>{projdata.Likes} Likes</span> </p></div>
                         </div>
-                        <div class="gettingdescription">
+                        <div className="gettingdescription">
                             <p>{projdata.Description}</p>
                         </div>
                         <div className="opfolder">
                             <p>FOLDER<span>&#128193;</span></p>
                             {/* need to add explorer hyper link here */}
                         </div>
-                        <div class="ourdomain">
+                        <div className="ourdomain">
                             <p>DOMAIN:{projdata.Domain}</p>
                         </div>
                         <div className="ourtechnology">
@@ -148,16 +148,16 @@ export default function ProjectPortfolio({ dis, ...props }) {
                         <div className="studentsworking">
                             <h3>Students worked:</h3>
                             {students.map((student,index)=>(
-                                    <div class="names" key={index} onClick={()=>navigate(`/hrmain/${student.id}`)}><p>{student.stuname}</p></div>
+                                    <div className="names" key={index} onClick={()=>navigate(`/hrmain/${student.id}`)}><p>{student.stuname}</p></div>
                             ))}
                         </div>
-                        <div class="commentsection">
-                            <div class="noofcomment">
+                        <div className="commentsection">
+                            <div className="noofcomment">
                                 <p>{comments.length} comments</p>
                             </div>
                             <form onSubmit={AddComment}>
-                            <div class="thereal">
-                                <input type="text" placeholder="Comment" class="commentinput" value={commentdata} onChange={handlecomment} required/>
+                            <div className="thereal">
+                                <input type="text" placeholder="Comment" className="commentinput" value={commentdata} onChange={handlecomment} required/>
                             </div>
                             <div className="decide">
                                 <button type="submit">Submit</button>
@@ -165,19 +165,19 @@ export default function ProjectPortfolio({ dis, ...props }) {
                             </form>
                             {(comments.length!==0)&&(
                                 comments.map((comment,index)=>(
-                                    <div class="personcomments" key={index}>
-                                        <div class="commentdetails">
-                                            <div class="commentpic">
+                                    <div className="personcomments" key={index}>
+                                        <div className="commentdetails">
+                                            <div className="commentpic">
                                                 <img src={`/en/image/${comment.photoid}`} alt="VS" className="slectimage" />
                                             </div>
-                                            <div class="commentname">
+                                            <div className="commentname">
                                                 <p>{comment.studentname}</p>
                                             </div>
-                                            <div class="commentdate">
+                                            <div className="commentdate">
                                                 <p>{transformdate(new Date(comment.Date))}</p>
                                             </div>
                                         </div>
-                                        <div class="realcomment">
+                                        <div className="realcomment">
                                             <p>{comment.comment}</p>
                                         </div>
                                     </div>

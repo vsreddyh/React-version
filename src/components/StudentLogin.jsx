@@ -96,14 +96,14 @@ export default function StudentLogin({setUserData}){
                     </p>
                 </div>
             </div>
-            <div class="content1" id="bodyy">
+            <div className="content1" id="bodyy">
                 <div id="body-content">
-                    <p class="create" >
+                    <p className="create" >
                         Enter your Department name 
                     </p>
                     
                     <form  action="/departments" method="post" onSubmit={submit}>
-                        <input class="collegename" type="text" id="collegeInput" placeholder="department" minlength="3" name="department" value={term} onChange={handleInputChange} required />
+                        <input className="collegename" type="text" id="collegeInput" placeholder="department" minlength="3" name="department" value={term} onChange={handleInputChange} required />
                         <br />
                         
                         
@@ -117,18 +117,18 @@ export default function StudentLogin({setUserData}){
                             
                         </div>
                         <br />
-                        <button type="submit" value="submit" class="submit">Next</button>
+                        <button type="submit" value="submit" className="submit">Next</button>
                     </form>  
                 </div>
             
-                <div class="terms">
+                <div className="terms">
                    <hr />
                        <p>
                          By signing-up in you are accepting
                          <br /> <Link>Terms and conditions</Link>
                        </p>
                 </div>
-                <div class="copyrights">
+                <div className="copyrights">
                     <p>
                         Copyright © {year}
                     </p>
