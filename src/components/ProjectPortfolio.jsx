@@ -11,7 +11,7 @@ export default function ProjectPortfolio({ dis, ...props }) {
     const [skills,setskills]=useState([])
     const [students,setstudents]=useState([])
     const [showCopyMessage, setShowCopyMessage] = useState(false);
-    const [commentdata,setcommentdata]= useState(null)
+    const [commentdata,setcommentdata]= useState("")
     const exit = async () => {
         console.log('yo')
         dis()
@@ -77,6 +77,13 @@ export default function ProjectPortfolio({ dis, ...props }) {
         fetchData();
     }, [projid]);
     console.log(projdata)
+
+
+    function handleSubmit(event) {
+        event.preventDefault()
+    }
+
+    
     return (
         <div class="ourprojectdetails">
             <div class="opbuttons">
@@ -153,7 +160,7 @@ export default function ProjectPortfolio({ dis, ...props }) {
                                 <input type="text" placeholder="Comment" class="commentinput" onChange={handlecomment} required/>
                             </div>
                             <div className="decide">
-                                {formData.comment !== "" && <button type="submit" onClick={handleSubmit}>Submit</button>}
+                                {commentdata !== "" && <button type="submit" onClick={handleSubmit}>Submit</button>}
                             </div>
                             </form>
                             {(comments.length!==0)&&(
