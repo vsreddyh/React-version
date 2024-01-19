@@ -19,6 +19,7 @@ export default function ProjectUploadForm(){
     const[photoname,setPhotoName]=useState('');
     const[videoname,setVideoName]=useState('');
     const[filename,setFileName]=useState('');
+    const[pphotoname,setProfilePhotoName]=useState('');
     const [formData,setFormData]=useState({
         category: 'Any',
         search:'',
@@ -134,6 +135,10 @@ export default function ProjectUploadForm(){
               };
               reader.readAsDataURL(selectedProfilePhoto);
             // Perform further actions with the selected photo here
+
+            let temp=event.target.value;
+              const profilePhotoName=temp.replace("C:\\fakepath\\", "");
+              setProfilePhotoName(profilePhotoName);
         } else {
             alert('No photo selected');
         }
@@ -234,6 +239,25 @@ export default function ProjectUploadForm(){
 
           function saveDetails(event) {
             try {
+                if(videoname.length===0){
+                    alert('video required!');
+                }
+                else if(filename.length===0){
+                    alert('code files requried!');
+                }
+                else if(languages.length===0){
+                    alert('languages required');
+                }
+                else if(domain.length===0){
+                    alert('Domain required');
+                }
+                else if(teams.length===0){
+                    alert('Team members  required');
+                }
+                else if(pphotoname.length===0){
+                    alert('profile photo required');
+                }
+                else{
               const response = axios.post(`/en/uploadDetails`, {
                 videoname: videoname,
                 photoname: photoname,
@@ -247,8 +271,10 @@ export default function ProjectUploadForm(){
                 languages:languages,
                 domain:domain,
                 teams:teams,
-              });
+              })
               console.log("Successfully uploaded");
+            };
+              
             } catch (error) {
               console.log("Error uploading details:", error);
             }
@@ -283,7 +309,7 @@ export default function ProjectUploadForm(){
                                     add photo 
                                 </p>
                             </label>
-                            <input type="file" name="profilePic" id="profilePic" accept="image/*" className="sphoto-input" onChange={handleProfilePhoto} required/>
+                            <input type="file" name="profilePic" id="profilePic" accept="image/*" className="sphoto-input" onChange={handleProfilePhoto}/>
                          
                         </div>
                         <div className="sname">
@@ -322,7 +348,7 @@ export default function ProjectUploadForm(){
                                     <label htmlFor="file-upload" className="file-upload-label"  >
                                         Upload files
                                     </label>
-                                    <input type="file" id="file-upload" className="file-upload-input" accept=".zip" onChange={handlechange} required />
+                                    <input type="file" id="file-upload" className="file-upload-input" accept=".zip" onChange={handlechange}  />
                                     
                                     <p>
                                         Drag files here
@@ -365,7 +391,7 @@ export default function ProjectUploadForm(){
                                     <label htmlFor="video-upload" className="media-upload-label" >
                                         Upload video
                                     </label>
-                                    <input type="file" id="video-upload" className="media-upload-input" accept="video/*" onChange={handleVideoChange} required/>
+                                    <input type="file" id="video-upload" className="media-upload-input" accept="video/*" onChange={handleVideoChange} />
                                     <label htmlFor="photo-upload" className="media-upload-label" >
                                      Upload photos
                                     </label>
