@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const Grid = require('gridfs-stream');
 const natural=require('natural');
 const GridFS = Grid(mongoose.connection, mongoose.mongo);
-const {college,projects,Course,url, recruiter} = require('../settings/env.js');
+const {college,projects,Course,url, recruiter,skills} = require('../settings/env.js');
 
 const app = express();
 app.use(express.static('./public'));
@@ -228,6 +228,32 @@ const addcomment = async(req,res)=>{
     }
     res.json("success")
 }
+const getskillproject = async (req, res) => {
+    const term = req.query.term;
+    const regex = RegExp(term, 'i');
+    const result = await projects.find({Skills:regex});
+    res.json(result);
+};
+
+
+const getrandomproject = async (req, res) => {
+    try {
+     
+      const randomProjects = await projects.aggregate([
+        { $sample: { size: 4 } }
+      ]);
+  
+      
+      res.json(randomProjects);
+    } catch (error) {
+      console.error("Error occurred:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
+  
+  
+  
+
 module.exports = {
     getdata,
     projectlist,
@@ -242,5 +268,7 @@ module.exports = {
     getDomainProjects,
     getstudentdetails,
     getstudentproject,
-    addcomment
+    addcomment,
+    getskillproject,
+    getrandomproject
 };

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export default function StudentProfile({ studentproj, studentdetail }) {
+    
     return (
         <div className="mprofile">
             <div className="mpcontainer">
@@ -11,6 +12,7 @@ export default function StudentProfile({ studentproj, studentdetail }) {
                     <div className="mpphoto"></div>
                     <div className="mpdetails">
                         <div className="mpdet">
+                            
                             <p className="mpname">{studentdetail.student_name}</p>
                             <p>{studentdetail.email_address}</p>
                             <p>{studentdetail.field_name}</p>

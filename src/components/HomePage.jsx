@@ -1,8 +1,24 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-
+import axios from 'axios';
+import { useEffect } from "react";
 export default function HomePage({ handleOptionClick ,handleDomainClick}) {
+    const [randomprj,setRandomprj]=useState([]);
+    useEffect(() => {
+        const getRandomProjects = async () => {
+          try {
+            const response = await axios.get("/en/getrandomprj");
+            const data = response.data;
+            console.log("Random Projects Data:", data);
+            setRandomprj(data);
+          } catch (error) {
+            console.error("Error occurred:", error);
+          }
+        };
+    
+        getRandomProjects();
+      }, []);
 
     return (
         <div className="total">
@@ -64,135 +80,33 @@ export default function HomePage({ handleOptionClick ,handleDomainClick}) {
                     <p> See more</p>
                 </div>
             </div>
-            <div className="maincard">
-                <div className="maincard1">
-                    <div className="details">
-                        <div className="detailphoto">
-
-                        </div>
-                        <div className="detailinformation">
-                            <p>Sanjana <span>liked</span> Bhavana project <span>2 days ago</span></p>
-                        </div>
-                    </div>
-                    <div className="project-card">
-                        <div className="cardpart">
-                            <div className="profile-section">
-                                <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                                <br />
-                                <span><FontAwesomeIcon icon={faHeart} /></span>
-
-                            </div>
-
-                            <div className="pnamedis">
-                                <div className="pname">
-                                    <p>
-                                        Project palace
-                                    </p>
-                                </div>
+            <div className="maincard" >
+                
+                    {randomprj.map((suggestion, index) => (
+                <div key={index} className="grid-item">
+                    <div>
+                        <div className="project-card">
+                            <div className="cardpart">
+                                <img className="profile-picture" src={`/en/image/${suggestion.photo}`} alt="Profile Picture"/>
                                 <div className="pdiscript">
                                     <p>
-                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                        maxime, ipsa cum sit in hic,
-                                        nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae
-                                        quasi corrupti quod. Lorem
-                                        ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab
-                                        enim eius suscipit, impedit
-                                        consectetur ullam
-                                        .Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo
-                                        velit!
+                                        {suggestion.Description}
                                     </p>
                                 </div>
                             </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div className="maincard">
-                <div className="maincard1">
-                    <div className="details">
-                        <div className="detailphoto">
-
-                        </div>
-                        <div className="detailinformation">
-                            <p>Sanjana <span>liked</span> Bhavana project <span>2 days ago</span></p>
-                        </div>
-                    </div>
-                    <div className="project-card">
-                        <div className="cardpart">
-                            <div className="profile-section">
-                                <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                                <br />
-                                <span><FontAwesomeIcon icon={faHeart} /></span></div>
-                            <div className="pnamedis">
-                                <div className="pname">
-                                    <p>
-                                        Project palace
-                                    </p>
-                                </div>
-                                <div className="pdiscript">
-                                    <p>
-                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                        maxime, ipsa cum sit in hic,
-                                        nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae
-                                        quasi corrupti quod. Lorem
-                                        ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab
-                                        enim eius suscipit, impedit
-                                        consectetur ullam
-                                        .Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo
-                                        velit!
-                                    </p>
-                                </div>
+                            <div className="pname" >
+                                <p>
+                                    {suggestion.Project_Name}
+                                </p>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
+            ))}
+             
             </div>
-            <div className="maincard">
-                <div className="maincard1">
-                    <div className="details">
-                        <div className="detailphoto">
-
-                        </div>
-                        <div className="detailinformation">
-                            <p>Sanjana <span>liked</span> Bhavana project <span>2 days ago</span></p>
-                        </div>
-                    </div>
-                    <div className="project-card">
-                        <div className="cardpart">
-                            <div className="profile-section">
-                                <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                                <br />
-                                <span><FontAwesomeIcon icon={faHeart} /></span></div>
-                            <div className="pnamedis">
-                                <div className="pname">
-                                    <p>
-                                        Project palace
-                                    </p>
-                                </div>
-                                <div className="pdiscript">
-                                    <p>
-                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                        maxime, ipsa cum sit in hic,
-                                        nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae
-                                        quasi corrupti quod. Lorem
-                                        ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab
-                                        enim eius suscipit, impedit
-                                        consectetur ullam
-                                        .Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo
-                                        velit!
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+           
+            
         </div>
     )
 }

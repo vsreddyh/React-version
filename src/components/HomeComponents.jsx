@@ -15,7 +15,7 @@ export default function HomeComponents() {
     const [isSiderVisible, setIsSiderVisible] = useState(true);
     const [bodyGridColumn, setBodyGridColumn] = useState('span 1');
     const [studentproj,setStudentproj]=useState([]);
-    const [studentdetail,setStudentdetail]=useState("");
+    const [studentdetail,setStudentdetail]=useState([]);
     
     const toggleDashboard = () => {
         setIsSiderVisible(prevState => !prevState);
@@ -27,6 +27,8 @@ export default function HomeComponents() {
     const [term,setTerm]=useState("");
     const [searchterm,setSearchterm]=useState("");
     const [sugesstions,setSugesstions]=useState([]);
+    const [skillprj,setSkillprj]=useState("");
+    const [randomprj,setRandomprj]=useState([]);
     
     const handleOptionClick=(index)=>
     {
@@ -57,6 +59,7 @@ export default function HomeComponents() {
     
     
     
+    
     const handlestudentdetail=async ()=>
     {
         
@@ -83,6 +86,22 @@ export default function HomeComponents() {
             console.error("error occured:",error);
         }
     }
+    const handleskillprj=async (skillname)=>
+    {
+        setSkillprj(skillname);
+        try{
+            const response=await axios.get(`/en/getskillprj?term=${skillname}`);
+            const data=response.data;
+            setSugesstions(data);
+            setDisplay(4);
+        }
+        catch(error)
+        {
+            console.error("error occured:",error);
+        }
+
+    }
+    
     
     
 
@@ -141,11 +160,7 @@ export default function HomeComponents() {
                         likes
                     </p>
                 </div>
-                <div id="option4" className="option" onClick={() => handleOptionClick(3)}>
-                    <p>
-                        comments
-                    </p>
-                </div>
+                
                 <div id="option5" className="option" onClick={() => handleOptionClick(5)}>
                     <p>
                         about us
@@ -157,7 +172,7 @@ export default function HomeComponents() {
             <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
                 {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick}/>}
                 {display === 1 && <StudentProfile  studentproj={studentproj} studentdetail={studentdetail}/>}
-                {display === 2 && <ProjectDisplay />}
+                {display === 2 && <ProjectDisplay handleskillprj={handleskillprj} handlesearchchange={handlesearchchange}  />}
                 {display===4 && <DomainClick sugesstions={sugesstions} handleOptionClick={handleOptionClick}/>}
 
             </div>
