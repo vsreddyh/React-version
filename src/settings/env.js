@@ -3,7 +3,6 @@ const ObjectId = mongoose.Types.ObjectId;
 url='mongodb+srv://Project:Florencemidhebaramvesam@project.tbx2krn.mongodb.net/projectpalace'
 mongoose.connect(url);
 const loginSchema = new mongoose.Schema({
-    _id:ObjectId,
     student_name : String,
     email_address : String,
     password : String,
