@@ -46,7 +46,8 @@ const projectschema = new mongoose.Schema({
     Video:ObjectId,
     Comments:Array,
     Students:Array,
-    photos:Array
+    photos:Array,
+    File:ObjectId
 },{ versionKey: false });
 const skillSchema=new mongoose.Schema({
     skill_name:String,

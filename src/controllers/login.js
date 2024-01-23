@@ -286,7 +286,6 @@ const signin = async(req,res)=>{
                 }
                 req.session.status=1;
                 res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
-                console.log('signin is',req.session)
             } else {
                 res.json({message:'Wrong Password', user: username })
             }
@@ -616,17 +615,24 @@ const homepage=async (req,res)=>
     const {term}=req.query;
     console.log(term);
 }
-const getSkill=async (req,res)=>
-{
+
+const checksessionexpiry = async(req,res)=>{
+    a=req.session.loggedInemail
+    if(a!==undefined){
+        res.json(1)
+    }
+    else{
+        res.json(0)
+    }
+}
+const getSkill=async (req,res)=>{
     try{
         const term1=req.query.term;
         const escapedSearchString = term1.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         const regex1 =new RegExp(escapedSearchString,'i');
         const Skills=await skills.find({skill_name:regex1}).select('skill_name').limit(5);
         const suggestions2=Skills.map(Skill=>Skill.skill_name);
-       
         res.json(suggestions2);
-    
     }
     catch(err)
     {
@@ -676,5 +682,6 @@ module.exports = {
     getCompanyDetails,
     homepage,
     getSkill,
-    getteam
+    getteam,
+    checksessionexpiry
 };

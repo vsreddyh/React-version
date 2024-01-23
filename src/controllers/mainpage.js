@@ -25,11 +25,16 @@ conn.once('open', () => {
 
 const getdata = async(req,res)=>{
     try{
-        const term=req.query.term;
-        const regex=new RegExp(term,"i");
-        const colleges=await college.find({college_name:regex}).select("college_name").limit(10);
-        const sugesstions=colleges.map(college=>college.college_name);
-        res.json(sugesstions);
+        if(req.query.term!==""){
+            const term=req.query.term;
+            const regex=new RegExp(term,"i");
+            const colleges=await college.find({college_name:regex}).select("college_name").limit(10);
+            const sugesstions=colleges.map(college=>college.college_name);
+            res.json(sugesstions);
+        }
+        else{
+            res.json([])
+        }
     }
     catch(error){
         console.log("error",error);

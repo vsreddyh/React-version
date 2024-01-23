@@ -814,7 +814,7 @@
     }
 }
 @media print {
-    .header ,.filters{
+    .header1 ,.filters{
         display: none !important;
     }
 }
