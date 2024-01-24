@@ -34,7 +34,6 @@ const companySchema=new mongoose.Schema({
     company_name:String,
 },{ versionKey: false });
 const projectschema = new mongoose.Schema({
-    _id:ObjectId,
     Domain:String,
     Skills:Array,
     College:String,

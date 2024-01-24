@@ -175,7 +175,6 @@ export default function ProjectUploadForm(){
                 const photoDataUrl = reader.result.split(',')[1];
                 // Update the state with the data URL of the photo
                 setPhotos(prevPhotos => [...prevPhotos, photoDataUrl]);
-                console.log(photos.length);
             };
             reader.readAsDataURL(selectedPhoto);
         }
@@ -239,6 +238,7 @@ export default function ProjectUploadForm(){
 
 
           function saveDetails(event) {
+            console.log(photos.length);
             try {
                 if(videoname.length===0){
                     alert('video required!');

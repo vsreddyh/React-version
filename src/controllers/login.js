@@ -576,7 +576,6 @@ const getCompanyDetails = async(req,res)=>{
     }
 
 }
-//save companydetails
 const companyDetails = async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.college;
