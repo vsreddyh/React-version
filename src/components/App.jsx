@@ -26,7 +26,6 @@ export default function App() {
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
-        // Check user session when the component mounts
         checkSession();
     }, []);
     const checkSession = async () => {
@@ -49,10 +48,10 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/hrmain/:projid" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN /> : <Category/>}/>
-                <Route path="/hrmain" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN /> : <Navigate to="/" />}/>
-                <Route path="/clgmain" element={(userData && userData[1]===1 && userData[2]===1) ? <ClgMainPage /> : <Navigate to="/" />}/>
-                <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents/> : <Navigate to="/" />}/>
+                <Route path="/hrmain/:projid" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN checkSession={checkSession} /> : <Category/>}/>
+                <Route path="/hrmain" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN checkSession={checkSession}/> : <Navigate to="/" />}/>
+                <Route path="/clgmain" element={(userData && userData[1]===1 && userData[2]===1) ? <ClgMainPage checkSession={checkSession}/> : <Navigate to="/" />}/>
+                <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/signup/:errorMessage" element={userData ? <Navigate to="/" /> : <SignUp/>} />
                 <Route path="/signup" element={userData ? <Navigate to="/" /> : <SignUp/>} />
                 <Route path="/Check-email" element={userData ? <Navigate to="/" />: <CheckEmail/>}/>

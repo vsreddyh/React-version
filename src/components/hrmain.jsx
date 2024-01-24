@@ -10,7 +10,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
 
-function HRMAIN(){
+function HRMAIN({checkSession}){
     const navigate = useNavigate();
     const [display, setDisplay]= useState(2)
     const [receivedData, setReceivedData] = useState({
@@ -100,6 +100,28 @@ function HRMAIN(){
             setSendDataToStudent(null);
         }
     }, [projid]);
+    useEffect(() => {
+        const intervalId = setInterval(async () => {
+          try {
+            const response = await axios.get("/checksessionexpiry");
+            console.log(response.data)
+            if (response.data === 0) {
+                try{
+                    clearInterval(intervalId);
+                    alert('Session Expired. Please Login again')
+                    await checkSession()
+                }
+                catch(error){
+                    console.log(error)
+                }
+            }
+          } catch (error) {
+            console.error('Error checking session expiry:', error);
+          }
+        }, 10000);
+    
+        return () => clearInterval(intervalId);
+      }, [checkSession]);
     return(
         <div className="body1">
         <Header takedata={CategoryData}/>

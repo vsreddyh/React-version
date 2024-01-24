@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { faSearch, faUser, faUserPlus, faBars, faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +9,7 @@ import ProjectDisplay from "./ProjectDisplay.jsx";
 import { Input } from "@mui/material";
 import DomainClick from "./DomainClick.jsx";
 import axios from 'axios';
-export default function HomeComponents() {
+export default function HomeComponents({checkSession}) {
 
 
     const [isSiderVisible, setIsSiderVisible] = useState(true);
@@ -101,7 +101,28 @@ export default function HomeComponents() {
         }
 
     }
+    useEffect(() => {
+        const intervalId = setInterval(async () => {
+          try {
+            const response = await axios.get("/checksessionexpiry");
+            console.log(response.data)
+            if (response.data === 0) {
+                try{
+                    clearInterval(intervalId);
+                    alert('Session Expired. Please Login again')
+                    await checkSession()
+                }
+                catch(error){
+                    console.log(error)
+                }
+            }
+          } catch (error) {
+            console.error('Error checking session expiry:', error);
+          }
+        }, 10000);
     
+        return () => clearInterval(intervalId);
+      }, [checkSession]);
     
     
 

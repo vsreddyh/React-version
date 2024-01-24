@@ -12,8 +12,6 @@ export default function Category(){
     });
     const handle = async(event)=>{
         event.preventDefault();
-        console.log("form data is");
-        console.log(formData);
         try{
             if(formData.year==='Student'){
                 navigate('/signup');

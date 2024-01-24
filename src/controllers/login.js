@@ -614,16 +614,6 @@ const homepage=async (req,res)=>
     const {term}=req.query;
     console.log(term);
 }
-
-const checksessionexpiry = async(req,res)=>{
-    a=req.session.loggedInemail
-    if(a!==undefined){
-        res.json(1)
-    }
-    else{
-        res.json(0)
-    }
-}
 const getSkill=async (req,res)=>{
     try{
         const term1=req.query.term;
@@ -650,9 +640,9 @@ const getteam = async (req, res) => {
             college_name: req.session.loggedInCollege,
             student_name: regex1
         }).select('student_name').limit(3);
-
+        console.log(teams)
         const suggestions3 = teams.map(team => team.student_name);
-        
+        console.log(suggestions3)
         res.json(suggestions3);
     } catch (err) {
         console.error('Error retrieving colleges:', err);
@@ -682,5 +672,4 @@ module.exports = {
     homepage,
     getSkill,
     getteam,
-    checksessionexpiry
 };
