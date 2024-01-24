@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faSearch } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useEffect } from "react";
+import TagSearch from "./TagSearch";
 export default function ProjectDisplay({handleskillprj }) {
     const [searchterm,setSearchterm]=useState("");
     const [randomprj,setRandomprj]=useState([]);
@@ -63,7 +64,8 @@ export default function ProjectDisplay({handleskillprj }) {
                 </div>
                 <div className="searchbarset1">
                     <div className="searchbar1">
-                        <input type="search" className="searchs1" placeholder="Search for projects" onChange={handlesearchchange} />
+                        {/* <input type="search" className="searchs1" placeholder="Search for projects" onChange={handlesearchchange} /> */}
+                        <TagSearch />
                         <div className="search-icon1" onClick={()=>{handleskillprj(searchterm)}}>
                             <FontAwesomeIcon className="search-icon1-i" icon={faSearch} style={{ color: "white" }} />
                         </div>
