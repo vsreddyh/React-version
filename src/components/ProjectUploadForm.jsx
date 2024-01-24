@@ -101,6 +101,7 @@ export default function ProjectUploadForm(){
     };
 
     const handleTeamKeyDown = (sugesstion) => {
+        console.log(sugesstion)
             addTeamMember(sugesstion);
             setTeamInputValue("");
         setSugesstions3([])
@@ -407,7 +408,7 @@ export default function ProjectUploadForm(){
                                     <div id="tagGroupmem">
                                         {teams.map((teamMember, index) => (
                                             <div key={index} className="team-member-tag">
-                                                <span>{teamMember}</span>
+                                                <span>{teamMember.student_name}</span>
                                                 <button onClick={() => removeTeamMember(index)}>X</button>
                                             </div>
                                         ))}
@@ -416,7 +417,7 @@ export default function ProjectUploadForm(){
                                     <div id="suggestions">
                                         {sugesstions3.map((sugesstion,index)=>(
                                             <div key={index} className="team_member" onClick={() => handleTeamKeyDown(sugesstion)}>
-                                                <p>{sugesstion}</p>
+                                                <p>{sugesstion.student_name}</p>
                                             </div>
                                         ))}
                                     

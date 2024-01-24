@@ -640,10 +640,7 @@ const getteam = async (req, res) => {
             college_name: req.session.loggedInCollege,
             student_name: regex1
         }).select('student_name').limit(3);
-        console.log(teams)
-        const suggestions3 = teams.map(team => team.student_name);
-        console.log(suggestions3)
-        res.json(suggestions3);
+        res.json(teams);
     } catch (err) {
         console.error('Error retrieving colleges:', err);
         res.status(500).json({ error: 'Error in retrieving colleges' });
