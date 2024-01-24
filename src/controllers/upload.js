@@ -31,7 +31,7 @@ const details = async (req, res) => {
       throw new Error('MongoDB connection not established.');
     }
 
-    const { file,filename,video,videoname,photo,photoname,title,description,languages,domain,profilePhoto,teams } = req.body;
+    const { file,filename,video,videoname,photos,photoname,title,description,languages,domain,profilePhoto,teams } = req.body;
     console.log(domain);
     console.log(title);
     console.log(filename);
@@ -69,21 +69,27 @@ if(videoname.length!=0){
   });
 }
 
-if(photoname.length!=0){
-  const buffer3 = Buffer.from(photo, 'base64');
+if (photos && photos.length > 0) {
+  console.log("i am here");
+  const photoIds = [];
+  console.log(photos.length);
 
-const bucket3 = new GridFSBucket(db);
-const uploadStream3 = bucket3.openUploadStream(photoname);
-const photoId = uploadStream3.id;
+  for (let i = 0; i < photos.length; i++) {
+    const buffer = Buffer.from(photos[i], 'base64');
 
-uploadStream3.end(buffer3, (error) => {
-  if (error) {
-    console.error('Error uploading file:', error);
-    res.status(500).send('Error uploading file');
-  } else {
-    console.log('File uploaded successfully, stored under photo id:',photoId);
+    const bucket = new GridFSBucket(db);
+    const uploadStream = bucket.openUploadStream(`photo_${i}`);
+    const photoId = uploadStream.id;
+
+    uploadStream.end(buffer, (error) => {
+      if (error) {
+        console.error('Error uploading photo:', error);
+      } else {
+        console.log(`Photo ${i + 1} uploaded successfully, stored under photo id:`, photoId);
+        photoIds.push(photoId);
+      }
+    });
   }
-});
 }
 
 
