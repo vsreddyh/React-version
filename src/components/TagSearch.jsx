@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TagSearch = ({ tagSearchContainerId, searchInputId }) => {
+const TagSearch = ({ tagSearchContainerId, searchInputId , handlesearchchange,}) => {
   const [tags, setTags] = useState([]);
 
   const handleKeyDown = (event) => {
@@ -25,6 +25,7 @@ const TagSearch = ({ tagSearchContainerId, searchInputId }) => {
         id={searchInputId}
         onKeyDown={handleKeyDown}
         placeholder="Add tags..."
+        onChange={ handlesearchchange}
       >
         <div id={tagSearchContainerId}>
         {tags.map((tag, index) => (

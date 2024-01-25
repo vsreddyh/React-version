@@ -1,4 +1,4 @@
-.ourprojectdetails{
+.ourprojectdetails1{
     -webkit-box-align: stretch;
     align-items: stretch;
     display: flex;
@@ -10,13 +10,13 @@
     /* border: 2px solid white; */
 }
 
-.opbuttons{
+.opbuttons1{
     height: 55px;
     display: block;
     color: aliceblue;
 }
 
-.opbtn{
+.opbtn1{
     
     display: flex;
     flex-direction: row;
@@ -25,19 +25,19 @@
     align-items: center;
 }
 
-.opbuttons p{
+.opbuttons1 p{
     border: 0.1px solid #2a2f3e;
     border-radius:10px ;
     padding: 10px;
 }
 
-.opbuttons p:hover{
+.opbuttons1 p:hover{
     border-color: #4e5569;
 }
 
 @media  screen and (min-width: 1024px) {
-    .opprojects{
-        height: calc(100vh - 180px);
+    .opprojects1{
+        height: calc(100vh - 130px);
         flex-direction: row;
 
     }
@@ -47,7 +47,7 @@
 
     
 
-.opprojects{
+.opprojects1{
     align-items: stretch;
     box-sizing: border-box;
     display: flex;
@@ -61,7 +61,7 @@
     /* border: 2px solid white; */
 }
 
-.opdiv{
+.opdiv1{
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -72,7 +72,7 @@
     gap: 10px;
 }
 @media  screen and (min-width: 1024px) {
-    .opimvid{
+    .opimvid1{
         width: 800px;
 
     }
@@ -88,20 +88,20 @@
     
 } */
 @media screen  and (max-width: 1024px){
-    .opprojects{
+    .opprojects1{
         flex-direction: column;
         height: auto;
     }
-    .opdiv{
+    .opdiv1{
         flex-direction: column;
         overflow: auto;
     }
-    .opimvid{
+    .opimvid1{
         width: 100%;
     }
 
 }
-.opimvid{
+.opimvid1{
     align-items: stretch;
     box-sizing: border-box;
     flex-basis: auto;
@@ -113,22 +113,22 @@
     margin-right: 5px;
 }
 
-.opimvid::-webkit-scrollbar {
+.opimvid1::-webkit-scrollbar {
     width: 12px;
   }
   
-.opimvid::-webkit-scrollbar-thumb {
+.opimvid1::-webkit-scrollbar-thumb {
     background-color: rgb(15, 83, 142);
     border-radius: 6px;
   }
   
-.opimvid::-webkit-scrollbar-track {
+.opimvid1::-webkit-scrollbar-track {
     background-color: #1c2333;
     border-radius: 8px;
 }
 
 @media  screen and (min-width: 1024px) {
-    .opdetail{
+    .opdetail1{
         flex-grow: 1;
 
     }
@@ -136,7 +136,7 @@
     
 }
 @media  screen and (min-width: 480px) {
-    .opdetail{
+    .opdetail1{
         display: flex;
 
     }
@@ -144,7 +144,7 @@
     
 }
 
-.opdetail{
+.opdetail1{
     align-items: stretch;
     box-sizing: border-box;
     flex: 1;
@@ -156,21 +156,21 @@
     /* word-wrap: break-word; */
 
 }
-.opdetail::-webkit-scrollbar {
+.opdetail1::-webkit-scrollbar {
     width: 12px;
   }
   
-.opdetail::-webkit-scrollbar-thumb {
+.opdetail1::-webkit-scrollbar-thumb {
     background-color: rgb(15, 83, 142);
     border-radius: 6px;
   }
   
-.opdetail::-webkit-scrollbar-track {
+.opdetail1::-webkit-scrollbar-track {
     background-color: #1c2333;
     border-radius: 8px;
 }
 
-.opprojectname{
+.opprojectname1{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -179,24 +179,24 @@
     align-items: center;
     /* width: 100%; */
 }
-.oppic{
+.oppic1{
     height: 60px;
     width: 60px;
     border: 2px solid white;
     border-radius: 50%;
 
-}.oprealpro{
+}.oprealpro1{
     margin-left: 10px;
     font-size: 29px;
     color: #3f82c5;
 }
 
-.oppostedby{
+.oppostedby1{
     margin: 13px;
     color: #f8f8f8;
     font-size: 23px;
 }
-.gettingdate{
+.gettingdate1{
     font-size :20px;
     color: #d5d2d2;
     margin: 13px;
@@ -204,14 +204,22 @@
     box-sizing: border-box;
 }
 
-
+.oplikes{
+    margin-left: 25px;
+    font-size: 35px;
+}
 
 .opnlikes{
     font-size: 18px;
     color: #9c9696;
-    margin-left: 20px;
+    margin-left: 5px;
 }
-.gettingdescription{
+.opnlikes1{
+    font-size: 18px;
+    color: #9c9696;
+    margin-left: 5px;
+}
+.gettingdescription1{
     font-size: 15px;
     color: #f8f8f8;
     margin: 13px;
@@ -221,7 +229,7 @@
     box-sizing: border-box;
 }
 
-.opfolder{
+.opfolder1{
     display: flex;
     margin: 13px;
     color: #f8f8f8;
@@ -230,33 +238,33 @@
     align-items: center;
 }
 
-.opfolder p{
+.opfolder1 p{
     border: 0.5px solid #3C445C;
     border-radius: 10px;
     padding: 10px ;
 }
 
-.opfolder p span{
+.opfolder1 p span{
     size: 20px;
 }
-.ourdomain{
+.ourdomain1{
     border-top: 2px solid #3C445C;
     color: #f8f8f8;
     margin: 13px;
     font-size: 16px;
 }
 
-.ourdomain p{
+.ourdomain1 p{
     margin-top: 10px;
 }
 
-.ourtechnology{
+.ourtechnology1{
     color: #f8f8f8;
     margin: 13px;
     font-size: 16px;
 }
 
-.studentsworking{
+.studentsworking1{
     color: #f8f8f8;
     margin: 13px;
     padding-bottom: 10px;
@@ -264,7 +272,7 @@
     box-sizing: border-box;
 }
 
-.names{
+.names1{
     margin: 5px;
     padding: 10px 20px;
     border: 0.3px solid #3C445C;
@@ -272,33 +280,33 @@
     height: auto;
 }
 
-.names:hover{
+.names1:hover{
     border-color: #4e5569;
 }
 
-.names:active{
+.names1:active{
     border-color: #0053A6;
 }
 
-.commentsection{
+.commentsection1{
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
 }
-.noofcomment{
+.noofcomment1{
     color: #cfcfcf;
     margin: 6px 13px;
     font-size: 18px;
 }
 
-.thereal{
+.thereal1{
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 13px;
     
 }
-.thereal input[type="text"] {
+.thereal1 input[type="text"] {
     /* Basic styling */
     padding: 10px;
     /* width: 100%; */
@@ -324,13 +332,13 @@
   }
   
 
-.commentinput{
+.commentinput1{
     height: 40px;
     width: 100%;
 
 }
 
-.decide{
+.decide1{
     display: flex;
     flex-direction: row;
     margin: 13px;
@@ -339,7 +347,7 @@
     color: #f8f8f8;
 
 }
-.decide button{
+.decide1 button{
     background-color: rgb(4, 67, 112);
     height: 40px;
     width: 100px;
@@ -347,7 +355,7 @@
     color: #f8f8f8;
     font-size: 15px;
 }
-.personcomments{
+.personcomments1{
     -webkit-box-align: stretch;
     align-items: stretch;
     box-sizing: border-box;
@@ -361,13 +369,13 @@
     overflow-wrap: break-word; 
 }
 
-.commentdetails{
+.commentdetails1{
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 10px;
 }
-.commentpic{
+.commentpic1{
     height: 30px;
     width: 30px;
     border: 1px solid #3C445C;
@@ -375,24 +383,24 @@
     margin: 2px;
 }
 
-.slectimage{
+.slectimage1{
     height: 30px;
     width: 30px;
     border-radius: 50%;
 }
 
-.commentname{
+.commentname1{
     font-size: 20px;
     color: #cfcfcf;
     margin: 4px 6px;
 }
 
-.commentdate{
+.commentdate1{
     font-size: 10px;
     color: #cfcfcf;
     margin-left: 5px;
 }
-.realcomment{
+.realcomment1{
     color: #cfcfcf;
     font-size: 15px;
     margin: 13px 13px 52px 13px;

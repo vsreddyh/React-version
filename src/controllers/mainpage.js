@@ -262,6 +262,45 @@ const getrandomproject = async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
   };
+  const addlike = async(req,res)=>{
+    const mail = req.session.loggedInemail;
+    const id = req.body.data;
+    const oid = new mongoose.Types.ObjectId(id);
+    const nooflikes=await projects.findOne({_id:oid});
+    nooflikes.Likes=nooflikes.Likes+1;
+    await nooflikes.save();
+    const user = await Course.findOne({email_address:mail})
+    const list = user.likes
+    list.push(oid);
+    user.likes=list;
+    user.save()
+    res.json("success")
+}
+const removelike = async(req,res)=>{
+    const mail = req.session.loggedInemail;
+    const id = req.body.data;
+    const oid = new mongoose.Types.ObjectId(id);
+    const nooflikes=await projects.findOne({_id:oid});
+
+    nooflikes.Likes=nooflikes.Likes-1;
+   
+    await nooflikes.save();
+    const user = await Course.findOne({email_address:mail})
+    const list = user.likes
+    var index = list.indexOf(oid);
+    list.splice(index, 1);
+    user.likes=list;
+    user.save()
+    res.json("success")
+}
+const checklike= async(req,res)=>{
+    const mail = req.session.loggedInemail;
+    const id = req.body.data;
+    const oid = new mongoose.Types.ObjectId(id);
+    const user = await Course.findOne({email_address:mail})
+    const list = user.likes
+    res.json(Number(list.includes(oid)))
+}
   
   
   
@@ -282,5 +321,8 @@ module.exports = {
     getstudentproject,
     addcomment,
     getskillproject,
-    getrandomproject
+    getrandomproject,
+    addlike,
+    removelike,
+    checklike
 };

@@ -12,7 +12,8 @@ const loginSchema = new mongoose.Schema({
     projects:[ObjectId],
     Description:String,
     skills:[String],
-    Domains:[String]
+    Domains:[String],
+    likes:[ObjectId],
 },{ versionKey: false });
 const collegeSchema = new mongoose.Schema({
     college_name: String,

@@ -64,8 +64,8 @@ export default function ProjectDisplay({handleskillprj,handleclick }) {
                 </div>
                 <div className="searchbarset1">
                     <div className="searchbar1">
-                        {/* <input type="search" className="searchs1" placeholder="Search for projects" onChange={handlesearchchange} /> */}
-                        <TagSearch />
+                        <input type="search" className="searchs1" placeholder="Search for projects" onChange={handlesearchchange} /> 
+                       {/* <TagSearch   handlesearchchange={ handlesearchchange} />*/}
                         <div className="search-icon1" onClick={()=>{handleskillprj(searchterm)}}>
                             <FontAwesomeIcon className="search-icon1-i" icon={faSearch} style={{ color: "white" }} />
                         </div>

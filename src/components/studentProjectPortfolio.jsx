@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import "./ProjectPortfolio.css"
+import "./studentProjectPortfolio.css"
 import { useNavigate } from "react-router-dom";
 import { GoLink } from "react-icons/go";
 import axios from "axios";
@@ -11,8 +11,10 @@ export default function StudentProjectProfile({ dis, ...props }) {
     const [skills,setskills]=useState([])
     const [students,setstudents]=useState([])
     const [showCopyMessage, setShowCopyMessage] = useState(false);
-    const [commentdata,setcommentdata]= useState('')
+    const [commentdata,setcommentdata]= useState('');
+    const [like,setLike]=useState(0);
     const navigate = useNavigate();
+    const [key,setKey]=useState(0);
     const exit = async () => {
         console.log('yo')
         dis()
@@ -65,6 +67,41 @@ export default function StudentProjectProfile({ dis, ...props }) {
 
         return `${dayWithSuffix} ${month} ${year}`;
     }
+    const handlelike = async () => {
+        try {
+          if (like === 1) {
+            const response = await axios.post("/en/removelike", { data: projid });
+            if (response.data === "success") {
+              setLike(0);
+              setKey(prevKey => prevKey - 1);
+            }
+          } else {
+            const response = await axios.post("/en/addlike", { data: projid });
+            if (response.data === "success") {
+              setLike(1);
+              setKey(prevKey => prevKey + 1);
+            }
+          }
+    
+          
+         
+        } catch (error) {
+          console.error("Error updating like:", error);
+        }
+      };
+    
+    useEffect(() => {
+        const checklike = async () => {
+            try {
+                const response = await axios.post('/en/checklike', { data: projid });
+                setLike(response.data);
+            } catch (error) {
+                console.error('Error fetching like count:', error);
+            }
+        };
+        checklike();
+    }, [projid]);
+    
     const fetchData = async () => {
         const response = await axios.post('/en/getprojectdata', { data: projid });
         setprojdata(response.data);
@@ -72,72 +109,74 @@ export default function StudentProjectProfile({ dis, ...props }) {
         setcomments(response.data.Comments)
         setskills(response.data.Skills)
         setstudents(response.data.Students)
+        setKey(response.data.Likes)
     };
     useEffect(() => {
         fetchData();
     }, [projid]);
     console.log(projdata)
 
-
+    
     function handleSubmit(event) {
         event.preventDefault()
     }
+    
 
     
     return (
-        <div className="ourprojectdetails">
-            <div className="opbuttons">
-                <div className="opbtn">
-                    <div className="opback" onClick={() => exit()} style={{ color: "aliceblue" }}>
+        <div className="ourprojectdetails1">
+            <div className="opbuttons1">
+                <div className="opbtn1">
+                    <div className="opback1" onClick={() => exit()} style={{ color: "aliceblue" }}>
                         <p><span>&#8592;</span>Go Back</p>
                     </div>
-                    <div className="opshare" onClick={() => share()} style={{ color: "aliceblue" }} >
+                    <div className="opshare1" onClick={() => share()} style={{ color: "aliceblue" }} >
                         <p>{showCopyMessage === false ? 'Copy Link ' : 'Link Copied'}<GoLink /></p>
                     </div>
                 </div>
             </div>
-            <div className="opprojects">
-                <div className="opdiv">
-                    <div className="opimvid">
-                        <div className="opvidname">
+            <div className="opprojects1">
+                <div className="opdiv1">
+                    <div className="opimvid1">
+                        <div className="opvidname1">
 
 
                         </div>
-                        <div className="opprojectvideo">
+                        <div className="opprojectvideo1">
                             {projdata&&(<video height="500px" width="600px" src={`/en/image/${projdata.Video}`} type="video/mp4" controls />)}
                         </div>
                         {(photolist.length!==0)&&(
                             photolist.map((photo,index)=>(
-                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="slectimage" />
+                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="slectimage1" />
                             ))
                         )}
                     </div>
-                    {projdata && (<div className="opdetail">
-                        <div className="opprojectname">
-                            <div className="oppic">
-                            {projdata&&(<img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage" />)}
+                    {projdata && (<div className="opdetail1">
+                        <div className="opprojectname1">
+                            <div className="oppic1">
+                            {projdata&&(<img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage1" />)}
                             </div>
-                            <div className="oprealpro">
+                            <div className="oprealpro1">
                                 <p>{projdata.Project_Name}</p>
                             </div>
                         </div>
-                        <div className="oppostedby">
+                        <div className="oppostedby1">
                             <p>{projdata.College}</p>
                         </div>
-                        <div className="gettingdate">
-                            <div><p> Posted on {transformdate(new Date(projdata.Date))}<span>{projdata.Likes} Likes</span> </p></div>
+                        <div className="gettingdate1">
+                            <div><p> Posted on {transformdate(new Date(projdata.Date))}<span className="oplikes1" onClick={()=>handlelike()}>&#9825;</span><span className="opnlikes1">{key} Likes</span> </p></div>
                         </div>
-                        <div className="gettingdescription">
+                        <div className="gettingdescription1">
                             <p>{projdata.Description}</p>
                         </div>
-                        <div className="opfolder">
+                        <div className="opfolder1">
                             <p>FOLDER<span>&#128193;</span></p>
                             {/* need to add explorer hyper link here */}
                         </div>
-                        <div className="ourdomain">
+                        <div className="ourdomain1">
                             <p>DOMAIN:{projdata.Domain}</p>
                         </div>
-                        <div className="ourtechnology">
+                        <div className="ourtechnology1">
                             <p>Technologies used: </p>
                             <ul>
                                 {skills.map((skill,index)=>(
@@ -145,40 +184,40 @@ export default function StudentProjectProfile({ dis, ...props }) {
                                 ))}
                             </ul>
                         </div>
-                        <div className="studentsworking">
+                        <div className="studentsworking1">
                             <h3>Students worked:</h3>
                             {students.map((student,index)=>(
-                                    <div className="names" key={index} ><p>{student.stuname}</p></div>
+                                    <div className="names1" key={index} ><p>{student.stuname}</p></div>
                             ))}
                         </div>
-                        <div className="commentsection">
-                            <div className="noofcomment">
+                        <div className="commentsection1">
+                            <div className="noofcomment1">
                                 <p>{comments.length} comments</p>
                             </div>
                             <form onSubmit={AddComment}>
-                            <div className="thereal">
+                            <div className="thereal1">
                                 <input type="text" placeholder="Comment" className="commentinput" value={commentdata} onChange={handlecomment} required/>
                             </div>
-                            <div className="decide">
+                            <div className="decide1">
                                 <button type="submit">Submit</button>
                             </div>
                             
                             </form>
                             {(comments.length!==0)&&(
                                 comments.map((comment,index)=>(
-                                    <div className="personcomments" key={index}>
-                                        <div className="commentdetails">
-                                            <div className="commentpic">
-                                                <img src={`/en/image/${comment.photoid}`} alt="VS" className="slectimage" />
+                                    <div className="personcomments1" key={index}>
+                                        <div className="commentdetails1">
+                                            <div className="commentpic1">
+                                                <img src={`/en/image/${comment.photoid}`} alt="VS" className="slectimage1" />
                                             </div>
-                                            <div className="commentname">
+                                            <div className="commentname1">
                                                 <p>{comment.studentname}</p>
                                             </div>
-                                            <div className="commentdate">
+                                            <div className="commentdate1">
                                                 <p>{transformdate(new Date(comment.Date))}</p>
                                             </div>
                                         </div>
-                                        <div className="realcomment">
+                                        <div className="realcomment1">
                                             <p>{comment.comment}</p>
                                         </div>
                                     </div>
