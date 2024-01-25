@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-export default function StudentProfile({ studentproj, studentdetail }) {
+export default function StudentProfile({ studentproj, studentdetail ,handleclick}) {
     
     return (
         <div className="mprofile">
@@ -28,7 +28,7 @@ export default function StudentProfile({ studentproj, studentdetail }) {
                 <div>
                     {studentproj && studentproj.map((project, index) => (
                         <div key={index} className="grid-item">
-                            <div>
+                            <div  onClick={()=>{handleclick(project._id)}}>
                                 <div className="project-card">
                                     <div className="cardpart">
                                         <div className="profile-section">

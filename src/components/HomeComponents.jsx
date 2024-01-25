@@ -252,7 +252,7 @@ export default function HomeComponents({checkSession}) {
 
             <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
                 {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} handleclick={handleclick}/>}
-                {display === 1 && <StudentProfile  studentproj={studentproj} studentdetail={studentdetail}/>}
+                {display === 1 && <StudentProfile  studentproj={studentproj} studentdetail={studentdetail} handleclick={handleclick}/>}
                 {display === 2 && <ProjectDisplay handleskillprj={handleskillprj} handlesearchchange={handlesearchchange}  handleclick={handleclick}/>}
                 {display===3 && <DomainClick sugesstions={sugesstions} handlebackClick={handlebackClick} handleclick={handleclick}/>}
                 {display===4 && <StudentProjectProfile studata={sendDataToStudent} dis={killpage} handleprojectprofile={handleprojectprofile}/>}
