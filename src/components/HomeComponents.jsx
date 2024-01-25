@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { faSearch, faUser, faUserPlus, faBars, faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +8,10 @@ import StudentProfile from "./StudentProfile.jsx";
 import ProjectDisplay from "./ProjectDisplay.jsx";
 import { Input } from "@mui/material";
 import DomainClick from "./DomainClick.jsx";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import StudentProjectProfile from "./studentProjectPortfolio.jsx";
+import { useParams } from "react-router-dom";
 export default function HomeComponents() {
 
 
@@ -16,7 +19,7 @@ export default function HomeComponents() {
     const [bodyGridColumn, setBodyGridColumn] = useState('span 1');
     const [studentproj,setStudentproj]=useState([]);
     const [studentdetail,setStudentdetail]=useState([]);
-    
+    const navigate=useNavigate();
     const toggleDashboard = () => {
         setIsSiderVisible(prevState => !prevState);
         setBodyGridColumn(prevState => prevState === 'span 1' ? 'span 2' : 'span 1');
@@ -28,10 +31,17 @@ export default function HomeComponents() {
     const [searchterm,setSearchterm]=useState("");
     const [sugesstions,setSugesstions]=useState([]);
     const [skillprj,setSkillprj]=useState("");
-    const [randomprj,setRandomprj]=useState([]);
+    let { projid } = useParams();
+    const [sendDataToStudent,setSendDataToStudent]=useState(null);
+    const [prevdisplay,setPrevdisplay]=useState(0);
+    const [optionclick,setOptionclick]=useState(0);
+    
     
     const handleOptionClick=(index)=>
     {
+        setOptionclick(index);
+        setPrevdisplay(index);
+        
         setDisplay(index);
     }
     const handleDomainClick = async (inputData) => {
@@ -42,17 +52,58 @@ export default function HomeComponents() {
             const response = await axios.get(`/en/getdomainbyclick?term=${inputData}`);
             const data=response.data;
             setSugesstions(data);
-            setDisplay(4);
+            setPrevdisplay(display);
+            setDisplay(3);
         } catch (error) {
             console.error("Error fetching suggestions:", error);
         }
     };
+    const handlebackClick=()=>
+    {
+       
+       try{
+        if(display===prevdisplay)
+        {
+            setDisplay(optionclick);
+        }
+        else
+        {
+            setDisplay(prevdisplay);
+        }
+       }
+       catch(error)
+       {
+        console.error("error occured:",error);
+       }
+    }
+    const handleclick=(data)=>{
+        setPrevdisplay(display)
+        setDisplay(4);
+        setSendDataToStudent(data);
+    }
+
+    const handleprojectprofile = async () => {
+        try {
+           console.log('handleprojectprofile function called');
+            if (projid) {
+                const response = await axios.get(`/en/validateurl?projid=${projid}`);
+                console.log('Response from server:', response.data);
+                setSendDataToStudent(response.data);
+               
+                setDisplay(4);
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    
+
     const handlesearchchange=async (event)=>
     {
         event.preventDefault();
         setSearchterm(event.target.value);
         if (event.target.value.trim() === "") {
-            setDisplay(0);
+            setDisplay(prevdisplay);
             return;
 }
     }
@@ -93,7 +144,8 @@ export default function HomeComponents() {
             const response=await axios.get(`/en/getskillprj?term=${skillname}`);
             const data=response.data;
             setSugesstions(data);
-            setDisplay(4);
+            setPrevdisplay(display)
+            setDisplay(3);
         }
         catch(error)
         {
@@ -101,6 +153,20 @@ export default function HomeComponents() {
         }
 
     }
+    const killpage = () => {
+        if(projid){
+            navigate("/main");
+        }
+        setDisplay(prevdisplay)
+        setSendDataToStudent(null)
+    }
+    useEffect(() => {
+        if (!projid) {
+            setDisplay(prevdisplay); // Reset display to 0 when projid is null
+            setSendDataToStudent(null);
+        }
+    }, [projid]);
+    
     
     
     
@@ -130,13 +196,7 @@ export default function HomeComponents() {
                         </div>
                     </div>
                     <div className="profileset4">
-                        <div className="addproject4">
-                            <button onclick="window.location.href='username.html'">
-                                <p>
-                                    Add project
-                                </p>
-                            </button>
-                        </div>
+                        
                         <div className="profile4">
                             <FontAwesomeIcon icon={faUser} className="profileset-icon" />
                         </div>
@@ -170,10 +230,11 @@ export default function HomeComponents() {
             </div>
 
             <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
-                {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick}/>}
+                {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} handleclick={handleclick}/>}
                 {display === 1 && <StudentProfile  studentproj={studentproj} studentdetail={studentdetail}/>}
-                {display === 2 && <ProjectDisplay handleskillprj={handleskillprj} handlesearchchange={handlesearchchange}  />}
-                {display===4 && <DomainClick sugesstions={sugesstions} handleOptionClick={handleOptionClick}/>}
+                {display === 2 && <ProjectDisplay handleskillprj={handleskillprj} handlesearchchange={handlesearchchange}  handleclick={handleclick}/>}
+                {display===3 && <DomainClick sugesstions={sugesstions} handlebackClick={handlebackClick} handleclick={handleclick}/>}
+                {display===4 && <StudentProjectProfile studata={sendDataToStudent} dis={killpage} handleprojectprofile={handleprojectprofile}/>}
 
             </div>
         </div>

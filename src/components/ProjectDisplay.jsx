@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faSearch } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useEffect } from "react";
-export default function ProjectDisplay({handleskillprj }) {
+export default function ProjectDisplay({handleskillprj,handleclick }) {
     const [searchterm,setSearchterm]=useState("");
     const [randomprj,setRandomprj]=useState([]);
     const handlesearchchange=(event)=>
@@ -95,7 +95,7 @@ export default function ProjectDisplay({handleskillprj }) {
                 
                     {randomprj.map((suggestion, index) => (
                 <div key={index} className="grid-item">
-                    <div>
+                    <div onClick={()=>{handleclick(suggestion._id)}}>
                         <div className="project-card">
                             <div className="cardpart">
                                 <img className="profile-picture" src={`/en/image/${suggestion.photo}`} alt="Profile Picture"/>

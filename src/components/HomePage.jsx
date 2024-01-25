@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useEffect } from "react";
-export default function HomePage({ handleOptionClick ,handleDomainClick}) {
+export default function HomePage({ handleOptionClick ,handleDomainClick,handleclick}) {
     const [randomprj,setRandomprj]=useState([]);
     useEffect(() => {
         const getRandomProjects = async () => {
@@ -84,7 +84,7 @@ export default function HomePage({ handleOptionClick ,handleDomainClick}) {
                 
                     {randomprj.map((suggestion, index) => (
                 <div key={index} className="grid-item">
-                    <div>
+                    <div onClick={()=>{handleclick(suggestion._id)}}>
                         <div className="project-card">
                             <div className="cardpart">
                                 <img className="profile-picture" src={`/en/image/${suggestion.photo}`} alt="Profile Picture"/>

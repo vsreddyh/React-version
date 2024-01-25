@@ -1,16 +1,16 @@
 import React from "react";
 import "./domainclick.css";
 
-export default function DomainClick({ sugesstions ,handleOptionClick}) {
+export default function DomainClick({ sugesstions ,handlebackClick, handleclick}) {
     return (
         <div className="sgtotal">
             <div className="sbackbutton">
-                <p onClick={()=>handleOptionClick(0)}><span>&#8592;</span>Go Back</p>
+                <p onClick={()=>handlebackClick()}><span>&#8592;</span>Go Back</p>
             </div>
             {sugesstions && sugesstions.map((suggestion, index) => (
                 <div key={index} className="grid-item">
-                    <div>
-                        <div className="project-card">
+                    <div onClick={()=>{handleclick(suggestion._id)}}>
+                        <div className="project-card" >
                             <div className="cardpart">
                                 <img className="profile-picture" src={`/en/image/${suggestion.photo}`} alt="Profile Picture"/>
                                 <div className="pdiscript">

@@ -49,7 +49,7 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/hrmain/:projid" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN /> : <Category/>}/>
+                <Route path="/hrmain/:projid" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN /> : <Navigate to="/" />}/>
                 <Route path="/hrmain" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN /> : <Navigate to="/" />}/>
                 <Route path="/clgmain" element={(userData && userData[1]===1 && userData[2]===1) ? <ClgMainPage /> : <Navigate to="/" />}/>
                 <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents/> : <Navigate to="/" />}/>
@@ -68,7 +68,7 @@ export default function App() {
                 <Route path="/hrsignup/:errorMessage" element={userData ? <Navigate to="/" /> :<HrSignUp />} />
                 <Route path="/hrsignup" element={userData ? <Navigate to="/" /> : <HrSignUp />} />
                 <Route path="/ProjectUploadForm" element={<ProjectUploadForm/>}/>
-               
+                <Route path="/main/:projid" element={(userData && userData[1]===0 && userData[2]===0) ? <HomeComponents /> : <Navigate to="/" />}/>
                 <Route path="/*" element={<Navigate to="/" />} />
                 <Route path="/" element=
                     {userData ?
