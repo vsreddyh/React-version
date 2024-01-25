@@ -204,10 +204,15 @@
     box-sizing: border-box;
 }
 
-.gettingdate p span{
+.oplikes{
+    margin-left: 25px;
+    font-size: 35px;
+}
+
+.opnlikes{
     font-size: 18px;
     color: #9c9696;
-    margin-left: 15px;
+    margin-left: 5px;
 }
 .gettingdescription{
     font-size: 15px;

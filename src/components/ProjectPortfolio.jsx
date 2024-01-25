@@ -125,7 +125,7 @@ export default function ProjectPortfolio({ dis, ...props }) {
                             <p>{projdata.College}</p>
                         </div>
                         <div className="gettingdate">
-                            <div><p> Posted on {transformdate(new Date(projdata.Date))}<span>{projdata.Likes} Likes</span> </p></div>
+                            <div><p> Posted on {transformdate(new Date(projdata.Date))}<span className="oplikes">&#9825;</span><span className="opnlikes">{projdata.Likes} Likes</span> </p></div>
                         </div>
                         <div className="gettingdescription">
                             <p>{projdata.Description}</p>
