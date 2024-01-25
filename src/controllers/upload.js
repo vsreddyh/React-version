@@ -5,9 +5,10 @@ const { MongoClient, GridFSBucket } = require('mongodb');
 const bodyParser = require('body-parser');
 const app = express();
 app.use(cors());
+const{projects,Course,url}=require('../settings/env.js');
 
-const mongoURI = 'mongodb://localhost:27017';
-const databaseName = 'upload-form';
+const mongoURI = url;
+const databaseName = 'projectpalace';
 
 let db;
 const client = new MongoClient(mongoURI);
@@ -22,97 +23,131 @@ client.connect()
     console.error('MongoDB connection error:', error);
   });
 
-const details = async (req, res) => {
-  app.use(bodyParser.json({ limit: '50mb' }));
-
-
-  try {
-    if (!db) {
-      throw new Error('MongoDB connection not established.');
-    }
-
-    const { file,filename,video,videoname,photo,photoname,title,description,languages,domain,profilePhoto,teams } = req.body;
-    console.log(domain);
-    console.log(title);
-    console.log(filename);
-    console.log(videoname)
-    console.log(languages);
-    console.log(teams)
-    const buffer = Buffer.from(file, 'base64');
-
-    const bucket = new GridFSBucket(db);
-    const uploadStream = bucket.openUploadStream(filename);
-    const zipFileid = uploadStream.id;
-
-    uploadStream.end(buffer, (error) => {
-      if (error) {
-        console.error('Error uploading file:', error);
-        res.status(500).send('Error uploading file');
-      } else {
-        console.log('File uploaded successfully, stored under file id:',zipFileid);
+  const details = async (req, res) => {
+    app.use(bodyParser.json({ limit: '50mb' }));
+  
+    try {
+      if (!db) {
+        throw new Error('MongoDB connection not established.');
       }
-    });
-if(videoname.length!=0){
-    const buffer2 = Buffer.from(video, 'base64');
+      const { file, filename, video, videoname, photos, photoname, title, description, languages, domain, profilePhoto, teams } = req.body;
+      let photoIds = [];
+      let videoId;
+      let profilePhotoId;
+      
 
-  const bucket2 = new GridFSBucket(db);
-  const uploadStream2 = bucket2.openUploadStream(videoname);
-  const videoId = uploadStream2.id;
-
-  uploadStream2.end(buffer2, (error) => {
-    if (error) {
-      console.error('Error uploading file:', error);
-      res.status(500).send('Error uploading file');
-    } else {
-      console.log('File uploaded successfully, stored under video id:',videoId);
+  
+      const buffer = Buffer.from(file, 'base64');
+  
+      const bucket = new GridFSBucket(db);
+      const uploadStream = bucket.openUploadStream(filename);
+      const zipFileid = uploadStream.id;
+  
+      await new Promise((resolve, reject) => {
+        uploadStream.end(buffer, (error) => {
+          if (error) {
+            console.error('Error uploading file:', error);
+            reject(error);
+          } else {
+            console.log('File uploaded successfully, stored under file id:', zipFileid);
+            resolve();
+          }
+        });
+      });
+  
+      if (videoname.length !== 0) {
+        const buffer2 = Buffer.from(video, 'base64');
+  
+        const bucket2 = new GridFSBucket(db);
+        const uploadStream2 = bucket2.openUploadStream(videoname);
+        videoId = uploadStream2.id;
+  
+        await new Promise((resolve, reject) => {
+          uploadStream2.end(buffer2, (error) => {
+            if (error) {
+              console.error('Error uploading file:', error);
+              reject(error);
+            } else {
+              console.log('File uploaded successfully, stored under video id:', videoId);
+              resolve();
+            }
+          });
+        });
+      }
+  
+      if (photos && photos.length > 0) {
+        await Promise.all(photos.map(async (photo, i) => {
+          const buffer = Buffer.from(photo, 'base64');
+  
+          const bucket = new GridFSBucket(db);
+          const uploadStream = bucket.openUploadStream(`photo_${i}`);
+          const photoId = uploadStream.id;
+  
+          await new Promise((resolve, reject) => {
+            uploadStream.end(buffer, (error) => {
+              if (error) {
+                console.error('Error uploading photo:', error);
+                reject(error);
+              } else {
+                console.log(`Photo ${i + 1} uploaded successfully, stored under photo id:`, photoId);
+                photoIds.push(photoId);
+                resolve();
+              }
+            });
+          });
+        }));
+        console.log(photoIds.length);
+      }
+  
+      if (profilePhoto) {
+        const buffer4 = Buffer.from(profilePhoto, 'base64');
+  
+        const bucket4 = new GridFSBucket(db);
+        const uploadStream4 = bucket4.openUploadStream("profilePhoto");
+        profilePhotoId = uploadStream4.id;
+  
+        await new Promise((resolve, reject) => {
+          uploadStream4.end(buffer4, (error) => {
+            if (error) {
+              console.error('Error uploading file:', error);
+              reject(error);
+            } else {
+              console.log('File uploaded successfully, stored under profilePhoto id:', profilePhotoId);
+              resolve();
+            }
+          });
+        });
+      }
+  
+      try {
+        console.log(photoIds.length);
+        const course = new projects({
+          Domain: domain,
+          Skills: languages,
+          College: req.session.loggedInCollege,
+          Project_Name: title.charAt(0).toUpperCase() + title.slice(1),
+          Likes: 0,
+          Description: description,
+          Date: new Date(),
+          photo: profilePhotoId,
+          Video: videoId,
+          Students: teams,
+          photos: photoIds,
+          File: zipFileid,
+          versionkey: false
+        });
+  
+        await course.save();
+        console.log("successfully saved");
+      } catch (err) {
+        console.error("Error updating user:", err);
+        res.status(500).json({ error: "Error updating project details" });
+      }
+    } catch (error) {
+      console.log("Error Uploading Data", error);
     }
-  });
-}
-
-if(photoname.length!=0){
-  const buffer3 = Buffer.from(photo, 'base64');
-
-const bucket3 = new GridFSBucket(db);
-const uploadStream3 = bucket3.openUploadStream(photoname);
-const photoId = uploadStream3.id;
-
-uploadStream3.end(buffer3, (error) => {
-  if (error) {
-    console.error('Error uploading file:', error);
-    res.status(500).send('Error uploading file');
-  } else {
-    console.log('File uploaded successfully, stored under photo id:',photoId);
-  }
-});
-}
-
-
-if(profilePhoto){
-  const buffer4 = Buffer.from(profilePhoto, 'base64');
-
-const bucket4 = new GridFSBucket(db);
-const uploadStream4 = bucket4.openUploadStream("profilePhoto");
-const profilePhotoId = uploadStream4.id;
-
-uploadStream4.end(buffer4, (error) => {
-  if (error) {
-    console.error('Error uploading file:', error);
-    res.status(500).send('Error uploading file');
-  } else {
-    console.log('File uploaded successfully, stored under profilePhoto id:',profilePhotoId);
-  }
-});
-}
-
-
-
-  }catch(error){
-    console.log("Error Uploading Data",error);
-  }
-
-};
-
-
+  };
+  
 module.exports={
     details
 }

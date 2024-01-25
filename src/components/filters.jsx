@@ -28,16 +28,6 @@ export default function Filters({ sendDataToParent }) {
     const handleChange1 = async (event) => {
         const inputdata = event.target.value;
         setTerm(inputdata);
-        
-        if (inputdata.length === 0) {
-            setSuggestions([]);
-            setFormData({
-                ...formData,
-                ["college_name"]: "Any"
-            });
-            return;
-        }
-        
         try {
             const response = await axios.get(`/en/data?term=${inputdata}`);
             const data = response.data;

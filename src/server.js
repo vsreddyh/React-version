@@ -35,10 +35,19 @@ app.use(session({
 app.use(express.static('../build'));
 app.use(bodyParser.json());
 app.use("/en",approute);
-app.get('*', function(req, res) {
-    res.sendFile(path.resolve(__dirname, '../build/index.html'));
-  });
-app.listen(3000,function()
+app.get("/checksessionexpiry",async(req,res)=>{
+  a=req.session.loggedInemail
+  if(a!==undefined){
+      res.json(1)
+  }
+  else{
+      res.json(0)
+  }
+})
+app.listen(3000,function(req,res)
 {
     console.log("server is running")
 })
+app.get('*', function(req, res) {
+  res.sendFile(path.resolve(__dirname, '../build/index.html'));
+});

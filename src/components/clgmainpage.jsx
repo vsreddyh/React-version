@@ -1,11 +1,33 @@
-import React from "react";
+import {React,useEffect} from "react";
 import "./main-page.css"
+import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import MenuIcon from '@mui/icons-material/Menu';
 
-
-export default function ClgMainPage(){
+export default function ClgMainPage({checkSession}){
+    useEffect(() => {
+        const intervalId = setInterval(async () => {
+          try {
+            const response = await axios.get("/checksessionexpiry");
+            console.log(response.data)
+            if (response.data === 0) {
+                try{
+                    clearInterval(intervalId);
+                    alert('Session Expired. Please Login again')
+                    await checkSession()
+                }
+                catch(error){
+                    console.log(error)
+                }
+            }
+          } catch (error) {
+            console.error('Error checking session expiry:', error);
+          }
+        }, 10000);
+    
+        return () => clearInterval(intervalId);
+      }, [checkSession]);
     return(
         <div className="abc">
         <div className="content1" id="header1">

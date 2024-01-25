@@ -286,7 +286,6 @@ const signin = async(req,res)=>{
                 }
                 req.session.status=1;
                 res.json({ message: 'Login successful', user: { username: username },checkstudent:userPassword[1] });
-                console.log('signin is',req.session)
             } else {
                 res.json({message:'Wrong Password', user: username })
             }
@@ -577,7 +576,6 @@ const getCompanyDetails = async(req,res)=>{
     }
 
 }
-//save companydetails
 const companyDetails = async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.college;
@@ -616,17 +614,14 @@ const homepage=async (req,res)=>
     const {term}=req.query;
     console.log(term);
 }
-const getSkill=async (req,res)=>
-{
+const getSkill=async (req,res)=>{
     try{
         const term1=req.query.term;
         const escapedSearchString = term1.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         const regex1 =new RegExp(escapedSearchString,'i');
         const Skills=await skills.find({skill_name:regex1}).select('skill_name').limit(5);
         const suggestions2=Skills.map(Skill=>Skill.skill_name);
-       
         res.json(suggestions2);
-    
     }
     catch(err)
     {
@@ -645,10 +640,7 @@ const getteam = async (req, res) => {
             college_name: req.session.loggedInCollege,
             student_name: regex1
         }).select('student_name').limit(3);
-
-        const suggestions3 = teams.map(team => team.student_name);
-        
-        res.json(suggestions3);
+        res.json(teams);
     } catch (err) {
         console.error('Error retrieving colleges:', err);
         res.status(500).json({ error: 'Error in retrieving colleges' });
@@ -676,5 +668,5 @@ module.exports = {
     getCompanyDetails,
     homepage,
     getSkill,
-    getteam
+    getteam,
 };

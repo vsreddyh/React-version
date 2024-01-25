@@ -1,0 +1,13 @@
+college main page
+check email (show college name)
+student-card for hrmain
+filters for clgmain student main
+connect gemini to file explorer
+likes functionality
+header padding in all pages
+plagarism api
+hrmain no project image
+hrmain tag search
+logo loading animation
+repeated addition in project upload form
+project upload form

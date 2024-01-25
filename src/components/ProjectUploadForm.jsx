@@ -12,7 +12,7 @@ import axios from "axios";
 export default function ProjectUploadForm(){
 
     
-    const [photo, setPhoto] = useState(null);
+    const [photos, setPhotos] = useState([]);
     const [video, setVideo] = useState(null);
     const[file,setFile]=useState(null);
     const [profilePhoto, setProfilePhoto] = useState(null);
@@ -101,6 +101,7 @@ export default function ProjectUploadForm(){
     };
 
     const handleTeamKeyDown = (sugesstion) => {
+        console.log(sugesstion)
             addTeamMember(sugesstion);
             setTeamInputValue("");
         setSugesstions3([])
@@ -167,19 +168,19 @@ export default function ProjectUploadForm(){
     }
     
     function handlePhotoChange(event) {
-        const selectedPhoto = event.target.files[0]; // Get the selected photo file
+        const selectedPhoto = event.target.files[0]; // Get the selected photo files
+        console.log("photo");
         if (selectedPhoto) {
-            const reader=new FileReader();
+            const reader = new FileReader();
             reader.onloadend = () => {
-                setPhoto(reader.result.split(',')[1]);
-              };
-              reader.readAsDataURL(selectedPhoto);
-              let temp2=event.target.value;
-              const photoname=temp2.replace("C:\\fakepath\\", "");
-              setPhotoName(photoname);
+                const photoDataUrl = reader.result.split(',')[1];
+                // Update the state with the data URL of the photo
+                setPhotos(prevPhotos => [...prevPhotos, photoDataUrl]);
+            };
+            reader.readAsDataURL(selectedPhoto);
+        }
 
-            // Perform further actions with the selected photo here
-        } else {
+         else {
             alert('No photo selected');
         }
     }
@@ -238,6 +239,7 @@ export default function ProjectUploadForm(){
 
 
           function saveDetails(event) {
+            console.log(photos.length);
             try {
                 if(videoname.length===0){
                     alert('video required!');
@@ -258,12 +260,12 @@ export default function ProjectUploadForm(){
                     alert('profile photo required');
                 }
                 else{
-              const response = axios.post(`/en/uploadDetails`, {
+              const response =  axios.post(`/en/uploadDetails`, {
                 videoname: videoname,
                 photoname: photoname,
                 filename: filename,
                 video: video,
-                photo: photo,
+                photos: photos,
                 file: file,
                 title:title,
                 description:description,
@@ -406,7 +408,7 @@ export default function ProjectUploadForm(){
                                     <div id="tagGroupmem">
                                         {teams.map((teamMember, index) => (
                                             <div key={index} className="team-member-tag">
-                                                <span>{teamMember}</span>
+                                                <span>{teamMember.student_name}</span>
                                                 <button onClick={() => removeTeamMember(index)}>X</button>
                                             </div>
                                         ))}
@@ -415,7 +417,7 @@ export default function ProjectUploadForm(){
                                     <div id="suggestions">
                                         {sugesstions3.map((sugesstion,index)=>(
                                             <div key={index} className="team_member" onClick={() => handleTeamKeyDown(sugesstion)}>
-                                                <p>{sugesstion}</p>
+                                                <p>{sugesstion.student_name}</p>
                                             </div>
                                         ))}
                                     
