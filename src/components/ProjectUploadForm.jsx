@@ -20,6 +20,10 @@ export default function ProjectUploadForm(){
     const[videoname,setVideoName]=useState('');
     const[filename,setFileName]=useState('');
     const[pphotoname,setProfilePhotoName]=useState('');
+    const[totalSize,setTotalSize]=useState(0);
+    const[fileSize,setFileSize]=useState(0);
+    const[videoSize,setVideoSize]=useState(0);
+    const[profilePhotoSize,setProfilePhotoSize]=useState(0);
     const [formData,setFormData]=useState({
         category: 'Any',
         search:'',
@@ -49,6 +53,7 @@ export default function ProjectUploadForm(){
     const [description,setDescription]=useState("");
     const [domain,setDomain]=useState("");
 
+
         
     const handleInputChange = async (event) => {
         const inputValue = event.target.value;
@@ -62,7 +67,7 @@ export default function ProjectUploadForm(){
         }
     else{
         try {
-            const response = await axios.get(`/en/getskills?term=${inputValue}`);
+            const response = await axios.get(`/en/getskills?term=${inputValue}&languages=${languages}`);
             const data = response.data;
                         setSugesstions2(data);
                         console.log(data);
@@ -129,6 +134,8 @@ export default function ProjectUploadForm(){
 
     function handleProfilePhoto(event) {
         const selectedProfilePhoto = event.target.files[0]; // Get the selected photo file
+        setProfilePhotoSize(selectedProfilePhoto.size / (1024 * 1024))
+
         if (selectedProfilePhoto) {
             const reader=new FileReader();
             reader.onloadend = () => {
@@ -150,6 +157,8 @@ export default function ProjectUploadForm(){
 
     function handleVideoChange(event) {
         const selectedVideo = event.target.files[0]; // Get the selected video file
+        setVideoSize(selectedVideo.size / (1024 * 1024));
+
         if (selectedVideo) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -169,6 +178,7 @@ export default function ProjectUploadForm(){
     
     function handlePhotoChange(event) {
         const selectedPhoto = event.target.files[0]; // Get the selected photo files
+
         console.log("photo");
         if (selectedPhoto) {
             const reader = new FileReader();
@@ -221,6 +231,7 @@ export default function ProjectUploadForm(){
     };*/
     function handlechange(event) {
         const selectedFile = event.target.files[0]; // Get the first selected file
+        setFileSize(selectedFile.size / (1024 * 1024))
         if (selectedFile && selectedFile.name.endsWith('.zip')) {
             const reader=new FileReader();
             reader.onloadend=()=>{
@@ -241,7 +252,11 @@ export default function ProjectUploadForm(){
           function saveDetails(event) {
             console.log(photos.length);
             try {
-                if(videoname.length===0){
+                if((fileSize+videoSize+profilePhotoSize)>40){
+                    alert("size exceeded");
+                }
+
+                else if(videoname.length===0){
                     alert('video required!');
                 }
                 else if(languages.length===0){
@@ -271,10 +286,13 @@ export default function ProjectUploadForm(){
                 domain:domain,
                 teams:teams,
               })
-              console.log("Successfully uploaded");
-            };
+                console.log("successfully uploaded.")
+        };
+            
               
             } catch (error) {
+                  alert('File size too large');
+                  
               console.log("Error uploading details:", error);
             }
           }
