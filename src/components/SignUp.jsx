@@ -41,7 +41,7 @@ export default function SignUp(){
                     </p>
                     
                     <form onSubmit={handleSubmit}>
-                        <input className="username" type="email" name="username" placeholder="Email" minLength={3} value={formData.username} onChange={handleInputChange} required autoComplete="username"/>
+                        <input className="username" type="email" name="username" placeholder="Email" title="min lenth 4 should contain special charecter" minLength={3} value={formData.username} onChange={handleInputChange} required autoComplete="username"/>
                         <br />
                         <button type="submit">
                             

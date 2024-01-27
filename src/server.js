@@ -12,6 +12,17 @@ require('dotenv').config();
 const {SESSION_KEY,url} = require('./settings/env.js');
 app.use(cors())
 app.use(bodyParser.json({ limit: '50mb' }));
+
+app.use(function (err, req, res, next) {
+  if (err.type === 'entity.too.large') {
+    // This will catch the error thrown by bodyParser when file size exceeds the limit
+    console.log("file take")
+    res.json({error:'File size too large'});
+  } else {
+    next(err);
+  }
+});
+
 app.get("/",cors(),(req,res)=>
 {
 
@@ -22,19 +33,21 @@ var store = new MongoDBStore({
 });
 
 app.use(session({
-  secret: SESSION_KEY, 
+  secret: SESSION_KEY,
   resave: false,
   store: store,
   saveUninitialized: false,
   cookie: {
-      secure: false, 
-      maxAge: 6 * 60 * 60 * 1000,
-      rolling:true
+      secure: false,
+      maxAge: 6 * 60 * 60 * 1000, //6 hours
+      rolling:true //whenever session is modified it resets expirytime
   }
 }));
 app.use(express.static('../build'));
-app.use(bodyParser.json());
-app.use("/en",approute);
+
+app.use("/en",approute);//routing to all functions
+
+//checks if session is expired
 app.get("/checksessionexpiry",async(req,res)=>{
   a=req.session.loggedInemail
   if(a!==undefined){
@@ -44,10 +57,14 @@ app.get("/checksessionexpiry",async(req,res)=>{
       res.json(0)
   }
 })
+
+
 app.listen(3000,function(req,res)
 {
     console.log("server is running")
 })
+
+//if route didnt match in above functions it will be redirected to app.jsx through this function
 app.get('*', function(req, res) {
   res.sendFile(path.resolve(__dirname, '../build/index.html'));
 });

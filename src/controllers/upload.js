@@ -61,6 +61,7 @@ const details = async (req, res) => {
     let photoIds = [];
     let videoId;
     let profilePhotoId;
+    let fileId;
 
     let updatedTeams = teams.map(student => {
       return {
@@ -100,6 +101,7 @@ const details = async (req, res) => {
 
     videoId = videoname ? await uploadFile(video, videoname) : null;
     profilePhotoId = profilePhoto ? await uploadFile(profilePhoto, 'profilePhoto') : null;
+    fileId=filename ? await uploadFile(file, filename) : null;
 
     // Save project details to MongoDB
     const course = new projects({
@@ -114,7 +116,7 @@ const details = async (req, res) => {
       Video: videoId,
       Students: updatedTeams,
       photos: photoIds,
-      File: await uploadFile(file, filename),
+      File: fileId,
       versionkey: false
     });
 
@@ -128,7 +130,7 @@ const details = async (req, res) => {
       await updateStudentSkills(studentId, languages, domain, projectId);
     }
 
-    res.status(200).json({ message: "Project details saved successfully" });
+    res.status(200).json({ message: "Project details saved successfully",error:'ok' });
   } catch (error) {
     console.error("Error uploading project details:", error);
     res.status(500).json({ error: "Error uploading project details" });
