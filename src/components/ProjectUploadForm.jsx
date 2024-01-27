@@ -244,9 +244,6 @@ export default function ProjectUploadForm(){
                 if(videoname.length===0){
                     alert('video required!');
                 }
-                else if(filename.length===0){
-                    alert('code files requried!');
-                }
                 else if(languages.length===0){
                     alert('languages required');
                 }
