@@ -22,7 +22,7 @@ conn.once('open', () => {
   });
 });
 
-
+//suggest college names
 const getdata = async(req,res)=>{
     try{
         if(req.query.term!==""){
@@ -41,8 +41,9 @@ const getdata = async(req,res)=>{
     }
     
 }
+
+//return projects for hr main
 const projectlist = async(req,res)=>{
-    // console.log(req.session)
     mail=req.session.loggedInemail
     let {category,search,college_name,type,sort_by,order,page} = req.query
     searchquery={Skills:search}
@@ -100,16 +101,18 @@ const projectlist = async(req,res)=>{
         }
     }
 }
+
+//pipe image
 const image = async(req, res) => {
-    try 
-    {
-        // const fileId = new mongoose.Types.ObjectId(req.params.id);
-        // await gfs.openDownloadStream(fileId).pipe(res);
-    }
-    catch(error)
-    {
-        console.log(error);
-    }
+    // try 
+    // {
+    //     const fileId = new mongoose.Types.ObjectId(req.params.id);
+    //     await gfs.openDownloadStream(fileId).pipe(res);
+    // }
+    // catch(error)
+    // {
+    //     console.log(error);
+    // }
 };
 const getstudata = async(req,res)=>{
     const data =req.body.data;
@@ -128,6 +131,8 @@ const fetchprojdata = async(req,res)=>{
     }
     res.json(array)
 }
+
+//add bookmark
 const addbookmark = async(req,res)=>{
     const mail = req.session.loggedInemail;
     const id = req.body.data;
@@ -139,6 +144,8 @@ const addbookmark = async(req,res)=>{
     user.save()
     res.json("success")
 }
+
+//remove bookmark
 const removebookmark = async(req,res)=>{
     const mail = req.session.loggedInemail;
     const id = req.body.data;
@@ -151,6 +158,8 @@ const removebookmark = async(req,res)=>{
     user.save()
     res.json("success")
 }
+
+//check bookmark
 const checkbookmark = async(req,res)=>{
     const mail = req.session.loggedInemail;
     const id = req.body.data;
@@ -180,9 +189,7 @@ const validateurl = async(req,res)=>{
     }
 }
 
-
-
-
+//return projects for student main
 const tokenizer = new natural.WordTokenizer();
 const getDomainProjects = async (req, res) => {
     const term = req.query.term;
@@ -191,13 +198,15 @@ const getDomainProjects = async (req, res) => {
     res.json(term1);
 };
 
-
+//return student details
 const getstudentdetails=async(req,res)=>
 {
     const user=req.session.loggedInemail;
     const search=await Course.findOne({email_address:user});
     res.json(search);
 }
+
+//returns projects made by specific student
 const getstudentproject=async(req,res)=>
 {
     const email=req.session.loggedInemail;
@@ -208,6 +217,8 @@ const getstudentproject=async(req,res)=>
 
 
 }
+
+//returns project data from id
 const getprojectdata = async(req,res)=>{
     const data =req.body.data;
     const projId = new mongoose.Types.ObjectId(data);
@@ -215,6 +226,7 @@ const getprojectdata = async(req,res)=>{
     res.json(projinfo)
 }
 
+//add comment
 const addcomment = async(req,res)=>{
     const {projid,commentdata} = req.body;
     mail=req.session.loggedInemail
@@ -240,6 +252,8 @@ const addcomment = async(req,res)=>{
     }
     res.json("success")
 }
+
+//get project by skills
 const getskillproject = async (req, res) => {
     const term = req.query.term;
     const regex = RegExp(term, 'i');
@@ -247,7 +261,7 @@ const getskillproject = async (req, res) => {
     res.json(result);
 };
 
-
+//random projects
 const getrandomproject = async (req, res) => {
     try {
      
@@ -262,6 +276,8 @@ const getrandomproject = async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
   };
+
+  //add like
   const addlike = async(req,res)=>{
     const mail = req.session.loggedInemail;
     const id = req.body.data;

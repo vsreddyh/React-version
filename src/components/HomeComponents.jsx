@@ -151,7 +151,6 @@ export default function HomeComponents({checkSession}) {
         {
             console.error("error occured:",error);
         }
-
     }
     const killpage = () => {
         if(projid){

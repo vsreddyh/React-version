@@ -1,6 +1,5 @@
 const router = require('express').Router();
 
-const { Router } = require('express');
 const {signin, signup, hrsignup, fpassword, validate_token, checkSessionEndpoint , newuser, newhr, newp, signup_college, mailpass,departments,get_departments,collegeDetails,getCollegeDetails,getCompanyDetails,companyDetails,getsignupCollege,homepage,getSkill,getteam} = require('./controllers/login.js')
 const {getdata,projectlist,image,getstudata,getprojectdata,fetchprojdata,addbookmark,removebookmark,checkbookmark,validateurl, getDomainProjects,getstudentdetails,getstudentproject,addcomment,getskillproject,getrandomproject,addlike,removelike,checklike} = require('./controllers/mainpage.js')
 const {details} = require('./controllers/upload.js');

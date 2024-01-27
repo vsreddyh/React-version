@@ -1,18 +1,22 @@
 import React from "react";
 import "./Check-Email.css"
+import { useParams } from "react-router-dom";
 // import Header from "./Header.jsx";
 // import Sider from "./Sider.jsx";
 // import "./signin.css"
 
-export  default function (){
+export default function () {
+
+    const params = useParams();
+    const token = params.mailid;
     return (
         <div className="container">
             <div className="cont">
                 <h1 className="heading">Check Your Email</h1>
-                <p className="para">We've sent you an email with a link to set your password. Please check your inbox and follow the instructions in the email.</p>
+                <p className="para">We've sent an email to {token} with a link to set your password. Please check your inbox and follow the instructions in the email.</p>
             </div>
-        </div>
+        </div>
 
-    )
+    )
 
 }

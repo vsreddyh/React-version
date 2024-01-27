@@ -29,7 +29,7 @@ export default function Category(){
         };
     const handleInputChange = (event) => {
         setFormData({
-          ...formData,
+          ...formData, //this makes sure that the remaining previous data doesnt change
           [event.target.name]: event.target.value
         });
         console.log(event.target.value)
@@ -85,7 +85,7 @@ export default function Category(){
                         select who you are?
                     </p>
                     
-                    <form onSubmit={handle} method="post">
+                    <form onSubmit={handle} >
                         <select  name="year" id="college" placeholder="category" value={formData.year} onChange={handleInputChange} required>
                             <option value="Student">Student</option>
                             <option value="College">College</option>

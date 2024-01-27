@@ -42,7 +42,7 @@ export default function ProjectDisplay({ handleskillprj, handleclick }) {
     const removeTag = (index) => {
         setTags((prevTags) => prevTags.filter((_, i) => i !== index));
     };
-
+    
     return (
         <div className="nprojects">
             <div className="nrealheading">
@@ -161,6 +161,7 @@ export default function ProjectDisplay({ handleskillprj, handleclick }) {
                                 style={{ color: "white" }}
                             />
                         </div>
+                        <div className="sugessions"></div>
                     </div>
                 </div>
             </div>

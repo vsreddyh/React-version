@@ -50,7 +50,7 @@ const handleSubmit = async (event) => {
         }else if (response.data.message==='college has been registered'){
             seterror('College registered')
         }else{
-            setUserData([response.data.email,1,0])
+            setUserData([response.data.email,1,1])
             navigate('/clgmain')
         }
 };
@@ -76,9 +76,9 @@ return(
             </p>
             
             <form onSubmit={handleSubmit}>
-                <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} minLength={8} required autoComplete="new-password"/>
+                <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} minLength={8} required autoComplete="new-password" title="should atleast conatin 1 capital 1 small 1 special char 1 number total of 8 char minimum"/>
                 <br />
-                <input type="password" name="cpassword" placeholder="Confirm Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.cpassword} onChange={handleInputChange} minLength={8} required autoComplete="new-password"/>
+                <input type="password" name="cpassword" placeholder="Confirm Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.cpassword} onChange={handleInputChange} minLength={8} required autoComplete="new-password" title="should atleast conatin 1 capital 1 small 1 special char 1 number total of 8 char minimum"/>
                 <br />
                 <button type="submit">
                         Next <i className="fa-solid fa-arrow-right"></i>

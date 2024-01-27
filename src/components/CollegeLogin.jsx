@@ -11,50 +11,52 @@ export default function CollegeLogin() {
   console.log(useParams)
   const { errorMessage: initialErrorMessage } = useParams();
   const [errorMessage, setErrorMessage] = useState(initialErrorMessage ? decodeURIComponent(initialErrorMessage) : '');
-  const [term,setTerm]=useState('');
+  const [term, setTerm] = useState('');
   const [suggestions1, setSuggestions1] = useState([]);
-  const handleInputChange= async (event) => {
+  const handleInputChange = async (event) => {
     const inputValue = event.target.value;
     setTerm(inputValue);
     if (inputValue.length === 0) {
-        setSuggestions1([]);
-        return;
+      setSuggestions1([]);
+      return;
     }
-
-    try {
-        const response = await axios.get(`/en/signup_college?term=${term}`);
+    else{
+      try {
+        const response = await axios.get(`/en/signup_college?term=${inputValue}`);
         const data = response.data; // Get data directly from the response
         setSuggestions1(data);
-        
-       
-    } catch (error) {
+  
+  
+      } catch (error) {
         console.error('Error fetching autocomplete data:', error);
+      }
     }
-};
-
-
-const handleSuggestionClick = (suggestion1) => {
-  setTerm(suggestion1);
-  setSuggestions1([]);
   };
 
-const handle = async (event) => {
-  event.preventDefault();
-  try {
-    const CollegeName=term;
-    const response = await axios.post('/en/signup_college',{serverCollegeName:CollegeName});
 
-   
-    if (response.data.message === 'User already registered') {
-      setErrorMessage('User Already Exists');
-    }
-   else {
-      navigate('/check-email');
+  const handleSuggestionClick = (suggestion1) => {
+    setTerm(suggestion1);
+    setSuggestions1([]);
+  };
+
+  const handle = async (event) => {
+    event.preventDefault();
+    try {
+      const CollegeName = term;
+      const response = await axios.post('/en/signup_college', { serverCollegeName: CollegeName });
+
+
+      if (response.data.message === 'User already registered') {
+        setErrorMessage('User Already Exists');
       }
-    }catch (error) {
+      else {
+        const mailid=response.data.mail
+        navigate(`/Check-email/${mailid}`)
+      }
+    } catch (error) {
       console.log(error);
     }
-    
+
   };
 
 
@@ -104,17 +106,16 @@ const handle = async (event) => {
           </p>
 
           <form onSubmit={handle} method="post">
-            <input name="serverCollegeName" className="collegename" type="text" id="collegeInput" placeholder="College Name"  value={term} onChange={handleInputChange} minLength="3" required />
+            <input name="serverCollegeName" className="collegename" type="text" id="collegeInput" placeholder="College Name" value={term} onChange={handleInputChange} minLength="3" required />
             <br />
             <div id="suggestions">
-                            {suggestions1.map((suggestion1,index)=>
-                            (
-                                <p key={index} className="suggestion" onClick={()=>handleSuggestionClick(suggestion1)}>
-                                    {suggestion1}
-                                </p>
-                            ))}
-                            
-                        </div>
+              {suggestions1.map((suggestion1, index) =>
+              (
+                <p key={index} className="suggestion" onClick={() => handleSuggestionClick(suggestion1)}>
+                  {suggestion1}
+                </p>
+              ))}
+            </div>
             <button type="submit">
 
               Next <i className="fa-solid fa-arrow-right"></i>
@@ -122,12 +123,12 @@ const handle = async (event) => {
             </button>
           </form>
           <div className="err">
-                    {errorMessage && <p>{errorMessage}</p>}
-                </div>
+            {errorMessage && <p>{errorMessage}</p>}
+          </div>
         </div>
         <div className="sighnup">
-                    <p>Already have an account?  <Link to="/SignIn">Login</Link></p>
-                </div>
+          <p>Already have an account?  <Link to="/SignIn">Login</Link></p>
+        </div>
 
         <div className="terms">
           <hr />

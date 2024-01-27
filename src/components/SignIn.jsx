@@ -75,7 +75,7 @@ export default function SignIn({ setUserData }){
                     <form onSubmit={handleSubmit}>
                         <input className="username" type="email" name="username" placeholder="Email" minLength={3} value={formData.username} onChange={handleInputChange} required autoComplete="username"/>
                         <br />
-                        <input type="password" name="password" placeholder="Password" minLength={8} pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} required autoComplete="current-password"/>
+                        <input type="password" name="password" placeholder="Password" minLength={8} pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} required autoComplete="current-password" title="should atleast conatin 1 capital 1 small 1 special char 1 number total of 8 char minimum"/>
                         <br />
                         <button type="submit">
                             

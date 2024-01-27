@@ -14,7 +14,7 @@ require('dotenv').config();
 app.use(express.static('../build'));
 app.use(bodyParser.json());
 
-
+// college suggestions
 const getsignupCollege=async(req,res)=>
 {
     
@@ -36,16 +36,19 @@ const getsignupCollege=async(req,res)=>
 
 //SESSION_CHECKER
 const checkSessionEndpoint = async(req,res)=>{
-    if (req.session.loggedInemail) {
-        // If the user is logged in (session contains loggedInUser), serve main-page.html
+    if (req.session.loggedInemail) { //if exists condition will be true
         res.json([req.session.loggedInemail,req.session.typeofuser,req.session.status,req.session.third,req.session.fourth]);
+        // typeof user 0 is student
+        //1 is college
+        //2 is hr
+        //status is 0 or 1 depending if the user completed all sign up procedure
     } else {
-        // If not logged in, serve signin.html
+        // If no session null will be returned
         res.json(null)
     }
 }
-//colege send mailer
 
+//colege send mailer
 const signup_college = async(req,res)=>{
     
     const CollegeName  = req.body.serverCollegeName;
@@ -99,7 +102,7 @@ const signup_college = async(req,res)=>{
                 html: mail,
             };
             transporter.sendMail(message)
-            res.json({message:"Mail Sent"});
+            res.json({message:"Mail Sent",mail:username});
 
 
         } else {
@@ -114,9 +117,11 @@ const signup_college = async(req,res)=>{
 
 //LINK-MAILER
 const signup = async(req,res)=>{
-    const { username } = req.body;
+    const { username } = req.body; // takes email from request
+
+    //checks if user exists already
     async function checkStudent(mail) {
-        const courses = await Course.find({ email_address: mail });
+        const courses = await Course.find({ email_address: mail }); //represents students
         const result = await college.find({ email_address: mail });
         const recruiters = await recruiter.find({ email_address: mail });
         if (courses.length !== 0) {
@@ -130,29 +135,31 @@ const signup = async(req,res)=>{
         }
         return 1;
     }
+
+    //creates signup
     async function create(req, res) {
         var email_1 = await checkStudent(username);
         if (email_1 === null) {
             res.json({message:"User Already Exists",username:"null"})
         }
         else {
-            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '10m' });
+            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '10m' }); //encodes mail with expiration time 10 min
             let config = {
-                service: 'gmail',
+                service: 'gmail', //to use gmail for sending mail
                 auth: {
-                    user: EMAIL,
-                    pass: PASSWORD,
+                    user: EMAIL, //our email
+                    pass: PASSWORD, //our app-password
                 },
             };
-            let transporter = nodemailer.createTransport(config);
+            let transporter = nodemailer.createTransport(config);// adds configuration to a variable named transporter
             let MailGenerator = new Mailgen({
                 theme: "default",
                 product: {
-                    name: "PROJECT PALACE",
-                    link: 'https://mailgen.js/'
+                    name: "PROJECT PALACE", //change based on website name
+                    link: 'https://mailgen.js/' //add website link after hosting
                 },
             });
-            let response = {
+            let response = { // creating mail
                 body: {
                     name: "USER",
                     intro: "Please click on the following link to set your password:",
@@ -161,21 +168,21 @@ const signup = async(req,res)=>{
                         button: {
                             color: "#22BC66",
                             text: "Set your password",
-                            link: `http://localhost:3000/set-password/nu/${token}`
+                            link: `http://localhost:3000/set-password/nu/${token}` //change link
                         }
                     },
                     outro: "If you did not request to set a password, no further action is required on your part.",
                 },
             };
-            let mail = MailGenerator.generate(response);
-            let message = {
+            let mail = MailGenerator.generate(response); // generating mail
+            let message = { //complete mail 
                 from: EMAIL,
                 to: username,
                 subject: "Your OTP for Verification",
                 html: mail,
             };
-            transporter.sendMail(message)
-            res.json({message:"Mail Sent"})
+            transporter.sendMail(message) //sending mail
+            res.json({message:"Mail Sent",mail:username})
         }
     }
     create(req,res);
@@ -244,7 +251,7 @@ const hrsignup = async(req,res)=>{
                 html: mail,
             };
             transporter.sendMail(message)
-            res.json({message:"Mail Sent"})
+            res.json({message:"Mail Sent",mail:username})
         }
     }
     create(req,res); 
@@ -309,7 +316,8 @@ const validate_token = function(req, res) {
         }
     });
 };
-//college mail registartion
+
+//college registartion
 const mailpass = async(req,res)=>{
     const {mail, password, cpassword } = req.body;
     const fromdb=await college.findOne({'email_address':mail});
@@ -489,13 +497,14 @@ const newp = async(req,res)=>{
     } 
     else{
         let user = await checkStudent(mail);
-        bcrypt.hash(password, 8, (err, hash) => {
+        bcrypt.hash(password, 8, async(err, hash) => {
             user.password=hash
-            user.save();
+            await user.save();
             res.json({message:'success'});
         });
     }
 }
+
 //department update
 const departments =async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
@@ -503,6 +512,7 @@ const departments =async(req,res)=>{
     req.session.third=result;
     res.json({message:"user saved",email:mail});
 }
+
 //department suggestions
 const get_departments = async(req,res)=>{
     try{
@@ -519,6 +529,7 @@ const get_departments = async(req,res)=>{
     }
 
 }
+
 //suggest colleges
 const getCollegeDetails = async(req,res)=>{
     try{
@@ -537,6 +548,7 @@ const getCollegeDetails = async(req,res)=>{
     }
 
 }
+
 //save collegedetails
 const collegeDetails = async(req,res)=>{
     const result = req.body.college;
@@ -558,6 +570,7 @@ const collegeDetails = async(req,res)=>{
         res.status(500).json({ error: "Error updating user" });
     }
 }
+
 //suggest companies
 const getCompanyDetails = async(req,res)=>{
     try{
@@ -576,6 +589,8 @@ const getCompanyDetails = async(req,res)=>{
     }
 
 }
+
+//save hr details
 const companyDetails = async(req,res)=>{
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.college;
@@ -608,20 +623,32 @@ const companyDetails = async(req,res)=>{
         res.status(500).json({ error: "Error updating user" });
     }
 }
+
 //displaying projects in home page after clicking
 const homepage=async (req,res)=>
 {
     const {term}=req.query;
     console.log(term);
 }
+
+//suggest skills
 const getSkill=async (req,res)=>{
     try{
         const term1=req.query.term;
+        // const languages=req.query.languages
+        // const a = languages.length + 5
         const escapedSearchString = term1.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         const regex1 =new RegExp(escapedSearchString,'i');
         const Skills=await skills.find({skill_name:regex1}).select('skill_name').limit(5);
-        const suggestions2=Skills.map(Skill=>Skill.skill_name);
-        res.json(suggestions2);
+        let suggestions2=Skills.map(Skill=>Skill.skill_name);
+        // for (let i=0;i<suggestions2.length;i++){
+        //     if (languages.includes(suggestions2[i])){
+        //         console.log(typeof(suggestions2[i]))
+        //         suggestions2.splice(i,1);
+        //         i--;
+        //     }
+        // }
+        res.json(suggestions2.slice(0,5));
     }
     catch(err)
     {
@@ -631,6 +658,8 @@ const getSkill=async (req,res)=>{
     }
 
 }
+
+//suggest students
 const getteam = async (req, res) => {
     try {
         const term1 = req.query.term;

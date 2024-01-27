@@ -23,20 +23,17 @@ import ProjectUploadForm from "./ProjectUploadForm";
 import HomeComponents from "./HomeComponents";
 
 export default function App() {
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState(null); //session data
 
     useEffect(() => {
         checkSession();
-    }, []);
+    }, []); //use effect to call function on rendering of app.jsx
     const checkSession = async () => {
         try {
-            // Make an API call to check for user session data
-            const respons = await axios.get('/en/checkSessionEndpoint');
-            if (respons.data) {
-                // If user data is available, set it in state
-                setUserData(respons.data);
+            const respons = await axios.get('/en/checkSessionEndpoint'); //call to server for checking session
+            if (respons.data) {//if session exists condition is true
+                setUserData(respons.data); //sets data recieved from backend
             } else {
-                // If no user data, set userData as null
                 setUserData(null);
             }
         } catch (error) {
@@ -54,7 +51,7 @@ export default function App() {
                 <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/signup/:errorMessage" element={userData ? <Navigate to="/" /> : <SignUp/>} />
                 <Route path="/signup" element={userData ? <Navigate to="/" /> : <SignUp/>} />
-                <Route path="/Check-email" element={userData ? <Navigate to="/" />: <CheckEmail/>}/>
+                <Route path="/Check-email/:mailid" element={userData ? <Navigate to="/" />: <CheckEmail/>}/>
                 <Route path="/college-signup" element={userData ? <Navigate to="/" /> : <CollegeLogin/>}/>
                 <Route path="/college-signup/:errorMessage" element={userData ? <Navigate to="/" /> : <CollegeLogin/>}/>
                 <Route path="/forgot-password/:errorMessage" element={<ForgotPassword/>}/>

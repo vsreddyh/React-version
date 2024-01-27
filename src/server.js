@@ -11,18 +11,7 @@ var MongoDBStore = require('connect-mongodb-session')(session);
 require('dotenv').config();
 const {SESSION_KEY,url} = require('./settings/env.js');
 app.use(cors())
-app.use(bodyParser.json({ limit: '50mb' }));
-
-app.use(function (err, req, res, next) {
-  if (err.type === 'entity.too.large') {
-    // This will catch the error thrown by bodyParser when file size exceeds the limit
-    console.log("file take")
-    res.json({error:'File size too large'});
-  } else {
-    next(err);
-  }
-});
-
+app.use(bodyParser.json({ limit: '50mb' })); //limit limits the data which can be uploaded to server.js from frontend
 app.get("/",cors(),(req,res)=>
 {
 

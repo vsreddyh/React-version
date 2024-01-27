@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
-const ObjectId = mongoose.Types.ObjectId;
-url='mongodb+srv://Project:Florencemidhebaramvesam@project.tbx2krn.mongodb.net/projectpalace'
-mongoose.connect(url);
+const ObjectId = mongoose.Types.ObjectId; //importing objectid
+url='mongodb+srv://Project:Florencemidhebaramvesam@project.tbx2krn.mongodb.net/projectpalace' //database link
+mongoose.connect(url); //database is connected to server
+
+//schemas are like classes
 const loginSchema = new mongoose.Schema({
     student_name : String,
     email_address : String,
@@ -51,8 +53,7 @@ const projectschema = new mongoose.Schema({
 },{ versionKey: false });
 const skillSchema=new mongoose.Schema({
     skill_name:String,
-
-},{ versionKey: false })
+},{ versionKey: false });
 
 const Course = mongoose.model('student', loginSchema);
 const recruiter = mongoose.model('head_recruiter', hrSchema);

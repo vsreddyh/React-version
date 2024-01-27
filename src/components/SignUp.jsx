@@ -21,7 +21,8 @@ export default function SignUp(){
         if (response.data.message==='User Already Exists'){
             setErrorMessage('User Already Exists')
         }else{
-            navigate('/Check-email')
+            const mailid=response.data.mail
+            navigate(`/Check-email/${mailid}`)
         }   
     };
     const handleInputChange = (event) => {

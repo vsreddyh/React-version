@@ -252,6 +252,11 @@
 .searchs1{
     display: flex;
 }
+
+.sugessions{
+    height: 250px;
+    width:fit-content;
+}
 /* Responsive adjustments */
 @media (max-width: 1400px) {
     .bgridelements {

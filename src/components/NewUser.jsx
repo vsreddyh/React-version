@@ -75,9 +75,9 @@ export default function NewUser({ setUserData }){
                     <form onSubmit={handleSubmit}>
                         <input className="username" type="text" name="username" placeholder="User name" value={formData.username} onChange={handleInputChange} minLength={3}  required autoComplete="name"/>
                         <br />
-                        <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} minLength={8} required autoComplete="new-password"/>
+                        <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} minLength={8} required autoComplete="new-password" title="should atleast conatin 1 capital 1 small 1 special char 1 number total of 8 char minimum"/>
                         <br />
-                        <input type="password" name="cpassword" placeholder="Confirm Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.cpassword} onChange={handleInputChange} minLength={8} required autoComplete="new-password"/>
+                        <input type="password" name="cpassword" placeholder="Confirm Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.cpassword} onChange={handleInputChange} minLength={8} required autoComplete="new-password" title="should atleast conatin 1 capital 1 small 1 special char 1 number total of 8 char minimum"/>
                         <br />
                         <button type="submit">
                         
