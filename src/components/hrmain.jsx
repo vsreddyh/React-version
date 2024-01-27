@@ -139,7 +139,7 @@ function HRMAIN({checkSession}){
                                     <div>
                                         <div className="project-card2">
                                             <div className="cardpart2">
-                                                <img className="profile-picture2" src={`/en/image/${project.photo}`} alt="Profile Picture"/>
+                                                <img className="profile-picture2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${project.photo}`}*/ alt="Profile Picture"/>
                                                 <div className="pdiscript2">
                                                     <p>
                                                         {project.Description}

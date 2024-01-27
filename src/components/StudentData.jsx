@@ -98,7 +98,7 @@ export default function StudentData({ dis, ...props }) {
                         <div className="sdetails">
                             <div className="probackground"></div>
                             <div className="sphoto">
-                                {studata.photo && (<img  src={`/en/image/${studata.photo}`} alt="Profile Picture"/>)}
+                                {studata.photo && (<img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${studata.photo}`}*/ alt="Profile Picture"/>)}
                             </div>
                             <div className="sname1">
                                 <p>{studata.student_name}</p>
@@ -154,7 +154,7 @@ export default function StudentData({ dis, ...props }) {
                                     <div>
                                         <div className="project-card1">
                                             <div className="cardpart1">
-                                                <img className="profile-picture1" src={`/en/image/${project.photo}`} alt="Profile Picture" />
+                                                <img className="profile-picture1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${project.photo}`}*/ alt="Profile Picture" />
                                                 <div className="pdiscript1">
                                                     <p>
                                                         {project.Description}

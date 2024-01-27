@@ -143,18 +143,18 @@ export default function StudentProjectProfile({ dis, ...props }) {
 
                         </div>
                         <div className="opprojectvideo1">
-                            {projdata&&(<video height="500px" width="600px" src={`/en/image/${projdata.Video}`} type="video/mp4" controls />)}
+                            {projdata&&(<video height="500px" width="600px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${projdata.Video}`}*/ type="video/mp4" controls />)}
                         </div>
                         {(photolist.length!==0)&&(
                             photolist.map((photo,index)=>(
-                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="slectimage1" />
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${photo}`}*/ key={index} alt="VS" className="slectimage1" />
                             ))
                         )}
                     </div>
                     {projdata && (<div className="opdetail1">
                         <div className="opprojectname1">
                             <div className="oppic1">
-                            {projdata&&(<img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage1" />)}
+                            {projdata&&(<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${projdata.photo}`}*/ alt="VS" className="slectimage1" />)}
                             </div>
                             <div className="oprealpro1">
                                 <p>{projdata.Project_Name}</p>

@@ -32,7 +32,7 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
                                 <div className="project-card">
                                     <div className="cardpart">
                                         <div className="profile-section">
-                                            <img className="profile-picture" src={`/en/image/${project.photo}`} alt="Profile Picture" />
+                                            <img className="profile-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${project.photo}`}*/ alt="Profile Picture" />
                                             <br />
                                             <span><FontAwesomeIcon icon={faHeart} /></span>
                                         </div>

@@ -87,7 +87,7 @@ export default function HomePage({ handleOptionClick ,handleDomainClick,handlecl
                     <div onClick={()=>{handleclick(suggestion._id)}}>
                         <div className="project-card">
                             <div className="cardpart">
-                                <img className="profile-picture" src={`/en/image/${suggestion.photo}`} alt="Profile Picture"/>
+                                <img className="profile-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${suggestion.photo}`}*/ alt="Profile Picture"/>
                                 <div className="pdiscript">
                                     <p>
                                         {suggestion.Description}
