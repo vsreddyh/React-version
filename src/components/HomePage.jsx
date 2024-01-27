@@ -29,7 +29,7 @@ export default function HomePage({ handleOptionClick ,handleDomainClick,handlecl
                 <div className="basicgrid">
                     <div className="bgridelements" onClick={() => handleDomainClick("Healthcare")}>
                         <div className="forpic">
-                            <img src="https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/machine-learning-pillar-page-overview.jpeg" alt="none" />
+                            <img src="https://e1.pxfuel.com/desktop-wallpaper/333/105/desktop-wallpaper-understanding-ai-and-machine-learning-the-easy-way-artificial-intelligence.jpg" alt="none" />
                         </div>
                         <div className="forname">
                             <p>Machine Learning</p>
@@ -37,7 +37,7 @@ export default function HomePage({ handleOptionClick ,handleDomainClick,handlecl
                     </div>
                     <div className="bgridelements" onClick={() => handleDomainClick("Artificial Intelligence and Robotics")}>
                         <div className="forpic">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUv1JtGaG2DK9V4Q9_PAYxMj6uHZS8oq7-WkcApanancD3q1ihSQlaRLV4dyzMbCJZYnk&usqp=CAU" alt="none" />
+                            <img src="https://assets-global.website-files.com/61845f7929f5aa517ebab941/6440f9477c2a321f0dd6ab61_How%20Artificial%20Intelligence%20(AI)%20Is%20Used%20In%20Biometrics.jpg" alt="none" />
                         </div>
                         <div className="forname">
                             <p>Artificial Intelligence</p>
@@ -45,7 +45,7 @@ export default function HomePage({ handleOptionClick ,handleDomainClick,handlecl
                     </div>
                     <div className="bgridelements" onClick={() => handleDomainClick("Web development")}>
                         <div className="forpic">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg0VBtW3kMK5jp6VrWS2avscSxR4_ib5Sy1PipbpHx7TpCy50v1H64usM5UUAvtY1NfIQ&usqp=CAU" alt="none" />
+                            <img src="https://sklc-tinymce-2021.s3.amazonaws.com/comp/2023/04/full-stack%20web%20development_1681290664.png" alt="none" />
                         </div>
                         <div className="forname">
                             <p>Web Development</p>
@@ -53,7 +53,7 @@ export default function HomePage({ handleOptionClick ,handleDomainClick,handlecl
                     </div>
                     <div className="bgridelements" onClick={() => handleDomainClick("App Development")}>
                         <div className="forpic">
-                            <img src="https://img.freepik.com/free-vector/app-development-illustration_52683-47931.jpg?size=626&ext=jpg&ga=GA1.1.1412446893.1705017600&semt=ais" alt="none" />
+                            <img src="https://www.techmango.net/wp-content/uploads/2022/04/mobile-app-development.png" alt="none" />
                         </div>
                         <div className="forname">
                             <p>App Development</p>
@@ -61,7 +61,7 @@ export default function HomePage({ handleOptionClick ,handleDomainClick,handlecl
                     </div>
                     <div className="bgridelements" onClick={() => handleDomainClick("AR/VR")}>
                         <div className="forpic">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlYxXaofgCn-BmScnX87kn_LH0qZh3ar9-s5g4pzZDSCbKk1nEvhRmRUhsG8yIbflkPok&usqp=CAU" alt="none" />
+                            <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/Virtual_Reality_1.jpg" alt="none" />
                         </div>
                         <div className="forname">
                             <p>AR/VR Projects</p>
@@ -69,7 +69,7 @@ export default function HomePage({ handleOptionClick ,handleDomainClick,handlecl
                     </div>
                     <div className="bgridelements" onClick={() => handleDomainClick("cyber security")}>
                         <div className="forpic">
-                            <img src="https://images.spiceworks.com/wp-content/uploads/2022/10/04121130/Concept-depicting-block-validation-in-the-blockchain-and-digital-ledger.jpg" alt="" />
+                            <img src="https://www.ctemag.com/sites/default/files/page_images/blockchain-tech-manufacturing.jpg" alt="" />
                         </div>
                         <div className="forname">
                             <p>Block Chain</p>

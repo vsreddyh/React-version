@@ -14,9 +14,9 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
                         <div className="mpdet">
                             
                             <p className="mpname">{studentdetail.student_name}</p>
-                            <p>{studentdetail.email_address}</p>
-                            <p>{studentdetail.field_name}</p>
-                            <p>{studentdetail.college_name}</p>
+                            <p className="mpgmname">{studentdetail.email_address}</p>
+                            <p className="mpgmname">{studentdetail.field_name}</p>
+                            <p className="mpgmname">{studentdetail.college_name}</p>
                         </div>
                     </div>
                 </div>

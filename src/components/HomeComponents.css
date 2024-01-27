@@ -190,42 +190,64 @@
 }
 
 .bgridelements {
+    position: relative;
     background-color: #141e2f;
-    flex: 1 1 calc(33.33% - 10px); /* Each item takes up one-third of the container minus some spacing */
-    margin: 10px 5px ;
+    flex: 1 1 calc(33.33% - 10px);
+    margin: 10px 5px;
     height: 230px;
     border: 0.1px solid #2a2f3e;
     border-radius: 10px;
     box-sizing: border-box;
+    overflow: hidden;
+    transition: transform 0.3s ease; /* Add transition for smooth movement */
 }
 
-.bgridelements:hover{
+.bgridelements:hover {
     border-color: #4e5569;
+    transform: translateY(-10px); /* Move the element up by 10 pixels, adjust as needed */
 }
-.bgridelements:active{
-    border-color:  #0053A6;
+
+.bgridelements:active {
+    border-color: #0053A6;
+    transform: translateY(0); /* Reset the translation on click */
 }
+
 .forpic {
+    position: relative;
     width: 100%;
-    height: 80%;
-    margin: 10px auto;
+    height: 100%;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .forpic img {
-    max-width: 100%; 
+    max-width: 100%;
     height: 100%;
-    display: block; 
-    margin: 0 auto; 
+    display: block;
+    margin: 0 auto;
+    transition: filter 0.3s ease;
+}
+
+.bgridelements:hover .forpic img {
+    filter: blur(1.75px); /* Adjust the blur intensity as needed */
 }
 
 .forname {
-    display: flex;
-    margin: 5px auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
     color: white;
-    align-items: center;
-    justify-content: center;
+    font-size: 35px;
+    font-weight: 400;
 }
+
+.bgridelements:hover .forname {
+    opacity: 1;
+}/* Responsive adjustments */
 
 .searchs1{
     display: flex;
