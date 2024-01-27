@@ -3,11 +3,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faSearch } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useEffect } from "react";
-export default function ProjectDisplay({ handleskillprj, handleclick }) {
+export default function ProjectDisplay({ handleskillprj, handleclick, handleskillList }) {
+    const [suggestions, setSuggestions] = useState([]);
     const [searchterm, setSearchterm] = useState("");
     const [randomprj, setRandomprj] = useState([]);
     const handlesearchchange = (event) => {
         event.preventDefault();
+
+        const inputValue = event.target.value;
+
+        const response = axios.get(`/en/getskills?term=${inputValue}&languages=${tags}`)
+        response.then(function (result) {
+            console.log(result.data);
+            setSuggestions(result.data)
+        }).catch(function (error) {
+            console.error("Error: ", error);
+        });
+
+
+
         setSearchterm(event.target.value);
     };
     useEffect(() => {
@@ -28,11 +42,10 @@ export default function ProjectDisplay({ handleskillprj, handleclick }) {
 
     const [tags, setTags] = useState([]);
 
-    const handleKeyDown = (event) => {
-        if (event.key === "Enter" && event.target.value.trim() !== "") {
-            addTag(event.target.value.trim());
-            event.target.value = "";
-        }
+    const handleKeyDown = (data) => {
+        addTag(data)
+        setSuggestions([])
+        setSearchterm("")
     };
 
     const addTag = (tagText) => {
@@ -42,7 +55,7 @@ export default function ProjectDisplay({ handleskillprj, handleclick }) {
     const removeTag = (index) => {
         setTags((prevTags) => prevTags.filter((_, i) => i !== index));
     };
-    
+
     return (
         <div className="nprojects">
             <div className="nrealheading">
@@ -130,29 +143,29 @@ export default function ProjectDisplay({ handleskillprj, handleclick }) {
                             <input
                                 type="text"
                                 id="searchInputId"
-                                onKeyDown={handleKeyDown}
+                                value={searchterm}
                                 placeholder="Add tags..."
                                 onChange={handlesearchchange}
                             />
-                                <div id="tagSearchContainerId">
-                                    {tags.map((tag, index) => (
-                                        <div key={index} className="tagContainer">
-                                            <span className="tagText">{tag}</span>
-                                            <button
-                                                className="removeTag"
-                                                onClick={() => removeTag(index)}
-                                            >
-                                                X
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
-                            
+                            <div id="tagSearchContainerId">
+                                {tags.map((tag, index) => (
+                                    <div key={index} className="tagContainer">
+                                        <span className="tagText">{tag}</span>
+                                        <button
+                                            className="removeTag"
+                                            onClick={() => removeTag(index)}
+                                        >
+                                            X
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+
                         </div>
                         <div
                             className="search-icon1"
                             onClick={() => {
-                                handleskillprj(searchterm);
+                                handleskillList(tags);
                             }}
                         >
                             <FontAwesomeIcon
@@ -161,7 +174,13 @@ export default function ProjectDisplay({ handleskillprj, handleclick }) {
                                 style={{ color: "white" }}
                             />
                         </div>
-                        <div className="sugessions"></div>
+                        <br />
+                        {suggestions !== "" &&
+                            (<div className="sugessions">
+                                {suggestions.map((suggestion, index) => (
+                                    <p key={index} onClick={() => handleKeyDown(suggestion)}>{suggestion}</p>
+                                ))}
+                            </div>)}
                     </div>
                 </div>
             </div>

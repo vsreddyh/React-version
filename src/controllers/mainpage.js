@@ -261,6 +261,16 @@ const getskillproject = async (req, res) => {
     res.json(result);
 };
 
+const getskillList = async (req, res) => {
+    const term = req.query.term;
+    const term1 = term.split((","))
+    console.log(term1);
+    console.log(typeof term1);
+    const result = await projects.find({Skills:{$all:term1}});
+    console.log(result);
+    res.json(result);
+};
+
 //random projects
 const getrandomproject = async (req, res) => {
     try {
@@ -340,5 +350,6 @@ module.exports = {
     getrandomproject,
     addlike,
     removelike,
-    checklike
+    checklike,
+    getskillList
 };

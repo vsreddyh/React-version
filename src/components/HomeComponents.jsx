@@ -152,6 +152,22 @@ export default function HomeComponents({checkSession}) {
             console.error("error occured:",error);
         }
     }
+
+    const handleskillList=async (skillList)=>
+    {
+        try{
+            const response=await axios.get(`/en/getskillList?term=${skillList}`);
+            const data=response.data;
+            setSugesstions(data);
+            setPrevdisplay(display)
+            setDisplay(3);
+        }
+        catch(error)
+        {
+            console.error("error occured:",error);
+        }
+    }
+
     const killpage = () => {
         if(projid){
             navigate("/main");
@@ -252,7 +268,7 @@ export default function HomeComponents({checkSession}) {
             <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
                 {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} handleclick={handleclick}/>}
                 {display === 1 && <StudentProfile  studentproj={studentproj} studentdetail={studentdetail} handleclick={handleclick}/>}
-                {display === 2 && <ProjectDisplay handleskillprj={handleskillprj} handlesearchchange={handlesearchchange}  handleclick={handleclick}/>}
+                {display === 2 && <ProjectDisplay handleskillprj={handleskillprj} handleskillList={handleskillList} handlesearchchange={handlesearchchange}  handleclick={handleclick}/>}
                 {display===3 && <DomainClick sugesstions={sugesstions} handlebackClick={handlebackClick} handleclick={handleclick}/>}
                 {display===4 && <StudentProjectProfile studata={sendDataToStudent} dis={killpage} handleprojectprofile={handleprojectprofile}/>}
 
