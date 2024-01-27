@@ -1,33 +1,48 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faSearch } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faSearch } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 import { useEffect } from "react";
-import TagSearch from "./TagSearch";
-export default function ProjectDisplay({handleskillprj,handleclick }) {
-    const [searchterm,setSearchterm]=useState("");
-    const [randomprj,setRandomprj]=useState([]);
-    const handlesearchchange=(event)=>
-    {
+export default function ProjectDisplay({ handleskillprj, handleclick }) {
+    const [searchterm, setSearchterm] = useState("");
+    const [randomprj, setRandomprj] = useState([]);
+    const handlesearchchange = (event) => {
         event.preventDefault();
         setSearchterm(event.target.value);
-    }
+    };
     useEffect(() => {
         const getRandomProjects = async () => {
-          try {
-            const response = await axios.get("/en/getrandomprj");
-            const data = response.data;
-            console.log("Random Projects Data:", data);
-            setRandomprj(data);
-          } catch (error) {
-            console.error("Error occurred:", error);
-          }
+            try {
+                const response = await axios.get("/en/getrandomprj");
+                const data = response.data;
+                console.log("Random Projects Data:", data);
+                setRandomprj(data);
+            } catch (error) {
+                console.error("Error occurred:", error);
+            }
         };
-    
+
         getRandomProjects();
-      }, []);
-    
-    
+    }, []);
+
+
+    const [tags, setTags] = useState([]);
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter" && event.target.value.trim() !== "") {
+            addTag(event.target.value.trim());
+            event.target.value = "";
+        }
+    };
+
+    const addTag = (tagText) => {
+        setTags((prevTags) => [...prevTags, tagText]);
+    };
+
+    const removeTag = (index) => {
+        setTags((prevTags) => prevTags.filter((_, i) => i !== index));
+    };
+
     return (
         <div className="nprojects">
             <div className="nrealheading">
@@ -38,20 +53,65 @@ export default function ProjectDisplay({handleskillprj,handleclick }) {
             </div>
             <div className="techflex">
                 <div className="techflexele">
-                    <div id="npython" className="ntechelements" onClick={()=>{handleskillprj("html")}}>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/800px-Python-logo-notext.svg.png" alt="" />
+                    <div
+                        id="npython"
+                        className="ntechelements"
+                        onClick={() => {
+                            handleskillprj("html");
+                        }}
+                    >
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/800px-Python-logo-notext.svg.png"
+                            alt=""
+                        />
                     </div>
-                    <div id="njava" className="ntechelements" onClick={()=>{handleskillprj("java")}}>
-                        <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/181_Java_logo_logos-512.png" alt="" />
+                    <div
+                        id="njava"
+                        className="ntechelements"
+                        onClick={() => {
+                            handleskillprj("java");
+                        }}
+                    >
+                        <img
+                            src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/181_Java_logo_logos-512.png"
+                            alt=""
+                        />
                     </div>
-                    <div id="ncpp" className="ntechelements" onClick={()=>{handleskillprj("c++")}}>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png" alt="" />
+                    <div
+                        id="ncpp"
+                        className="ntechelements"
+                        onClick={() => {
+                            handleskillprj("c++");
+                        }}
+                    >
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png"
+                            alt=""
+                        />
                     </div>
-                    <div id="nkotlin" className="ntechelements" onClick={()=>{handleskillprj("kotlin")}}>
-                        <img src="https://www.freepnglogos.com/uploads/javascript-png/javascript-logo-transparent-logo-javascript-images-3.png" alt="" />
+                    <div
+                        id="nkotlin"
+                        className="ntechelements"
+                        onClick={() => {
+                            handleskillprj("kotlin");
+                        }}
+                    >
+                        <img
+                            src="https://www.freepnglogos.com/uploads/javascript-png/javascript-logo-transparent-logo-javascript-images-3.png"
+                            alt=""
+                        />
                     </div>
-                    <div id="nmern" className="ntechelements" onClick={()=>{handleskillprj("mern")}}>
-                        <img src="https://inzint.com/wp-content/uploads/2023/02/Features-of-Mern-stack-development-services-You-Should-Know-1.png" alt="" />
+                    <div
+                        id="nmern"
+                        className="ntechelements"
+                        onClick={() => {
+                            handleskillprj("mern");
+                        }}
+                    >
+                        <img
+                            src="https://inzint.com/wp-content/uploads/2023/02/Features-of-Mern-stack-development-services-You-Should-Know-1.png"
+                            alt=""
+                        />
                     </div>
                     <div id="nmean" className="ntechelements">
                         <p>AND MANY MORE</p>
@@ -64,10 +124,42 @@ export default function ProjectDisplay({handleskillprj,handleclick }) {
                 </div>
                 <div className="searchbarset1">
                     <div className="searchbar1">
-                        <input type="search" className="searchs1" placeholder="Search for projects" onChange={handlesearchchange} /> 
-                       {/* <TagSearch   handlesearchchange={ handlesearchchange} />*/}
-                        <div className="search-icon1" onClick={()=>{handleskillprj(searchterm)}}>
-                            <FontAwesomeIcon className="search-icon1-i" icon={faSearch} style={{ color: "white" }} />
+                        {/* <input type="search" className="searchs1" placeholder="Search for projects" onChange={handlesearchchange} />  */}
+                        {/* <TagSearch   handlesearchchange={ handlesearchchange} />*/}
+                        <div className="searchs1">
+                            <input
+                                type="text"
+                                id="searchInputId"
+                                onKeyDown={handleKeyDown}
+                                placeholder="Add tags..."
+                                onChange={handlesearchchange}
+                            />
+                                <div id="tagSearchContainerId">
+                                    {tags.map((tag, index) => (
+                                        <div key={index} className="tagContainer">
+                                            <span className="tagText">{tag}</span>
+                                            <button
+                                                className="removeTag"
+                                                onClick={() => removeTag(index)}
+                                            >
+                                                X
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            
+                        </div>
+                        <div
+                            className="search-icon1"
+                            onClick={() => {
+                                handleskillprj(searchterm);
+                            }}
+                        >
+                            <FontAwesomeIcon
+                                className="search-icon1-i"
+                                icon={faSearch}
+                                style={{ color: "white" }}
+                            />
                         </div>
                     </div>
                 </div>
@@ -92,38 +184,34 @@ export default function ProjectDisplay({handleskillprj,handleclick }) {
                     <p>#python</p>
                 </div>
             </div>
-            
-            <div className="maincard" >
-                
-                    {randomprj.map((suggestion, index) => (
-                <div key={index} className="grid-item">
-                    <div onClick={()=>{handleclick(suggestion._id)}}>
-                        <div className="project-card">
-                            <div className="cardpart">
-                                <img className="profile-picture" src={`/en/image/${suggestion.photo}`} alt="Profile Picture"/>
-                                <div className="pdiscript">
-                                    <p>
-                                        {suggestion.Description}
-                                    </p>
+
+            <div className="maincard">
+                {randomprj.map((suggestion, index) => (
+                    <div key={index} className="grid-item">
+                        <div
+                            onClick={() => {
+                                handleclick(suggestion._id);
+                            }}
+                        >
+                            <div className="project-card">
+                                <div className="cardpart">
+                                    <img
+                                        className="profile-picture"
+                                        src={`/en/image/${suggestion.photo}`}
+                                        alt="Profile Picture"
+                                    />
+                                    <div className="pdiscript">
+                                        <p>{suggestion.Description}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="pname" >
-                                <p>
-                                    {suggestion.Project_Name}
-                                </p>
+                                <div className="pname">
+                                    <p>{suggestion.Project_Name}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            ))}
-             
+                ))}
             </div>
-
-            
-
-                    
-
-
         </div>
-    )
+    );
 }
