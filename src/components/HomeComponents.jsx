@@ -15,8 +15,8 @@ import { useParams } from "react-router-dom";
 export default function HomeComponents({checkSession}) {
 
 
-    const [isSiderVisible, setIsSiderVisible] = useState(true);
-    const [bodyGridColumn, setBodyGridColumn] = useState('span 1');
+    const [isSiderVisible, setIsSiderVisible] = useState(false);
+    const [bodyGridColumn, setBodyGridColumn] = useState('span 2');
     const [studentproj,setStudentproj]=useState([]);
     const [studentdetail,setStudentdetail]=useState([]);
     const navigate=useNavigate();
@@ -44,11 +44,23 @@ export default function HomeComponents({checkSession}) {
         
         setDisplay(index);
     }
-    const handleDomainClick = async (inputData) => {
+    const handlesearchClick = async (inputData) => {
         setTerm(inputData);
         try {
             
     
+            const response = await axios.get(`/en/getsearchbyclick?term=${inputData}`);
+            const data=response.data;
+            setSugesstions(data);
+            setPrevdisplay(display);
+            setDisplay(3);
+        } catch (error) {
+            console.error("Error fetching suggestions:", error);
+        }
+    };
+    const handleDomainClick = async (inputData) => {
+        setTerm(inputData);
+        try {
             const response = await axios.get(`/en/getdomainbyclick?term=${inputData}`);
             const data=response.data;
             setSugesstions(data);
@@ -58,6 +70,17 @@ export default function HomeComponents({checkSession}) {
             console.error("Error fetching suggestions:", error);
         }
     };
+    const handlelikeClick = async () =>{
+        try{
+            const response = await axios.get(`/en/getlikedprojects`);
+            const data=response.data;
+            setSugesstions(data);
+            setPrevdisplay(display);
+            setDisplay(3);
+        } catch(error){
+            console.error("Error fetching suggestions:", error);
+        }
+    }
     const handlebackClick=()=>
     {
        
@@ -226,7 +249,7 @@ export default function HomeComponents({checkSession}) {
                     <div className="searchbarset4">
                         <div className="searchbar4">
                             <input type="search" className="searchs4" placeholder="Search for projects"  value={searchterm} onChange={handlesearchchange} />
-                            <div className="search-icon4" onClick={()=>{handleDomainClick(searchterm)}}>
+                            <div className="search-icon4" onClick={()=>{handlesearchClick(searchterm)}}>
                                 <FontAwesomeIcon className="search-icon4-i" icon={faSearch} style={{ color: "white" }} />
                             </div>
                         </div>
@@ -256,7 +279,11 @@ export default function HomeComponents({checkSession}) {
                         likes
                     </p>
                 </div>
-                
+                <div id="option3" className="option" onClick={() => handlelikeClick()}>
+                    <p>
+                        Liked Projects
+                    </p>
+                </div>
                 <div id="option5" className="option" onClick={() => handleOptionClick(5)}>
                     <p>
                         about us

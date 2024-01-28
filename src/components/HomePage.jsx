@@ -29,10 +29,10 @@ export default function HomePage({ handleOptionClick ,handleDomainClick,handlecl
                 <div className="basicgrid">
                     <div className="bgridelements" onClick={() => handleDomainClick("Healthcare")}>
                         <div className="forpic">
-                            <img src="https://e1.pxfuel.com/desktop-wallpaper/333/105/desktop-wallpaper-understanding-ai-and-machine-learning-the-easy-way-artificial-intelligence.jpg" alt="none" />
+                            <img src="https://www.nttdata.com/global/en/-/media/nttdataglobal/1_images/industries/healthcare/mv_healthcare.jpg?h=1667&iar=0&w=2667&rev=2558ddff7948493d9a108e414e54d8b2" alt="none" />
                         </div>
                         <div className="forname">
-                            <p>Machine Learning</p>
+                            <p>Healthcare</p>
                         </div>
                     </div>
                     <div className="bgridelements" onClick={() => handleDomainClick("Artificial Intelligence and Robotics")}>
@@ -51,28 +51,28 @@ export default function HomePage({ handleOptionClick ,handleDomainClick,handlecl
                             <p>Web Development</p>
                         </div>
                     </div>
-                    <div className="bgridelements" onClick={() => handleDomainClick("App Development")}>
+                    <div className="bgridelements" onClick={() => handleDomainClick("Software development")}>
                         <div className="forpic">
-                            <img src="https://www.techmango.net/wp-content/uploads/2022/04/mobile-app-development.png" alt="none" />
+                            <img src="https://blog.planview.com/wp-content/uploads/2020/01/Top-6-Software-Development-Methodologies.jpg" alt="none" />
                         </div>
                         <div className="forname">
-                            <p>App Development</p>
+                            <p>Software development</p>
                         </div>
                     </div>
-                    <div className="bgridelements" onClick={() => handleDomainClick("AR/VR")}>
+                    <div className="bgridelements" onClick={() => handleDomainClick("E-Commerce and Marketplace development")}>
                         <div className="forpic">
-                            <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/Virtual_Reality_1.jpg" alt="none" />
+                            <img src="https://product.hstatic.net/200000388585/product/khoa-ecommerce-leader_499927079ba847f1b0e4f8ec44fa3d90_1024x1024.jpg" alt="none" />
                         </div>
                         <div className="forname">
-                            <p>AR/VR Projects</p>
+                            <p>E-Commerce and Marketplace development</p>
                         </div>
                     </div>
-                    <div className="bgridelements" onClick={() => handleDomainClick("cyber security")}>
+                    <div className="bgridelements" onClick={() => handleDomainClick("Cyber Security")}>
                         <div className="forpic">
                             <img src="https://www.ctemag.com/sites/default/files/page_images/blockchain-tech-manufacturing.jpg" alt="" />
                         </div>
                         <div className="forname">
-                            <p>Block Chain</p>
+                            <p>Cyber Security</p>
                         </div>
                     </div>
                 </div>

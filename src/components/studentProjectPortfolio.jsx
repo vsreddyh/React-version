@@ -2,6 +2,7 @@ import React, { useState,useEffect } from "react";
 import "./studentProjectPortfolio.css"
 import { useNavigate } from "react-router-dom";
 import { GoLink } from "react-icons/go";
+import { FaRegHeart,FaHeart } from 'react-icons/fa';
 import axios from "axios";
 
 export default function StudentProjectProfile({ dis, ...props }) {
@@ -164,7 +165,7 @@ export default function StudentProjectProfile({ dis, ...props }) {
                             <p>{projdata.College}</p>
                         </div>
                         <div className="gettingdate1">
-                            <div><p> Posted on {transformdate(new Date(projdata.Date))}<span className="oplikes1" onClick={()=>handlelike()}>&#9825;</span><span className="opnlikes1">{key} Likes</span> </p></div>
+                            <div><p> Posted on {transformdate(new Date(projdata.Date))}<span className="oplikes1" onClick={()=>handlelike()}>{like===0?<FaRegHeart />:<FaHeart color="red" />}</span><span className="opnlikes1">{key} Likes</span> </p></div>
                         </div>
                         <div className="gettingdescription1">
                             <p>{projdata.Description}</p>

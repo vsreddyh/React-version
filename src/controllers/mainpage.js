@@ -189,15 +189,31 @@ const validateurl = async(req,res)=>{
     }
 }
 
-//return projects for student main
+//return projects by search
 const tokenizer = new natural.WordTokenizer();
-const getDomainProjects = async (req, res) => {
+const getSearchProjects = async (req, res) => {
     const term = req.query.term;
     const tokens = tokenizer.tokenize(term);
     const term1= await projects.find({ $text: { $search: tokens.join(' ') } });
     res.json(term1);
 };
 
+//return proects by domain
+const getDomainProjects = async (req, res) => {
+    const term = req.query.term;
+    const term1= await projects.find({Domain:term});
+    res.json(term1);
+};
+
+//return liked projects
+const getlikedprojects = async (req, res) => {
+    const mail = req.session.loggedInemail
+    const term1= await Course.findOne({email_address:mail}).select('likes');
+    const list = term1.likes
+    let objectidlist = list.map(id => new mongoose.Types.ObjectId(id));
+    const listo = await projects.find({_id:{$in:objectidlist}})
+    res.json(listo);
+};
 //return student details
 const getstudentdetails=async(req,res)=>
 {
@@ -343,6 +359,7 @@ module.exports = {
     checkbookmark,
     validateurl,
     getDomainProjects,
+    getSearchProjects,
     getstudentdetails,
     getstudentproject,
     addcomment,
@@ -351,5 +368,6 @@ module.exports = {
     addlike,
     removelike,
     checklike,
-    getskillList
+    getskillList,
+    getlikedprojects
 };

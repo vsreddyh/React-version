@@ -1,6 +1,6 @@
 college main page
 student-card for hrmain
-filters for clgmain student main
+filters for clgmain
 connect gemini to file explorer
 add fileexplorer to main repository
 header padding in all pages
