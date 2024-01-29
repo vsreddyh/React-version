@@ -280,27 +280,19 @@ const getskillproject = async (req, res) => {
 const getskillList = async (req, res) => {
     const term = req.query.term;
     const term1 = term.split((","))
-    console.log(term1);
-    console.log(typeof term1);
+    //console.log(term1);
+   // console.log(typeof term1);
     const result = await projects.find({Skills:{$all:term1}});
-    console.log(result);
+    //console.log(result);
     res.json(result);
 };
 
 //random projects
-const getrandomproject = async (req, res) => {
-    try {
-     
-      const randomProjects = await projects.aggregate([
-        { $sample: { size: 4 } }
-      ]);
-  
-      
-      res.json(randomProjects);
-    } catch (error) {
-      console.error("Error occurred:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
+
+  const getmostlikedprj= async (req, res) => {
+    const topProjects = await projects.find({}).sort({ Likes: -1 }).limit(5);
+    res.json(topProjects);
+   
   };
 
   //add like
@@ -343,6 +335,12 @@ const checklike= async(req,res)=>{
     const list = user.likes
     res.json(Number(list.includes(oid)))
 }
+const getrecentprj= async (req, res) => {
+   
+    const topProjects = await projects.find({}).sort({ Date: -1 }).limit(5);
+    res.json(topProjects);
+   
+  };
   
   
   
@@ -364,10 +362,12 @@ module.exports = {
     getstudentproject,
     addcomment,
     getskillproject,
-    getrandomproject,
+    getmostlikedprj,
     addlike,
     removelike,
     checklike,
     getskillList,
-    getlikedprojects
+    getlikedprojects,
+    getrecentprj
+
 };
