@@ -629,24 +629,25 @@ const homepage = async (req, res) => {
 //suggest skills
 const getSkill = async (req, res) => {
     try {
-        const term1 = req.query.term;
+        const term1 = decodeURIComponent(req.query.term);
         if (term1.trim() === "") {
             res.json([]);
         }
         else {
-            // const languages=req.query.languages
-            // const a = languages.length + 5
-            const escapedSearchString = term1.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            const languages=req.query.languages
+            const listoflanguages = languages.split((","))
+            const a = languages.length + 5
+            const escapedSearchString = term1.replace(/[!@%^*()_\-=\[\]{}|;':",.<>\/?~`+&#+]/g, '\\$&');
             const regex1 = new RegExp(escapedSearchString, 'i');
-            const Skills = await skills.find({ skill_name: regex1 }).select('skill_name').limit(5);
+            const Skills = await skills.find({ skill_name: regex1 }).select('skill_name').limit(a);
             let suggestions2 = Skills.map(Skill => Skill.skill_name);
-            // for (let i=0;i<suggestions2.length;i++){
-            //     if (languages.includes(suggestions2[i])){
-            //         console.log(typeof(suggestions2[i]))
-            //         suggestions2.splice(i,1);
-            //         i--;
-            //     }
-            // }
+            for (let i=0;i<suggestions2.length;i++){
+                if (listoflanguages.includes(suggestions2[i])){
+                    console.log(suggestions2[i])
+                    suggestions2.splice(i,1);
+                    i--;
+                }
+            }
             res.json(suggestions2.slice(0, 5));
         }
     }

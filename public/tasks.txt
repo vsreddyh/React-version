@@ -13,3 +13,4 @@ repeated addition in project upload form
 project upload form
 add a div specifying password format
 fix tagsearch backend
+studen main profile div

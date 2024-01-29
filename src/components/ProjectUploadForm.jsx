@@ -67,7 +67,7 @@ export default function ProjectUploadForm(){
         }
     else{
         try {
-            const response = await axios.get(`/en/getskills?term=${inputValue}&languages=${languages}`);
+            const response = await axios.get(`/en/getskills?term=${encodeURIComponent(inputValue)}&languages=${languages}`);
             const data = response.data;
                         setSugesstions2(data);
                         console.log(data);
