@@ -25,9 +25,9 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
         setSearchterm(event.target.value);
     };
     useEffect(() => {
-        const getRandomProjects = async () => {
+        const getmostlikedprj = async () => {
             try {
-                const response = await axios.get("/en/getrandomprj");
+                const response = await axios.get("/en/getmostlikedprj");
                 const data = response.data;
                 console.log("Random Projects Data:", data);
                 setRandomprj(data);
@@ -36,7 +36,7 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
             }
         };
 
-        getRandomProjects();
+        getmostlikedprj();
     }, []);
 
 

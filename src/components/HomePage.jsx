@@ -6,9 +6,9 @@ import { useEffect } from "react";
 export default function HomePage({ handleOptionClick ,handleDomainClick,handleclick}) {
     const [randomprj,setRandomprj]=useState([]);
     useEffect(() => {
-        const getRandomProjects = async () => {
+        const getrecentprj = async () => {
           try {
-            const response = await axios.get("/en/getrandomprj");
+            const response = await axios.get("/en/getrecentprj");
             const data = response.data;
             console.log("Random Projects Data:", data);
             setRandomprj(data);
@@ -17,7 +17,7 @@ export default function HomePage({ handleOptionClick ,handleDomainClick,handlecl
           }
         };
     
-        getRandomProjects();
+        getrecentprj();
       }, []);
 
     return (
