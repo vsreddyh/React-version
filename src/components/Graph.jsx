@@ -16,7 +16,6 @@ const Graph = ({receivedData}) => {
         response.then(function (result) {
             setsuggestions(result.data.list)
             setcollege(result.data.college)
-
         }).catch(function (error) {
             console.error("Error: ", error);
         });
@@ -114,7 +113,7 @@ const Graph = ({receivedData}) => {
                     <canvas id="monthlyChart"></canvas>
                 </div>
                 <div id="cmainnp" className="justincase">
-                    <p>suggestions.length()</p>
+                    <p>20+ projects this year</p>
                 </div>
             </div>
             <div className="cprojects">
