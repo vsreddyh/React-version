@@ -347,6 +347,80 @@ const getrecentprj= async (req, res) => {
     res.json(topProjects);
    
   };
+  const getcollegeprojects = async (req, res) => {
+    try {
+        const college = req.session.loggedInCollege;
+        const term = req.query.term;
+        
+        const startOfYear = new Date(`${term}-01-01T00:00:00.000Z`);
+        const endOfYear = new Date(`${parseInt(term) + 1}-01-01T00:00:00.000Z`);
+
+        const projectsData = await projects.find({
+            College: college,
+            Date: { $gte: startOfYear, $lt: endOfYear }
+        });
+
+        
+        const allMonths = Array.from({ length: 12 }, (_, index) => ({
+            month: new Date(`${term}-${index + 1}-01`).toLocaleString('en-US', { month: 'long' }),
+            projectsCount: 0,
+            
+
+        }));
+
+        
+        projectsData.forEach(project => {
+            const month = project.Date.getMonth() + 1;
+            allMonths[month - 1].projectsCount += 1;
+            
+        });
+
+        
+        res.json(allMonths);
+    } catch (error) {
+        console.error('Error fetching college projects:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+/*const getcollegedomainprojects = async (req, res) => {
+    try {
+        const college = req.session.loggedInCollege;
+        const term = req.query.term;
+
+        const startOfYear = new Date(`${term}-01-01T00:00:00.000Z`);
+        const endOfYear = new Date(`${parseInt(term) + 1}-01-01T00:00:00.000Z`);
+
+        const projectsData = await projects.find({
+            College: college,
+            Date: { $gte: startOfYear, $lt: endOfYear }
+        });
+
+        const domainCounts = {};
+
+        projectsData.forEach(project => {
+            const domain = project.Domain;
+            domainCounts[domain] = (domainCounts[domain] || 0) + 1;
+        });
+
+        const result = Object.entries(domainCounts).map(([domain, projectsCount]) => ({
+            domain,
+            projectsCount
+        }));
+        console.log(result);
+
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching college projects:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};*/
+
+
+
+
+
+
   
   
   
@@ -376,4 +450,6 @@ module.exports = {
     getlikedprojects,
     getrecentprj,
     collegeprojdisplay,
+    getcollegeprojects,
+    
 };
