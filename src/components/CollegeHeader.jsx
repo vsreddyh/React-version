@@ -7,12 +7,14 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
 
-export default function CollegeHeader() {
+export default function CollegeHeader({takedata}) {
     const [formData, setFormData] = useState({
         category: 'Any',
         search: '',
     });
-
+    useEffect(() => {
+        takedata(formData);
+    }, [formData, takedata]);
     function adjustSelectSize() {
         const selectElement = document.getElementById('cars');
         const selectedOption = selectElement.options[selectElement.selectedIndex];

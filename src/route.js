@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const {signin, signup, hrsignup, fpassword, validate_token, checkSessionEndpoint , newuser, newhr, newp, signup_college, mailpass,departments,get_departments,collegeDetails,getCollegeDetails,getCompanyDetails,companyDetails,getsignupCollege,homepage,getSkill,getteam} = require('./controllers/login.js')
-const {getdata,projectlist,image,getstudata,getprojectdata,fetchprojdata,addbookmark,removebookmark,checkbookmark,validateurl, getSearchProjects, getDomainProjects,getstudentdetails,getstudentproject,addcomment,getskillproject,addlike,removelike,checklike, getskillList,getlikedprojects, getmostlikedprj,getrecentprj} = require('./controllers/mainpage.js')
+const {getdata,projectlist,image,getstudata,getprojectdata,fetchprojdata,addbookmark,removebookmark,checkbookmark,validateurl, getSearchProjects, getDomainProjects,getstudentdetails,getstudentproject,addcomment,getskillproject,addlike,removelike,checklike, getskillList,getlikedprojects, getmostlikedprj,getrecentprj,collegeprojdisplay} = require('./controllers/mainpage.js')
 const {details} = require('./controllers/upload.js');
 /** HTTP Reqeust */
 router.post('/signin', signin);
@@ -49,5 +49,6 @@ router.post("/checklike",checklike);
 router.get("/getskillList", getskillList)
 router.get("/getlikedprojects", getlikedprojects)
 router.get("/getrecentprj",getrecentprj)
+router.post("/collegeprojectsdisplay",collegeprojdisplay);
 
 module.exports = router;

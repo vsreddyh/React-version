@@ -102,6 +102,12 @@ const projectlist = async(req,res)=>{
     }
 }
 
+const collegeprojdisplay = async(req,res)=>{
+    const college=req.session.loggedInCollege
+    const projlists = await projects.find({College:college}).sort({Date:-1}).select('photo Project_Name Description')
+    res.json({list:projlists,college:college})
+}
+
 //pipe image
 const image = async(req, res) => {
     // try 
@@ -368,6 +374,6 @@ module.exports = {
     checklike,
     getskillList,
     getlikedprojects,
-    getrecentprj
-
+    getrecentprj,
+    collegeprojdisplay,
 };

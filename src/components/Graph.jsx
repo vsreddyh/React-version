@@ -1,11 +1,26 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Chart from 'chart.js/auto';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
-const Graph = () => {
+const Graph = ({receivedData}) => {
+    const [suggestions,setsuggestions]=useState([])
+    const [college,setcollege]=useState('')
+    useEffect(()=>{
+        getproj()
+    })
+    const getproj=async()=>{
+        const response = axios.post('/en/collegeprojectsdisplay')
+        response.then(function (result) {
+            setsuggestions(result.data.list)
+            setcollege(result.data.college)
 
+        }).catch(function (error) {
+            console.error("Error: ", error);
+        });
+    }
     const [selectedYear, setSelectedYear] = useState('2021');
     const yearlyData = {
         '2021': [
@@ -83,11 +98,10 @@ const Graph = () => {
     const handleYearChange = event => {
         setSelectedYear(event.target.value);
     };
-
     return (
         <div className="cmaintotal">
             <div className="cmainheading">
-                <h2>KESHAV MEMORIAL INSTITUTE OF TECHNOLOGY</h2>
+                <h2>{college}</h2>
             </div>
             <div className="cmaingraph">
                 <div id="cmainrealgraph" className="justincase">
@@ -100,11 +114,12 @@ const Graph = () => {
                     <canvas id="monthlyChart"></canvas>
                 </div>
                 <div id="cmainnp" className="justincase">
-                    <p>20+ Projects in this year</p>
+                    <p>suggestions.length()</p>
                 </div>
             </div>
             <div className="cprojects">
-                <div className="project-card">
+            {suggestions.map((suggestion, index) => (
+                <div className="project-card" key={index}>
                     <div className="cardpart">
                         <div className="profile-section">
                             <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
@@ -114,19 +129,12 @@ const Graph = () => {
                         <div className="pnamedis">
                             <div className="pname">
                                 <p>
-                                    Project palace
+                                    {suggestion.Project_Name}
                                 </p>
                             </div>
                             <div className="pdiscript">
                                 <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione?
-                                    Recusandae quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab
-                                    enim eius suscipit, impedit
-                                    consectetur ullam .Quidem dolorem asperiores id dignissimos itaque aspernatur
-                                    deleniti error illo velit!
+                                {suggestion.Description}
                                 </p>
                             </div>
                         </div>
@@ -134,99 +142,7 @@ const Graph = () => {
                     </div>
 
                 </div>
-
-                <div className="project-card">
-                    <div className="cardpart">
-                        <div className="profile-section">
-                            <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div className="pnamedis">
-                            <div className="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div className="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione?
-                                    Recusandae quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab
-                                    enim eius suscipit, impedit
-                                    consectetur ullam .Quidem dolorem asperiores id dignissimos itaque aspernatur
-                                    deleniti error illo velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="project-card">
-                    <div className="cardpart">
-                        <div className="profile-section">
-                            <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div className="pnamedis">
-                            <div className="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div className="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione?
-                                    Recusandae quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab
-                                    enim eius suscipit, impedit
-                                    consectetur ullam .Quidem dolorem asperiores id dignissimos itaque aspernatur
-                                    deleniti error illo velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="project-card">
-                    <div className="cardpart">
-                        <div className="profile-section">
-                            <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div className="pnamedis">
-                            <div className="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div className="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione?
-                                    Recusandae quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab
-                                    enim eius suscipit, impedit
-                                    consectetur ullam .Quidem dolorem asperiores id dignissimos itaque aspernatur
-                                    deleniti error illo velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
+            ))}
             </div>
         </div>
     )

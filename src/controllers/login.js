@@ -636,7 +636,7 @@ const getSkill = async (req, res) => {
         else {
             const languages=req.query.languages
             const listoflanguages = languages.split((","))
-            const a = languages.length + 5
+            const a = languages.length + 8
             const escapedSearchString = term1.replace(/[!@%^*()_\-=\[\]{}|;':",.<>\/?~`+&#+]/g, '\\$&');
             const regex1 = new RegExp(escapedSearchString, 'i');
             const Skills = await skills.find({ skill_name: regex1 }).select('skill_name').limit(a).sort({skill_name:1});
@@ -648,7 +648,7 @@ const getSkill = async (req, res) => {
                     i--;
                 }
             }
-            res.json(suggestions2.slice(0, 5));
+            res.json(suggestions2.slice(0, 8));
         }
     }
     catch (err) {
