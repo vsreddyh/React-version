@@ -104,7 +104,6 @@ export default function ProjectUploadForm(){
             setInputValue("");
         setSugesstions2([])
     };
-
     const handleTeamKeyDown = (sugesstion) => {
         console.log(sugesstion)
             addTeamMember(sugesstion);
