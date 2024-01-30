@@ -8,9 +8,9 @@ const Graph = () => {
     const [suggestions, setsuggestions] = useState([]);
     const [college, setCollege] = useState('');
     const [collegeprj, setCollegePrj] = useState([]);
-    const [selectedYear, setSelectedYear] = useState('2023');
+    const [selectedYear, setSelectedYear] = useState('2004');
     
-    //const [domainprj,setDomainprj]=useState([]);
+    const [domainprj,setDomainprj]=useState([]);
 
     useEffect(() => {
         getproj();
@@ -45,7 +45,7 @@ const Graph = () => {
         handlecollegeprojects();
     }, [selectedYear]);
 
-    /*useEffect(() => {
+    useEffect(() => {
         const handledomainprojects = async () => {
             try {
                 const response = await axios.get(`/en/getcolldomainprojects?term=${selectedYear}`);
@@ -59,9 +59,10 @@ const Graph = () => {
         };
 
         handledomainprojects();
-    }, [selectedYear]);*/
+    }, [selectedYear]);
 
     const monthlyChartRef=useRef(null);
+    const domainChartRef=useRef(null);
     
 
     //line graph
@@ -108,7 +109,51 @@ useEffect(() => {
         },
     });
 }, [selectedYear, collegeprj]);
+//bar graph
+useEffect(() => {
+    console.log('domainprj:', domainprj);
+    if (!domainprj) {
+        console.warn(`Data for year ${selectedYear} not available yet.`);
+        return;
+    }
 
+    const ctx = document.getElementById('domainChart').getContext('2d');
+
+    if (domainChartRef.current) {
+        domainChartRef.current.destroy();
+    }
+
+    domainChartRef.current = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: domainprj.map(entry => entry.domain),
+            datasets: [
+                {
+                    label: `Number of Projects (${selectedYear})`,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false,
+                    data: domainprj.map(entry => entry.projectsCount),
+                },
+            ],
+        },
+        options: {
+            scales: {
+                x: {
+                    grid: {
+                        display: false,
+                    },
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false,
+                    },
+                },
+            },
+        },
+    });
+}, [selectedYear, domainprj]);
 
 
     const handleYearChange = event => {
@@ -152,6 +197,8 @@ useEffect(() => {
                         
                     </select>
                     <canvas id="monthlyChart"></canvas>
+                    <canvas id="domainChart"></canvas>
+
                 </div>
                 <div id="cmainnp" className="justincase">
                     <p>20+ projects this year</p>

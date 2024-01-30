@@ -383,7 +383,7 @@ const getrecentprj= async (req, res) => {
     }
 };
 
-/*const getcollegedomainprojects = async (req, res) => {
+const getcollegedomainprojects = async (req, res) => {
     try {
         const college = req.session.loggedInCollege;
         const term = req.query.term;
@@ -407,14 +407,14 @@ const getrecentprj= async (req, res) => {
             domain,
             projectsCount
         }));
-        console.log(result);
+        
 
         res.json(result);
     } catch (error) {
         console.error('Error fetching college projects:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-};*/
+};
 
 
 
@@ -451,5 +451,6 @@ module.exports = {
     getrecentprj,
     collegeprojdisplay,
     getcollegeprojects,
+    getcollegedomainprojects
     
 };
