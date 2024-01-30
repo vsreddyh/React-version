@@ -1,14 +1,21 @@
-college main page
 student-card for hrmain
-filters for clgmain
-connect gemini to file explorer
+connect gemini to file explorer 
 add fileexplorer to main repository
 header padding in all pages
 hrmain less than 10 problem white image
 plagarism api
-hrmain,project display,student main no project image
+hrmain,project display,student main no projects found image
 hrmain tag search
 logo loading animation
 project upload form
-add a div specifying password format
-studen main profile div
+password pattern
+student main profile div
+make things greater replacement
+filters for clgmain
+login header css
+suggestions css
+check email jsx
+scrolling in login height
+terms and conditions
+department dataset
+college search if empty hrmain should be restored
