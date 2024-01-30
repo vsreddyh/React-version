@@ -12,4 +12,3 @@ logo loading animation
 project upload form
 add a div specifying password format
 studen main profile div
-info in project upload form
