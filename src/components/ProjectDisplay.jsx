@@ -12,7 +12,7 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
 
         const inputValue = event.target.value;
 
-        const response = axios.get(`/en/getskills?term=${inputValue}&languages=${tags}`)
+        const response = axios.get(`/en/getskills?term=${encodeURIComponent(inputValue)}&languages=${tags}`)
         response.then(function (result) {
             console.log(result.data);
             setSuggestions(result.data)
