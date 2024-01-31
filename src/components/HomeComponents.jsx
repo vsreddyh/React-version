@@ -228,7 +228,6 @@ export default function HomeComponents({checkSession}) {
         const intervalId = setInterval(async () => {
           try {
             const response = await axios.get("/checksessionexpiry");
-            console.log(response.data)
             if (response.data === 0) {
                 try{
                     clearInterval(intervalId);
@@ -260,7 +259,7 @@ export default function HomeComponents({checkSession}) {
                         </div>
                         <div className="logo4">
                             {/* <FontAwesomeIcon icon={faProductHunt} style={{ color: "#0db1f8" }} /> */}
-                            <img src='../Plogo.png' style={{ width: '100px', height: 'auto',}}/>
+                            <img src='../Plogo.png' style={{ width: '35px', height: 'auto',}}/>
                         </div>
                         <div className="title4">
                             <p>project</p>

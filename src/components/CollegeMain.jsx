@@ -147,11 +147,10 @@ const CollegeMain =({checkSession}) => {
     return(
         <div className="body1">
         <CollegeHeader takedata={CategoryData} handlesearch={handlesearch} handlecollegedetail={handlecollegedetail} toggleDashboard1={toggleDashboard1}/>
-        <div className="bodyy1">
-            <div class="pbox" style={{ display: isProfileVisible ? 'block' : 'none' }}>
-                    <div class="two">
-                        <div class="pp">
-                            <div class="pphoto">
+        <div className={`pbox ${isProfileVisible ? 'unblurred-content' : ''}`} style={{ display: isProfileVisible ? 'block' : 'none' }}>
+                    <div className="two">
+                        <div className="pp">
+                            <div className="pphoto">
         
                             </div>
         
@@ -159,13 +158,15 @@ const CollegeMain =({checkSession}) => {
                         <p>{collegedetail.college_name}</p>
                     </div>
                     <div class="pelement">
-                        <div class="para"><p>{collegedetail.email_address} </p></div>
-                        <div class="para"><p>{collegedetail.state}</p></div>
+                        <div className="para"><p>{collegedetail.email_address} </p></div>
+                        <div className="para"><p>{collegedetail.state}</p></div>
                         
                         <hr/>  
-                        <div class="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
+                        <div className="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
                     </div>
             </div>
+        <div className={`bodyy1 ${isProfileVisible ? 'blur-background' : ''}`}>
+            
  
             <FiltersCollege sendDataToParent={FilterData}/>
             {display===0 && <Graph receivedData={receivedData} handleclick={handleclick}/>}

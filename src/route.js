@@ -5,6 +5,7 @@ const {getdata,projectlist,image,getstudata,getprojectdata,fetchprojdata,addbook
 const {details,getFile} = require('./controllers/upload.js');
 /** HTTP Reqeust */
 router.post('/signin', signin);
+router.post('/fexp', getFile);
 router.post('/signup', signup);
 router.post('/newuser', newuser);
 router.post('/fpassword',fpassword)
@@ -49,7 +50,7 @@ router.post("/checklike",checklike);
 router.get("/getskillList", getskillList)
 router.get("/getlikedprojects", getlikedprojects)
 router.get("/getrecentprj",getrecentprj)
-router.get("/en/file/:fileId",getFile);
+router.post("/files",getFile);
 router.post("/collegeprojectsdisplay",collegeprojdisplay);
 router.get("/getcollegeprojects",getcollegeprojects);
 router.get("/getcolldomainprojects",getcollegedomainprojects)
