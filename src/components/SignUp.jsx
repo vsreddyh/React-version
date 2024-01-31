@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import Header from "./Header";
 import Sider from "./Sider";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import "./signin.css"
 import axios from "axios";
 import { Link , useNavigate ,useParams } from "react-router-dom";
@@ -32,17 +34,50 @@ export default function SignUp(){
         });
     };
     return(
-        <div className="abc">
-            <Header />
-            <Sider />
-            <div className="content1" id="bodyy">
-                <div id="body-content">
-                    <p className="create">
+        <div className="abc15">
+            <div className="content115" id="header15">
+                <div className="header-logo15">
+                    <div className="logo15">
+                        <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} />
+                    </div>
+                    <div className="title15">
+                        <p>project</p>
+                    </div>
+                </div>
+            </div>
+            <div className="content115" id="sider15">
+                <div className="sider-slogan15">
+                    <p>
+                        Make things great.
+                    </p>
+                </div>
+                <div className="sider-contents15">
+                    <p>
+                        <i className="fa-solid fa-check" ></i>
+                        learn to make things
+                    </p>
+                    <p>
+                        <i className="fa-solid fa-check" ></i>
+                        learn to make things
+                    </p>
+                    <p>
+                        <i className="fa-solid fa-check" ></i>
+                        learn to make things
+                    </p>
+                    <p>
+                        <i className="fa-solid fa-check" ></i>
+                        learn to make things
+                    </p>
+                </div>
+            </div>
+            <div className="content115" id="bodyy15">
+                <div id="body-content15">
+                    <p className="create15">
                         Create your account
                     </p>
                     
                     <form onSubmit={handleSubmit}>
-                        <input className="username" type="email" name="username" placeholder="Email" title="min lenth 4 should contain special charecter" minLength={3} value={formData.username} onChange={handleInputChange} required autoComplete="username"/>
+                        <input className="username15" type="email" name="username" placeholder="Email" title="min lenth 4 should contain special charecter" minLength={3} value={formData.username} onChange={handleInputChange} required autoComplete="username"/>
                         <br />
                         <button type="submit">
                             
@@ -51,13 +86,13 @@ export default function SignUp(){
                         </button>  
                     </form>  
                 </div>
-                <div className="err">
+                <div className="err15">
                     {errorMessage && <p>{errorMessage}</p>}
                 </div>
-                <div className="sighnup">
+                <div className="sighnup15">
                     <p>Already have an account?  <Link to="/SignIn">Login</Link></p>
                 </div>
-                <div className="terms">
+                <div className="terms15">
                    <hr />
                        <p>
                          By signing-up in you are accepting
