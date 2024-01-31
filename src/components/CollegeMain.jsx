@@ -4,8 +4,13 @@ import Graph from "./Graph";
 import axios from "axios";
 import "./collegemain.css"
 import FiltersCollege from "./FiltersCollege";
+import DomainClick from "./DomainClick";
+import Collegeprojectportfolio from "./collegeprojectportfolio"
+import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
+import StudentData from "./StudentData";
 
 const CollegeMain =({checkSession}) => {
+    let { projid } = useParams();
     useEffect(() => {
         const intervalId = setInterval(async () => {
           try {
@@ -25,9 +30,33 @@ const CollegeMain =({checkSession}) => {
             console.error('Error checking session expiry:', error);
           }
         }, 10000);
+
     
         return () => clearInterval(intervalId);
       }, [checkSession]);
+      
+      const [display,setDisplay]=useState(0);
+      const [sugesstions,setSugesstions]=useState([]);
+      const [sendDataToStudent, setSendDataToStudent] = useState(null);
+      const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const [projects, setProjects] = useState([]);
+    
+      const navigate=useNavigate();
+      const handlesearch = async (inputData) => {
+        
+        try {
+            
+    
+            const response = await axios.get(`/en/getsearchbyclick?term=${inputData}`);
+            const data=response.data;
+            setSugesstions(data);
+            
+            setDisplay(1);
+        } catch (error) {
+            console.error("Error fetching suggestions:", error);
+        }
+    };
       const [receivedData, setReceivedData] = useState({
         category:'Any',
         search:'',
@@ -36,6 +65,16 @@ const CollegeMain =({checkSession}) => {
         sort_by:'Relevance',
         order:true
     });
+    const handleclick=(data)=>{
+        
+        setDisplay(2);
+        setSendDataToStudent(data);
+    }
+
+    const handlebackClick=async()=>
+    {
+        setDisplay(display-1);
+    }
     const FilterData = useCallback((data) => {
         updateReceivedData(data);
     }, []);
@@ -46,9 +85,42 @@ const CollegeMain =({checkSession}) => {
     const updateReceivedData = (data) => {
         setReceivedData(prevData => ({ ...prevData, ...data }));
     };
+    const killpage = () => {
+        if(projid){
+            navigate('/clgmain')
+        }
+        setDisplay(display-1)
+        setSendDataToStudent(null)
+    }
+    const fetchData = async () => {
+        try {
+            if(projid){
+                const response = await axios.get(`/en/validateurl?projid=${projid}`)
+                if (response.data===1){
+                    
+                    setDisplay(2)
+                    setSendDataToStudent(projid)
+                }
+                else if(response.data==2){
+                    
+                    setDisplay(3)
+                    setSendDataToStudent(projid)
+                }
+                else{
+                    navigate('clgmain')
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    useEffect(()=>{
+        fetchData()
+    })
+    
     return(
         <div className="body1">
-        <CollegeHeader takedata={CategoryData}/>
+        <CollegeHeader takedata={CategoryData} handlesearch={handlesearch}/>
         <div className="bodyy1">
             <div class="pbox">
                     <div class="two">
@@ -71,7 +143,10 @@ const CollegeMain =({checkSession}) => {
             </div>
  
             <FiltersCollege sendDataToParent={FilterData}/>
-            <Graph receivedData={receivedData}/>
+            {display===0 && <Graph receivedData={receivedData} handleclick={handleclick}/>}
+            {display===1 && <DomainClick handleclick={handleclick} handlebackClick={handlebackClick} sugesstions={sugesstions}/>}
+            {display===2 && <Collegeprojectportfolio studata={sendDataToStudent} dis={killpage}/>}
+            {display===3 && <StudentData studata={sendDataToStudent} dis={killpage}/>}
         </div>
         </div>
     );

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-const Graph = () => {
+const Graph = ({handleclick}) => {
     const [suggestions, setsuggestions] = useState([]);
     const [college, setCollege] = useState('');
     const [collegeprj, setCollegePrj] = useState([]);
@@ -205,10 +205,10 @@ useEffect(() => {
                     <p>20+ projects this year</p>
                 </div>
             </div>
-            <div className="cprojects">
+            <div className="cprojects" >
                 {suggestions.map((suggestion, index) => (
                     <div className="project-card" key={index}>
-                        <div className="cardpart">
+                        <div className="cardpart" onClick={()=>{handleclick(suggestion._id)}}>
                             <div className="profile-section">
                                 <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
                                 <br />
