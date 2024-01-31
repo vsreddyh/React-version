@@ -19,6 +19,7 @@ import Newhr from "./Newhr";
 import Company from "./choosecompany";
 import ClgMainPage from "./clgmainpage";
 import ProjectUploadForm from "./ProjectUploadForm";
+import FileExplorer from "./fileExplorer";
 
 import HomeComponents from "./HomeComponents";
 
@@ -64,6 +65,8 @@ export default function App() {
                 <Route path="/hrsignup/:errorMessage" element={userData ? <Navigate to="/" /> :<HrSignUp />} />
                 <Route path="/hrsignup" element={userData ? <Navigate to="/" /> : <HrSignUp />} />
                 <Route path="/ProjectUploadForm" element={<ProjectUploadForm/>}/>
+                <Route path="/showFiles" element={<FileExplorer/>}/>
+                
                 <Route path="/main/:projid" element={(userData && userData[1]===0 && userData[2]===0) ? <HomeComponents /> : <Navigate to="/" />}/>
                 <Route path="/*" element={<Navigate to="/" />} />
                 <Route path="/" element=
