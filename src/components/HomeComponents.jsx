@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
-import { faSearch, faUser, faUserPlus, faBars, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faUser, faUserPlus, faBars, faHeart, faHouse } from '@fortawesome/free-solid-svg-icons';
 import "./HomeComponents.css";
 import HomePage from "./HomePage.jsx"
 import StudentProfile from "./StudentProfile.jsx";
@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import StudentProjectProfile from "./studentProjectPortfolio.jsx";
 import { useParams } from "react-router-dom";
+import AboutUs from "./AboutUs.jsx";
 export default function HomeComponents({checkSession}) {
 
 
@@ -265,7 +266,7 @@ export default function HomeComponents({checkSession}) {
 
             <div className="content14" id="sider4" style={{ display: isSiderVisible ? 'block' : 'none' }}>
                 <div id="option1" className="option" onClick={() => handleOptionClick(0)}>
-                    <p><span></span>
+                    <p><span><FontAwesomeIcon icon={faHouse} /></span>
                         Home
                     </p>
                 </div>
@@ -298,6 +299,7 @@ export default function HomeComponents({checkSession}) {
                 {display === 2 && <ProjectDisplay handleskillprj={handleskillprj} handleskillList={handleskillList} handlesearchchange={handlesearchchange}  handleclick={handleclick}/>}
                 {display===3 && <DomainClick sugesstions={sugesstions} handlebackClick={handlebackClick} handleclick={handleclick}/>}
                 {display===4 && <StudentProjectProfile studata={sendDataToStudent} dis={killpage} handleprojectprofile={handleprojectprofile}/>}
+                {display===5 && <AboutUs /> }
 
             </div>
         </div>
