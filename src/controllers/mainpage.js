@@ -423,6 +423,13 @@ const gethrdetails=async(req,res)=>
    
     res.json(info);
 }
+const getCollDetails=async(req,res)=>
+{
+    const name=req.session.loggedInemail;
+    const clg=await college.findOne({email_address:name});
+    
+    res.json(clg);
+}
 
 
 
@@ -459,6 +466,7 @@ module.exports = {
     collegeprojdisplay,
     getcollegeprojects,
     getcollegedomainprojects,
-    gethrdetails
+    gethrdetails,
+    getCollDetails
     
 };
