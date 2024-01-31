@@ -39,7 +39,7 @@ const FrontPage = () => {
           target.classList.remove('active');
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 });
 
     sections.forEach((section) => {
       observer.observe(section);
@@ -114,25 +114,25 @@ const FrontPage = () => {
             <div className="jdet">
               <div id="jdetdetail" className="jdetimage">
                 <div className="jjjjj">
-                  <p>JOIN THE COMMUNITY OF 2500+ STUDENTS</p>
+                  <p>DEPLOY YOUR PROJECTS</p>
                 </div>
                 <div className="aaaaa">
                   <p>Create</p>
                 </div>
               </div>
               <div className="jdetimage">
-                <img src="../Deploying.webp" alt="community-students" />
+                <img src="../Deploying.jpg" alt="community-students" />
               </div>
             </div>
           </div>
           <div className="section" id="section3">
             <div className="jdet">
               <div className="jdetimage">
-                <img src="mlearning.jpg" alt="community-students" />
+                <img src="../Project-Management.jpg" alt="community-students" />
               </div>
               <div id="jdetdetail" className="jdetimage">
                 <div className="jjjjj">
-                  <p>JOIN THE COMMUNITY OF 2500+ STUDENTS</p>
+                  <p>LET OTHERS KNOW ABOUT YOUR PROJECTS</p>
                 </div>
                 <div className="aaaaa">
                   <p>Create</p>
