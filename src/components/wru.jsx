@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./wru.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
+import { faProductHunt} from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default function Category(){
     const year= new Date().getFullYear()
@@ -59,19 +60,19 @@ export default function Category(){
                 </div>
                 <div className="sider-contents9">
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                    <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                    <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
                         learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
-                        learn to make things
+                    <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
+                          learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                    <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
                         learn to make things
                     </p>
                 </div>
