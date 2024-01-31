@@ -21,6 +21,7 @@ export default function HomeComponents({checkSession}) {
     const [studentproj,setStudentproj]=useState([]);
     const [studentdetail,setStudentdetail]=useState([]);
     const [isProfileVisible,setIsProfileVisible]=useState(false);
+  
     const navigate=useNavigate();
     const toggleDashboard = () => {
         setIsSiderVisible(prevState => !prevState);
@@ -28,7 +29,8 @@ export default function HomeComponents({checkSession}) {
     };
     const toggleDashboard1 = () => {
         setIsProfileVisible(prevState => !prevState);
-        //setBodyGridColumn(prevState => prevState === 'span 1' ? 'span 2' : 'span 1');
+        console.log(isProfileVisible);
+        
     };
 
    
@@ -150,6 +152,7 @@ export default function HomeComponents({checkSession}) {
     
     
     
+    
     const handlestudentdetail=async ()=>
     {
         
@@ -247,7 +250,7 @@ export default function HomeComponents({checkSession}) {
     
 
     return (
-        <div className="body">
+        <div className={`body ${isProfileVisible ? 'blur-background' : ''}`}>
 
             <div className="content14" id="header4">
                 <header className="headerset4">
@@ -309,23 +312,24 @@ export default function HomeComponents({checkSession}) {
             </div>
 
             <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
-                <div class="pbox"  style={{ display: isProfileVisible ? 'block' : 'none' }}>
-                    <div class="two">
-                        <div class="pp">
-                            <div class="pphoto">
+            
+                <div className={`pbox ${isProfileVisible ? 'unblurred-content' : ''}`} style={{ display: isProfileVisible ? 'block' : 'none' }}>
+                    <div className="two">
+                        <div className="pp">
+                            <div className="pphoto">
         
                             </div>
         
                         </div>
                         <p>{studentdetail.student_name }</p>
                     </div>
-                    <div class="pelement">
+                    <div className="pelement">
                         
-                        <div class="para"><p>{studentdetail.email_address}</p></div>
-                        <div class="para"><p>{studentdetail.college_name}</p></div>
-                        <div class="para"><p>{studentdetail.field_name}</p></div>
+                        <div className="para"><p>{studentdetail.email_address}</p></div>
+                        <div className="para"><p>{studentdetail.college_name}</p></div>
+                        <div className="para"><p>{studentdetail.field_name}</p></div>
                         <hr/>  
-                        <div class="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
+                        <div className="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
                     </div>
                 </div>
                 {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} handleclick={handleclick}/>}

@@ -10,7 +10,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
 import DomainClick from "./DomainClick";
-
+import HomePage from "./HomePage";
 function HRMAIN({checkSession}){
     const navigate = useNavigate();
     const [display, setDisplay]= useState(0)
@@ -55,6 +55,7 @@ function HRMAIN({checkSession}){
     const [prevdisplay,setPrevdisplay]=useState(0);
     const [sugesstion,setSugesstions]=useState([]);
     const [hrdetails,setHrdetails]=useState([]);
+    const [term,setTerm]=useState('');
 
     const fetchData = async () => {
         try {
@@ -69,6 +70,7 @@ function HRMAIN({checkSession}){
                     setPrevdisplay(display)
                     setDisplay(3)
                     setSendDataToStudent(projid)
+
                 }
                 else{
                     navigate('hrmain')
@@ -117,12 +119,27 @@ function HRMAIN({checkSession}){
             const data=response.data;
             setSugesstions(data);
             setPrevdisplay(display)
-            setDisplay(2);
+            setDisplay(3);
         } catch (error) {
             console.error("Error fetching suggestions:", error);
         }
     };
-    
+    const handleDomainClick = async (inputData) => {
+        setTerm(inputData);
+        try {
+            const response = await axios.get(`/en/getdomainbyclick?term=${inputData}`);
+            const data=response.data;
+            setSugesstions(data);
+            
+            setDisplay(3);
+        } catch (error) {
+            console.error("Error fetching suggestions:", error);
+        }
+    };
+    const handleOptionClick=(inputval)=>
+    {
+        setDisplay(inputval);
+    }
    
    
 
@@ -223,10 +240,13 @@ function HRMAIN({checkSession}){
             <Filters sendDataToParent={FilterData}/>
             {display === 1 ? (
                 <ProjectPortfolio studata={sendDataToStudent} dis={killpage}/>
-            ) :display===2 ?( <DomainClick sugesstions={sugesstion} handleclick={handleclick} handlebackClick={handlebackClick}/>): display === 3 ? (
+            ) :display===3 ?( <DomainClick sugesstions={sugesstion} handleclick={handleclick} handlebackClick={handlebackClick}/>): display === 3 ? (
                 <StudentData studata={sendDataToStudent} dis={killpage} />
-            ) : display === 0 ? (
+            ):display===0?(<HomePage handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick}/>) : display === 2 ? (
                 <div>
+                    <div className="sbackbutton">
+                <p onClick={()=>handlebackClick()}><span>&#8592;</span>Go Back</p></div>
+
                     <div className="grid-container1">
                         {projects.map((project, index) => (
                                 <div key={index} className="grid-item1">
