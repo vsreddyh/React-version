@@ -250,7 +250,7 @@ export default function HomeComponents({checkSession}) {
     
 
     return (
-        <div className={`body ${isProfileVisible ? 'blur-background' : ''}`}>
+        <div className="body">
 
             <div className="content14" id="header4">
                 <header className="headerset4">
@@ -311,10 +311,7 @@ export default function HomeComponents({checkSession}) {
                 </div>
 
             </div>
-
-            <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
-            
-                <div className={`pbox ${isProfileVisible ? 'unblurred-content' : ''}`} style={{ display: isProfileVisible ? 'block' : 'none' }}>
+            <div className={`pbox ${isProfileVisible ? 'unblurred-content' : ''}`} style={{ display: isProfileVisible ? 'block' : 'none' }}>
                     <div className="two">
                         <div className="pp">
                             <div className="pphoto">
@@ -333,6 +330,10 @@ export default function HomeComponents({checkSession}) {
                         <div className="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
                     </div>
                 </div>
+
+            <div  className={`content14 ${isProfileVisible ? 'blur-background' : ''}`} id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
+            
+                
                 {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} handleclick={handleclick}/>}
                 {display === 1 && <StudentProfile  studentproj={studentproj} studentdetail={studentdetail} handleclick={handleclick}/>}
                 {display === 2 && <ProjectDisplay handleskillprj={handleskillprj} handleskillList={handleskillList} handlesearchchange={handlesearchchange}  handleclick={handleclick}/>}
