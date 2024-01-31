@@ -7,17 +7,28 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
 
-export default function Header({takedata}){
+export default function Header({takedata,handlesearch}){
     const [formData,setFormData]=useState({
         category: 'Any',
         search:'',
     });
+    const [searchterm,setSearchTerm]=useState('');
+    const handlesearchchange=async (event)=>
+    {
+        event.preventDefault();
+        setSearchTerm(event.target.value);
+        
+
+    }
+    
+
     useEffect(() => {
         takedata(formData);
     }, [formData, takedata]);
     function adjustSelectSize() {
         const selectElement = document.getElementById('cars');
         const selectedOption = selectElement.options[selectElement.selectedIndex];
+    
   
         // Calculate the width based on the text content of the selected option
         const width = getTextWidth(selectedOption.text) +40 ; // Add some padding
@@ -25,6 +36,8 @@ export default function Header({takedata}){
         // Set the width of the select element
         selectElement.style.width = width + 'px';
         }
+        
+    
   
     function getTextWidth(text) {
         const canvas = document.createElement('canvas');
@@ -71,10 +84,10 @@ export default function Header({takedata}){
                     </div>
             
                     <div className="searchbar1">
-                        <input type="search" className="searchs1" spellcheck="false" placeholder="Search for projects"></input>
+                        <input type="search" className="searchs1" spellcheck="false" placeholder="Search for projects" value={searchterm} onChange={(event)=>{handlesearchchange(event)}}></input>
                     </div>
                     <div className="search-icon1">
-                        <FontAwesomeIcon className="i" icon={faSearch} style={{color: "white"}}/>
+                        <FontAwesomeIcon className="i" icon={faSearch} style={{color: "white"}} onClick={()=>{handlesearch(searchterm)}}/>
                     </div>
                 </div>
                 <div className="profileset1">

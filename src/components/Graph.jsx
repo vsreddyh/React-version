@@ -1,84 +1,161 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Chart from 'chart.js/auto';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-
-const Graph = () => {
-
-    const [selectedYear, setSelectedYear] = useState('2021');
-    const yearlyData = {
-        '2021': [
-            { month: 'January', num_items: 15 },
-            { month: 'February', num_items: 20 },
-            { month: 'March', num_items: 20 },
-            { month: 'April', num_items: 10 },
-            { month: 'May', num_items: 5 },
-            { month: 'June', num_items: 4 },
-            { month: 'July', num_items: 65 },
-            { month: 'August', num_items: 88 },
-            { month: 'September', num_items: 7 },
-            { month: 'October', num_items: 50 },
-            { month: 'November', num_items: 12 },
-            { month: 'December', num_items: 35 },
-        ],
-        '2022': [
-            { month: 'January', num_items: 18 },
-            { month: 'February', num_items: 22 },
-            { month: 'March', num_items: 20 },
-            { month: 'April', num_items: 20 },
-            { month: 'May', num_items: 20 },
-            { month: 'June', num_items: 20 },
-            { month: 'July', num_items: 20 },
-            { month: 'August', num_items: 20 },
-            { month: 'September', num_items: 20 },
-            { month: 'October', num_items: 20 },
-            { month: 'November', num_items: 20 },
-            { month: 'December', num_items: 20 },
-        ],
-        // Add data for more years as needed
-    };
-
-    const monthlyChartRef = useRef(null);
+const Graph = ({handleclick}) => {
+    const [suggestions, setsuggestions] = useState([]);
+    const [college, setCollege] = useState('');
+    const [collegeprj, setCollegePrj] = useState([]);
+    const [selectedYear, setSelectedYear] = useState('2004');
+    
+    const [domainprj,setDomainprj]=useState([]);
 
     useEffect(() => {
-        const ctx = document.getElementById('monthlyChart').getContext('2d');
+        getproj();
+    }, []);
 
-        if (monthlyChartRef.current) {
-            monthlyChartRef.current.destroy();
+    const getproj = async () => {
+        try {
+            const response = await axios.post('/en/collegeprojectsdisplay');
+            setsuggestions(response.data.list);
+            setCollege(response.data.college);
+        } catch (error) {
+            console.error("Error fetching projects:", error);
+           
         }
+    };
+    
+    
 
-        monthlyChartRef.current = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: yearlyData[selectedYear].map(entry => entry.month),
-                datasets: [
-                    {
-                        label: `Number of Items Bought (${selectedYear})`,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 2,
-                        fill: false,
-                        data: yearlyData[selectedYear].map(entry => entry.num_items),
+    useEffect(() => {
+        const handlecollegeprojects = async () => {
+            try {
+                const response = await axios.get(`/en/getcollegeprojects?term=${selectedYear}`);
+                const data = response.data;
+                console.log("data", data);
+                setCollegePrj(data);
+            } catch (error) {
+                console.error('Error fetching college projects:', error);
+                
+            }
+        };
+
+        handlecollegeprojects();
+    }, [selectedYear]);
+
+    useEffect(() => {
+        const handledomainprojects = async () => {
+            try {
+                const response = await axios.get(`/en/getcolldomainprojects?term=${selectedYear}`);
+                const data = response.data;
+                console.log("data", data);
+                setDomainprj(data);
+            } catch (error) {
+                console.error('Error fetching college projects:', error);
+                
+            }
+        };
+
+        handledomainprojects();
+    }, [selectedYear]);
+
+    const monthlyChartRef=useRef(null);
+    const domainChartRef=useRef(null);
+    
+
+    //line graph
+useEffect(() => {
+    if (!collegeprj) {
+        console.warn(`Data for year ${selectedYear} not available yet.`);
+        return;
+    }
+
+    const ctx = document.getElementById('monthlyChart').getContext('2d');
+
+    if (monthlyChartRef.current) {
+        monthlyChartRef.current.destroy();
+    }
+
+    monthlyChartRef.current = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: collegeprj.map(entry => entry.month),
+            datasets: [
+                {
+                    label: `Number of Projects (${selectedYear})`,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false,
+                    data: collegeprj.map(entry => entry.projectsCount),
+                },
+            ],
+        },
+        options: {
+            scales: {
+                x: {
+                    grid: {
+                        display: false,
                     },
-                ],
-            },
-            options: {
-                scales: {
-                    x: {
-                        grid: {
-                            display: false,
-                        },
-                    },
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            display: false,
-                        },
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false,
                     },
                 },
             },
-        });
-    }, [selectedYear]);
+        },
+    });
+}, [selectedYear, collegeprj]);
+//bar graph
+useEffect(() => {
+    console.log('domainprj:', domainprj);
+    if (!domainprj) {
+        console.warn(`Data for year ${selectedYear} not available yet.`);
+        return;
+    }
+
+    const ctx = document.getElementById('domainChart').getContext('2d');
+
+    if (domainChartRef.current) {
+        domainChartRef.current.destroy();
+    }
+
+    domainChartRef.current = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: domainprj.map(entry => entry.domain),
+            datasets: [
+                {
+                    label: `Number of Projects (${selectedYear})`,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: true,
+                    backgroundColor : 'rgba(75, 192, 192, 1)',
+                    data: domainprj.map(entry => entry.projectsCount),
+                },
+            ],
+        },
+        options: {
+            scales: {
+                x: {
+                    grid: {
+                        display: false,
+                    },
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false,
+                    },
+                },
+            },
+        },
+    });
+}, [selectedYear, domainprj]);
+
 
     const handleYearChange = event => {
         setSelectedYear(event.target.value);
@@ -87,149 +164,74 @@ const Graph = () => {
     return (
         <div className="cmaintotal">
             <div className="cmainheading">
-                <h2>KESHAV MEMORIAL INSTITUTE OF TECHNOLOGY</h2>
+                <h2>{college}</h2>
             </div>
             <div className="cmaingraph">
                 <div id="cmainrealgraph" className="justincase">
-                    <label for="yearSelector">Select Year:</label>
+                    <label htmlFor="yearSelector">Select Year:</label>
                     <select id="yearSelector" onChange={handleYearChange}>
-                        <option value="2021">2021</option>
+                        <option value="2023">2023</option>
                         <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="2014">2014</option>
+                        <option value="2013">2013</option>
+                        <option value="2012">2012</option>
+                        <option value="2011">2011</option>
+                        <option value="2010">2010</option>
+                        <option value="2009">2009</option>
+                        <option value="2008">2008</option>
+                        <option value="2007">2007</option>
+                        <option value="2006">2006</option>
+                        <option value="2005">2005</option>
+                        <option value="2004">2004</option>
+                        <option value="2003">2003</option>
 
+                        
+
+
+                        
                     </select>
                     <canvas id="monthlyChart"></canvas>
+                    <canvas id="domainChart"></canvas>
+
                 </div>
                 <div id="cmainnp" className="justincase">
-                    <p>20+ Projects in this year</p>
+                    <p>20+ projects this year</p>
                 </div>
             </div>
-            <div className="cprojects">
-                <div className="project-card">
-                    <div className="cardpart">
-                        <div className="profile-section">
-                            <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div className="pnamedis">
-                            <div className="pname">
-                                <p>
-                                    Project palace
-                                </p>
+            <div className="cprojects" >
+                {suggestions.map((suggestion, index) => (
+                    <div className="project-card" key={index}>
+                        <div className="cardpart" onClick={()=>{handleclick(suggestion._id)}}>
+                            <div className="profile-section">
+                                <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
+                                <br />
+                                <span><FontAwesomeIcon icon={faHeart} /></span>
                             </div>
-                            <div className="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione?
-                                    Recusandae quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab
-                                    enim eius suscipit, impedit
-                                    consectetur ullam .Quidem dolorem asperiores id dignissimos itaque aspernatur
-                                    deleniti error illo velit!
-                                </p>
+                            <div className="pnamedis">
+                                <div className="pname">
+                                    <p>
+                                        {suggestion.Project_Name}
+                                    </p>
+                                </div>
+                                <div className="pdiscript">
+                                    <p>
+                                        {suggestion.Description}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-
                     </div>
-
-                </div>
-
-                <div className="project-card">
-                    <div className="cardpart">
-                        <div className="profile-section">
-                            <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div className="pnamedis">
-                            <div className="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div className="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione?
-                                    Recusandae quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab
-                                    enim eius suscipit, impedit
-                                    consectetur ullam .Quidem dolorem asperiores id dignissimos itaque aspernatur
-                                    deleniti error illo velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="project-card">
-                    <div className="cardpart">
-                        <div className="profile-section">
-                            <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div className="pnamedis">
-                            <div className="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div className="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione?
-                                    Recusandae quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab
-                                    enim eius suscipit, impedit
-                                    consectetur ullam .Quidem dolorem asperiores id dignissimos itaque aspernatur
-                                    deleniti error illo velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="project-card">
-                    <div className="cardpart">
-                        <div className="profile-section">
-                            <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                            <br />
-                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                        </div>
-                        <div className="pnamedis">
-                            <div className="pname">
-                                <p>
-                                    Project palace
-                                </p>
-                            </div>
-                            <div className="pdiscript">
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam,
-                                    maxime, ipsa cum sit in hic,
-                                    nemo esse magnam ullam doloremque culpa odit repellat minima ratione?
-                                    Recusandae quasi corrupti quod. Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab
-                                    enim eius suscipit, impedit
-                                    consectetur ullam .Quidem dolorem asperiores id dignissimos itaque aspernatur
-                                    deleniti error illo velit!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
+                ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Graph;

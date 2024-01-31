@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import Header from "./Header";
 import Sider from "./Sider";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import axiosInstance from "../settings/axiosInstance";
 import "./signin.css"
 import { Link , useNavigate } from "react-router-dom";
@@ -63,17 +65,50 @@ export default function SignIn({ setUserData }){
         });
     };
     return(
-        <div className="abc">
-            <Header />
-            <Sider />
-            <div className="content1" id="bodyy">
-                <div id="body-content">
-                    <p className="create">
+        <div className="abc15">
+            <div className="content115" id="header15">
+                <div className="header-logo15">
+                    <div className="logo15">
+                        <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} />
+                    </div>
+                    <div className="title15">
+                        <p>project</p>
+                    </div>
+                </div>
+            </div>
+            <div className="content115" id="sider15">
+                <div className="sider-slogan15">
+                    <p>
+                        Make things great.
+                    </p>
+                </div>
+                <div className="sider-contents15">
+                    <p>
+                        <i className="fa-solid fa-check" ></i>
+                        learn to make things
+                    </p>
+                    <p>
+                        <i className="fa-solid fa-check" ></i>
+                        learn to make things
+                    </p>
+                    <p>
+                        <i className="fa-solid fa-check" ></i>
+                        learn to make things
+                    </p>
+                    <p>
+                        <i className="fa-solid fa-check" ></i>
+                        learn to make things
+                    </p>
+                </div>
+            </div>
+            <div className="content115" id="bodyy15">
+                <div id="body-content15">
+                    <p className="create15">
                         Log in to your account
                     </p>
                     
                     <form onSubmit={handleSubmit}>
-                        <input className="username" type="email" name="username" placeholder="Email" minLength={3} value={formData.username} onChange={handleInputChange} required autoComplete="username"/>
+                        <input className="username15" type="email" name="username" placeholder="Email" minLength={3} value={formData.username} onChange={handleInputChange} required autoComplete="username"/>
                         <br />
                         <input type="password" name="password" placeholder="Password" minLength={8} pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} required autoComplete="current-password" title="should atleast conatin 1 capital 1 small 1 special char 1 number total of 8 char minimum"/>
                         <br />
@@ -84,10 +119,10 @@ export default function SignIn({ setUserData }){
                         </button>  
                     </form>  
                 </div>
-                <div className="err">
+                <div className="err15">
                     {errorMessage && <p>{errorMessage}</p>}
                 </div>
-                <div className="sighnup">
+                <div className="sighnup15">
                 <p>
                     New to project?<Link to="/">Sign up</Link>
                     
@@ -95,7 +130,7 @@ export default function SignIn({ setUserData }){
                 <Link to="/forgot-password">Forgot Password</Link>
                 
                 </div>
-                <div className="terms">
+                <div className="terms15">
                    <hr />
                        <p>
                          By logging in you are accepting

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
-import MainPage from "./MainPage";
 import CheckEmail from "./Check-Email";
 import ForgotPassword from "./ForgotPassword";
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
@@ -17,10 +16,10 @@ import HRMAIN from "./hrmain";
 import HrSignUp from "./hrsignup";
 import Newhr from "./Newhr";
 import Company from "./choosecompany";
-import ClgMainPage from "./clgmainpage";
+import CollegeMain from "./CollegeMain";
 import ProjectUploadForm from "./ProjectUploadForm";
 import FileExplorer from "./fileExplorer";
-
+import FrontPage from "./FrontPage";
 import HomeComponents from "./HomeComponents";
 
 export default function App() {
@@ -48,10 +47,12 @@ export default function App() {
             <Routes>
                 <Route path="/hrmain/:projid" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN checkSession={checkSession} /> : <Navigate to="/"/>}/>
                 <Route path="/hrmain" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN checkSession={checkSession}/> : <Navigate to="/" />}/>
-                <Route path="/clgmain" element={(userData && userData[1]===1 && userData[2]===1) ? <ClgMainPage checkSession={checkSession}/> : <Navigate to="/" />}/>
+                <Route path="/clgmain:projid" element={(userData && userData[1]===1 && userData[2]===1) ? <CollegeMain checkSession={checkSession}/> : <Navigate to="/" />}/>
+                <Route path="/clgmain" element={(userData && userData[1]===1 && userData[2]===1) ? <CollegeMain checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/signup/:errorMessage" element={userData ? <Navigate to="/" /> : <SignUp/>} />
                 <Route path="/signup" element={userData ? <Navigate to="/" /> : <SignUp/>} />
+                <Route path="/wru" element={userData ? <Navigate to="/" /> : <Category/>} />
                 <Route path="/Check-email/:mailid" element={userData ? <Navigate to="/" />: <CheckEmail/>}/>
                 <Route path="/college-signup" element={userData ? <Navigate to="/" /> : <CollegeLogin/>}/>
                 <Route path="/college-signup/:errorMessage" element={userData ? <Navigate to="/" /> : <CollegeLogin/>}/>
@@ -82,7 +83,7 @@ export default function App() {
                         :userData[2]===0?
                         <Company setUserData={setUserData}/>
                         :<Navigate to="/hrmain"/>
-                    : <Category  />}
+                    : <FrontPage  />}
                 exact/>
             </Routes>
         </BrowserRouter>

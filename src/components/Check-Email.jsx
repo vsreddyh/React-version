@@ -1,6 +1,7 @@
 import React from "react";
 import "./Check-Email.css"
 import { useParams } from "react-router-dom";
+import Header from "./Header";
 // import Header from "./Header.jsx";
 // import Sider from "./Sider.jsx";
 // import "./signin.css"
@@ -10,6 +11,8 @@ export default function () {
     const params = useParams();
     const token = params.mailid;
     return (
+        <div>
+             <Header/>
         <div className="container">
             <div className="cont">
                 <h1 className="heading">Check Your Email</h1>
@@ -17,6 +20,8 @@ export default function () {
             </div>
         </div>
 
+        </div>
+       
     )
 
 }

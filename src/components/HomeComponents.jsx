@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
-import { faSearch, faUser, faUserPlus, faBars, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faUser, faUserPlus, faBars, faHeart, faHouse } from '@fortawesome/free-solid-svg-icons';
 import "./HomeComponents.css";
 import HomePage from "./HomePage.jsx"
 import StudentProfile from "./StudentProfile.jsx";
@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import StudentProjectProfile from "./studentProjectPortfolio.jsx";
 import { useParams } from "react-router-dom";
+import AboutUs from "./AboutUs.jsx";
 export default function HomeComponents({checkSession}) {
 
 
@@ -265,27 +266,27 @@ export default function HomeComponents({checkSession}) {
 
             <div className="content14" id="sider4" style={{ display: isSiderVisible ? 'block' : 'none' }}>
                 <div id="option1" className="option" onClick={() => handleOptionClick(0)}>
-                    <p>
+                    <p><span><FontAwesomeIcon icon={faHouse} /></span>
                         Home
                     </p>
                 </div>
                 <div id="option2" className="option" onClick={() => {handleOptionClick(1) ; handlestudentdetail();handlegetproject();}} >
-                    <p>
+                    <p><span></span>
                         My project
                     </p>
                 </div>
                 <div id="option3" className="option" onClick={() => handleOptionClick(2)}>
-                    <p>
+                    <p><span></span>
                         likes
                     </p>
                 </div>
                 <div id="option3" className="option" onClick={() => handlelikeClick()}>
-                    <p>
+                    <p><span></span>
                         Liked Projects
                     </p>
                 </div>
                 <div id="option5" className="option" onClick={() => handleOptionClick(5)}>
-                    <p>
+                    <p><span></span>
                         about us
                     </p>
                 </div>
@@ -293,11 +294,31 @@ export default function HomeComponents({checkSession}) {
             </div>
 
             <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
+                <div class="pbox">
+                    <div class="two">
+                        <div class="pp">
+                            <div class="pphoto">
+        
+                            </div>
+        
+                        </div>
+                        <p>Hrishita</p>
+                    </div>
+                    <div class="pelement">
+                        <div class="para"><p>Name </p></div>
+                        <div class="para"><p>sugandham/hrishita@gmail.com</p></div>
+                        <div class="para"><p>Year</p></div>
+                        <div class="para"><p>Department</p></div>
+                        <hr/>  
+                        <div class="logout"> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
+                    </div>
+                </div>
                 {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} handleclick={handleclick}/>}
                 {display === 1 && <StudentProfile  studentproj={studentproj} studentdetail={studentdetail} handleclick={handleclick}/>}
                 {display === 2 && <ProjectDisplay handleskillprj={handleskillprj} handleskillList={handleskillList} handlesearchchange={handlesearchchange}  handleclick={handleclick}/>}
                 {display===3 && <DomainClick sugesstions={sugesstions} handlebackClick={handlebackClick} handleclick={handleclick}/>}
                 {display===4 && <StudentProjectProfile studata={sendDataToStudent} dis={killpage} handleprojectprofile={handleprojectprofile}/>}
+                {display===5 && <AboutUs /> }
 
             </div>
         </div>

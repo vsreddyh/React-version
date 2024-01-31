@@ -9,10 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
+import DomainClick from "./DomainClick";
 
 function HRMAIN({checkSession}){
     const navigate = useNavigate();
-    const [display, setDisplay]= useState(2)
+    const [display, setDisplay]= useState(0)
     const [receivedData, setReceivedData] = useState({
         category:'Any',
         search:'',
@@ -32,10 +33,12 @@ function HRMAIN({checkSession}){
         setCurrentPage(1);
         setDisplay(0)
     }, []);
+
     const updateReceivedData = (data) => {
         setReceivedData(prevData => ({ ...prevData, ...data }));
     };
     const handleclick=(data)=>{
+        setPrevdisplay(display);
         setDisplay(1);
         setSendDataToStudent(data);
     }
@@ -44,15 +47,20 @@ function HRMAIN({checkSession}){
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [sendDataToStudent, setSendDataToStudent] = useState(null);
+    const [prevdisplay,setPrevdisplay]=useState(0);
+    const [sugesstion,setSugesstions]=useState([]);
+
     const fetchData = async () => {
         try {
             if(projid){
                 const response = await axios.get(`/en/validateurl?projid=${projid}`)
                 if (response.data===1){
+                    setPrevdisplay(display)
                     setDisplay(1)
                     setSendDataToStudent(projid)
                 }
                 else if(response.data==2){
+                    setPrevdisplay(display)
                     setDisplay(3)
                     setSendDataToStudent(projid)
                 }
@@ -68,12 +76,51 @@ function HRMAIN({checkSession}){
                 const response = await axios.get(`/en/projects?${queryParams}`);
                 setProjects(response.data.list);
                 setTotalPages(response.data.total_pages);
+                
                 setDisplay(response.data.display)
             }
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
+    const handlebackClick=()=>
+    {
+        try{
+            if(display===prevdisplay)
+            {
+                setDisplay(0);
+            }
+            else
+            {
+                setDisplay(prevdisplay);
+            }
+           }
+           catch(error)
+           {
+            console.error("error occured:",error);
+           }
+       
+      
+    }
+    const handlesearch = async (inputData) => {
+        
+        try {
+            
+    
+            const response = await axios.get(`/en/getsearchbyclick?term=${inputData}`);
+            const data=response.data;
+            setSugesstions(data);
+            setPrevdisplay(display)
+            setDisplay(2);
+        } catch (error) {
+            console.error("Error fetching suggestions:", error);
+        }
+    };
+
+   
+   
+
+    
     useEffect(() => {
         fetchData();
     }, [receivedData, currentPage, projid]);
@@ -91,12 +138,12 @@ function HRMAIN({checkSession}){
         if(projid){
             navigate('/hrmain')
         }
-        setDisplay(0)
+        setDisplay(prevdisplay)
         setSendDataToStudent(null)
     }
     useEffect(() => {
         if (!projid) {
-            setDisplay(0); // Reset display to 0 when projid is null
+            setDisplay(prevdisplay); // Reset display to 0 when projid is null
             setSendDataToStudent(null);
         }
     }, [projid]);
@@ -124,13 +171,33 @@ function HRMAIN({checkSession}){
       }, [checkSession]);
     return(
         <div className="body1">
-        <Header takedata={CategoryData}/>
+        <Header takedata={CategoryData} handlesearch={handlesearch}/>
         <div className="bodyy1">
+            <div class="pbox">
+                    <div class="two">
+                        <div class="pp">
+                            <div class="pphoto">
+        
+                            </div>
+        
+                        </div>
+                        <p>Hrishita</p>
+                    </div>
+                    <div class="pelement">
+                        <div class="para"><p>Name </p></div>
+                        <div class="para"><p>sugandham/hrishita@gmail.com</p></div>
+                        <div class="para"><p>Year</p></div>
+                        <div class="para"><p>Department</p></div>
+                        <hr/>  
+                        <div class="logout"> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
+                    </div>
+            </div>
+
             <Filters sendDataToParent={FilterData}/>
             {display === 1 ? (
                 <ProjectPortfolio studata={sendDataToStudent} dis={killpage}/>
-            ) : display === 3 ? (
-                <StudentData studata={sendDataToStudent} dis={killpage}/>
+            ) :display===2 ?( <DomainClick sugesstions={sugesstion} handleclick={handleclick} handlebackClick={handlebackClick}/>): display === 3 ? (
+                <StudentData studata={sendDataToStudent} dis={killpage} />
             ) : display === 0 ? (
                 <div>
                     <div className="grid-container1">

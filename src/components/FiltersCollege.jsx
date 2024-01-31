@@ -47,9 +47,9 @@ export default function FiltersCollege({ sendDataToParent }) {
 
 
 
-    // useEffect(() => {
-    //     sendDataToParent(formData);
-    // }, [formData, sendDataToParent]);
+    useEffect(() => {
+        sendDataToParent(formData);
+    }, [formData, sendDataToParent]);
 
     const handleToggle = () => {
         setFormData({
