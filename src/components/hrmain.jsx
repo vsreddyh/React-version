@@ -254,9 +254,7 @@ function HRMAIN({ checkSession }) {
             </div>
 
 
-
-            <div className="bodyy1" style={{ gridColumn: bodyGridColumn }}>
-                <div className="pbox" style={{ display: isProfileVisible ? 'block' : 'none' }}>
+            <div className={`pbox ${isProfileVisible ? 'unblurred-content' : ''}`} style={{ display: isProfileVisible ? 'block' : 'none' }}>
                     <div className="two">
                         <div className="pp">
                             <div className="pphoto">
@@ -275,6 +273,8 @@ function HRMAIN({ checkSession }) {
                         <div className="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>
                     </div>
                 </div>
+            <div  className={`bodyy1 ${isProfileVisible ? 'blur-background' : ''}`} style={{ gridColumn: bodyGridColumn }}>
+                
 
                 {display === 0 ? (<HomePage handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} />) :
                     (
