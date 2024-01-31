@@ -121,7 +121,7 @@ const FrontPage = () => {
                 </div>
               </div>
               <div className="jdetimage">
-                <img src="mlearning.jpg" alt="community-students" />
+                <img src="../Deploying.webp" alt="community-students" />
               </div>
             </div>
           </div>
