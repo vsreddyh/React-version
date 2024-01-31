@@ -126,6 +126,26 @@ function HRMAIN({checkSession}){
         <div className="body1">
         <Header takedata={CategoryData}/>
         <div className="bodyy1">
+            <div class="pbox">
+                    <div class="two">
+                        <div class="pp">
+                            <div class="pphoto">
+        
+                            </div>
+        
+                        </div>
+                        <p>Hrishita</p>
+                    </div>
+                    <div class="pelement">
+                        <div class="para"><p>Name </p></div>
+                        <div class="para"><p>sugandham/hrishita@gmail.com</p></div>
+                        <div class="para"><p>Year</p></div>
+                        <div class="para"><p>Department</p></div>
+                        <hr/>  
+                        <div class="logout"> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
+                    </div>
+            </div>
+
             <Filters sendDataToParent={FilterData}/>
             {display === 1 ? (
                 <ProjectPortfolio studata={sendDataToStudent} dis={killpage}/>

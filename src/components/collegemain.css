@@ -2,7 +2,7 @@
     margin: 0px;
 }
 
-body {
+.body1 {
     display: block;
     margin: 0px;
     border: 0px;
@@ -138,7 +138,7 @@ body {
     border: 5px;
 }
 
-.bodyy {
+.bodyy1 {
     display: flex;
     flex-direction: column;
     background-color: #070b13;
@@ -148,6 +148,7 @@ body {
     padding-bottom: 0px;
     /* overflow: hidden; */
     box-sizing: border-box;
+    position: relative;
 }
 
 .filters {
@@ -294,4 +295,93 @@ body {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.pbox{
+    display: block;
+    box-sizing: content-box;
+    border: 2px solid rgb(7, 90, 149);
+    border-radius: 10px;
+    max-width: 220px;
+    max-height: 2000px;
+    background-color: rgb(33, 32, 32);
+    position:absolute ;
+    right: 0;
+    z-index: 5;
+    /* left: 100%; */
+    /* box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.3); */
+
+}
+.para p{
+    color: rgb(200, 200, 207);
+
+}
+.two{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    align-items: center;
+    padding-right: 5px;
+
+}
+.two p{
+    display: block;
+    padding-left: 10px;
+    color: rgb(236, 236, 242);
+}
+.two:hover{
+    background-color: rgb(70, 71, 71);
+    color: rgb(236, 236, 242);
+}
+.pp{
+    margin-left: 10px;
+}
+.pphoto{
+    /* display: block; */
+    background-color: rgb(173, 186, 194);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    /* padding-right: 10px; */
+}
+.pelement{
+    display: block;
+
+    /* text-align: center;
+ */
+}
+.para{
+    margin: 0px;
+    padding: 5px 0px;
+
+
+}
+
+.logout{
+    margin: 0px;
+    padding: 5px 0px;
+
+
+}
+.para p{
+    margin-left: 10px;
+}
+.para:hover{
+    background-color: rgb(70, 71, 71);
+    /* color: blue; */
+  
+
+}
+.logout:hover{
+    background-color: rgb(70, 71, 71);
+    /* color: blue; */
+  
+
+}
+.fas fa-sign-out-alt{
+    font-size: 26px;
+    color: aliceblue;
+}
+.logout p{
+    margin-left: 10px;
+    color: rgb(236, 236, 242);
 }
