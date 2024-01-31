@@ -17,13 +17,12 @@
 #header4{
     background-color: #1c2333 ;
     grid-column: span 2;
-    border: 0px;
     position: sticky;
 }
 
 .logo4{
-    margin-top: 14px;
-    margin-left: 5px;
+    margin-left: -15px;
+    margin-top:-10px;
 }
 
 .title4 {
@@ -31,8 +30,8 @@
     font-weight: 1000;
     color: aliceblue;
     font-family:'Courier New', Courier, monospace;
-    margin-left: 5px;
-    margin-top: 18px;
+    margin-top: 22px;
+    margin-left: -19px;
 }
 
 .logoset4{
@@ -43,6 +42,7 @@
 
 .searchbarset4{
     width: 40%;
+    margin-top: -49px;
 }
 
 .profileset4{
@@ -52,7 +52,7 @@
     padding-left: 10px;
 }
 .dash4{
-    margin-top: 10px;
+    margin-top: 20px;
     margin-left: 8px;
 }
 .headerset4 { 
@@ -123,7 +123,7 @@
     font-weight: 600;
 }
 .profile4{
-    margin-bottom: 3px;
+    margin-bottom: 30px;
     margin-right: 5px;
 
 }
