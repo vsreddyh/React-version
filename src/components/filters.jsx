@@ -38,7 +38,7 @@ export default function Filters({ sendDataToParent }) {
         if(inputdata===''){
             setFormData({
                 ...formData,
-                ["college_name"]: ''
+                ["college_name"]: 'Any'
             });
         }
     };
