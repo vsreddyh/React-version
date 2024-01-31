@@ -24,30 +24,37 @@ import HomeComponents from "./HomeComponents";
 
 export default function App() {
     const [userData, setUserData] = useState(null); //session data
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         checkSession();
     }, []); //use effect to call function on rendering of app.jsx
     const checkSession = async () => {
         try {
-            const respons = await axios.get('/en/checkSessionEndpoint'); //call to server for checking session
-            if (respons.data) {//if session exists condition is true
-                setUserData(respons.data); //sets data recieved from backend
+            const response = await axios.get('/en/checkSessionEndpoint');
+            if (response.data) {
+                setUserData(response.data);
             } else {
                 setUserData(null);
             }
         } catch (error) {
             console.error("Error checking session:", error);
             setUserData(null);
+        } finally {
+            setLoading(false); // Set loading to false regardless of success or failure
         }
     };
     console.log(userData)
+    if (loading) {
+        return <div>Loading...</div>; // Render a loading indicator while checking the session
+    }
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/hrmain/:projid" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN checkSession={checkSession} /> : <Navigate to="/"/>}/>
                 <Route path="/hrmain" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/clgmain:projid" element={(userData && userData[1]===1 && userData[2]===1) ? <CollegeMain checkSession={checkSession}/> : <Navigate to="/" />}/>
+                <Route path="/main:projid" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/clgmain" element={(userData && userData[1]===1 && userData[2]===1) ? <CollegeMain checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/signup/:errorMessage" element={userData ? <Navigate to="/" /> : <SignUp/>} />
