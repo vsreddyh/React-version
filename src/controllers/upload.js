@@ -172,7 +172,7 @@ connectWithRetry().catch(error => {
 });
 
 
-const getFile = async (fileId) => {
+const getFile = async (req,res) => {
 
 //   const { fileId } = req.params;
 //   console.log('Fetching file:', fileId);
