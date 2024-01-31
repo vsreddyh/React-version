@@ -323,7 +323,12 @@ function HRMAIN({ checkSession }) {
                                 </div>
                             ) : (
                                 <div>
-                                    <img src='https://www.shutterstock.com/shutterstock/photos/2315292249/display_1500/stock-photo-cute-baby-monkey-playing-in-indian-forest-2315292249.jpg' alt="Monkey" />
+                                    <div>
+                                        No Projects Found
+                                    </div>
+                                    <div>
+                                       <img src="../notfound.gif"></img>
+                                    </div>
                                 </div>
                             )}
                         </>)}
