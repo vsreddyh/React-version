@@ -215,25 +215,57 @@ function HRMAIN({checkSession}){
       }, [checkSession]);
     return(
         <div className="body1">
+        <div className="parent-container">
         <Header takedata={CategoryData} handlesearch={handlesearch} handlehrdetail={handlehrdetail} toggleDashboard1={toggleDashboard1}/>
+        <div className="hrbcon">
+        <div className="content14" id="sider4"  >
+            <div className="option1" id="option">
+                <p>
+                    Home
+                </p>
+            </div>
+            <div className="option2" id="option">
+                <p>
+                    My project
+                </p>
+            </div>
+            <div className="option3" id="option">
+                <p>
+                    likes
+                </p>
+            </div>
+            <div className="option4" id="option">
+                <p>
+                    comments
+                </p>
+            </div>
+            <div className="option5" id="option">
+                <p>
+                    about us
+                </p>
+            </div>
+            
+        </div>
+
+        
         <div className="bodyy1">
-            <div class="pbox"  style={{ display: isProfileVisible ? 'block' : 'none' }}>
-                    <div class="two">
-                        <div class="pp">
-                            <div class="pphoto">
+            <div className="pbox"  style={{ display: isProfileVisible ? 'block' : 'none' }}>
+                    <div className="two">
+                        <div className="pp">
+                            <div className="pphoto">
         
                             </div>
         
                         </div>
                         <p>{hrdetails.hr_name}</p>
                     </div>
-                    <div class="pelement">
+                    <div className="pelement">
                         
-                        <div class="para"><p>{hrdetails.email_address}</p></div>
-                        <div class="para"><p>{hrdetails.company_name}</p></div>
+                        <div className="para"><p>{hrdetails.email_address}</p></div>
+                        <div className="para"><p>{hrdetails.company_name}</p></div>
                         
                         <hr/>  
-                        <div class="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
+                        <div className="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
                     </div>
             </div>
 
@@ -284,6 +316,8 @@ function HRMAIN({checkSession}){
                     <img src='https://www.shutterstock.com/shutterstock/photos/2315292249/display_1500/stock-photo-cute-baby-monkey-playing-in-indian-forest-2315292249.jpg' alt="Monkey"/>
                 </div>
             )}
+        </div>
+        </div>
         </div>
         </div>
     );

@@ -2,7 +2,10 @@ import React,{useState,useEffect} from "react";
 import "./hr-page.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
-import { faSearch ,faUser} from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
+import { faSearch, faUser, faUserPlus, faBars, faHeart, faHouse } from '@fortawesome/free-solid-svg-icons';
+// import { faSearch ,faUser} from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -58,6 +61,10 @@ export default function Header({takedata,handlesearch, toggleDashboard1,handlehr
         <div className="header1">
             <div className="headerset1">
                 <div className="logoset1">
+                    <div className="dash4">
+                            <span className="btn4" ><FontAwesomeIcon icon={faBars} style={{ color: "aliceblue" }} /></span>
+                    </div>
+
                     <div className="logo1">
                         <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} />
                     </div>
