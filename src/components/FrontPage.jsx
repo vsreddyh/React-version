@@ -55,9 +55,7 @@ const FrontPage = () => {
     };
   }, []);
 
-  const handleClick=(event)=>{
-    console.log(`${event.target.innerText} button clicked`)
-  }
+  
 
   return (
     <div className="fpage1">
@@ -66,7 +64,8 @@ const FrontPage = () => {
           <div className="fheaderset1">
             <div className="flogo">
               <div className="fflogo">
-                <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8"}} />
+                {/* <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8"}} /> */}
+                <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }}/>
               </div>
               <div className="ftitle">
                 <p>project</p>
