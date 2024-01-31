@@ -41,7 +41,12 @@ const CollegeMain =({checkSession}) => {
       const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [projects, setProjects] = useState([]);
-    
+    const [collegedetail,setCollegedetail]=useState([]);
+    const [isProfileVisible,setIsProfileVisible]=useState(false);
+    const toggleDashboard1 = () => {
+        setIsProfileVisible(prevState => !prevState);
+       
+    };
       const navigate=useNavigate();
       const handlesearch = async (inputData) => {
         
@@ -55,6 +60,14 @@ const CollegeMain =({checkSession}) => {
             setDisplay(1);
         } catch (error) {
             console.error("Error fetching suggestions:", error);
+        }
+    };
+    const deletesession = async () => {
+        try {
+            const response = await axios.post("/en/deletesession");
+            await checkSession();
+        } catch (error) {
+            console.error('Error deleting session:', error);
         }
     };
       const [receivedData, setReceivedData] = useState({
@@ -92,6 +105,19 @@ const CollegeMain =({checkSession}) => {
         setDisplay(display-1)
         setSendDataToStudent(null)
     }
+    const handlecollegedetail=async()=>
+    {
+        try{
+            const response=await axios.get("/en/getcollegedetails");
+            const data=response.data;
+            console.log(data);
+            setCollegedetail(data);
+        }
+        catch(error)
+        {
+            console.error("error occured:",error);
+        }
+    }
     const fetchData = async () => {
         try {
             if(projid){
@@ -120,9 +146,9 @@ const CollegeMain =({checkSession}) => {
     
     return(
         <div className="body1">
-        <CollegeHeader takedata={CategoryData} handlesearch={handlesearch}/>
+        <CollegeHeader takedata={CategoryData} handlesearch={handlesearch} handlecollegedetail={handlecollegedetail} toggleDashboard1={toggleDashboard1}/>
         <div className="bodyy1">
-            <div class="pbox">
+            <div class="pbox" style={{ display: isProfileVisible ? 'block' : 'none' }}>
                     <div class="two">
                         <div class="pp">
                             <div class="pphoto">
@@ -130,15 +156,14 @@ const CollegeMain =({checkSession}) => {
                             </div>
         
                         </div>
-                        <p>Hrishita</p>
+                        <p>{collegedetail.college_name}</p>
                     </div>
                     <div class="pelement">
-                        <div class="para"><p>Name </p></div>
-                        <div class="para"><p>sugandham/hrishita@gmail.com</p></div>
-                        <div class="para"><p>Year</p></div>
-                        <div class="para"><p>Department</p></div>
+                        <div class="para"><p>{collegedetail.email_address} </p></div>
+                        <div class="para"><p>{collegedetail.state}</p></div>
+                        
                         <hr/>  
-                        <div class="logout"> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
+                        <div class="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
                     </div>
             </div>
  

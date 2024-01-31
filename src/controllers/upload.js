@@ -174,7 +174,7 @@ connectWithRetry().catch(error => {
 
 const getFile = async (fileId) => {
 
-  const { fileId } = req.params;
+  //const { fileId } = req.params;
   console.log('Fetching file:', fileId);
   try {
     if (!db) {
