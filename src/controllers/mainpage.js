@@ -78,10 +78,10 @@ const projectlist = async(req,res)=>{
         const a=~~((projlists.length)/10)
         let m;
         if (projlists.length===0){
-            m=2;
+            m=5;
         }
         else{
-            m=0;
+            m=2;
         }
         res.json({list:projlists.slice(l_limit,u_limit),total_pages:a+1,display:m})
     }

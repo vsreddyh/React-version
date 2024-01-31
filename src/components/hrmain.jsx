@@ -30,13 +30,13 @@ function HRMAIN({checkSession}){
     const FilterData = useCallback((data) => {
         updateReceivedData(data);
         setCurrentPage(1);
-        setDisplay(0)
+        setDisplay(2)
     }, []);
 
     const CategoryData = useCallback((data) => {
         updateReceivedData(data);
         setCurrentPage(1);
-        setDisplay(0)
+        setDisplay(2)
     }, []);
 
     const updateReceivedData = (data) => {
@@ -68,7 +68,7 @@ function HRMAIN({checkSession}){
                 }
                 else if(response.data==2){
                     setPrevdisplay(display)
-                    setDisplay(3)
+                    setDisplay(4)
                     setSendDataToStudent(projid)
 
                 }
@@ -240,7 +240,7 @@ function HRMAIN({checkSession}){
             <Filters sendDataToParent={FilterData}/>
             {display === 1 ? (
                 <ProjectPortfolio studata={sendDataToStudent} dis={killpage}/>
-            ) :display===3 ?( <DomainClick sugesstions={sugesstion} handleclick={handleclick} handlebackClick={handlebackClick}/>): display === 3 ? (
+            ) :display===3 ?( <DomainClick sugesstions={sugesstion} handleclick={handleclick} handlebackClick={handlebackClick}/>): display === 4 ? (
                 <StudentData studata={sendDataToStudent} dis={killpage} />
             ):display===0?(<HomePage handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick}/>) : display === 2 ? (
                 <div>
