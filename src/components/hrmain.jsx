@@ -218,12 +218,18 @@ function HRMAIN({checkSession}){
     
         return () => clearInterval(intervalId);
       }, [checkSession]);
+
+
+      const [isSiderVisible, setIsSiderVisible] = useState(true)
+      const toggleSider = () => {
+        setIsSiderVisible(prevState => !prevState);
+    };
     return(
         <div className="body1">
         <div className="parent-container">
-        <Header takedata={CategoryData} handlesearch={handlesearch} handlehrdetail={handlehrdetail} toggleDashboard1={toggleDashboard1}/>
+        <Header takedata={CategoryData} handlesearch={handlesearch} handlehrdetail={handlehrdetail} toggleDashboard1={toggleDashboard1} toggleSider={toggleSider}/>
         <div className="hrbcon">
-        <div className="content14" id="sider4"  >
+        <div className="content14" id="sider4" style={{ display: isSiderVisible ? 'block' : 'none' }} >
             <div className="option1" id="option">
                 <p>
                     Home
