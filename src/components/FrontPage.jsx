@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import './frontpage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
-
+import { useNavigate } from 'react-router-dom';
 
 const FrontPage = () => {
+  const navigate=useNavigate()
   useEffect(() => {
 
     let lastScrollTop = 0;
@@ -72,8 +73,8 @@ const FrontPage = () => {
               </div>
             </div>
             <div className="fbuttons">
-              <button className="fsignup" onClick={handleClick} name='signup'><p>Sign Up</p></button>
-              <button className="fsignup" onClick={handleClick} name='signin'><p>Sign In</p></button>
+              <button className="fsignup" onClick={()=>navigate('/wru')} name='signup'><p>Sign Up</p></button>
+              <button className="fsignup" onClick={()=>navigate('/SignIn')} name='signin'><p>Sign In</p></button>
             </div>
           </div>
         </header>
@@ -91,7 +92,7 @@ const FrontPage = () => {
               <div>
                 JOIN THE COMMUNITY OF 2500+ STUDENTS
               </div>
-              <div className="aaaaa">
+              <div className="aaaaa" onClick={()=>navigate('/wru')}>
                 <p>Create</p>
               </div>
             </div>

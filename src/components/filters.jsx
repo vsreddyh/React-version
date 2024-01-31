@@ -35,6 +35,12 @@ export default function Filters({ sendDataToParent }) {
         } catch (error) {
             console.log("error", error);
         }
+        if(inputdata===''){
+            setFormData({
+                ...formData,
+                ["college_name"]: ''
+            });
+        }
     };
     const handleSuggestionClick = (selectedSuggestion) => {
         setFormData({
@@ -44,27 +50,6 @@ export default function Filters({ sendDataToParent }) {
         setTerm(selectedSuggestion);
         setSuggestions([]);
     };
-    
-    /*useEffect(() => {
-        const fetchData = async () => {
-            try {
-                if (inputValue === 'Any') {
-                    setDropdownOptions([]); // Clear suggestions when 'Any' is selected
-                    setFormData({
-                        ...formData,
-                        ['college_name']: 'Any'
-                    });
-                } else {
-                    const response = await axios.get(`/en/data?state=${inputValue}`);
-                    setDropdownOptions(response.data);
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
-    }, [inputValue]);*/
 
     useEffect(() => {
         sendDataToParent(formData);

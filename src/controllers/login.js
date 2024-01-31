@@ -676,6 +676,11 @@ const getteam = async (req, res) => {
     }
 };
 
+const deletesession = async(req,res)=>{
+    req.session.destroy();
+    res.json('success')
+}
+
 module.exports = {
     signin,
     checkSessionEndpoint,
@@ -698,4 +703,5 @@ module.exports = {
     homepage,
     getSkill,
     getteam,
+    deletesession,
 };

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
-import MainPage from "./MainPage";
 import CheckEmail from "./Check-Email";
 import ForgotPassword from "./ForgotPassword";
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
@@ -19,7 +18,7 @@ import Newhr from "./Newhr";
 import Company from "./choosecompany";
 import CollegeMain from "./CollegeMain";
 import ProjectUploadForm from "./ProjectUploadForm";
-
+import FrontPage from "./FrontPage";
 import HomeComponents from "./HomeComponents";
 
 export default function App() {
@@ -52,6 +51,7 @@ export default function App() {
                 <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/signup/:errorMessage" element={userData ? <Navigate to="/" /> : <SignUp/>} />
                 <Route path="/signup" element={userData ? <Navigate to="/" /> : <SignUp/>} />
+                <Route path="/wru" element={userData ? <Navigate to="/" /> : <Category/>} />
                 <Route path="/Check-email/:mailid" element={userData ? <Navigate to="/" />: <CheckEmail/>}/>
                 <Route path="/college-signup" element={userData ? <Navigate to="/" /> : <CollegeLogin/>}/>
                 <Route path="/college-signup/:errorMessage" element={userData ? <Navigate to="/" /> : <CollegeLogin/>}/>
@@ -80,7 +80,7 @@ export default function App() {
                         :userData[2]===0?
                         <Company setUserData={setUserData}/>
                         :<Navigate to="/hrmain"/>
-                    : <Category  />}
+                    : <FrontPage  />}
                 exact/>
             </Routes>
         </BrowserRouter>

@@ -133,6 +133,7 @@ const fetchprojdata = async(req,res)=>{
         let data = datas[key];
         let projId = new mongoose.Types.ObjectId(data);
         let projinfo = await projects.findOne({_id:projId});
+        console.log(projinfo)
         array.push(projinfo)
     }
     res.json(array)

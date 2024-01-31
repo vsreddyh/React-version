@@ -5,6 +5,7 @@ const cors=require("cors")
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const approute=require("./route.js")
+const axios=require("axios")
 var MongoDBStore = require('connect-mongodb-session')(session);
 
 
@@ -33,6 +34,34 @@ app.use(session({
   }
 }));
 app.use(express.static('../build'));
+
+app.post('/checkPlagiarism', async (req, res) => {
+    const { textToCheck } = req.body;
+    console.log(textToCheck)
+    const options = {
+        method: 'POST',
+        url: 'https://plagiarism-checker-and-auto-citation-generator-multi-lingual.p.rapidapi.com/plagiarism',
+        headers: {
+          'content-type': 'application/json',
+          'X-RapidAPI-Key': 'fee42b39c6mshf82915257919e4ap11ae16jsn0cd6205d2a1a',
+          'X-RapidAPI-Host': 'plagiarism-checker-and-auto-citation-generator-multi-lingual.p.rapidapi.com'
+        },
+        data: {
+          text: textToCheck,
+          language: 'en',
+          includeCitations: req.body.includeCitations || false,
+          scrapeSources: req.body.scrapeSources || false
+        }
+      };
+    
+    try {
+    const response = await axios.request(options);
+    res.json(response.data.percentPlagiarism);
+    } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 app.use("/en",approute);//routing to all functions
 
