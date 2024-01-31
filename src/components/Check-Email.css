@@ -1,5 +1,6 @@
 .container {
     display: flex;
+    background-color:  #11151d;
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -9,8 +10,8 @@
     text-align: center;
 }
 .heading {
-    color: #444;
+    color: whitesmoke;
 }
 .para {
-    color: #666;
+    color: whitesmoke;
 }
