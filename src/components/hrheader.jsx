@@ -66,7 +66,8 @@ export default function Header({takedata,handlesearch, toggleDashboard1,handlehr
                     </div>
 
                     <div className="logo1">
-                        <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} />
+                        {/* <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} /> */}
+                        <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }}/>
                     </div>
                     <div className="title1">
                         <p>Project</p>

@@ -10,8 +10,8 @@ export default function Filters({ sendDataToParent }) {
     const [formData, setFormData] = useState({
         college_name: 'Any',
         type:'Any',
-        sort_by: 'Name',
-        order: true
+        sort_by: 'Upload Date',
+        order: false
     });
 
     //const [inputValue, setInputValue] = useState('Any');

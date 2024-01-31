@@ -19,8 +19,8 @@ function HRMAIN({checkSession}){
         search:'',
         type: 'Any',
         college_name: 'Any',
-        sort_by:'Relevance',
-        order:true
+        sort_by:'Upload Date',
+        order:false
     });
     const [isProfileVisible,setIsProfileVisible]=useState(false);
     const toggleDashboard1 = () => {
@@ -30,13 +30,13 @@ function HRMAIN({checkSession}){
     const FilterData = useCallback((data) => {
         updateReceivedData(data);
         setCurrentPage(1);
-        setDisplay(0)
+        setDisplay(2)
     }, []);
 
     const CategoryData = useCallback((data) => {
         updateReceivedData(data);
         setCurrentPage(1);
-        setDisplay(0)
+        setDisplay(2)
     }, []);
 
     const updateReceivedData = (data) => {
@@ -68,7 +68,7 @@ function HRMAIN({checkSession}){
                 }
                 else if(response.data==2){
                     setPrevdisplay(display)
-                    setDisplay(3)
+                    setDisplay(4)
                     setSendDataToStudent(projid)
 
                 }
@@ -139,13 +139,18 @@ function HRMAIN({checkSession}){
     const handleOptionClick=(inputval)=>
     {
         setDisplay(inputval);
+        if(inputval===2){
+            fetchData();
+        }
     }
    
    
 
     
     useEffect(() => {
-        fetchData();
+        if (display!==0){
+            fetchData();
+        }
     }, [receivedData, currentPage, projid]);
     const handleNextPage = () => {
         if (currentPage < totalPages) {
@@ -269,16 +274,19 @@ function HRMAIN({checkSession}){
                     </div>
             </div>
 
+            {display===0?(<HomePage handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick}/>):
+            (
+            <>
             <Filters sendDataToParent={FilterData}/>
             {display === 1 ? (
                 <ProjectPortfolio studata={sendDataToStudent} dis={killpage}/>
-            ) :display===3 ?( <DomainClick sugesstions={sugesstion} handleclick={handleclick} handlebackClick={handlebackClick}/>): display === 3 ? (
+            ) :display===3 ?( <DomainClick sugesstions={sugesstion} handleclick={handleclick} handlebackClick={handlebackClick}/>): display === 4 ? (
                 <StudentData studata={sendDataToStudent} dis={killpage} />
-            ):display===0?(<HomePage handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick}/>) : display === 2 ? (
+            ) : display === 2 ? (
                 <div>
                     <div className="sbackbutton">
-                <p onClick={()=>handlebackClick()}><span>&#8592;</span>Go Back</p></div>
-
+                <p onClick={()=>handlebackClick()}><span>&#8592;</span>Go Back</p>
+                    </div>
                     <div className="grid-container1">
                         {projects.map((project, index) => (
                                 <div key={index} className="grid-item1">
@@ -316,6 +324,7 @@ function HRMAIN({checkSession}){
                     <img src='https://www.shutterstock.com/shutterstock/photos/2315292249/display_1500/stock-photo-cute-baby-monkey-playing-in-indian-forest-2315292249.jpg' alt="Monkey"/>
                 </div>
             )}
+            </>)}
         </div>
         </div>
         </div>
