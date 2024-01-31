@@ -219,6 +219,12 @@ function HRMAIN({checkSession}){
     
         return () => clearInterval(intervalId);
       }, [checkSession]);
+
+
+      const [isSiderVisible, setIsSiderVisible] = useState(true)
+      const toggleSider = () => {
+        setIsSiderVisible(prevState => !prevState);
+    };
     return(
         <div className="body19">
         
