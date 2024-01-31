@@ -10,7 +10,7 @@ import { faSearch, faUser, faUserPlus, faBars, faHeart, faHouse } from '@fortawe
 
 
 
-export default function Header({takedata,handlesearch, toggleDashboard1,handlehrdetail, toggleSider}){
+export default function Header({takedata,handlesearch, toggleDashboard1,handlehrdetail, toggleDashboard}){
     const [formData,setFormData]=useState({
         category: 'Any',
         search:'',
@@ -62,7 +62,7 @@ export default function Header({takedata,handlesearch, toggleDashboard1,handlehr
             <div className="headerset1">
                 <div className="logoset1">
                     <div className="dash1">
-                            <span className="btn1" ><FontAwesomeIcon icon={faBars} style={{ color: "aliceblue" }} /></span>
+                            <span className="btn1" onClick={toggleDashboard}><FontAwesomeIcon icon={faBars} style={{ color: "aliceblue" }} /></span>
                     </div>
 
                     <div className="logo1">
