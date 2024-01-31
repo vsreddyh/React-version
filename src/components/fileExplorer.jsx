@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import FileOrFolder from './fileorfolder'
 import './fileExplorer.css';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
-
-
+import { useParams } from 'react-router-dom';
+import axiosInstance from "../settings/axiosInstance";
 
 
 
 const FileExplorer = () => {
+  const {data} = useParams()
   const [fileName, setFileName] = useState('');
   const [folderStructure, setFolderStructure] = useState(null);
   const [fileContents, setFileContents] = useState({});
@@ -17,13 +18,16 @@ const FileExplorer = () => {
   const [fname,setFname]=useState('');
   const [cde,setcde]=useState()
   const [openforpath,setopenforpath]=useState('')
+  
   const [fileId,setFileId]=useState('');
   console.log(openforpath)
-  const fetchFolderStructure = async () => {
+  const fetchFolderStructure = async (data) => {
     try {
       
-      setFileId('65b497569dc7f9d4ea86dfca');
-      const response = await axios.get(`en/file/${encodeURIComponent(fileId)}`);
+      setFileId(data);
+      console.log("c",data,fileId)
+      const response = await axios.post('/en/fexp', { data });
+      console.log(response.data.filename);
       setFolderStructure(response.data.folderStructure);
       setFileContents(response.data.fileContents);
       setFileName(response.data.filename);
@@ -31,11 +35,7 @@ const FileExplorer = () => {
       console.error('Error fetching folder structure:', error);
     }
   };
-  
-
-  
-
-
+  console.log("a",data)
   return (
     <div>
       {/* <input
@@ -47,7 +47,7 @@ const FileExplorer = () => {
 
       <div class="bodyy">
         <div className="sider">
-        <button onClick={fetchFolderStructure}>Fetch Folder Structure</button>
+        <button onClick={()=>fetchFolderStructure(data)}>Fetch Folder Structure</button>
           {folderStructure && <FileOrFolder fileName={fileName} name={fileName} contents={folderStructure} fileContents={fileContents} setcde={setcde} setopenforpath={setopenforpath} openforpath={openforpath}/>}
         </div>
         <div className="file-content">

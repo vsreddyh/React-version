@@ -228,7 +228,6 @@ export default function HomeComponents({checkSession}) {
         const intervalId = setInterval(async () => {
           try {
             const response = await axios.get("/checksessionexpiry");
-            console.log(response.data)
             if (response.data === 0) {
                 try{
                     clearInterval(intervalId);

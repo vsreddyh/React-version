@@ -65,6 +65,9 @@ export default function ProjectPortfolio({ dis, ...props }) {
 
         return `${dayWithSuffix} ${month} ${year}`;
     }
+    const handleFile = (data)=>{
+        navigate(`/showFiles/${data}`)
+    }
     const fetchData = async () => {
         const response = await axios.post('/en/getprojectdata', { data: projid });
         setprojdata(response.data);
@@ -130,7 +133,7 @@ export default function ProjectPortfolio({ dis, ...props }) {
                         <div className="gettingdescription">
                             <p>{projdata.Description}</p>
                         </div>
-                        <div className="opfolder">
+                        <div className="opfolder" onClick={()=>handleFile('65b497569dc7f9d4ea86dfca')}>
                             <p>FOLDER<span>&#128193;</span></p>
                             {/* need to add explorer hyper link here */}
                         </div>
