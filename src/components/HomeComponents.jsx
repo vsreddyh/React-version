@@ -265,27 +265,27 @@ export default function HomeComponents({checkSession}) {
 
             <div className="content14" id="sider4" style={{ display: isSiderVisible ? 'block' : 'none' }}>
                 <div id="option1" className="option" onClick={() => handleOptionClick(0)}>
-                    <p>
+                    <p><span></span>
                         Home
                     </p>
                 </div>
                 <div id="option2" className="option" onClick={() => {handleOptionClick(1) ; handlestudentdetail();handlegetproject();}} >
-                    <p>
+                    <p><span></span>
                         My project
                     </p>
                 </div>
                 <div id="option3" className="option" onClick={() => handleOptionClick(2)}>
-                    <p>
+                    <p><span></span>
                         likes
                     </p>
                 </div>
                 <div id="option3" className="option" onClick={() => handlelikeClick()}>
-                    <p>
+                    <p><span></span>
                         Liked Projects
                     </p>
                 </div>
                 <div id="option5" className="option" onClick={() => handleOptionClick(5)}>
-                    <p>
+                    <p><span></span>
                         about us
                     </p>
                 </div>
