@@ -13,6 +13,7 @@ import axios from 'axios';
 import StudentProjectProfile from "./studentProjectPortfolio.jsx";
 import { useParams } from "react-router-dom";
 import AboutUs from "./AboutUs.jsx";
+import { MdOutlineHome } from "react-icons/md";
 export default function HomeComponents({checkSession}) {
 
 
@@ -284,7 +285,9 @@ export default function HomeComponents({checkSession}) {
 
             <div className="content14" id="sider4" style={{ display: isSiderVisible ? 'block' : 'none' }}>
                 <div id="option1" className="option" onClick={() => handleOptionClick(0)}>
-                    <p><span><FontAwesomeIcon icon={faHouse} /></span>
+                    <p>
+                        {/* <span><FontAwesomeIcon icon={faHouse} /></span> */}
+                        <span><MdOutlineHome /></span>
                         Home
                     </p>
                 </div>
