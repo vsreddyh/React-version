@@ -796,7 +796,7 @@
 {
     filter: blur(1.6px);
 }
-unblurred-content
+.unblurred-content
 {
     filter:blur(0) !important;
 }

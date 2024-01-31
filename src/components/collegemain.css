@@ -297,7 +297,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .pbox{
-    display: block;
+   
     box-sizing: content-box;
     border: 2px solid rgb(7, 90, 149);
     border-radius: 10px;
@@ -306,7 +306,9 @@
     background-color: rgb(33, 32, 32);
     position:absolute ;
     right: 0;
-    z-index: 5;
+    z-index: 999;
+    display: none;
+    top:60px;
     /* left: 100%; */
     /* box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.3); */
 
@@ -384,4 +386,12 @@
 .logout p{
     margin-left: 10px;
     color: rgb(236, 236, 242);
+}
+.blur-background
+{
+    filter: blur(1.6px);
+}
+.unblurred-content
+{
+    filter:blur(0) !important;
 }
