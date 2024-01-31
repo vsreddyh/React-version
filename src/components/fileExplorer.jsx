@@ -22,7 +22,7 @@ const FileExplorer = () => {
   const fetchFolderStructure = async () => {
     try {
       
-      setFileId('65af8e8e9f0a23467fa1b284');
+      setFileId('65b497569dc7f9d4ea86dfca');
       const response = await axios.get(`en/file/${encodeURIComponent(fileId)}`);
       setFolderStructure(response.data.folderStructure);
       setFileContents(response.data.fileContents);

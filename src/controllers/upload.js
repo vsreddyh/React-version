@@ -174,86 +174,86 @@ connectWithRetry().catch(error => {
 
 const getFile = async (fileId) => {
 
-  //const { fileId } = req.params;
-  console.log('Fetching file:', fileId);
-  try {
-    if (!db) {
-      throw new Error('MongoDB connection not established.');
-    }
-    const bucket = new GridFSBucket(db);
+//   const { fileId } = req.params;
+//   console.log('Fetching file:', fileId);
+//   try {
+//     if (!db) {
+//       throw new Error('MongoDB connection not established.');
+//     }
+//     const bucket = new GridFSBucket(db);
 
-    const fileDocument = await db.collection('fs.files').findOne({ _id: new ObjectId(fileId) });
-    if (!fileDocument) {
-      return res.status(404).send('File not found');
-    }
+//     const fileDocument = await db.collection('fs.files').findOne({ _id: new ObjectId(fileId) });
+//     if (!fileDocument) {
+//       return res.status(404).send('File not found');
+//     }
 
-    // Store the filename in a variable
-    const filename = fileDocument.filename;
-    console.log('Filename:', filename);
+//     // Store the filename in a variable
+//     const filename = fileDocument.filename;
+//     console.log('Filename:', filename);
 
-    const downloadStream = bucket.openDownloadStream(new ObjectId(fileId));
+//     const downloadStream = bucket.openDownloadStream(new ObjectId(fileId));
 
-    let data = [];
-    downloadStream.on('data', (chunk) => {
-      data.push(chunk);
-    });
-    console.log(data);
+//     let data = [];
+//     downloadStream.on('data', (chunk) => {
+//       data.push(chunk);
+//     });
+//     console.log(data);
 
-    downloadStream.on('end', async () => {
-      try {
+//     downloadStream.on('end', async () => {
+//       try {
         
-        const buffer = Buffer.concat(data);
-        const zip = new AdmZip(buffer);
-        const zipEntries = zip.getEntries();
-        const folderStructure = getFolderStructure(zipEntries);
-        const fileContents = {};
-        zipEntries.forEach((zipEntry) => {
-          const textFileExtensions = ['.txt', '.csv', '.json', '.xml', '.yml', '.md', '.html', '.js', '.py', '.cpp', '.java', '.c', '.cs', '.php', '.rb', '.go', '.rs', '.swift', '.kt', '.ts', '.jsx', '.tsx', '.css', '.scss','-html', '.sass', '.less', '.bson', '.bytes', '.bind', '.disposition', '.type', '.cookie', '.signature', '.debug', '.property', '.eslintrc', '.github', '.nycrc', '.md', '.d.ts', '.d.ts.map', '.js', '.LICENSE', '.json', '.md', '.test', '.json', '.depd', '.destroy', '.first', '.url', '.html', '.etag', '.express', '.handler'];
-          if (textFileExtensions.some(ext => zipEntry.name.endsWith(ext))) {
-            const fileContentsBuffer = zipEntry.getData();
-            const contents = fileContentsBuffer.toString('utf8');
-            fileContents[zipEntry.entryName] = contents;
-          }
-        });
-        console.log('success')
-        res.status(200).json({ filename,folderStructure, fileContents });
-      } catch (error) {
-        console.error('Error extracting zip file:', error);
-        res.status(500).send('Internal Server Error - Invalid Zip Format');
-      }
-    });
+//         const buffer = Buffer.concat(data);
+//         const zip = new AdmZip(buffer);
+//         const zipEntries = zip.getEntries();
+//         const folderStructure = getFolderStructure(zipEntries);
+//         const fileContents = {};
+//         zipEntries.forEach((zipEntry) => {
+//           const textFileExtensions = ['.txt', '.csv', '.json', '.xml', '.yml', '.md', '.html', '.js', '.py', '.cpp', '.java', '.c', '.cs', '.php', '.rb', '.go', '.rs', '.swift', '.kt', '.ts', '.jsx', '.tsx', '.css', '.scss','-html', '.sass', '.less', '.bson', '.bytes', '.bind', '.disposition', '.type', '.cookie', '.signature', '.debug', '.property', '.eslintrc', '.github', '.nycrc', '.md', '.d.ts', '.d.ts.map', '.js', '.LICENSE', '.json', '.md', '.test', '.json', '.depd', '.destroy', '.first', '.url', '.html', '.etag', '.express', '.handler'];
+//           if (textFileExtensions.some(ext => zipEntry.name.endsWith(ext))) {
+//             const fileContentsBuffer = zipEntry.getData();
+//             const contents = fileContentsBuffer.toString('utf8');
+//             fileContents[zipEntry.entryName] = contents;
+//           }
+//         });
+//         console.log('success')
+//         res.status(200).json({ filename,folderStructure, fileContents });
+//       } catch (error) {
+//         console.error('Error extracting zip file:', error);
+//         res.status(500).send('Internal Server Error - Invalid Zip Format');
+//       }
+//     });
 
-    downloadStream.on('error', (error) => {
-      console.error('Error fetching file:', error);
-      res.status(500).send(`Error fetching file ${filename}`);
-    });
-  } catch (error) {
-    console.error('Error fetching file content:', error);
-    res.status(500).send('Internal Server Error');
-  }
+//     downloadStream.on('error', (error) => {
+//       console.error('Error fetching file:', error);
+//       res.status(500).send(`Error fetching file ${filename}`);
+//     });
+//   } catch (error) {
+//     console.error('Error fetching file content:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
 
   
-};
-function getFolderStructure(zipEntries) {
-  const folderStructure = {};
+// };
+// function getFolderStructure(zipEntries) {
+//   const folderStructure = {};
 
-  zipEntries.forEach((zipEntry) => {
-    const pathComponents = zipEntry.entryName.split('/');
-    let currentFolder = folderStructure;
+//   zipEntries.forEach((zipEntry) => {
+//     const pathComponents = zipEntry.entryName.split('/');
+//     let currentFolder = folderStructure;
 
-    pathComponents.forEach((component, index) => {
-      if (index === pathComponents.length - 1) {
-        currentFolder[component] = null;
-      } else {
-        if (!currentFolder[component]) {
-          currentFolder[component] = {};
-        }
-        currentFolder = currentFolder[component];
-      }
-    });
-  });
+//     pathComponents.forEach((component, index) => {
+//       if (index === pathComponents.length - 1) {
+//         currentFolder[component] = null;
+//       } else {
+//         if (!currentFolder[component]) {
+//           currentFolder[component] = {};
+//         }
+//         currentFolder = currentFolder[component];
+//       }
+//     });
+//   });
 
-  return folderStructure;
+//   return folderStructure;
 }
 
 

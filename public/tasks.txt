@@ -3,6 +3,7 @@ add fileexplorer to main repository
 add div for gemini
 header padding in all pages
 hrmain,project display,student main no projects found image
+hrmain less than 10 white page
 hrmain search fixing optional if time allows
 project upload form add plagarism div
 password pattern
@@ -16,3 +17,4 @@ department dataset
 copy link for projects not working
 random button student main
 logo loading animation
+delete comment
