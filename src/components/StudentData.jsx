@@ -84,19 +84,19 @@ export default function StudentData({ dis, ...props }) {
                         </div>
                     </div>
                 </div>
-                <div className="studetails">
-                    <div className="sdetails">
+                <div className="studetails1">
+                    <div className="sdetails1">
                         <div className="probackground"></div>
                         <div className="sphoto">
                             {studata.photo && (<img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${studata.photo}`}*/ alt="Profile Picture"/>)}
                         </div>
-                        <div className="sname">
+                        <div className="sname1">
                                 <p>{studata.student_name}</p>
                                 <p>{studata.email_address}</p>
                                 <p>{studata.college_name}</p>
                         </div>
                     </div>
-                    <div className="sprojects">
+                    <div className="sprojects1">
                         <div className="sprojectdetails">
                             <p>No. of Projects:{studata.projects?.length || 0}</p>
                             <h4>Active Domains worked for</h4>

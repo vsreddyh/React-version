@@ -45,7 +45,7 @@ export default function Category(){
                 <div className="header-logo9">
                     <div className="logo9">
                         {/* <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8"}} /> */}
-                        <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }}/>
+                        <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '17px' }}/>
                     </div>
                     <div className="title9">
                         <p>project</p>

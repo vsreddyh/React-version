@@ -102,7 +102,9 @@ export default function StudentProjectProfile({ dis, ...props }) {
         };
         checklike();
     }, [projid]);
-    
+    const handleFile = (data)=>{
+        navigate(`/showFiles/${data}`)
+    }
     const fetchData = async () => {
         const response = await axios.post('/en/getprojectdata', { data: projid });
         setprojdata(response.data);
@@ -170,7 +172,7 @@ export default function StudentProjectProfile({ dis, ...props }) {
                         <div className="gettingdescription1">
                             <p>{projdata.Description}</p>
                         </div>
-                        <div className="opfolder1">
+                        <div className="opfolder1" onClick={()=>handleFile('65b497569dc7f9d4ea86dfca')}>
                             <p>FOLDER<span>&#128193;</span></p>
                             {/* need to add explorer hyper link here */}
                         </div>
