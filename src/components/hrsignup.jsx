@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import Header from "./Header";
 import Sider from "./Sider";
-import "./signin.css"
+// import "./signin.css"
+import "./new-user.css"
 import axios from "axios";
 import { Link , useNavigate ,useParams } from "react-router-dom";
 
@@ -32,17 +33,17 @@ export default function HrSignUp(){
         });
     };
     return(
-        <div className="abc">
+        <div className="abc20">
             <Header />
             <Sider />
-            <div className="content1" id="bodyy">
-                <div id="body-content">
-                    <p className="create">
+            <div className="content120" id="bodyy20">
+                <div id="body-content20">
+                    <p className="create20">
                         Create your account
                     </p>
                     
                     <form onSubmit={handleSubmit}>
-                        <input className="username" type="email" name="username" placeholder="Email" minLength={3} value={formData.username} onChange={handleInputChange} required autoComplete="username"/>
+                        <input className="username20" type="email" name="username" placeholder="Email" minLength={3} value={formData.username} onChange={handleInputChange} required autoComplete="username"/>
                         <br />
                         <button type="submit">
                             
@@ -51,13 +52,13 @@ export default function HrSignUp(){
                         </button>  
                     </form>  
                 </div>
-                <div className="err">
+                <div className="err20">
                     {errorMessage && <p>{errorMessage}</p>}
                 </div>
-                <div className="sighnup">
+                <div className="sighnup20">
                     <p>Already have an account?  <Link to="/SignIn">Login</Link></p>
                 </div>
-                <div className="terms">
+                <div className="terms20">
                    <hr />
                        <p>
                          By signing-up in you are accepting

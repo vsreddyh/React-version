@@ -63,17 +63,17 @@ export default function NewUser({ setUserData }){
     };
     
     return(
-        <div className="abc">
+        <div className="abc20">
             <Header />
             <Sider />
-            <div id="bodyy" className="content1">
-                <div id="body-content">
-                    <p className="create">
+            <div id="bodyy20" className="content120">
+                <div id="body-content20">
+                    <p className="create20">
                     Create your account
                     </p>
                 
                     <form onSubmit={handleSubmit}>
-                        <input className="username" type="text" name="username" placeholder="User name" value={formData.username} onChange={handleInputChange} minLength={3}  required autoComplete="name"/>
+                        <input className="username20" type="text" name="username" placeholder="User name" value={formData.username} onChange={handleInputChange} minLength={3}  required autoComplete="name"/>
                         <br />
                         <input type="password" name="password" placeholder="Password" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} minLength={8} required autoComplete="new-password" title="should atleast conatin 1 capital 1 small 1 special char 1 number total of 8 char minimum"/>
                         <br />
@@ -86,11 +86,11 @@ export default function NewUser({ setUserData }){
                         </button>  
                     </form>  
                 </div>
-                <div className ="err">
+                <div className ="err20">
                     {errorMessage && <p>{errorMessage}</p>}
                     {error && <p>{error}</p>}
                 </div>
-                <div className="terms">
+                <div className="terms20">
                     <hr />
                         <p>
                         By creating you are accepting

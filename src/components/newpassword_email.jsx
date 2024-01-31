@@ -2,7 +2,7 @@ import React, {useState , useEffect} from "react";
 import "./new-user.css";
 import Header from "./Header";
 import Sider from "./Sider";
-import "./signin.css"
+// import "./signin.css"
 import axios from "axios";
 import { Link , useNavigate ,useLocation, useParams } from "react-router-dom";
 
@@ -65,13 +65,13 @@ const handleInputChange = (event) => {
 };
 
 return(
-    <div className="abc">
+    <div className="abc20">
         <Header />
         <Sider />
     
-    <div id="bodyy" className="content1">
-        <div id="body-content">
-            <p className="create">
+    <div id="bodyy20" className="content120">
+        <div id="body-content20">
+            <p className="create20">
             Create your account
             </p>
             
@@ -86,11 +86,11 @@ return(
 
             </form>  
         </div>
-        <div className ="err">
+        <div className ="err20">
             {errorMessage && <p>{errorMessage}</p>}
             {error && <p>{error}</p>}
         </div>
-        <div className="terms">
+        <div className="terms20">
         <hr />
             <p>
                 By creating you are accepting

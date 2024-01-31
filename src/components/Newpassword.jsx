@@ -59,13 +59,13 @@ export default function Newpasword(){
     };
     
     return(
-        <div className="abc">
+        <div className="abc20">
             <Header />
             <Sider />
         
-        <div id="bodyy" className="content1">
-            <div id="body-content">
-                <p className="create">
+        <div id="bodyy20" className="content120">
+            <div id="body-content20">
+                <p className="create20">
                 Create your account
                 </p>
                 
@@ -81,11 +81,11 @@ export default function Newpasword(){
                     </button>  
                 </form>  
             </div>
-            <div className ="err">
+            <div className ="err20">
                 {errorMessage && <p>{errorMessage}</p>}
                 {error && <p>{error}</p>}
             </div>
-            <div className="terms">
+            <div className="terms20">
                <hr />
                    <p>
                      By creating you are accepting

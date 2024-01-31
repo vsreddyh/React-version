@@ -70,115 +70,106 @@ export default function StudentData({ dis, ...props }) {
         fetchprojdata();
     }, [studata])
     return (
-        <div>
-            <div className="fakesbutton">
+        <div className="sprofile">
                 <div className="sbuttons">
                     <div className="stubutton">
                         <div className="bookmark">
-                            <div className="nby" onClick={() => togglebookmark()}>
-                                <p>
-                                    {bookmark === 0 ? 'Bookmark ' : 'Bookmark '}
-                                    <span>{bookmark === 0 ? '\u2606' : '\u2605'}</span>
-                                </p>
-                            </div>
-                            <div className="nby" onClick={() => handleDownload()}><p>Download <span>&#11123;</span></p></div>
+                            <div style="color: aliceblue;" className="nby"><p>Bookmark <span>&#9734;</span></p></div>
+                            <div style="color: aliceblue;" className="nby"><p>Download <span>&#11123;</span></p></div>
                         </div>
                         <div className="exit">
-                            <div className="nbu" onClick={() => share()}><p>{showCopyMessage === false ? 'Copy Link ' : 'Link Copied'}
-                                <GoLink /></p></div>
-                            <div className="nbu" onClick={() => exit()}><p>Exit <span>&#x2715;</span></p></div>
+                            <div style="color: aliceblue ;" className="nbu"><p>Share<span>&#10150;</span></p></div>
+                            <div style="color: aliceblue;" className="nbu"><p>Exit <span>&#x2715;</span></p></div>    
                         </div>
                     </div>
                 </div>
-
-            </div>
-            <div ref={printDivRef} className="sdownload">
-                <div className="sprofile">
-                    <div className="studetails">
-                        <div className="sdetails">
-                            <div className="probackground"></div>
-                            <div className="sphoto">
-                                {studata.photo && (<img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${studata.photo}`}*/ alt="Profile Picture"/>)}
-                            </div>
-                            <div className="sname1">
-                                <p>{studata.student_name}</p>
-                                <p>{studata.email_address}</p>
-                                <p>{studata.college_name}</p>
-                            </div>
+                <div className="studetails">
+                    <div className="sdetails">
+                        <div className="probackground"></div>
+                        <div className="sphoto">
+    
                         </div>
-                        <div className="sprojects">
-                            <div className="sprojectdetails">
-                                <p>No. of Projects: {studata.projects?.length || 0}</p>
-                                <h4>Active Domains worked for</h4>
-                                <ul>
-                                    {(studata.Domains && studata.Domains.length > 0) ? (
-                                        studata.Domains.map((domain, index) => (
-                                            <li key={index}>{domain}</li>
-                                        ))
-                                    ) : (
-                                        <li>None</li>
-                                    )}
-                                </ul>
-                            </div>
+                        <div className="sname">
+                                <p>Vishnu Shouryan Reddy Hanumandla</p>
+                                <p>vishnushouryan@gmail.com</p>
+                                <p>Keshav Memorial Institute of Technology</p>
                         </div>
-
                     </div>
-                    <div className="sbio">
-                        <div className="stubio">
-                            <p>{studata.Description}</p>
+                    <div className="sprojects">
+                        <div className="sprojectdetails">
+                            <p>No. of Projects:</p>
+                            <h4>Active Domains worked for</h4>
+                            <ul>
+                                <li>Machine Learning</li>
+                                <li>Artificial Intelligence</li>
+                            </ul>
+
                         </div>
-
                     </div>
-                    <div className="stuskill">
-                        <div className="sskill">
-                            <div>
-                                <h4>Skills:</h4>
-                                <ul>
-                                    {(studata.skills && Array.isArray(studata.skills) && studata.skills.length > 0) ? (
-                                        studata.skills.map((skill, index) => (
-                                            <li key={index}>{skill}</li>
-                                        ))
-                                    ) : (
-                                        <li>None</li>
-                                    )}
-                                </ul>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div className="proj-container">
-                        {projects.length > 0 ? (
-                            projects.map((project, index) => (
-                                <div key={index} className="proj-item">
-                                    <div>
-                                        <div className="project-card1">
-                                            <div className="cardpart1">
-                                                <img className="profile-picture1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${project.photo}`}*/ alt="Profile Picture" />
-                                                <div className="pdiscript1">
-                                                    <p>
-                                                        {project.Description}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div className="pname1" onClick={()=>navigate(`/hrmain/${project._id}`)}>
-                                                <p>
-                                                    {project.Project_Name}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <p>Loading projects...</p>
-                        )}
-
+                </div>
+                <div className="sbio">
+                    <div className="stubio">
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda nulla deserunt nam eaque aliquid architecto rerum quos, enim dolorem suscipit. Esse, pariatur nemo veniam cumque eius accusamus natus unde sapiente. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita deleniti nihil voluptates corporis iste amet, labore illo optio fugit distinctio, et consequatur doloremque ab ad atque incidunt maxime sit unde. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quos minus laborum molestiae velit officia rem unde, nisi harum nihil consequatur id officiis, dolores, impedit esse tenetur labore odio quaerat.</p>
                     </div>
 
                 </div>
-            </div>
+                <div className="stuskill">
+                    <div className="sskill">
+                        <div>
+                            <p>Project name in the domain of machine learning</p>
+                            <h4>Skills:</h4>
+                            <ul>
+                                <li>Skill1</li>
+                                <li>Skill2</li>
+                                <li>Skill3</li>
+                            </ul>
+                        </div>
+                    </div>
 
-        </div>
+                </div>
+                <div className="spro">
+                    <div className="spro1">
+                        <h3>PROJECTS</h3>
+                    </div>
+                </div>
+                <div className="project-card1">
+                    <div className="cardpart1">
+                        <img className="profile-picture1" src="https://placekitten.com/300/200" alt="Profile Picture1"/>
+                        <div className="pdiscript1">
+                            <p>
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam, maxime, ipsa cum sit in hic, 
+                               nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae quasi corrupti quod. Lorem
+                                ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab enim eius suscipit, impedit 
+                                consectetur ullam
+                               . Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo velit!
+                            </p>
+                        </div>
+                    </div>
+                    <div className="pname1">
+                        <p>
+                            Project palace
+                        </p>
+                    </div>
+                </div>
+                <div className="project-card1">
+                    <div className="cardpart1">
+                        <img className="profile-picture1" src="https://placekitten.com/300/200" alt="Profile Picture1"/>
+                        <div className="pdiscript1">
+                            <p>
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis aliquam, maxime, ipsa cum sit in hic, 
+                               nemo esse magnam ullam doloremque culpa odit repellat minima ratione? Recusandae quasi corrupti quod. Lorem
+                                ipsum dolor sit amet consectetur adipisicing elit. Unde aut perferendis amet ab enim eius suscipit, impedit 
+                                consectetur ullam
+                               . Quidem dolorem asperiores id dignissimos itaque aspernatur deleniti error illo velit!
+                            </p>
+                        </div>
+                    </div>
+                    <div className="pname1">
+                        <p>
+                            Project palace
+                        </p>
+                    </div>
+                </div>
+            </div>
     )
 }
