@@ -62,25 +62,25 @@ export default function CollegeLogin() {
 
 
   return (
-    <div className="abc">
-      <div className="content1" id="header">
-        <div className="header-logo">
-          <div className="logo">
+    <div className="abc8">
+      <div className="content18" id="header8">
+        <div className="header-logo8">
+          <div className="logo8">
             <FontAwesomeIcon icon={faProductHunt} style={{ color: "#0db1f8" }} />
           </div>
-          <div className="title">
+          <div className="title8">
             <p>project</p>
           </div>
         </div>
       </div>
 
-      <div className="content1" id="sider">
-        <div className="sider-slogan">
+      <div className="content18" id="sider8">
+        <div className="sider-slogan8">
           <p>
             Make things great.
           </p>
         </div>
-        <div className="sider-contents">
+        <div className="sider-contents8">
           <p>
             <i className="fa-solid fa-check" ></i>
             learn to make things
@@ -99,16 +99,16 @@ export default function CollegeLogin() {
           </p>
         </div>
       </div>
-      <div className="content1" id="bodyy">
-        <div id="body-content">
-          <p className="create" >
+      <div className="content18" id="bodyy8">
+        <div id="body-content8">
+          <p className="create8" >
             Enter your college name
           </p>
 
           <form onSubmit={handle} method="post">
-            <input name="serverCollegeName" className="collegename" type="text" id="collegeInput" placeholder="College Name" value={term} onChange={handleInputChange} minLength="3" required />
+            <input name="serverCollegeName" className="collegename" type="text" id="collegeInput8" placeholder="College Name" value={term} onChange={handleInputChange} minLength="3" required />
             <br />
-            <div id="suggestions">
+            <div id="suggestions8">
               {suggestions1.map((suggestion1, index) =>
               (
                 <p key={index} className="suggestion" onClick={() => handleSuggestionClick(suggestion1)}>
@@ -122,15 +122,15 @@ export default function CollegeLogin() {
 
             </button>
           </form>
-          <div className="err">
+          <div className="err8">
             {errorMessage && <p>{errorMessage}</p>}
           </div>
         </div>
-        <div className="sighnup">
+        <div className="sighnup8">
           <p>Already have an account?  <Link to="/SignIn">Login</Link></p>
         </div>
 
-        <div className="terms">
+        <div className="terms8">
           <hr />
           <p>
             By signing up, you are accepting
