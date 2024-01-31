@@ -3,9 +3,6 @@ import axios from 'axios';
 import DisplayFolders from './displayfolder';
 import DisplayFile from './displayfiles';
 
-// Import your folder and file images
-import folderImage from './folder.png';
-import fileImage from './file (1).png';
 
 const FileOrFolder = ({ fileName, path, name, contents, fileContents, setcde, openforpath, setopenforpath }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,10 +43,10 @@ const FileOrFolder = ({ fileName, path, name, contents, fileContents, setcde, op
       <div  className="folders" onClick={handleClick}>
         {isFolder(contents) ? (
           // Use the folder image for folders
-          <img src={folderImage} alt="Folder" style={{ width: '20px', marginRight: '5px' }} />
+          <img src="../folder.png" alt="Folder" style={{ width: '20px', marginRight: '5px' }} />
         ) : (
           // Use the file image for files
-          <img src={fileImage} alt="File" style={{ width: '20px', marginRight: '5px' }} />
+          <img src="../file (1).png" alt="File" style={{ width: '20px', marginRight: '5px' }} />
         )}
         <div className='p'> <p>{name} </p> </div>
       </div>
