@@ -20,11 +20,18 @@ export default function HomeComponents({checkSession}) {
     const [bodyGridColumn, setBodyGridColumn] = useState('span 2');
     const [studentproj,setStudentproj]=useState([]);
     const [studentdetail,setStudentdetail]=useState([]);
+    const [isProfileVisible,setIsProfileVisible]=useState(false);
     const navigate=useNavigate();
     const toggleDashboard = () => {
         setIsSiderVisible(prevState => !prevState);
         setBodyGridColumn(prevState => prevState === 'span 1' ? 'span 2' : 'span 1');
     };
+    const toggleDashboard1 = () => {
+        setIsProfileVisible(prevState => !prevState);
+        //setBodyGridColumn(prevState => prevState === 'span 1' ? 'span 2' : 'span 1');
+    };
+
+   
 
 
     const [display, setDisplay] = useState(0);
@@ -131,6 +138,14 @@ export default function HomeComponents({checkSession}) {
             return;
 }
     }
+    const deletesession = async () => {
+        try {
+            const response = await axios.post("/en/deletesession");
+            await checkSession();
+        } catch (error) {
+            console.error('Error deleting session:', error);
+        }
+    };
     
     
     
@@ -257,8 +272,8 @@ export default function HomeComponents({checkSession}) {
                     </div>
                     <div className="profileset4">
                         
-                        <div className="profile4">
-                            <FontAwesomeIcon icon={faUser} className="profileset-icon" />
+                        <div className="profile4" >
+                            <FontAwesomeIcon icon={faUser} className="profileset-icon" onClick={() => {toggleDashboard1();handlestudentdetail()}}/>
                         </div>
                     </div>
                 </header>
@@ -294,7 +309,7 @@ export default function HomeComponents({checkSession}) {
             </div>
 
             <div className="content14" id="bodyy4" style={{ gridColumn: bodyGridColumn }}>
-                <div class="pbox">
+                <div class="pbox"  style={{ display: isProfileVisible ? 'block' : 'none' }}>
                     <div class="two">
                         <div class="pp">
                             <div class="pphoto">
@@ -302,15 +317,15 @@ export default function HomeComponents({checkSession}) {
                             </div>
         
                         </div>
-                        <p>Hrishita</p>
+                        <p>{studentdetail.student_name }</p>
                     </div>
                     <div class="pelement">
-                        <div class="para"><p>Name </p></div>
-                        <div class="para"><p>sugandham/hrishita@gmail.com</p></div>
-                        <div class="para"><p>Year</p></div>
-                        <div class="para"><p>Department</p></div>
+                        
+                        <div class="para"><p>{studentdetail.email_address}</p></div>
+                        <div class="para"><p>{studentdetail.college_name}</p></div>
+                        <div class="para"><p>{studentdetail.field_name}</p></div>
                         <hr/>  
-                        <div class="logout"> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
+                        <div class="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
                     </div>
                 </div>
                 {display === 0 && <HomePage  handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} handleclick={handleclick}/>}

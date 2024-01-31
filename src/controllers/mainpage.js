@@ -416,7 +416,13 @@ const getcollegedomainprojects = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
-
+const gethrdetails=async(req,res)=>
+{
+    const hr=req.session.loggedInemail;
+    const info=await recruiter.findOne({email_address:hr});
+   
+    res.json(info);
+}
 
 
 
@@ -452,6 +458,7 @@ module.exports = {
     getrecentprj,
     collegeprojdisplay,
     getcollegeprojects,
-    getcollegedomainprojects
+    getcollegedomainprojects,
+    gethrdetails
     
 };

@@ -22,6 +22,11 @@ function HRMAIN({checkSession}){
         sort_by:'Relevance',
         order:true
     });
+    const [isProfileVisible,setIsProfileVisible]=useState(false);
+    const toggleDashboard1 = () => {
+        setIsProfileVisible(prevState => !prevState);
+       
+    };
     const FilterData = useCallback((data) => {
         updateReceivedData(data);
         setCurrentPage(1);
@@ -49,6 +54,7 @@ function HRMAIN({checkSession}){
     const [sendDataToStudent, setSendDataToStudent] = useState(null);
     const [prevdisplay,setPrevdisplay]=useState(0);
     const [sugesstion,setSugesstions]=useState([]);
+    const [hrdetails,setHrdetails]=useState([]);
 
     const fetchData = async () => {
         try {
@@ -116,7 +122,7 @@ function HRMAIN({checkSession}){
             console.error("Error fetching suggestions:", error);
         }
     };
-
+    
    
    
 
@@ -147,6 +153,27 @@ function HRMAIN({checkSession}){
             setSendDataToStudent(null);
         }
     }, [projid]);
+    const handlehrdetail=async()=>
+    {
+        try{
+            const response=await axios.get("/en/gethrdetails");
+            const data=response.data;
+            console.log(data);
+            setHrdetails(data);
+        }
+        catch(error)
+        {
+            console.error("error occured:",error);
+        }
+    }
+    const deletesession = async () => {
+        try {
+            const response = await axios.post("/en/deletesession");
+            await checkSession();
+        } catch (error) {
+            console.error('Error deleting session:', error);
+        }
+    };
     useEffect(() => {
         const intervalId = setInterval(async () => {
           try {
@@ -171,9 +198,9 @@ function HRMAIN({checkSession}){
       }, [checkSession]);
     return(
         <div className="body1">
-        <Header takedata={CategoryData} handlesearch={handlesearch}/>
+        <Header takedata={CategoryData} handlesearch={handlesearch} handlehrdetail={handlehrdetail} toggleDashboard1={toggleDashboard1}/>
         <div className="bodyy1">
-            <div class="pbox">
+            <div class="pbox"  style={{ display: isProfileVisible ? 'block' : 'none' }}>
                     <div class="two">
                         <div class="pp">
                             <div class="pphoto">
@@ -181,15 +208,15 @@ function HRMAIN({checkSession}){
                             </div>
         
                         </div>
-                        <p>Hrishita</p>
+                        <p>{hrdetails.hr_name}</p>
                     </div>
                     <div class="pelement">
-                        <div class="para"><p>Name </p></div>
-                        <div class="para"><p>sugandham/hrishita@gmail.com</p></div>
-                        <div class="para"><p>Year</p></div>
-                        <div class="para"><p>Department</p></div>
+                        
+                        <div class="para"><p>{hrdetails.email_address}</p></div>
+                        <div class="para"><p>{hrdetails.company_name}</p></div>
+                        
                         <hr/>  
-                        <div class="logout"> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
+                        <div class="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
                     </div>
             </div>
 

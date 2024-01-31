@@ -2,12 +2,12 @@ import React,{useState,useEffect} from "react";
 import "./hr-page.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch ,faUser} from '@fortawesome/free-solid-svg-icons';
 
 
 
 
-export default function Header({takedata,handlesearch}){
+export default function Header({takedata,handlesearch, toggleDashboard1,handlehrdetail}){
     const [formData,setFormData]=useState({
         category: 'Any',
         search:'',
@@ -20,6 +20,7 @@ export default function Header({takedata,handlesearch}){
         
 
     }
+    
     
 
     useEffect(() => {
@@ -92,7 +93,7 @@ export default function Header({takedata,handlesearch}){
                 </div>
                 <div className="profileset1">
                 <p>
-
+                <FontAwesomeIcon icon={faUser} className="profileset-icon" onClick={() => {toggleDashboard1();handlehrdetail()}}/>
                 </p>
                 
                 </div>
