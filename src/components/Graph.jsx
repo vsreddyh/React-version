@@ -72,11 +72,12 @@ useEffect(() => {
         return;
     }
 
-    const ctx = document.getElementById('monthlyChart').getContext('2d');
 
     if (monthlyChartRef.current) {
         monthlyChartRef.current.destroy();
     }
+
+    const ctx = document.getElementById('monthlyChart').getContext('2d');
 
     monthlyChartRef.current = new Chart(ctx, {
         type: 'line',
@@ -85,7 +86,7 @@ useEffect(() => {
             datasets: [
                 {
                     label: `Number of Projects (${selectedYear})`,
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderColor: 'rgba(4, 67, 112, 1)',
                     borderWidth: 2,
                     fill: false,
                     data: collegeprj.map(entry => entry.projectsCount),
@@ -109,6 +110,7 @@ useEffect(() => {
         },
     });
 }, [selectedYear, collegeprj]);
+
 //bar graph
 useEffect(() => {
     console.log('domainprj:', domainprj);
@@ -117,11 +119,13 @@ useEffect(() => {
         return;
     }
 
-    const ctx = document.getElementById('domainChart').getContext('2d');
+    
 
     if (domainChartRef.current) {
         domainChartRef.current.destroy();
     }
+
+    const ctx = document.getElementById('domainChart').getContext('2d');
 
     domainChartRef.current = new Chart(ctx, {
         type: 'bar',
@@ -130,10 +134,10 @@ useEffect(() => {
             datasets: [
                 {
                     label: `Number of Projects (${selectedYear})`,
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderColor: 'rgba(4, 67, 112, 1)',
                     borderWidth: 2,
                     fill: true,
-                    backgroundColor : 'rgba(75, 192, 192, 1)',
+                    backgroundColor : 'rgba(4, 67, 112, 1)',
                     data: domainprj.map(entry => entry.projectsCount),
                 },
             ],
