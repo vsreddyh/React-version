@@ -1,5 +1,6 @@
 import React , {useState,useEffect,useCallback} from "react";
 import "./hr-page.css";
+// import Hrsider from "./hrsider";
 import Header from "./hrheader";
 import Filters from "./filters"
 import axios from "axios";
@@ -219,11 +220,10 @@ function HRMAIN({checkSession}){
         return () => clearInterval(intervalId);
       }, [checkSession]);
     return(
-        <div className="body1">
-        <div className="parent-container">
+        <div className="body19">
+        
         <Header takedata={CategoryData} handlesearch={handlesearch} handlehrdetail={handlehrdetail} toggleDashboard1={toggleDashboard1}/>
-        <div className="hrbcon">
-        <div className="content14" id="sider4"  >
+            <div className="content14" id="sider4"  >
             <div className="option1" id="option">
                 <p>
                     Home
@@ -250,10 +250,11 @@ function HRMAIN({checkSession}){
                 </p>
             </div>
             
-        </div>
+            </div>
 
         
-        <div className="bodyy1">
+        
+            <div className="bodyy1">
             <div className="pbox"  style={{ display: isProfileVisible ? 'block' : 'none' }}>
                     <div className="two">
                         <div className="pp">
@@ -325,10 +326,9 @@ function HRMAIN({checkSession}){
                 </div>
             )}
             </>)}
+            </div>
         </div>
-        </div>
-        </div>
-        </div>
+       
     );
 }
 export default HRMAIN;

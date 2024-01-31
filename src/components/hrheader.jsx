@@ -58,11 +58,11 @@ export default function Header({takedata,handlesearch, toggleDashboard1,handlehr
         adjustSelectSize();
     };
     return(
-        <div className="header1">
+        <div className="header1" id="hhhhead">
             <div className="headerset1">
                 <div className="logoset1">
-                    <div className="dash4">
-                            <span className="btn4" ><FontAwesomeIcon icon={faBars} style={{ color: "aliceblue" }} /></span>
+                    <div className="dash1">
+                            <span className="btn1" ><FontAwesomeIcon icon={faBars} style={{ color: "aliceblue" }} /></span>
                     </div>
 
                     <div className="logo1">

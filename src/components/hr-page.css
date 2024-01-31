@@ -23,18 +23,21 @@
     background: #212f46; 
   }
 
-.body1{
+.body19{
     margin: 0px;
     border: 0px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 65px 1fr;
     height: 100vh;
-    box-sizing: border-box;
+    /* overflow-y: auto; */
     overflow: hidden;
 }
 
-.header1{
+#hhhhead{
     background-color: #1c2333 ;
     border: 0px;
-    height: 65px;
+    grid-column: span 2;
 }
 
 .logo1{
@@ -943,7 +946,7 @@
 #option:active{
     border:2.5px solid rgb(37, 101, 147) ;
 }
-.dash4{
+.dash{
     margin-top: 10px;
     margin-left: 8px;
 }
