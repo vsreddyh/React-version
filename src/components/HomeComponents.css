@@ -21,8 +21,9 @@
 }
 
 .logo4{
-    margin-left: -15px;
-    margin-top:-10px;
+    margin:0px;
+    margin-top:10px;
+    margin-left:10px;
 }
 
 .title4 {
@@ -31,7 +32,7 @@
     color: aliceblue;
     font-family:'Courier New', Courier, monospace;
     margin-top: 22px;
-    margin-left: -19px;
+    margin-left: 10px;
 }
 
 .logoset4{
@@ -42,7 +43,7 @@
 
 .searchbarset4{
     width: 40%;
-    margin-top: -49px;
+    margin-top: -19px;
 }
 
 .profileset4{
@@ -68,7 +69,7 @@
 .searchbar4 input{
     height: 35px;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 25px;
     margin-left: 10px;
     border-radius: 5px;
     background-color: #21293b;
@@ -83,7 +84,7 @@
 }
 
 .search-icon4{
-    margin-top: 15px;
+    margin-top: 25px;
     font-size: 17px;
     height: 35px;
     width: 30px;
@@ -123,7 +124,7 @@
     font-weight: 600;
 }
 .profile4{
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     margin-right: 5px;
 
 }
