@@ -42,7 +42,7 @@ const AboutUs=()=>{
                     </div>
                     <div className="Auteam-member">
                       <img src="test.png" alt="Team Member 2" width="120" height="120" />
-                      <p>Hrishitha</p>
+                      <p>Hrishita</p>
                     
                     </div>
                     <div className="Auteam-member">
