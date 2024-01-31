@@ -47,6 +47,7 @@ export default function App() {
             <Routes>
                 <Route path="/hrmain/:projid" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN checkSession={checkSession} /> : <Navigate to="/"/>}/>
                 <Route path="/hrmain" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN checkSession={checkSession}/> : <Navigate to="/" />}/>
+                <Route path="/clgmain:projid" element={(userData && userData[1]===1 && userData[2]===1) ? <CollegeMain checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/clgmain" element={(userData && userData[1]===1 && userData[2]===1) ? <CollegeMain checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/signup/:errorMessage" element={userData ? <Navigate to="/" /> : <SignUp/>} />
