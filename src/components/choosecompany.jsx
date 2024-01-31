@@ -62,7 +62,8 @@ export default function Company({setUserData}){
             <div className="content1" id="header">
                 <div className="header-logo">
                     <div className="logo">
-                        <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8"}} />
+                        {/* <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8"}} /> */}
+                        <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }}/>
                     </div>
                     <div className="title">
                         <p>project</p>

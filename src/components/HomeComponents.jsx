@@ -259,7 +259,8 @@ export default function HomeComponents({checkSession}) {
                             <span className="btn4" onClick={toggleDashboard}><FontAwesomeIcon icon={faBars} style={{ color: "aliceblue" }} /></span>
                         </div>
                         <div className="logo4">
-                            <FontAwesomeIcon icon={faProductHunt} style={{ color: "#0db1f8" }} />
+                            {/* <FontAwesomeIcon icon={faProductHunt} style={{ color: "#0db1f8" }} /> */}
+                            <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }}/>
                         </div>
                         <div className="title4">
                             <p>project</p>

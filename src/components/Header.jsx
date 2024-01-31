@@ -8,7 +8,8 @@ export default function Header(){
         <div className="content120" id="header20">
             <div className="header-logo20">
                 <div className="logo20">
-                    <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} />
+                    {/* <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} /> */}
+                    <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }}/>
                 </div>
                 <div className="title20">
                     <p>project</p>

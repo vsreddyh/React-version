@@ -71,7 +71,8 @@ export default function SignIn({ setUserData }){
             <div className="content115" id="header15">
                 <div className="header-logo15">
                     <div className="logo15">
-                        <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} />
+                        {/* <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} /> */}
+                        <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }}/>
                     </div>
                     <div className="title15">
                         <p>project</p>
