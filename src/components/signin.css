@@ -9,6 +9,7 @@
     grid-template-columns: 35% 1fr;
     grid-template-rows: 80px 1fr;
     height: 100vh;
+    background-color: #1c2333;
 }
 #suggestions::-webkit-scrollbar {
     width: 12px;

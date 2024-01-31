@@ -60,19 +60,19 @@ export default function Category(){
                 </div>
                 <div className="sider-contents9">
                     <p>
-                    <FontAwesomeIcon icon={faCircleCheck} size="lg" />
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                     <p>
-                    <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
                         learn to make things
                     </p>
                     <p>
-                    <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
                           learn to make things
                     </p>
                     <p>
-                    <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
                         learn to make things
                     </p>
                 </div>

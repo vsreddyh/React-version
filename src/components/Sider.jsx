@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 // import "./signin.css"
 
 export default function Sider(){
@@ -11,19 +13,19 @@ export default function Sider(){
                 </div>
                 <div className="sider-contents20">
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                 </div>

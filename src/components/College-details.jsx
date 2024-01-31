@@ -6,6 +6,8 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+
 export default function CollegeDetails({setUserData}){
     const year= new Date().getFullYear();
     
@@ -53,69 +55,69 @@ export default function CollegeDetails({setUserData}){
         };
       
     return(
-        <div className="abc">
-            <div className="content1" id="header">
-                <div className="header-logo">
-                    <div className="logo">
+        <div className="abc8">
+            <div className="content18" id="header8">
+                <div className="header-logo8">
+                    <div className="logo8">
                         <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8"}} />
                     </div>
-                    <div className="title">
+                    <div className="title8">
                         <p>project</p>
                     </div>
                 </div>
             </div>
         
-            <div className="content1" id="sider">
-                <div className="sider-slogan">
+            <div className="content18" id="sider8">
+                <div className="sider-slogan8">
                     <p>
                         Make things great.
                     </p>
                 </div>
-                <div className="sider-contents">
+                <div className="sider-contents8">
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                       <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                       <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                       <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                 </div>
             </div>
-            <div className="content1" id="bodyy">
-                <div id="body-content">
-                    <p className="create" >
+            <div className="content18" id="bodyy8">
+                <div id="body-content8">
+                    <p className="create8" >
                         Enter your College name 
                     </p>
                     
                     <form action="/college-details" method="post" onSubmit={(e) => e.preventDefault()}>
-                        <input className="collegename" type="text" id="collegeInput" placeholder="college name" minlength="3" name="college" value={term1} onChange={handleInputChange} required />
+                        <input className="collegename8" type="text" id="collegeInput" placeholder="college name" minlength="3" name="college" value={term1} onChange={handleInputChange} required />
                         <br />
                         
                         
-                        <div id="suggestions">
+                        <div id="suggestions8">
                             {suggestions1.map((suggestion1,index)=>
                             (
-                                <p key={index} className="suggestion" onClick={()=>handleSuggestionClick(suggestion1)}>
+                                <p key={index} className="suggestion8" onClick={()=>handleSuggestionClick(suggestion1)}>
                                     {suggestion1}
                                 </p>
                             ))}
                             
                         </div>
                         <br />
-                        <button type="submit" value="submit" className="submit" onClick={submit}>Next</button>
+                        <button type="submit" value="submit" className="submit8" onClick={submit}>Next</button>
                     </form>  
                 </div>
             
-                <div className="terms">
+                <div className="terms8">
                    <hr />
                        <p>
                          By signing-up in you are accepting

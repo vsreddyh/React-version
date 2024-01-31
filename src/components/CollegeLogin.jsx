@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function CollegeLogin() {
   const year = new Date().getFullYear();
@@ -82,19 +84,19 @@ export default function CollegeLogin() {
         </div>
         <div className="sider-contents8">
           <p>
-            <i className="fa-solid fa-check" ></i>
+            <FontAwesomeIcon icon={faCircleCheck} size="lg" />
             learn to make things
           </p>
           <p>
-            <i className="fa-solid fa-check" ></i>
+            <FontAwesomeIcon icon={faCircleCheck} size="lg" />
             learn to make things
           </p>
           <p>
-            <i className="fa-solid fa-check" ></i>
+            <FontAwesomeIcon icon={faCircleCheck} size="lg" />
             learn to make things
           </p>
           <p>
-            <i className="fa-solid fa-check" ></i>
+            <FontAwesomeIcon icon={faCircleCheck} size="lg" />
             learn to make things
           </p>
         </div>

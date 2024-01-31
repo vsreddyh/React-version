@@ -6,6 +6,8 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import "./signin.css"
 import axios from "axios";
 import { Link , useNavigate ,useParams } from "react-router-dom";
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function SignUp(){
     const year= new Date().getFullYear()
@@ -53,19 +55,19 @@ export default function SignUp(){
                 </div>
                 <div className="sider-contents15">
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                     <p>
-                        <i className="fa-solid fa-check" ></i>
+                        <FontAwesomeIcon icon={faCircleCheck} size="lg" />
                         learn to make things
                     </p>
                 </div>
