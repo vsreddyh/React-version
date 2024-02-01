@@ -216,6 +216,14 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
                                 handleclick(suggestion._id);
                             }}
                         >
+                            <div class="details">
+                            <div class="detailphoto">
+
+                            </div>
+                            <div class="detailinformation">
+                                <p>{suggestion.College}</p>
+                            </div>
+                        </div>
                             <div className="project-card">
                                 <div className="cardpart">
                                     <img
