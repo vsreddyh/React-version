@@ -395,3 +395,168 @@
 {
     filter:blur(0) !important;
 }
+
+@media print {
+    .headerCollege ,.filtersCollege{
+        display: none !important;
+    }
+}
+
+.headersetCollege { 
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+}
+
+.logosetCollege{
+    display: flex;
+    width: 30%;
+    height: 100%;
+}
+
+.logoCollege{
+    font-size: 40px;
+    margin-top: 16px;
+    margin-left: 20px;
+}
+
+.titleCollege {
+    font-size: 1.15rem;
+    font-weight: 1000;
+    color: aliceblue;
+    font-family:'Courier New', Courier, monospace;
+    margin-left: 5px;
+    margin-top: 28px;
+}
+
+.searchbarsetCollege{
+    width: 40%;
+    display: flex;
+}
+
+.searchbarCollege {
+    width: 100%;
+    display: flex;
+}
+
+.searchbarCollege input{
+    height: 35px;
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 0px;
+    background-color: #21293b;
+    box-sizing: border-box;
+    border: 0.5px solid;
+    border-color: rgb(4, 67, 112);
+    padding: 10px;
+    outline: rgb(255, 255, 255);
+    color: #a6a5a5;
+    border-radius: 0px;
+}
+
+.searchbarCollege input:hover {
+    border: 1px solid #7190c6; /* Add border on hover */
+}
+
+.search-iconCollege{
+    margin-top: 15px;
+    font-size: 17px;
+    height: 35px;
+    width: 50px;
+    border: 5px;
+    border-color: aliceblue;
+    background-color:rgb(4, 67, 112) ;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.search-iconCollege:hover {
+    border: 1px solid #7190c6;
+}
+
+.iCollege{
+    margin-top: 10px;
+    margin-left: 8px;
+    border: 5px;
+}
+
+.profilesetCollege{
+    width: 30%;
+    height: 100%;
+}
+
+.profilesetCollege p{
+    text-align: right;
+    margin-right: 10px;
+    margin-top: 13px;
+}
+
+.filtersCollege{
+    width:70%;
+    height: 30px;
+    margin: auto;
+    display: flex;
+    position: relative;
+    background-color:  #1c2333;
+    border-radius: 9px;
+    margin-bottom: 10px;
+
+}
+
+.filter1College,.filter2College,.filter3College,.filter4College{
+    width: 25%;
+    height: 100%;
+    margin: 0;
+    padding: 0
+}
+
+.filter1College input{
+    border-bottom-left-radius: 10px;
+    text-align: center;
+    width: 100%;
+    border: none;
+    height: 28px;
+    background-color: #1c2333;
+    color: #a3a2a2;
+    outline: rgb(255, 255, 255);
+    
+}
+
+.filter1College input::placeholder{
+    text-align: center;
+}
+
+.filter4College button{
+    width: 100%;
+    border: none;
+    background-color: #1c2333;
+    height: 100%;
+    color: #a6a5a5;
+    outline: rgb(255, 255, 255);
+    border-bottom-right-radius: 10px;
+}
+
+.filtersCollege select{
+    width: 100%;
+    border: none;
+    background-color: #1c2333;
+    height: 100%;
+    color: #a6a5a5;
+    outline: rgb(255, 255, 255);
+}
+
+.filtersCollege select{
+    width: 100%;
+    border: none;
+    background-color: #1c2333;
+    height: 100%;
+    color: #a6a5a5;
+    outline: rgb(255, 255, 255);
+}
+
+.filtersCollege select:hover, .filtersCollege input:hover, .filtersCollege button:hover {
+    border: 1px solid #7190c6;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
