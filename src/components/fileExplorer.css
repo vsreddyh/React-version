@@ -64,149 +64,16 @@
 }
 
 
-body{
-  margin: 0px;
-  border: 0px;
-  height: 100vh;
-}
-
-.header{
-  background-color: #1c2333 ;
-  border: 0px;
-  height: 65px;
-}
-
-.logo{
-  margin-top: 16px;
-  margin-left: 15px;
-}
-
-.title {
-  font-size: 1rem;
-  font-weight: 1000;
-  color: aliceblue;
-  font-family:'Courier New', Courier, monospace;
-  margin-left: 5px;
-  margin-top: 21px;
-}
-
-.logoset{
-  display: flex;
-  width: 30%;
-  height: 100%;
-}
-
-.searchbarset{
-  width: 40%;
-  display: flex;
-}
-
-.profileset{
-  width: 30%;
-  height: 100%;
-}
-
-.profileset p{
-  text-align: right;
-  margin-right: 10px;
-  margin-top: 13px;
-}
-
-.headerset { 
-  font-size: 25px;
-  align-items: center;
-  display: flex;
-}
-
-.domain select{
-  height: 35px;
-  width: 70px;
-  margin-top: 15px;
-  margin-left: 0px;
-  background-color: #21293b;
-  box-sizing: border-box;
-  border: 0.5px solid;
-  border-color: rgb(4, 67, 112);
-  border-right: #0E1525;
-  padding: 2px;
-  padding-left: 5px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  color: #a6a5a5;
-  outline: rgb(255, 255, 255);
-}
-.domain select:hover {
-  border: 1px solid #7190c6;
-}
-
-.searchbar {
-  width: 100%;
-  display: flex;
-}
-
-#searchContainer {
-  display: flex;
-  align-items: center;
-  height: 35px;
-  margin-top: 15px;
-  width: 100%;
-  background-color: #21293b;
-  box-sizing: border-box;
-  border: 0.5px solid rgb(6, 60, 107);;
-  padding: 10px;
-  color: #cfcbcb;
-  font-size: 23px;
-  font-family:Georgia, 'Times New Roman', Times, serif;
-}
-
-#searchContainer:hover{
-  border: 1px solid #7190c6;
-}
-
-#searchbarInput {
-  height: 33px;
-  width: 100px;
-  margin: 7px;
-  overflow-x: hidden;
-  margin-left: 0px;
-  box-sizing: border-box;
-  background-color: #20293d;
-  border: 0px;
-  border-radius: 5px;
-  padding: 10px;
-  color: #cfcbcb;
-  font-size: 23px;
-  font-family:Georgia, 'Times New Roman', Times, serif;
-}
-
-
-.search-icon{
-  margin-top: 15px;
-  font-size: 17px;
-  height: 35px;
-  width: 50px;
-  border: 5px;
-  border-color: aliceblue;
-  background-color:rgb(4, 67, 112) ;
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.search-icon:hover {
-  border: 1px solid #7190c6;
-}
-
-.search-icon i{
-  margin-top: 10px;
-  margin-left: 5px;
-  border: 5px;
-}
-
 .bodyy{
   background-color: #0E1525;
   width:100%;
-  height:1000px;
+  height:100vh;
   display: flex;
+}
+
+.femenu{
+  height:30px;
+  margin:20px
 }
 
 #searchbarContainer {
@@ -214,41 +81,16 @@ body{
 }
 
 .sider{
-  width: 350px;
+  overflow-y: auto;
+  width:300px;
+  min-width: 300px;
   background-color: #0E1525;
   height:100%;
   border-right:5px solid #333f52;
 }
 
-.tagContainer {
-  background-color: rgb(45, 109, 169);
-  height:20px;
-  border-radius: 7px;
-  border-bottom-right-radius: 16px;
-  border-top-right-radius: 16px;
-  padding-left: 5px;
-  margin: 2px;
-  display: flex;
-  /* width: fit-content; */
-  flex-wrap: wrap; 
-  align-items: center;
-}
-
-.tagContainer button{
-  margin:0px;
-  margin-left: 5px;
-  cursor: pointer;
-  border-radius: 50%;
-  border:0px;
-  background-color: rgb(8, 63, 111);
-}
-
-.tagText{
-  font-size: 15px;
-}
-
 .sider input{
-  height: 40px;
+    height: 40px;
     width: 250px;
     margin: 7px;
     background-color: #1c2333;
@@ -270,18 +112,77 @@ body{
     color: #417ce1;
 }
 
-.file-content
-{
-  height: calc(100%-100px);
+.festage {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.festage1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow-y: auto;
+}
+
+.file-content {
   margin: 50px;
+  margin-bottom: 20px;
+  height: 100%;
+  min-width: 200px;
   padding: 20px;
   border: 2px solid rgb(65, 76, 90);
   border-radius: 10px;
-  display: flex;
   color: white;
   background-color: #03070f;
   overflow-y: scroll;
+}
+
+.file-content1 {
+  margin: 40px;
+  margin-bottom: 20px;
+  margin-right:10px;
+  height: 80%;
+  width: 50%;
+  padding: 20px;
+  border: 2px solid rgb(65, 76, 90);
+  border-radius: 10px;
+  color: white;
+  background-color: #03070f;
+  overflow-y: scroll;
+}
+
+.askme {
+  align-self: flex-end; /* Align to the end (right) within the .festage container */
+  margin-right:50px;
+  margin-bottom: 20px;
+  background-color:#004182 ;
+  border:1px solid #2e6ca9 ;
+    height: 40px;
+    min-height: 40px;
+    width: 150px;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #417ce1;
+}
+
+.askme:hover{
+  border:1px solid rgb(83, 126, 227);
+}
+
+.explain-block{
+  margin: 40px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  height: 80%;
+  width: 50%;
+  padding: 20px;
+  border: 2px solid rgb(65, 76, 90);
+  border-radius: 10px;
+  color: white;
+  background-color: #03070f;
+  overflow-y: scroll;
+
 }
 
 .content{
@@ -294,7 +195,6 @@ pre span{
 
 .folderrs{
   cursor:pointer;
-
 }
 
 .folders{
