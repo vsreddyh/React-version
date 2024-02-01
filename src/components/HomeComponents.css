@@ -258,9 +258,19 @@
 }
 
 .sugessions{
-    height: 250px;
+
+    max-height: 250px;
+    overflow-y: auto;
     width:fit-content;
+    background-color: #031945;
+    z-index: 99;
 }
+
+.sugessions p{
+    margin: 10px;
+    padding: 2px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1400px) {
     .bgridelements {
@@ -467,6 +477,7 @@
     
 }
 .searchbar1 {
+    height: 60px;
     width: 100%;
     display: flex;
 }
@@ -657,6 +668,7 @@
 
 #tagSearchContainerId {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     position: absolute;
     top: 100%;
@@ -670,6 +682,7 @@
 }
 
 .tagContainer {
+    height: auto;
     display: flex;
     align-items: center;
     margin: 4px;
