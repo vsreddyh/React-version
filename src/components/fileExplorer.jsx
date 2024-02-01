@@ -38,7 +38,7 @@ const FileExplorer = () => {
   };
   console.log("a",data)
   return (
-      <div class="bodyy">
+      <div class="febodyy">
         { sider &&
           (<div className="sider">
             <button onClick={()=>fetchFolderStructure(data)}>Fetch Folder Structure</button>
