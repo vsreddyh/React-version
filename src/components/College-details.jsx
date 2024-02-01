@@ -13,7 +13,7 @@ export default function CollegeDetails({setUserData}){
     
     const [term1, setTerm1] = useState('');
     const [suggestions1, setSuggestions1] = useState([]);
- 
+    const [error,seterror]=useState()
     const navigate =useNavigate();
     const handleInputChange= async (event) => {
         const inputValue = event.target.value;
@@ -43,7 +43,9 @@ export default function CollegeDetails({setUserData}){
                 setUserData([response.data.email,0,1])
                 navigate("/main");
             }
-            
+            else{
+                seterror("College Doesn't exist in our Database")
+            }
         } 
         catch (error) {
             console.error('Error navigating:', error);
@@ -119,7 +121,9 @@ export default function CollegeDetails({setUserData}){
                         <button type="submit" value="submit" className="submit8" onClick={submit}>Next</button>
                     </form>  
                 </div>
-            
+                <div className="err1505">
+                    {error && <p>{error}</p>}
+                </div>
                 <div className="terms8">
                    <hr />
                        <p>

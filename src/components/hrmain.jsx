@@ -232,25 +232,14 @@ function HRMAIN({ checkSession }) {
                 </div>
                 <div className="option2" id="option">
                     <p>
-                        My project
+                        Explore
                     </p>
                 </div>
                 <div className="option3" id="option">
                     <p>
-                        likes
+                        Bookmarks
                     </p>
                 </div>
-                <div className="option4" id="option">
-                    <p>
-                        comments
-                    </p>
-                </div>
-                <div className="option5" id="option">
-                    <p>
-                        about us
-                    </p>
-                </div>
-
             </div>
 
 

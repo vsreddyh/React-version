@@ -12,7 +12,7 @@ export default function StudentLogin({setUserData}){
     
     const [term, setTerm] = useState('');
     const [suggestions, setSuggestions] = useState([]);
- 
+    const [error,seterror] = useState()
     const navigate =useNavigate();
     const handleInputChange= async (event) => {
         const inputValue = event.target.value;
@@ -21,14 +21,10 @@ export default function StudentLogin({setUserData}){
             setSuggestions([]);
             return;
         }
-    
         try {
             const response = await axios.get(`/en/departments?term=${term}`);
             const data = response.data; // Get data directly from the response
             setSuggestions(data);
-            
-            
-           
         } catch (error) {
             console.error('Error fetching autocomplete data:', error);
         }
@@ -43,6 +39,9 @@ export default function StudentLogin({setUserData}){
             {
                 setUserData([response.data.email,0,0,departmentvalue])
                 navigate("/college-details");
+            }
+            else{
+                seterror("Invalid Department")
             }
             
         } catch (error) {
@@ -124,7 +123,9 @@ export default function StudentLogin({setUserData}){
                         <button type="submit" value="submit" className="submit8">Next</button>
                     </form>  
                 </div>
-            
+                <div className="err15">
+                    {error && <p>{error}</p>}
+                </div>
                 <div className="terms8">
                    <hr />
                        <p>

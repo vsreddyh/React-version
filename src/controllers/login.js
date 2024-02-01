@@ -508,8 +508,14 @@ const newp = async (req, res) => {
 const departments = async (req, res) => {
     const mail = req.session.loggedInemail; // Get the email from session
     const result = req.body.department;
-    req.session.third = result;
-    res.json({ message: "user saved", email: mail });
+    const check = await Department.find({field_name:result})
+    if (check.length===0){
+        res.json({message:"error"})
+    }
+    else{
+        req.session.third = result;
+        res.json({ message: "user saved", email: mail });
+    }
 }
 
 //department suggestions
@@ -536,7 +542,6 @@ const getCollegeDetails = async (req, res) => {
         const colleges = await college.find({ college_name: regex1 }).select('college_name').limit(10);
         const suggestions1 = colleges.map(college => college.college_name);
         res.json(suggestions1);
-
     }
     catch (err) {
         console.error('Error retrieving colleges:', err);
@@ -549,22 +554,28 @@ const getCollegeDetails = async (req, res) => {
 //save collegedetails
 const collegeDetails = async (req, res) => {
     const result = req.body.college;
-    req.session.fourth = result;
-    try {
-        const course = new Course({
-            student_name: req.session.username,
-            email_address: req.session.loggedInemail,
-            password: req.session.password,
-            field_name: req.session.third,
-            college_name: req.session.fourth,
-            versionKey: false
-        })
-        await course.save();
-        req.session.status = 1;
-        res.json({ message: "user saved", email: req.session.loggedInemail });
-    } catch (err) {
-        console.error("Error updating user:", err);
-        res.status(500).json({ error: "Error updating user" });
+    const check = await college.find({college_name:result})
+    if (check.length===0){
+        res.json({message:"error"})
+    }
+    else{
+        req.session.fourth = result;
+        try {
+            const course = new Course({
+                student_name: req.session.username,
+                email_address: req.session.loggedInemail,
+                password: req.session.password,
+                field_name: req.session.third,
+                college_name: req.session.fourth,
+                versionKey: false
+            })
+            await course.save();
+            req.session.status = 1;
+            res.json({ message: "user saved", email: req.session.loggedInemail });
+        } catch (err) {
+            console.error("Error updating user:", err);
+            res.status(500).json({ error: "Error updating user" });
+        }
     }
 }
 
@@ -648,7 +659,8 @@ const getSkill = async (req, res) => {
                     i--;
                 }
             }
-            res.json(suggestions2.slice(0, 8));
+            suggestions2.sort((a, b) => a.length - b.length);
+            res.json(suggestions2.slice(0, 5));
         }
     }
     catch (err) {
