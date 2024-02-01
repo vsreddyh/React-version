@@ -65,9 +65,10 @@ export default function ProjectPortfolio({ dis, ...props }) {
 
         return `${dayWithSuffix} ${month} ${year}`;
     }
-    const handleFile = (data)=>{
-        navigate(`/showFiles/${data}`)
+    const handleFile = (data) => {
+        window.open(`/showFiles/${data}`, '_blank');
     }
+    
     const fetchData = async () => {
         const response = await axios.post('/en/getprojectdata', { data: projid });
         setprojdata(response.data);
