@@ -67,6 +67,12 @@
     font-size: 25px;
     margin-top: 15%; 
 }
+.z{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
 #body-content8 input{
     height: 40px;
     width: 250px;
@@ -77,6 +83,7 @@
     border-color: rgb(6, 60, 107);
     border-radius: 5px;
     padding: 10px;
+  
 }
 #suggestions8::-webkit-scrollbar {
     width: 12px;
@@ -91,7 +98,18 @@
     background-color: #1c2333;
     border-radius: 8px;
 }
-#suggestions8 {
+#suggestions8{
+    position: absolute;
+    top: 47px;
+    background-color: #1c2333;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    width: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    cursor: default; 
+}
+/* #suggestions8 {
     display: block;
     position: absolute;
     margin-left: auto;
@@ -102,8 +120,8 @@
     width: 150;
     overflow-y: auto;
     z-index: 1000;
-    cursor: default; /* Set default cursor for the suggestion box */
-}
+    cursor: default; 
+} */
 .suggestion8 {
     display: block;
     color: #f2f2f2;
