@@ -11,6 +11,7 @@ import StudentData from "./StudentData";
 
 const CollegeMain =({checkSession}) => {
     let { projid } = useParams();
+    
     useEffect(() => {
         const intervalId = setInterval(async () => {
           try {
@@ -53,8 +54,9 @@ const CollegeMain =({checkSession}) => {
         try {
             
     
-            const response = await axios.get(`/en/getsearchbyclick?term=${inputData}`);
+            const response = await axios.get(`/en/getsearchbycollege?term=${inputData}`);
             const data=response.data;
+            console.log(data);
             setSugesstions(data);
             
             setDisplay(1);
@@ -71,16 +73,15 @@ const CollegeMain =({checkSession}) => {
         }
     };
       const [receivedData, setReceivedData] = useState({
-        category:'Any',
-        search:'',
-        type: 'Any',
-        college_name: 'Any',
+        
+        
         sort_by:'Relevance',
         order:true
     });
     const handleclick=(data)=>{
         
         setDisplay(2);
+        console.log(data);
         setSendDataToStudent(data);
     }
 
@@ -89,13 +90,16 @@ const CollegeMain =({checkSession}) => {
         setDisplay(display-1);
     }
     const FilterData = useCallback((data) => {
+        console.log(data);
         updateReceivedData(data);
     }, []);
 
     const CategoryData = useCallback((data) => {
+        console.log(data);
         updateReceivedData(data);
     }, []);
     const updateReceivedData = (data) => {
+        console.log(data);
         setReceivedData(prevData => ({ ...prevData, ...data }));
     };
     const killpage = () => {
@@ -147,6 +151,7 @@ const CollegeMain =({checkSession}) => {
     return(
         <div className="body1">
         <CollegeHeader takedata={CategoryData} handlesearch={handlesearch} handlecollegedetail={handlecollegedetail} toggleDashboard1={toggleDashboard1}/>
+        <FiltersCollege sendDataToParent={FilterData} />
         <div className={`pbox ${isProfileVisible ? 'unblurred-content' : ''}`} style={{ display: isProfileVisible ? 'block' : 'none' }}>
                     <div className="two">
                         <div className="pp">
@@ -168,7 +173,7 @@ const CollegeMain =({checkSession}) => {
         <div className={`bodyy1 ${isProfileVisible ? 'blur-background' : ''}`}>
             
  
-            <FiltersCollege sendDataToParent={FilterData}/>
+            
             {display===0 && <Graph receivedData={receivedData} handleclick={handleclick}/>}
             {display===1 && <DomainClick handleclick={handleclick} handlebackClick={handlebackClick} sugesstions={sugesstions}/>}
             {display===2 && <Collegeprojectportfolio studata={sendDataToStudent} dis={killpage}/>}

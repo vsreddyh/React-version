@@ -8,8 +8,8 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 export default function FiltersCollege({ sendDataToParent }) {
     const [formData, setFormData] = useState({
-        college_name: 'Any',
-        type: 'Any',
+        //college_name: 'Any',
+        //type: 'Any',
         sort_by: 'Name',
         order: true
     });
@@ -37,12 +37,12 @@ export default function FiltersCollege({ sendDataToParent }) {
         // }
     };
     const handleSuggestionClick = (selectedSuggestion) => {
-        setFormData({
+      /*  setFormData({
             ...formData,
             ["college_name"]: selectedSuggestion
         });
         setTerm(selectedSuggestion);
-        setSuggestions([]);
+        setSuggestions([]);*/
     };
 
 

@@ -9,6 +9,7 @@ const Grid = require('gridfs-stream');
 const natural=require('natural');
 const GridFS = Grid(mongoose.connection, mongoose.mongo);
 const {college,projects,Course,url, recruiter,skills} = require('../settings/env.js');
+const { constants } = require('fs/promises');
 
 const app = express();
 app.use(express.static('./public'));
@@ -102,11 +103,33 @@ const projectlist = async(req,res)=>{
     }
 }
 
-const collegeprojdisplay = async(req,res)=>{
-    const college=req.session.loggedInCollege
-    const projlists = await projects.find({College:college}).sort({Date:-1}).select('photo Project_Name Description')
-    res.json({list:projlists,college:college})
-}
+const collegeprojdisplay = async (req, res) => {
+    try {
+        const college = req.session.loggedInCollege;
+        const receivedData = req.body.receivedData;
+
+        const query = { College: college };
+        let  sortField = 'Date';
+        let sortOrder = -1;
+
+        if (receivedData.sort_by === 'Likes') {
+            sortField = 'Likes';
+        } else if (receivedData.sort_by === 'Upload Date') {
+            sortField = 'Date';
+        }
+
+        sortOrder = receivedData.order ? 1 : -1;
+
+        const projlists = await projects.find(query).sort({ [sortField]: sortOrder }).select('photo Project_Name Description');
+
+        res.json({ list: projlists, college: college });
+    } catch (error) {
+        console.error('Error fetching projects:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+
 
 //pipe image
 const image = async(req, res) => {
@@ -431,6 +454,14 @@ const getCollDetails=async(req,res)=>
     res.json(clg);
 }
 
+const  getSearchProjectscollege=async(req,res)=>
+{
+    const name=req.session.loggedInCollege;
+    const term=req.query.term;
+    const tokens=tokenizer.tokenize(term);
+    const term1 = await projects.find({$and: [ { $text: { $search: tokens.join(' ') } },{ College: name }]});
+    res.json(term1);
+}
 
 
 
@@ -467,6 +498,7 @@ module.exports = {
     getcollegeprojects,
     getcollegedomainprojects,
     gethrdetails,
-    getCollDetails
+    getCollDetails,
+    getSearchProjectscollege
     
 };

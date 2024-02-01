@@ -4,7 +4,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-const Graph = ({handleclick}) => {
+const Graph = ({handleclick, receivedData}) => {
     const [suggestions, setsuggestions] = useState([]);
     const [college, setCollege] = useState('');
     const [collegeprj, setCollegePrj] = useState([]);
@@ -13,12 +13,14 @@ const Graph = ({handleclick}) => {
     const [domainprj,setDomainprj]=useState([]);
 
     useEffect(() => {
+        console.log("new data:",receivedData);
         getproj();
-    }, []);
+    }, [receivedData]);
 
     const getproj = async () => {
         try {
-            const response = await axios.post('/en/collegeprojectsdisplay');
+            const response = await axios.post('/en/collegeprojectsdisplay', {receivedData: receivedData});
+            console.log("recev data:",receivedData);
             setsuggestions(response.data.list);
             setCollege(response.data.college);
         } catch (error) {
@@ -26,6 +28,7 @@ const Graph = ({handleclick}) => {
            
         }
     };
+    
     
     
 
