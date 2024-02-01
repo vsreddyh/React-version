@@ -1,10 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './frontpage.css';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+import { get } from 'mongoose';
 
 const FrontPage = () => {
+  const [data,setdata]=useState([])
+  const getdata = async()=>{
+    const response = await axios.get('/en/count')
+    setdata(response.data)
+  }
+  useEffect(()=>{
+    getdata()
+  })
   const navigate=useNavigate()
   useEffect(() => {
 
@@ -150,19 +160,19 @@ const FrontPage = () => {
           <div className="ffele" id="ficons">
             <div className="fonline">
               <p>project</p>
-              <i className="fab fa-twitter">Twitter</i>
-              <i className="fab fa-facebook-f">Facebook</i>
-              <i className="fab fa-instagram">Instagram</i>
-              <i className="fab fa-envelope-f">Mail</i>
+              <i className="fab fa-twitter"><Link to='https://twitter.com/neilgogte'>Twitter</Link></i>
+              <i className="fab fa-facebook-f"><Link to='https://www.facebook.com/KMiT.in/'>Facebook</Link></i>
+              <i className="fab fa-instagram"><Link to='https://www.instagram.com/kmitofficial/?hl=en'>Instagram</Link></i>
+              <i className="fab fa-envelope-f"><Link>freemovies5247@gmail.com</Link></i>
             </div>
             <div>
-              <p>Students Registered</p>
+              <p>Students Registered:{data[0]}</p>
             </div>
             <div>
-              <p>Colleges Registered</p>
+              <p>Colleges Registered:{data[1]}</p>
             </div>
             <div>
-              <p>Companies Registered</p>
+              <p>Companies Registered:{data[2]}</p>
             </div>
           </div>
         </footer>

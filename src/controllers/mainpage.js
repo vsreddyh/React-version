@@ -107,9 +107,8 @@ const collegeprojdisplay = async (req, res) => {
     try {
         const college = req.session.loggedInCollege;
         const receivedData = req.body.receivedData;
-
         const query = { College: college };
-        let  sortField = 'Date';
+        let sortField = 'Date';
         let sortOrder = -1;
 
         if (receivedData.sort_by === 'Likes') {
@@ -193,6 +192,7 @@ const removebookmark = async(req,res)=>{
 const checkbookmark = async(req,res)=>{
     const mail = req.session.loggedInemail;
     const id = req.body.data;
+    console.log(id)
     const oid = new mongoose.Types.ObjectId(id);
     const user = await recruiter.findOne({email_address:mail})
     const list = user.bookmarks

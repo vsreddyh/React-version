@@ -681,6 +681,12 @@ const deletesession = async(req,res)=>{
     res.json('success')
 }
 
+const getcount = async(req,res)=>{
+    const a = await Course.countDocuments();
+    const b = await college.countDocuments();
+    const c = await companies.countDocuments();
+    res.json([a,b,c])
+}
 module.exports = {
     signin,
     checkSessionEndpoint,
@@ -704,4 +710,5 @@ module.exports = {
     getSkill,
     getteam,
     deletesession,
+    getcount,
 };

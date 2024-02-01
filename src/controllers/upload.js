@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const retry = require('retry'); // Importing the retry library
 const AdmZip = require('adm-zip');
 const mongoose = require('mongoose');
-
+const axios=require('axios');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -260,27 +260,7 @@ function getFolderStructure(zipEntries) {
 
 const explainCode = async (req,res) => {
   console.log(req.body.data);
-  const code=`function getFolderStructure(zipEntries) {
-    const folderStructure = {};
-  
-    zipEntries.forEach((zipEntry) => {
-      const pathComponents = zipEntry.entryName.split('/');
-      let currentFolder = folderStructure;
-  
-      pathComponents.forEach((component, index) => {
-        if (index === pathComponents.length - 1) {
-          currentFolder[component] = null;
-        } else {
-          if (!currentFolder[component]) {
-            currentFolder[component] = {};
-          }
-          currentFolder = currentFolder[component];
-        }
-      });
-    });
-  
-    return folderStructure;
-  }`;
+  const code=req.body.data;
  // console.log(req.body.data);
   // node --version # Should be >= 18
 // npm install @google/generative-ai
@@ -365,9 +345,40 @@ runChat();
   
 };
 
+const checkPlagarism = async (req,res) => {
+  const { textToCheck } = req.body;
+    console.log(textToCheck)
+    const options = {
+        method: 'POST',
+        url: 'https://plagiarism-checker-and-auto-citation-generator-multi-lingual.p.rapidapi.com/plagiarism',
+        headers: {
+          'content-type': 'application/json',
+          'X-RapidAPI-Key': 'fee42b39c6mshf82915257919e4ap11ae16jsn0cd6205d2a1a',
+          'X-RapidAPI-Host': 'plagiarism-checker-and-auto-citation-generator-multi-lingual.p.rapidapi.com'
+        },
+        data: {
+          text: textToCheck,
+          language: 'en',
+          includeCitations: req.body.includeCitations || false,
+          scrapeSources: req.body.scrapeSources || false
+        }
+      };
+    
+    try {
+    const response = await axios.request(options);
+    res.json(response.data.percentPlagiarism);
+    } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+  
+};
+
 
 module.exports = {
   details,
   getFile,
-  explainCode
+  explainCode,
+  checkPlagarism
 };

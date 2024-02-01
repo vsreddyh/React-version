@@ -137,7 +137,7 @@ export default function CollegeLogin() {
           <hr />
           <p>
             By signing up, you are accepting
-            <br /> <Link>Terms and conditions</Link>
+            <br /> <Link to='/t&c'>Terms and conditions</Link>
           </p>
         </div>
         <div className="copyrights">

@@ -7,7 +7,7 @@ import FiltersCollege from "./FiltersCollege";
 import DomainClick from "./DomainClick";
 import Collegeprojectportfolio from "./collegeprojectportfolio"
 import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
-import StudentData from "./StudentData";
+import StudentDataclg from "./StudentDataclg";
 
 const CollegeMain =({checkSession}) => {
     let { projid } = useParams();
@@ -73,13 +73,10 @@ const CollegeMain =({checkSession}) => {
         }
     };
       const [receivedData, setReceivedData] = useState({
-        
-        
-        sort_by:'Relevance',
-        order:true
+        sort_by:'Upload Date',
+        order:false
     });
     const handleclick=(data)=>{
-        
         setDisplay(2);
         console.log(data);
         setSendDataToStudent(data);
@@ -87,26 +84,27 @@ const CollegeMain =({checkSession}) => {
 
     const handlebackClick=async()=>
     {
-        setDisplay(display-1);
+        setDisplay(0);
     }
     const FilterData = useCallback((data) => {
-        console.log(data);
+        
+        console.log(receivedData);
         updateReceivedData(data);
     }, []);
 
     const CategoryData = useCallback((data) => {
-        console.log(data);
+        
         updateReceivedData(data);
     }, []);
     const updateReceivedData = (data) => {
-        console.log(data);
+        
         setReceivedData(prevData => ({ ...prevData, ...data }));
     };
     const killpage = () => {
         if(projid){
-            navigate('/clgmain')
+            navigate(`/clgmain`)
         }
-        setDisplay(display-1)
+        setDisplay(0)
         setSendDataToStudent(null)
     }
     const handlecollegedetail=async()=>
@@ -127,12 +125,10 @@ const CollegeMain =({checkSession}) => {
             if(projid){
                 const response = await axios.get(`/en/validateurl?projid=${projid}`)
                 if (response.data===1){
-                    
                     setDisplay(2)
                     setSendDataToStudent(projid)
                 }
                 else if(response.data==2){
-                    
                     setDisplay(3)
                     setSendDataToStudent(projid)
                 }
@@ -146,8 +142,8 @@ const CollegeMain =({checkSession}) => {
     };
     useEffect(()=>{
         fetchData()
-    })
-    
+    },[projid])
+    console.log(projid,display)
     return(
         <div className="body1">
         <CollegeHeader takedata={CategoryData} handlesearch={handlesearch} handlecollegedetail={handlecollegedetail} toggleDashboard1={toggleDashboard1}/>
@@ -164,8 +160,6 @@ const CollegeMain =({checkSession}) => {
                     </div>
                     <div class="pelement">
                         <div className="para"><p>{collegedetail.email_address} </p></div>
-                        <div className="para"><p>{collegedetail.state}</p></div>
-                        
                         <hr/>  
                         <div className="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>         
                     </div>
@@ -177,7 +171,7 @@ const CollegeMain =({checkSession}) => {
             {display===0 && <Graph receivedData={receivedData} handleclick={handleclick}/>}
             {display===1 && <DomainClick handleclick={handleclick} handlebackClick={handlebackClick} sugesstions={sugesstions}/>}
             {display===2 && <Collegeprojectportfolio studata={sendDataToStudent} dis={killpage}/>}
-            {display===3 && <StudentData studata={sendDataToStudent} dis={killpage}/>}
+            {display===3 && <StudentDataclg studata={sendDataToStudent} dis={killpage}/>}
         </div>
         </div>
     );

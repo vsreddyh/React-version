@@ -21,6 +21,7 @@ import ProjectUploadForm from "./ProjectUploadForm";
 import FileExplorer from "./fileExplorer";
 import FrontPage from "./FrontPage";
 import HomeComponents from "./HomeComponents";
+import TermsAndConditions from "./TermsAndConditions";
 
 export default function App() {
     const [userData, setUserData] = useState(null); //session data
@@ -53,8 +54,8 @@ export default function App() {
             <Routes>
                 <Route path="/hrmain/:projid" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN checkSession={checkSession} /> : <Navigate to="/"/>}/>
                 <Route path="/hrmain" element={(userData && userData[1]===2 && userData[2]===1) ? <HRMAIN checkSession={checkSession}/> : <Navigate to="/" />}/>
-                <Route path="/clgmain:projid" element={(userData && userData[1]===1 && userData[2]===1) ? <CollegeMain checkSession={checkSession}/> : <Navigate to="/" />}/>
-                <Route path="/main:projid" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents checkSession={checkSession}/> : <Navigate to="/" />}/>
+                <Route path="/clgmain/:projid" element={(userData && userData[1]===1 && userData[2]===1) ? <CollegeMain checkSession={checkSession}/> : <Navigate to="/" />}/>
+                <Route path="/main/:projid" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/clgmain" element={(userData && userData[1]===1 && userData[2]===1) ? <CollegeMain checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/main" element={(userData && userData[1]===0 && userData[2]===1) ? < HomeComponents checkSession={checkSession}/> : <Navigate to="/" />}/>
                 <Route path="/signup/:errorMessage" element={userData ? <Navigate to="/" /> : <SignUp/>} />
@@ -74,8 +75,7 @@ export default function App() {
                 <Route path="/hrsignup" element={userData ? <Navigate to="/" /> : <HrSignUp />} />
                 <Route path="/ProjectUploadForm" element={<ProjectUploadForm/>}/>
                 <Route path="/showFiles/:data" element={<FileExplorer/>}/>
-                
-                <Route path="/main/:projid" element={(userData && userData[1]===0 && userData[2]===0) ? <HomeComponents /> : <Navigate to="/" />}/>
+                <Route path="/t&c" element={<TermsAndConditions/>}/>
                 <Route path="/*" element={<Navigate to="/" />} />
                 <Route path="/" element=
                     {userData ?

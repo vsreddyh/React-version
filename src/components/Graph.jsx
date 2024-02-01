@@ -176,7 +176,7 @@ useEffect(() => {
             <div className="cmaingraph">
                 <div id="cmainrealgraph" className="justincase">
                     <label htmlFor="yearSelector">Select Year:</label>
-                    <select id="yearSelector" onChange={handleYearChange}>
+                    <select id="yearSelector" onChange={handleYearChange} value={selectedYear}>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
                         <option value="2021">2021</option>
