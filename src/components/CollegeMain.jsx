@@ -87,16 +87,17 @@ const CollegeMain =({checkSession}) => {
         setDisplay(0);
     }
     const FilterData = useCallback((data) => {
-        console.log(data);
+        
+        console.log(receivedData);
         updateReceivedData(data);
     }, []);
 
     const CategoryData = useCallback((data) => {
-        console.log(data);
+        
         updateReceivedData(data);
     }, []);
     const updateReceivedData = (data) => {
-        console.log(data);
+        
         setReceivedData(prevData => ({ ...prevData, ...data }));
     };
     const killpage = () => {

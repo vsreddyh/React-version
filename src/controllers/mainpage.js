@@ -107,21 +107,19 @@ const collegeprojdisplay = async (req, res) => {
     try {
         const college = req.session.loggedInCollege;
         const receivedData = req.body.receivedData;
-
         const query = { College: college };
-        let sortField='Likes'
+        let sortField = 'Date';
+        let sortOrder = -1;
+
         if (receivedData.sort_by === 'Likes') {
             sortField = 'Likes';
         } else if (receivedData.sort_by === 'Upload Date') {
-            ortField = 'Date';
-        }
-        else if(receivedData.sort_by==='Name'){
-            sortField = 'Project_Name'
+            sortField = 'Date';
         }
 
         sortOrder = receivedData.order ? 1 : -1;
-        sortquery={sortField:sortOrder}
-        const projlists = await projects.find(query).sort(sortquery).select('photo Project_Name Description');
+
+        const projlists = await projects.find(query).sort({ [sortField]: sortOrder }).select('photo Project_Name Description');
 
         res.json({ list: projlists, college: college });
     } catch (error) {
