@@ -9,11 +9,6 @@ project upload form add plagarism div
 password pattern
 student main profile div
 make things greater replacement
-login header css
-suggestions css
-scrolling in login height
-terms and conditions
-department dataset
 copy link for projects not working
 random button student main
 logo loading animation
