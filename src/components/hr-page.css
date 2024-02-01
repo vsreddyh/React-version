@@ -144,6 +144,57 @@
     border: 1px solid #7190c6;
 }
 
+.suggestions::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+.suggestions::-webkit-scrollbar-thumb {
+    background-color: rgb(15, 83, 142);
+    border-radius: 6px;
+  }
+  
+.suggestions::-webkit-scrollbar-track {
+    background-color: #1c2333;
+    border-radius: 8px;
+}
+.suggestions{
+    position: absolute;
+    top: 31px;
+    background-color: #1c2333;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    min-width: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    cursor: default; 
+}
+/* #suggestions8 {
+    display: block;
+    position: absolute;
+    margin-left: auto;
+    background-color: #1c2333;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    max-height: 150px;
+    width: 150;
+    overflow-y: auto;
+    z-index: 1000;
+    cursor: default; 
+} */
+.suggestion {
+    display: block;
+    color: #f2f2f2;
+    padding: 8px 12px;
+    margin: 0;
+    margin-top: 0;
+    cursor: pointer; /* Set pointer cursor for suggestions */
+  }
+
+.suggestion:hover {
+    background-color: rgb(6, 60, 107);
+    border-radius: 5px;
+  }
+
 .i{
     margin-top: 10px;
     margin-left: 8px;
@@ -160,6 +211,20 @@
     position: relative;
 }
 
+.y{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* width: 25%; */
+    box-sizing: border-box;
+}
+.filter1{
+    padding: 0;
+    margin-right: 5px;
+    width: 100%;
+}
+
 .filters{
     width:70%;
     height: 30px;
@@ -171,8 +236,15 @@
     margin-bottom: 10px;
 
 }
+/* .filter1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 
-.filter1,.filter2,.filter3,.filter4{
+} */
+
+.y,.filter2,.filter3,.filter4{
     width: 25%;
     height: 100%;
     margin: 0;
@@ -199,7 +271,7 @@
     border-bottom-right-radius: 10px;
 }
 
-.filters select{
+.filters select,.y select{
     width: 100%;
     border: none;
     background-color: #1c2333;
@@ -226,6 +298,7 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
 
 /*.filter1 select{
     border-bottom-left-radius: 10px;

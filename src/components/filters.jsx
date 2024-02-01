@@ -69,16 +69,18 @@ export default function Filters({ sendDataToParent }) {
     //     });
     return (
         <div className="filters">
-            <div className="filter1">
-                <input type="text" spellCheck="false" placeholder="search for institutions" name="college_name" value={term} onChange={handleChange1}></input>
-            </div>
-            <div className="suggestions">
-            {suggestions.map((suggestion, index) => (
-                    <p key={index} className="suggestion" onClick={() => handleSuggestionClick(suggestion)}>
-                        {suggestion}
-                    </p>
-                ))}
+            <div className="y">
+                <div className="filter1">
+                    <input type="text" spellCheck="false" placeholder="search for institutions" name="college_name" value={term} onChange={handleChange1}></input>
+                </div>
+                <div className="suggestions">
+                {suggestions.map((suggestion, index) => (
+                        <p key={index} className="suggestion" onClick={() => handleSuggestionClick(suggestion)}>
+                            {suggestion}
+                        </p>
+                    ))}
                 
+                </div>
             </div>
             <div className="filter2">
                 <select name="type" id="year" value={formData.type} onChange={handleChange}>
