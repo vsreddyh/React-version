@@ -100,11 +100,11 @@
 }
 #suggestions8{
     position: absolute;
-    top: 47px;
+    top: 48px;
     background-color: #1c2333;
     border: 1px solid #000000;
     border-radius: 8px;
-    width: 250px;
+    min-width: 250px;
     overflow-y: auto;
     z-index: 1000;
     cursor: default; 

@@ -100,18 +100,20 @@ export default function CollegeDetails({setUserData}){
                     </p>
                     
                     <form action="/college-details" method="post" onSubmit={(e) => e.preventDefault()}>
-                        <input className="collegename8" type="text" id="collegeInput" placeholder="college name" minlength="3" name="college" value={term1} onChange={handleInputChange} required />
-                        <br />
+                        <div className="z">
+                            <input className="collegename8" type="text" id="collegeInput" placeholder="college name" minlength="3" name="college" value={term1} onChange={handleInputChange} required />
+                            <br />
                         
                         
-                        <div id="suggestions8">
-                            {suggestions1.map((suggestion1,index)=>
-                            (
-                                <p key={index} className="suggestion8" onClick={()=>handleSuggestionClick(suggestion1)}>
-                                    {suggestion1}
-                                </p>
-                            ))}
+                            <div id="suggestions8">
+                                {suggestions1.map((suggestion1,index)=>
+                                (
+                                    <p key={index} className="suggestion8" onClick={()=>handleSuggestionClick(suggestion1)}>
+                                        {suggestion1}
+                                    </p>
+                                ))}
                             
+                            </div>
                         </div>
                         <br />
                         <button type="submit" value="submit" className="submit8" onClick={submit}>Next</button>
