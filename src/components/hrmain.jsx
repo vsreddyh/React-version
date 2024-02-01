@@ -8,7 +8,7 @@ import StudentData from "./StudentData";
 import ProjectPortfolio from "./ProjectPortfolio";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight ,faUser} from '@fortawesome/free-solid-svg-icons';
 import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
 import DomainClick from "./DomainClick";
 import HomePage from "./HomePage";
@@ -258,7 +258,7 @@ function HRMAIN({ checkSession }) {
                     <div className="two">
                         <div className="pp">
                             <div className="pphoto">
-
+                            <FontAwesomeIcon icon={faUser} className="profileset-icon1"/>
                             </div>
 
                         </div>

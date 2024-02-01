@@ -1,6 +1,8 @@
 import React, {useState,useEffect,useCallback} from "react";
 import CollegeHeader from "./CollegeHeader";
 import Graph from "./Graph";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser} from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import "./collegemain.css"
 import FiltersCollege from "./FiltersCollege";
@@ -152,7 +154,7 @@ const CollegeMain =({checkSession}) => {
                     <div className="two">
                         <div className="pp">
                             <div className="pphoto">
-        
+                            <FontAwesomeIcon icon={faUser} className="profileset-icon1"/>
                             </div>
         
                         </div>

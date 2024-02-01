@@ -81,6 +81,7 @@
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     padding: 10px;
+    color:aliceblue
 }
 
 .search-icon4{
@@ -593,8 +594,7 @@
     background: linear-gradient(to right,rgb(28, 34, 101),rgb(42, 126, 252));
 }
 
-.mpphoto{
-    display: block;
+.mpphoto {
     position: absolute;
     background-color: #e3e5e8;
     left: 100px;
@@ -602,8 +602,12 @@
     height: 100px;
     width: 100px;
     border-radius: 50%;
-    border-color: 2px solid white;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .mpdetails{
 
     margin: 50px 5px 5px 5px;
@@ -762,6 +766,13 @@
     height: 80px;
     border-radius: 50%;
     /* padding-right: 10px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profileset-icon1 {
+    font-size: 40px; 
+    color: rgb(4, 67, 112); 
 }
 .pelement{
     display: block;
