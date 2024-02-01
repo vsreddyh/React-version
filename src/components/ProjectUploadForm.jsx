@@ -359,6 +359,10 @@ export default function ProjectUploadForm(){
                                 <p className="description">
                                     <label htmlFor="description">Description:</label>
                                     <textarea name="description" id="description" rows="5" required className="dscrpt-textarea" onChange={(e) => setDescription(e.target.value)}></textarea>
+                                    <button>
+                                        check for palgrism
+                                    </button>
+                                    <p>Hello all</p>
                                 </p>
                                 <div className="file-upload">
                                     <label htmlFor="file-upload" className="file-upload-label"  >
