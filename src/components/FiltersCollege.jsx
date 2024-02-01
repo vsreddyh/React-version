@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./hr-page.css";
+import "./collegemain.css";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
@@ -59,32 +59,32 @@ export default function FiltersCollege({ sendDataToParent }) {
     };
 
     return (
-        <div className="filters">
-            <div className="filter1">
+        <div className="filtersCollege">
+            <div className="filter1College">
                 <input type="text" spellCheck="false" placeholder="search for institutions" name="college_name" value={term} onChange={handleChange1}></input>
             </div>
-            <div className="suggestions">
+            <div className="suggestionsCollege">
                 {suggestions.map((suggestion, index) => (
-                    <p key={index} className="suggestion" onClick={() => handleSuggestionClick(suggestion)}>
+                    <p key={index} className="suggestionCollege" onClick={() => handleSuggestionClick(suggestion)}>
                         {suggestion}
                     </p>
                 ))}
 
             </div>
-            <div className="filter2">
+            <div className="filter2College">
                 <select name="type" id="year" value={formData.type} onChange={handleChange}>
                     <option value="Any">Any</option>
                     <option value="Bookmarked">Bookmarked</option>
                 </select>
             </div>
-            <div className="filter3">
+            <div className="filter3College">
                 <select name="sort_by" id="year" value={formData.sort_by} onChange={handleChange}>
                     <option value="Name">Name</option>
                     <option value="Likes">Likes</option>
                     <option value="Upload Date">Upload Date</option>
                 </select>
             </div>
-            <div className="filter4">
+            <div className="filter4College">
                 <button name="order" onClick={handleToggle}>
                     {formData.order ? <> Ascending  <FontAwesomeIcon icon={faArrowUp} /></> : <> Descending  <FontAwesomeIcon icon={faArrowDown} /></>}
                 </button>

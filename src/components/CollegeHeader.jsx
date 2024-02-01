@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./hr-page.css";
+import "./collegemain.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { faSearch ,faUser} from '@fortawesome/free-solid-svg-icons';
@@ -43,30 +43,30 @@ export default function CollegeHeader({takedata,handlesearch,toggleDashboard1,ha
     }
     
     return (
-        <div className="header1">
-            <div className="headerset1">
-                <div className="logoset1">
-                    <div className="logo1">
+        <div className="headerCollege">
+            <div className="headersetCollege">
+                <div className="logosetCollege">
+                    <div className="logoCollege">
                         {/* <FontAwesomeIcon icon={faProductHunt} style={{ color: "#0db1f8", }} /> */}
                         <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }}/>
                     </div>
-                    <div className="title1">
+                    <div className="titleCollege">
                         <p>Project</p>
                     </div>
                 </div>
-                <div className="searchbarset1">
+                <div className="searchbarsetCollege">
                     
 
-                    <div className="searchbar1">
-                        <input type="search" className="searchs1" spellcheck="false" placeholder="Search for projects" value={searchterm} onChange={(event)=>{handlesearchchange(event)}}></input>
+                    <div className="searchbarCollege">
+                        <input type="search" className="searchsCollege" spellcheck="false" placeholder="Search for projects" value={searchterm} onChange={(event)=>{handlesearchchange(event)}}></input>
                     </div>
-                    <div className="search-icon1">
-                        <FontAwesomeIcon className="i" icon={faSearch} style={{ color: "white" }} onClick={()=>{handlesearch(searchterm)}} />
+                    <div className="search-iconCollege">
+                        <FontAwesomeIcon className="iCollege" icon={faSearch} style={{ color: "white" }} onClick={()=>{handlesearch(searchterm)}} />
                     </div>
                 </div>
-                <div className="profileset1">
+                <div className="profilesetCollege">
                     <p>
-                    <FontAwesomeIcon icon={faUser} className="profileset-icon" onClick={() => {toggleDashboard1();handlecollegedetail()}}/>
+                    <FontAwesomeIcon icon={faUser} className="profileset-iconCollege" onClick={() => {toggleDashboard1();handlecollegedetail()}}/>
                     </p>
 
                 </div>
