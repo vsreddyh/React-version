@@ -44,6 +44,9 @@
 #sider9{
     background-color: #0f1726;
     border: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #sider9 p{
@@ -62,6 +65,12 @@
     margin-top: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin-right: 100px;
+}
+.sider-contents9{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 /* .title9 {

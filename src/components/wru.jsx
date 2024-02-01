@@ -56,25 +56,25 @@ export default function Category(){
             <div className="content19" id="sider9">
                 <div className="sider-slogan9">
                     <p>
-                        Make things great.
+                    From Concept to Completion
                     </p>
                 </div>
                 <div className="sider-contents9">
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg" />
-                        learn to make things
+                        Code empowers evolution
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
-                        learn to make things
+                        Where Imagination meets Achievement
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
-                          learn to make things
+                        From Cool Concepts to Epic Realities
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg"/>
-                        learn to make things
+                        Innovate through scripting
                     </p>
                 </div>
             </div>

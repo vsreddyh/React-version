@@ -82,25 +82,25 @@ export default function SignIn({ setUserData }){
             <div className="content115" id="sider15">
                 <div className="sider-slogan15">
                     <p>
-                        Make things great.
+                    From Concept to Completion
                     </p>
                 </div>
                 <div className="sider-contents15">
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg" />
-                        learn to make things
+                        Code empowers evolution
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg" />
-                        learn to make things
+                        Where Imagination meets Achievement
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg" />
-                        learn to make things
+                        From Cool Concepts to Epic Realities 
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg" />
-                        learn to make things
+                        Innovate through scripting
                     </p>
                 </div>
             </div>

@@ -74,25 +74,25 @@ export default function Company({setUserData}){
             <div className="content1" id="sider">
                 <div className="sider-slogan">
                     <p>
-                        Make things great.
+                    From Concept to Completion
                     </p>
                 </div>
                 <div className="sider-contents">
                     <p>
                         <i className="fa-solid fa-check" ></i>
-                        learn to make things
+                        Code empowers evolution
                     </p>
                     <p>
                         <i className="fa-solid fa-check" ></i>
-                        learn to make things
+                        Where Imagination meets Achievement
                     </p>
                     <p>
                         <i className="fa-solid fa-check" ></i>
-                        learn to make things
+                        From Cool Concepts to Epic Realities
                     </p>
                     <p>
                         <i className="fa-solid fa-check" ></i>
-                        learn to make things
+                        Innovate through scripting
                     </p>
                 </div>
             </div>

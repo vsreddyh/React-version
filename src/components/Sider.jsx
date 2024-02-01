@@ -8,25 +8,25 @@ export default function Sider(){
         <div className="content120" id="sider20">
                 <div className="sider-slogan20">
                     <p>
-                        Make things great.
+                    From Concept to Completion
                     </p>
                 </div>
                 <div className="sider-contents20">
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg" />
-                        learn to make things
+                        lCode empowers evolution
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg" />
-                        learn to make things
+                        lWhere Imagination meets Achievement
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg" />
-                        learn to make things
+                        From Cool Concepts to Epic Realities 
                     </p>
                     <p>
                         <FontAwesomeIcon icon={faCircleCheck} size="lg" />
-                        learn to make things
+                        Innovate through scripting
                     </p>
                 </div>
         </div>
