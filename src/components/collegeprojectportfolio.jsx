@@ -31,6 +31,9 @@ export default function StudentProjectProfile({ dis, studata }) {
             console.error('Failed to copy: ', err);
         }
     };
+    const handleFile = (data) => {
+        window.open(`/showFiles/${data}`, '_blank');
+    }
 
     const transformDate = (date) => {
         const dateObj = new Date(date);
@@ -136,7 +139,7 @@ export default function StudentProjectProfile({ dis, studata }) {
                             <div className="gettingdescription1">
                                 <p>{projdata.Description}</p>
                             </div>
-                            <div className="opfolder1">
+                            <div className="opfolder1" onClick={()=>handleFile('65b497569dc7f9d4ea86dfca')}>
                                 <p>FOLDER<span>&#128193;</span></p>
                                 {/* need to add explorer hyperlink here */}
                             </div>
