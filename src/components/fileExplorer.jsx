@@ -10,6 +10,7 @@ import axiosInstance from "../settings/axiosInstance";
 
 
 const FileExplorer = () => {
+  const [sider, setsider]=useState('true');
   const {data} = useParams()
   const [fileName, setFileName] = useState('');
   const [folderStructure, setFolderStructure] = useState(null);
@@ -37,31 +38,70 @@ const FileExplorer = () => {
   };
   console.log("a",data)
   return (
-    <div>
-      {/* <input
-        type="text"
-        placeholder="Enter file name"
-        value={fileName}
-        onChange={(e) => setFileName(e.target.value)}
-      /> */}
+      <div class="febodyy">
+        { sider &&
+          (<div className="sider">
+            <button onClick={()=>fetchFolderStructure(data)}>Fetch Folder Structure</button>
+            {folderStructure && <FileOrFolder fileName={fileName} name={fileName} contents={folderStructure} fileContents={fileContents} setcde={setcde} setopenforpath={setopenforpath} openforpath={openforpath}/>}
+          </div>)
+        }
+        {
+          sider?(
+          <div className="festage">
+          <div className="file-content">
+            <div>
+              <SyntaxHighlighter language="javascript" style={ solarizedlight} customStyle={{ backgroundColor: '#03070f'}} >
+                  {cde ? cde : "No code"}
+              </SyntaxHighlighter>
 
-      <div class="bodyy">
-        <div className="sider">
-        <button onClick={()=>fetchFolderStructure(data)}>Fetch Folder Structure</button>
-          {folderStructure && <FileOrFolder fileName={fileName} name={fileName} contents={folderStructure} fileContents={fileContents} setcde={setcde} setopenforpath={setopenforpath} openforpath={openforpath}/>}
-        </div>
-        <div className="file-content">
-        <div>
-        <SyntaxHighlighter language="javascript" style={ solarizedlight} customStyle={{ backgroundColor: '#03070f'}} >
-              {cde ? cde : "No code"}
+            </div>
+          </div>  
+          { sider &&
+            (
+              <button className='askme' onClick={()=>setsider(false)}>
+                Explain me!
+              </button>
+            )}
+          {
+            !sider&&
+            (
+              <div className="explain-block">
+
+              </div>
+            )
+          }
+          
+      </div>
+      ):(
+        <div className="festage1">
+        <div className="file-content1">
+          <div>
+            <SyntaxHighlighter language="javascript" style={ solarizedlight} customStyle={{ backgroundColor: '#03070f'}} >
+                {cde ? cde : "No code"}
             </SyntaxHighlighter>
 
-        </div>
-        </div>
+          </div>
+        </div>  
+        { sider &&
+          (
+            <button className='askme' onClick={()=>setsider(false)}>
+              Explain me!
+            </button>
+          )}
+        {
+          !sider&&
+          (
+            <div className="explain-block">
 
-      </div>
-
+            </div>
+          )
+        }
+        
     </div>
+      )
+        }
+        
+      </div>
   );
 };
 
