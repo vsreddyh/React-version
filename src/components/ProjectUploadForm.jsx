@@ -24,6 +24,7 @@ export default function ProjectUploadForm(){
     const[fileSize,setFileSize]=useState(0);
     const[videoSize,setVideoSize]=useState(0);
     const[profilePhotoSize,setProfilePhotoSize]=useState(0);
+    const[percent,setPercent]=useState(0);
     const [formData,setFormData]=useState({
         category: 'Any',
         search:'',
@@ -52,6 +53,9 @@ export default function ProjectUploadForm(){
     const [title,setTitle]=useState("");
     const [description,setDescription]=useState("");
     const [domain,setDomain]=useState("");
+    const [plgarismVerify,setPlagarismVerify]=useState(false);
+    const [plagarismValue,setPlagarismValue]=useState(0);
+    const [plagarismErrorMessage,setPlagarismErrorMessage]=useState('');
 
 
         
@@ -246,6 +250,29 @@ export default function ProjectUploadForm(){
           alert('please select a valid .zip file');
         }
           }
+          const handlePlagarism = () => {
+            setPlagarismValue(2);
+            console.log(description);
+            setPercent(100);
+            if(description.length!==0){
+            
+            const response=axios.post('/en/checkPlagiarism',{textToCheck:description});
+            response.then(function (result) {
+                setPercent(result.data);
+              
+            }).catch(function (error) {
+                console.error("Error: ", error);
+            });
+        }
+            
+            console.log("percent is ",percent);
+            if(percent<30){
+                setPlagarismValue(3);
+            }
+            else{
+                setPlagarismValue(1);
+            }
+          };
 
 
           function saveDetails(event) {
@@ -253,6 +280,9 @@ export default function ProjectUploadForm(){
             try {
                 if((fileSize+videoSize+profilePhotoSize)>40){
                     alert("size exceeded");
+                }
+                else if(plagarismValue!==3){
+                    alert('plagarism check failed!');
                 }
 
                 else if(videoname.length===0){
@@ -359,7 +389,7 @@ export default function ProjectUploadForm(){
                                 <p className="description">
                                     <label htmlFor="description">Description:</label>
                                     <textarea name="description" id="description" rows="5" required className="dscrpt-textarea" onChange={(e) => setDescription(e.target.value)}></textarea>
-                                    <button>
+                                    <button onClick={()=>handlePlagarism()}>
                                         check for palgrism
                                     </button>
                                     <p>Hello all</p>

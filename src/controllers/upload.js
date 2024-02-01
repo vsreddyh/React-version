@@ -346,8 +346,9 @@ runChat();
 };
 
 const checkPlagarism = async (req,res) => {
-  const { textToCheck } = req.body;
-    console.log(textToCheck)
+  //const { textToCheck } = req.body.textToCheck;
+    console.log(req.body.textToCheck)
+    const textToCheck=req.body.textToCheck;
     const options = {
         method: 'POST',
         url: 'https://plagiarism-checker-and-auto-citation-generator-multi-lingual.p.rapidapi.com/plagiarism',
@@ -366,7 +367,9 @@ const checkPlagarism = async (req,res) => {
     
     try {
     const response = await axios.request(options);
-    res.json(response.data.percentPlagiarism);
+    const answer=(response.data.percentPlagiarism);
+    console.log(answer);
+    res.json(answer);
     } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
