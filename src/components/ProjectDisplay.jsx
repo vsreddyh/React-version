@@ -139,6 +139,7 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
                     <div className="searchbar1">
                         {/* <input type="search" className="searchs1" placeholder="Search for projects" onChange={handlesearchchange} />  */}
                         {/* <TagSearch   handlesearchchange={ handlesearchchange} />*/}
+
                         <div className="searchs1">
                             <input
                                 type="text"
@@ -147,6 +148,8 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
                                 placeholder="Add tags..."
                                 onChange={handlesearchchange}
                             />
+                            
+
                             <div id="tagSearchContainerId">
                                 {tags.map((tag, index) => (
                                     <div key={index} className="tagContainer">
