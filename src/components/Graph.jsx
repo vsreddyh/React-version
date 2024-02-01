@@ -9,7 +9,7 @@ const Graph = ({handleclick, receivedData}) => {
     const [college, setCollege] = useState('');
     const [collegeprj, setCollegePrj] = useState([]);
     const [selectedYear, setSelectedYear] = useState('2004');
-    
+    const [noofprj,setNoofprj]=useState(0);
     const [domainprj,setDomainprj]=useState([]);
 
     useEffect(() => {
@@ -28,6 +28,16 @@ const Graph = ({handleclick, receivedData}) => {
            
         }
     };
+    useEffect(()=>
+    {
+        const getNoofprojects=async(req,res)=>
+        {
+            const response=await axios.get(`/en/getnoofprj?term=${selectedYear}`);
+            const data=response.data;
+            setNoofprj(data);
+        };
+        getNoofprojects();
+    },[noofprj])
     
     
     
@@ -209,7 +219,7 @@ useEffect(() => {
 
                 </div>
                 <div id="cmainnp" className="justincase">
-                    <p>20+ projects this year</p>
+                    <p>{noofprj} projects this year</p>
                 </div>
             </div>
             <div className="cprojects" >

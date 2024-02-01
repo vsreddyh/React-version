@@ -462,6 +462,17 @@ const  getSearchProjectscollege=async(req,res)=>
     const term1 = await projects.find({$and: [ { $text: { $search: tokens.join(' ') } },{ College: name }]});
     res.json(term1);
 }
+const getNoofprojects=async(req,res)=>
+{
+    const college=req.session.loggedInCollege;
+    const term=req.query.term;
+    const startOfYear = new Date(`${term}-01-01T00:00:00.000Z`);
+    const endOfYear = new Date(`${parseInt(term) + 1}-01-01T00:00:00.000Z`);
+    const projectsData = await projects.find({College: college,Date: { $gte: startOfYear, $lt: endOfYear }});
+    const total=projectsData.length;
+    res.json(total);
+
+}
 
 
 
@@ -499,6 +510,7 @@ module.exports = {
     getcollegedomainprojects,
     gethrdetails,
     getCollDetails,
-    getSearchProjectscollege
+    getSearchProjectscollege,
+    getNoofprojects
     
 };

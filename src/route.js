@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const {signin, signup, hrsignup, fpassword, validate_token, checkSessionEndpoint , newuser, newhr, newp, signup_college, mailpass,departments,get_departments,collegeDetails,getCollegeDetails,getCompanyDetails,companyDetails,getsignupCollege,homepage,getSkill,getteam,deletesession,getcount} = require('./controllers/login.js')
-const {getdata,projectlist,image,getstudata,getprojectdata,fetchprojdata,addbookmark,removebookmark,checkbookmark,validateurl, getSearchProjects, getDomainProjects,getstudentdetails,getstudentproject,addcomment,getskillproject,addlike,removelike,checklike, getskillList,getlikedprojects, getmostlikedprj,getrecentprj,collegeprojdisplay,getcollegeprojects,getcollegedomainprojects,gethrdetails,getCollDetails,getSearchProjectscollege} = require('./controllers/mainpage.js')
+const {getdata,projectlist,image,getstudata,getprojectdata,fetchprojdata,addbookmark,removebookmark,checkbookmark,validateurl, getSearchProjects, getDomainProjects,getstudentdetails,getstudentproject,addcomment,getskillproject,addlike,removelike,checklike, getskillList,getlikedprojects, getmostlikedprj,getrecentprj,collegeprojdisplay,getcollegeprojects,getcollegedomainprojects,gethrdetails,getCollDetails,getSearchProjectscollege,getNoofprojects} = require('./controllers/mainpage.js')
 const {details,getFile,explainCode,checkPlagarism} = require('./controllers/upload.js');
 /** HTTP Reqeust */
 router.post('/signin', signin);
@@ -61,5 +61,6 @@ router.get("/getsearchbycollege",getSearchProjectscollege);
 router.post("/explainCode",explainCode);
 router.get("/count",getcount)
 router.post("/checkPlagiarism",checkPlagarism);
+router.get("/getnoofprj",getNoofprojects);
 
 module.exports = router;
