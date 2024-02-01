@@ -580,10 +580,12 @@ h2
     width: 6px; 
   }
   
-  
+  ::-webkit-scrollbar-thumb {
+    background-color:rgb(4, 67, 112) ;
+  }
   
   ::-webkit-scrollbar-track {
-    background-color:#7190c6 ; 
+    background-color:rgb(4, 67, 112) ; 
   }
   .profileset-iconCollege
   {
@@ -594,4 +596,12 @@ h2
     font-size: 40px; 
     color: rgb(4, 67, 112); 
 
+  }
+  #cmainnp
+  {
+    color: #a6a5a5;
+  }
+  .year
+  {
+    color:#a6a5a5;
   }

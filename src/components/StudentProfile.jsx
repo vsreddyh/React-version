@@ -24,7 +24,7 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
             </div>
             <div className="mpprojects">
                 <div className="mpheading">
-                    <h5>MY PROJECTS</h5>
+                    <h5 className="myprj">MY PROJECTS</h5>
                 </div>
                 <div>
                     {studentproj && studentproj.map((project, index) => (
