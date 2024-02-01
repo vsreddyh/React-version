@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {signin, signup, hrsignup, fpassword, validate_token, checkSessionEndpoint , newuser, newhr, newp, signup_college, mailpass,departments,get_departments,collegeDetails,getCollegeDetails,getCompanyDetails,companyDetails,getsignupCollege,homepage,getSkill,getteam,deletesession} = require('./controllers/login.js')
+const {signin, signup, hrsignup, fpassword, validate_token, checkSessionEndpoint , newuser, newhr, newp, signup_college, mailpass,departments,get_departments,collegeDetails,getCollegeDetails,getCompanyDetails,companyDetails,getsignupCollege,homepage,getSkill,getteam,deletesession,getcount} = require('./controllers/login.js')
 const {getdata,projectlist,image,getstudata,getprojectdata,fetchprojdata,addbookmark,removebookmark,checkbookmark,validateurl, getSearchProjects, getDomainProjects,getstudentdetails,getstudentproject,addcomment,getskillproject,addlike,removelike,checklike, getskillList,getlikedprojects, getmostlikedprj,getrecentprj,collegeprojdisplay,getcollegeprojects,getcollegedomainprojects,gethrdetails,getCollDetails,getSearchProjectscollege} = require('./controllers/mainpage.js')
 const {details,getFile,explainCode} = require('./controllers/upload.js');
 /** HTTP Reqeust */
@@ -59,5 +59,6 @@ router.get("/gethrdetails",gethrdetails);
 router.get("/getcollegedetails",getCollDetails);
 router.get("/getsearchbycollege",getSearchProjectscollege);
 router.post("/explainCode",explainCode);
+router.get("/count",getcount)
 
 module.exports = router;

@@ -109,18 +109,19 @@ const collegeprojdisplay = async (req, res) => {
         const receivedData = req.body.receivedData;
 
         const query = { College: college };
-        let  sortField = 'Date';
-        let sortOrder = -1;
-
+        let sortField='Likes'
         if (receivedData.sort_by === 'Likes') {
             sortField = 'Likes';
         } else if (receivedData.sort_by === 'Upload Date') {
-            sortField = 'Date';
+            ortField = 'Date';
+        }
+        else if(receivedData.sort_by==='Name'){
+            sortField = 'Project_Name'
         }
 
         sortOrder = receivedData.order ? 1 : -1;
-
-        const projlists = await projects.find(query).sort({ [sortField]: sortOrder }).select('photo Project_Name Description');
+        sortquery={sortField:sortOrder}
+        const projlists = await projects.find(query).sort(sortquery).select('photo Project_Name Description');
 
         res.json({ list: projlists, college: college });
     } catch (error) {
@@ -193,6 +194,7 @@ const removebookmark = async(req,res)=>{
 const checkbookmark = async(req,res)=>{
     const mail = req.session.loggedInemail;
     const id = req.body.data;
+    console.log(id)
     const oid = new mongoose.Types.ObjectId(id);
     const user = await recruiter.findOne({email_address:mail})
     const list = user.bookmarks

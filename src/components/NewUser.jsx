@@ -94,7 +94,7 @@ export default function NewUser({ setUserData }){
                     <hr />
                         <p>
                         By creating you are accepting
-                        <br /> <a href="#">Terms and conditions</a>
+                        <br /> <Link to='/t&c'>Terms and conditions</Link>
                         </p>
                 </div>
                 <div className="copyrights">

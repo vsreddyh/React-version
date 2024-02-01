@@ -99,7 +99,7 @@ export default function SignUp(){
                    <hr />
                        <p>
                          By signing-up in you are accepting
-                         <br /> <Link to="#">Terms and conditions</Link>
+                         <br /> <Link to='/t&c'>Terms and conditions</Link>
                        </p>
                 </div>
                 <div className="copyrights">

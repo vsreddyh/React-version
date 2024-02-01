@@ -124,7 +124,7 @@ export default function CollegeDetails({setUserData}){
                    <hr />
                        <p>
                          By signing-up in you are accepting
-                         <br /> <Link>Terms and conditions</Link>
+                         <br /> <Link to='/t&c'>Terms and conditions</Link>
                        </p>
                 </div>
                 <div className="copyrights">
