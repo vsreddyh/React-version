@@ -10,7 +10,7 @@ import axiosInstance from "../settings/axiosInstance";
 
 
 const FileExplorer = () => {
-  const [sider, setsider]=useState('true');
+  const [sider, setsider]=useState(true);
   const {data} = useParams()
   const [fileName, setFileName] = useState('');
   const [folderStructure, setFolderStructure] = useState(null);
@@ -19,6 +19,7 @@ const FileExplorer = () => {
   const [fname,setFname]=useState('');
   const [cde,setcde]=useState()
   const [openforpath,setopenforpath]=useState('')
+  const [codeExplain,setCodeExplain]=useState('');
   
   const [fileId,setFileId]=useState('');
   console.log(openforpath)
@@ -26,7 +27,6 @@ const FileExplorer = () => {
     try {
       
       setFileId(data);
-      console.log("c",data,fileId)
       const response = await axios.post('/en/fexp', { data });
       console.log(response.data.filename);
       setFolderStructure(response.data.folderStructure);
@@ -35,6 +35,23 @@ const FileExplorer = () => {
     } catch (error) {
       console.error('Error fetching folder structure:', error);
     }
+  };
+  const handleCodeExplain = () => {
+    setCodeExplain('')
+    setsider(false);
+    const response=axios.post('/en/explainCode',{data:cde});
+    response.then(function (result) {
+      console.log(result);
+      console.log(result.data.ans);
+      let codeExplainString=result.data.ans;
+      codeExplainString=codeExplainString.replace(/\n/g, "<br/>");
+      setCodeExplain(codeExplainString);
+  }).catch(function (error) {
+      console.error("Error: ", error);
+  });
+    console.log("reponse is ",response);
+   // setCodeExplain(response.data.ans);
+
   };
   console.log("a",data)
   return (
@@ -56,9 +73,9 @@ const FileExplorer = () => {
 
             </div>
           </div>  
-          { sider &&
+          { sider && cde &&
             (
-              <button className='askme' onClick={()=>setsider(false)}>
+              <button className='askme' onClick={()=>handleCodeExplain()}>
                 Explain me!
               </button>
             )}
@@ -74,6 +91,9 @@ const FileExplorer = () => {
       </div>
       ):(
         <div className="festage1">
+          <button onClick={()=>setsider(true)}>
+            sid
+          </button>
         <div className="file-content1">
           <div>
             <SyntaxHighlighter language="javascript" style={ solarizedlight} customStyle={{ backgroundColor: '#03070f'}} >
@@ -82,18 +102,11 @@ const FileExplorer = () => {
 
           </div>
         </div>  
-        { sider &&
-          (
-            <button className='askme' onClick={()=>setsider(false)}>
-              Explain me!
-            </button>
-          )}
         {
           !sider&&
           (
-            <div className="explain-block">
+            <div className="explain-block" dangerouslySetInnerHTML={{ __html: codeExplain ? codeExplain : "Generating" }}></div>
 
-            </div>
           )
         }
         
