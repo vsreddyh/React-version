@@ -19,7 +19,7 @@ export default function StudentDataclg({ dis, ...props }) {
         window.print();
     };
     const share = async () => {
-        navigator.clipboard.writeText(`http://localhost:3000/hrmain/${projid}`)
+        navigator.clipboard.writeText(`http://localhost:3000/clgmain/${projid}`)
             .then(() => {
                 setShowCopyMessage(true);
             })
