@@ -11,3 +11,4 @@ copy link for projects not working
 random button student main
 logo loading animation
 delete comment
+student description, photo and other things
