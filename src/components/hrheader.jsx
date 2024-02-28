@@ -10,9 +10,9 @@ import { faSearch, faUser, faUserPlus, faBars, faHeart, faHouse } from '@fortawe
 
 
 
-export default function Header({takedata,handlesearch, toggleDashboard1,handlehrdetail, toggleDashboard}){
+export default function Header({takedata, toggleDashboard1,handlehrdetail, toggleDashboard}){
     const [formData,setFormData]=useState({
-        category: 'Any',
+        type: 'Project Search',
         search:'',
     });
     const [searchterm,setSearchTerm]=useState('');
@@ -53,10 +53,16 @@ export default function Header({takedata,handlesearch, toggleDashboard1,handlehr
     const save = (event) => {
         setFormData({
             ...formData,
-            category: event.target.value
+            type: event.target.value
         });
         adjustSelectSize();
     };
+    const handlesearch = ()=>{
+        setFormData({
+            ...formData,
+            search: searchterm
+        });
+    }
     return(
         <div className="header1" id="hhhhead">
             <div className="headerset1">
@@ -76,18 +82,9 @@ export default function Header({takedata,handlesearch, toggleDashboard1,handlehr
                 <div className="searchbarset1">
                     <div className="domain1">
                         <form id="domain">
-                            <select name="category" id="cars" onChange={save}>
-                                <option value="Any">Any</option>
-                                <option value="Web development">Web development</option>
-                                <option value="App development">App development</option>
-                                <option value="Data Science and Analytics">Data Science and Analytics</option>
-                                <option value="Game development">Game development</option>
-                                <option value="Cyber Security">Cyber Security</option>
-                                <option value="Artificial Intelligence and Robotic">Artificial Intelligence and Robotics</option>
-                                <option value="Embedded systems and IOT(Sensors)">Embedded systems and IOT(Sensors)</option>
-                                <option value="E-Commerce and Marketplace development">E-Commerce and Marketplace development</option>
-                                <option value="Healthcare">Healthcare</option>
-                                <option value="Software development">Software development</option>
+                            <select name="type" id="cars" value={formData.type} onChange={save}>
+                                <option>Project Search</option>
+                                <option>Student Search</option>
                             </select>
                         </form>
                     </div>
@@ -96,7 +93,7 @@ export default function Header({takedata,handlesearch, toggleDashboard1,handlehr
                         <input type="search" className="searchs1" spellcheck="false" placeholder="Search for projects" value={searchterm} onChange={(event)=>{handlesearchchange(event)}}></input>
                     </div>
                     <div className="search-icon1">
-                        <FontAwesomeIcon className="i" icon={faSearch} style={{color: "white"}} onClick={()=>{handlesearch(searchterm)}}/>
+                        <FontAwesomeIcon className="i" icon={faSearch} style={{color: "white"}} onClick={()=>{handlesearch()}}/>
                     </div>
                 </div>
                 <div className="profileset1">

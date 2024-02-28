@@ -46,61 +46,43 @@ const getdata = async(req,res)=>{
 //return projects for hr main
 const projectlist = async(req,res)=>{
     mail=req.session.loggedInemail
-    let {category,search,college_name,type,sort_by,order,page} = req.query
-    searchquery={Skills:search}
+    let {category,college_name,sort_by,order,page} = req.query
     catquery={Domain:category}
     clgquery={College:college_name}
     sortquery={}
     u_limit=page*10
     l_limit=u_limit-10
-    if (search==='' && type==='Any'){
-        if (category==='Any'){
-            catquery={}
-        }
-        if (college_name==='Any'){
-            clgquery={}
-        }
-        if (order==='true'){
-            order=1
-        }
-        else{
-            order=-1
-        }
-        if (sort_by==='Name'){
-            sortquery={Project_Name:order}
-        }
-        else if (sort_by==='Likes'){
-            sortquery={Likes:order}
-        }
-        else if (sort_by==='Upload Date'){
-            sortquery={Date:order}
-        }
-        const projlists = await projects.find({$and:[clgquery,catquery]}).sort(sortquery).select('photo Project_Name Description')
-        const a=~~((projlists.length)/10)
-        let m;
-        if (projlists.length===0){
-            m=5;
-        }
-        else{
-            m=2;
-        }
-        res.json({list:projlists.slice(l_limit,u_limit),total_pages:a+1,display:m})
+    if (category==='Any'){
+        catquery={}
+    }
+    if (college_name==='Any'){
+        clgquery={}
+    }
+    if (order==='true'){
+        order=1
     }
     else{
-        let projelists=[]
-        const stulists = await Course.find()
-        if (type==="Bookmarked"){
-            const bookmarklists = await recruiter.findOne({email_address:mail}).select('bookmarks')
-            for(y of stulists){
-                    if (bookmarklists.bookmarks.includes(y._id)){
-                        projelists.push(y)
-                    }
-            }
-        }
-        else{
-            
-        }
+        order=-1
     }
+    if (sort_by==='Name'){
+        sortquery={Project_Name:order}
+    }
+    else if (sort_by==='Likes'){
+        sortquery={Likes:order}
+    }
+    else if (sort_by==='Upload Date'){
+        sortquery={Date:order}
+    }
+    const projlists = await projects.find({$and:[clgquery,catquery]}).sort(sortquery).select('photo Project_Name Description')
+    const a=~~((projlists.length)/10)
+    let m;
+    if (projlists.length===0){
+        m=5;
+    }
+    else{
+        m=2;
+    }
+    res.json({list:projlists.slice(l_limit,u_limit),total_pages:a+1,display:m})
 }
 
 const collegeprojdisplay = async (req, res) => {

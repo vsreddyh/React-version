@@ -12,48 +12,60 @@ import { faArrowRight ,faUser} from '@fortawesome/free-solid-svg-icons';
 import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
 import DomainClick from "./DomainClick";
 import HomePage from "./HomePage";
+import NothingHere from "./nothinghere";
 function HRMAIN({ checkSession }) {
     const navigate = useNavigate();
     const [display, setDisplay] = useState(0)
     const [receivedData, setReceivedData] = useState({
         category: 'Any',
-        search: '',
-        type: 'Any',
         college_name: 'Any',
         sort_by: 'Upload Date',
         order: false
     });
+    const [searchData,setsearchData]=useState({
+        type:'Project Search',
+        search:'',
+    })
     const [isProfileVisible, setIsProfileVisible] = useState(false);
     const toggleDashboard1 = () => {
         setIsProfileVisible(prevState => !prevState);
 
     };
     const FilterData = useCallback((data) => {
+        console.log(data)
+        if (display!==0){
+            console.log('got filter data')
+            setDisplay(2)
+        }
         updateReceivedData(data);
         setCurrentPage(1);
-        setDisplay(2)
     }, []);
 
     const CategoryData = useCallback((data) => {
-        updateReceivedData(data);
+        updatesearchData(data);
         setCurrentPage(1);
-        setDisplay(2)
     }, []);
-
+    const updatesearchData = (data) => {
+        if (data.search!==''){
+            if (data.type==='Project Search'){
+                setDisplay(2)
+                handlesearch(data.search)
+            }
+        }
+        setsearchData(prevData => ({ ...prevData, ...data }));
+    };
     const updateReceivedData = (data) => {
         setReceivedData(prevData => ({ ...prevData, ...data }));
     };
-    const handleclick = (data) => {
-        setPrevdisplay(display);
-        setDisplay(1);
-        setSendDataToStudent(data);
-    }
+    // const handleclick = (data) => {
+    //     setDisplay(1);
+    //     setSendDataToStudent(data);
+    // }
     let { projid } = useParams();
     const [projects, setProjects] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [sendDataToStudent, setSendDataToStudent] = useState(null);
-    const [prevdisplay, setPrevdisplay] = useState(0);
     const [sugesstion, setSugesstions] = useState([]);
     const [hrdetails, setHrdetails] = useState([]);
     const [term, setTerm] = useState('');
@@ -63,12 +75,10 @@ function HRMAIN({ checkSession }) {
             if (projid) {
                 const response = await axios.get(`/en/validateurl?projid=${projid}`)
                 if (response.data === 1) {
-                    setPrevdisplay(display)
                     setDisplay(1)
                     setSendDataToStudent(projid)
                 }
                 else if (response.data == 2) {
-                    setPrevdisplay(display)
                     setDisplay(4)
                     setSendDataToStudent(projid)
 
@@ -92,62 +102,36 @@ function HRMAIN({ checkSession }) {
             console.error('Error fetching data:', error);
         }
     };
-    const handlebackClick = () => {
-        try {
-            if (display === prevdisplay) {
-                setDisplay(0);
-            }
-            else {
-                setDisplay(prevdisplay);
-            }
-        }
-        catch (error) {
-            console.error("error occured:", error);
-        }
-
-
-    }
     const handlesearch = async (inputData) => {
 
         try {
-
-
             const response = await axios.get(`/en/getsearchbyclick?term=${inputData}`);
             const data = response.data;
-            setSugesstions(data);
-            setPrevdisplay(display)
-            setDisplay(3);
+            setDisplay(2);
+            setProjects(data);
         } catch (error) {
             console.error("Error fetching suggestions:", error);
         }
     };
-    const handleDomainClick = async (inputData) => {
-        setTerm(inputData);
-        try {
-            const response = await axios.get(`/en/getdomainbyclick?term=${inputData}`);
-            const data = response.data;
-            setSugesstions(data);
 
-            setDisplay(3);
-        } catch (error) {
-            console.error("Error fetching suggestions:", error);
-        }
-    };
+    // const handleDomainClick = async (inputData) => {
+    //     setTerm(inputData);
+    //     try {
+    //         const response = await axios.get(`/en/getdomainbyclick?term=${inputData}`);
+    //         const data = response.data;
+    //         setSugesstions(data);
+
+    //         setDisplay(3);
+    //     } catch (error) {
+    //         console.error("Error fetching suggestions:", error);
+    //     }
+    // };
     const handleOptionClick = (inputval) => {
         setDisplay(inputval);
         if (inputval === 2) {
             fetchData();
         }
     }
-
-
-
-
-    useEffect(() => {
-        if (display !== 0) {
-            fetchData();
-        }
-    }, [receivedData, currentPage, projid]);
     const handleNextPage = () => {
         if (currentPage < totalPages) {
             setCurrentPage(prevPage => prevPage + 1);
@@ -160,17 +144,13 @@ function HRMAIN({ checkSession }) {
     };
     const killpage = () => {
         if (projid) {
-            navigate('/hrmain')
+            navigate('/')
         }
-        setDisplay(prevdisplay)
-        setSendDataToStudent(null)
+        else{
+            setDisplay(2)
+            setSendDataToStudent(null)
+        }
     }
-    useEffect(() => {
-        if (!projid) {
-            setDisplay(prevdisplay); // Reset display to 0 when projid is null
-            setSendDataToStudent(null);
-        }
-    }, [projid]);
     const handlehrdetail = async () => {
         try {
             const response = await axios.get("/en/gethrdetails");
@@ -190,6 +170,17 @@ function HRMAIN({ checkSession }) {
             console.error('Error deleting session:', error);
         }
     };
+    useEffect(() => {
+        if (display !== 0 && searchData.search==='') {
+            console.log('fetching dataaa')
+            fetchData();
+        }
+    }, [receivedData, currentPage]);
+    useEffect(()=>{
+        if (projid){
+            fetchData()
+        }
+    },[projid])
     useEffect(() => {
         const intervalId = setInterval(async () => {
             try {
@@ -220,22 +211,23 @@ function HRMAIN({ checkSession }) {
         setIsSiderVisible(prevState => !prevState);
         setBodyGridColumn(prevState => prevState === 'span 1' ? 'span 2' : 'span 1');
     };
+    console.log(display,projects)
     return (
         <div className="body19">
 
-            <Header takedata={CategoryData} handlesearch={handlesearch} handlehrdetail={handlehrdetail} toggleDashboard1={toggleDashboard1} toggleDashboard={toggleDashboard} />
+            <Header takedata={CategoryData} handlehrdetail={handlehrdetail} toggleDashboard1={toggleDashboard1} toggleDashboard={toggleDashboard} />
             <div className="content14" id="sider4" style={{ display: isSiderVisible ? 'block' : 'none' }} >
-                <div className="option1" id="option">
+                <div className="option1" id="option" onClick={()=>setDisplay(0)}>
                     <p>
                         Home
                     </p>
                 </div>
-                <div className="option2" id="option">
+                <div className="option2" id="option" onClick={()=>setDisplay(2)}>
                     <p>
                         Explore
                     </p>
                 </div>
-                <div className="option3" id="option">
+                <div className="option3" id="option" onClick={()=>setDisplay(3)}>
                     <p>
                         Bookmarks
                     </p>
@@ -265,18 +257,20 @@ function HRMAIN({ checkSession }) {
             <div  className={`bodyy1 ${isProfileVisible ? 'blur-background' : ''}`} style={{ gridColumn: bodyGridColumn }}>
                 
 
-                {display === 0 ? (<HomePage handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} />) :
+                {display === 0 ? (<HomePage handleOptionClick={handleOptionClick}/>) :
                     (
                         <>
                             <Filters sendDataToParent={FilterData} />
                             {display === 1 ? (
                                 <ProjectPortfolio studata={sendDataToStudent} dis={killpage} />
-                            ) : display === 3 ? (<DomainClick sugesstions={sugesstion} handleclick={handleclick} handlebackClick={handlebackClick} />) : display === 4 ? (
+                            ) 
+                            // : display === 3 ? (<DomainClick sugesstions={sugesstion} handleclick={handleclick} handlebackClick={handlebackClick} />) 
+                            : display === 4 ? (
                                 <StudentData studata={sendDataToStudent} dis={killpage} />
                             ) : display === 2 ? (
                                 <div>
                                     <div className="sbackbutton">
-                                        <p onClick={() => handlebackClick()}><span>&#8592;</span>Go Back</p>
+                                        <p onClick={() => setDisplay(0)}><span>&#8592;</span>Go Back</p>
                                     </div>
                                     <div className="grid-container1">
                                         {projects.map((project, index) => (
@@ -291,7 +285,7 @@ function HRMAIN({ checkSession }) {
                                                                 </p>
                                                             </div>
                                                         </div>
-                                                        <div className="pname2" onClick={() => handleclick(project._id)}>
+                                                        <div className="pname2" onClick={() => navigate(`/hrmain/${project._id}`)}>
                                                             <p>
                                                                 {project.Project_Name}
                                                             </p>
@@ -311,14 +305,7 @@ function HRMAIN({ checkSession }) {
                                     </div>
                                 </div>
                             ) : (
-                                <div>
-                                    <div>
-                                        No Projects Found
-                                    </div>
-                                    <div>
-                                       <img src="../notfound.gif"></img>
-                                    </div>
-                                </div>
+                                <NothingHere/>
                             )}
                         </>)}
             </div>

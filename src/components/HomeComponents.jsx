@@ -122,9 +122,10 @@ export default function HomeComponents({checkSession}) {
             if (projid) {
                 const response = await axios.get(`/en/validateurl?projid=${projid}`);
                 console.log('Response from server:', response.data);
-                setSendDataToStudent(response.data);
-               
-                setDisplay(4);
+                if (response.data === 1) {
+                    setDisplay(4)
+                    setSendDataToStudent(projid)
+                }
             }
         } catch (error) {
             console.error('Error fetching data:', error);
