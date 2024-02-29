@@ -372,15 +372,25 @@
 .commentdetails1{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     margin: 10px;
 }
+.letcomdetails1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .commentpic1{
     height: 30px;
     width: 30px;
     border: 1px solid #3C445C;
     border-radius: 50%;
     margin: 2px;
+}
+.deletecommentbut1{
+    color: #cfcfcf;
 }
 
 .slectimage1{
@@ -405,4 +415,17 @@
     font-size: 15px;
     margin: 13px 13px 52px 13px;
     font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.threedots1{
+    position: relative;
+}
+
+.deletenamebut1{
+    /* display: hidden; */
+    position: absolute;
+    top: 10px;
+    font-size: 14px;
+    right: 15px;
+    white-space: nowrap;
 }

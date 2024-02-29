@@ -211,14 +211,25 @@ export default function StudentProjectProfile({ dis, ...props }) {
                                 comments.map((comment,index)=>(
                                     <div className="personcomments1" key={index}>
                                         <div className="commentdetails1">
-                                            <div className="commentpic1">
-                                                <img src={`/en/image/${comment.photoid}`} alt="VS" className="slectimage1" />
+                                            <div className="letcomdetails1">
+                                                <div className="commentpic1">
+                                                    <img src={`/en/image/${comment.photoid}`} alt="VS" className="slectimage1" />
+                                                </div>
+                                                <div className="commentname1">
+                                                    <p>{comment.studentname}</p>
+                                                </div>
+                                                <div className="commentdate1">
+                                                    <p>{transformdate(new Date(comment.Date))}</p>
+                                                </div>
                                             </div>
-                                            <div className="commentname1">
-                                                <p>{comment.studentname}</p>
-                                            </div>
-                                            <div className="commentdate1">
-                                                <p>{transformdate(new Date(comment.Date))}</p>
+                                            <div className="deletecommentbut1">
+                                                <div className="threedots1">
+                                                    <p><span>&#65049;</span></p>
+                                                    <div className="deletenamebut1">
+                                                        <p>Delete comment <span>&#128465;</span></p>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <div className="realcomment1">
