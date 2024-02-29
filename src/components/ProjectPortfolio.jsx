@@ -171,14 +171,25 @@ export default function ProjectPortfolio({ dis, ...props }) {
                                 comments.map((comment,index)=>(
                                     <div className="personcomments" key={index}>
                                         <div className="commentdetails">
-                                            <div className="commentpic">
-                                                <img src={`/en/image/${comment.photoid}`} alt="VS" className="slectimage" />
+                                            <div className="letcomdetails">
+                                                <div className="commentpic">
+                                                    <img src={`/en/image/${comment.photoid}`} alt="VS" className="slectimage" />
+                                                </div>
+                                                <div className="commentname">
+                                                    <p>{comment.studentname}</p>
+                                                </div>
+                                                <div className="commentdate">
+                                                    <p>{transformdate(new Date(comment.Date))}</p>
+                                                </div>
                                             </div>
-                                            <div className="commentname">
-                                                <p>{comment.studentname}</p>
-                                            </div>
-                                            <div className="commentdate">
-                                                <p>{transformdate(new Date(comment.Date))}</p>
+                                            <div className="deletecommentbut">
+                                                <div className="threedots">
+                                                    <p><span>&#65049;</span></p>
+                                                    <div className="deletenamebut">
+                                                        <p>Delete comment <span>&#128465;</span></p>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <div className="realcomment">

@@ -364,9 +364,18 @@
 .commentdetails{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     margin: 10px;
+    
 }
+
+.letcomdetails{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .commentpic{
     height: 30px;
     width: 30px;
@@ -392,9 +401,27 @@
     color: #cfcfcf;
     margin-left: 5px;
 }
+
+.deletecommentbut{
+    color: #cfcfcf;
+}
+
 .realcomment{
     color: #cfcfcf;
     font-size: 15px;
     margin: 13px 13px 52px 13px;
     font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.threedots{
+    position: relative;
+}
+
+.deletenamebut{
+    /* display: hidden; */
+    position: absolute;
+    top: 10px;
+    font-size: 14px;
+    right: 15px;
+    white-space: nowrap;
 }
