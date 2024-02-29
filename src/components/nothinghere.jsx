@@ -2,8 +2,8 @@ import React from "react";
 
 export default function NothingHere () {
     return (
-        <div>
-            <div>
+        <div className="notfoundvid">
+            <div className="nothingherep">
                 Nothing Here
             </div>
             <div>

@@ -201,7 +201,7 @@
     border: 5px;
 }
 
-.bodyy1{
+.bodyy121{
     background-color: #0E1525;
     min-height: calc(100%-96px);
     height: auto;
@@ -1052,4 +1052,19 @@
 .unblurred-content
 {
     filter:blur(0) !important;
+}
+
+.notfoundvid{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    justify-content: center;
+}
+
+.nothingherep{
+    font-size: 15px;
+    color: aliceblue;
 }

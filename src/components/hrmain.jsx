@@ -254,7 +254,7 @@ function HRMAIN({ checkSession }) {
                         <div className="logout" onClick={deletesession}> <p>LogOut<span><i class='fas fa-sign-out-alt'></i></span></p></div>
                     </div>
                 </div>
-            <div  className={`bodyy1 ${isProfileVisible ? 'blur-background' : ''}`} style={{ gridColumn: bodyGridColumn }}>
+            <div  className={`bodyy121 ${isProfileVisible ? 'blur-background' : ''}`} style={{ gridColumn: bodyGridColumn }}>
                 
 
                 {display === 0 ? (<HomePage handleOptionClick={handleOptionClick}/>) :
