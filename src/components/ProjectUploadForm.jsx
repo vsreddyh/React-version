@@ -39,7 +39,7 @@ export default function ProjectUploadForm(){
 
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevents the default form submission behavior
-        saveDetails(event);
+        saveDetails();
       };
     // useEffect(() => {
     //     takedata(formData);
@@ -53,7 +53,6 @@ export default function ProjectUploadForm(){
     const [title,setTitle]=useState("");
     const [description,setDescription]=useState("");
     const [domain,setDomain]=useState("");
-    const [plgarismVerify,setPlagarismVerify]=useState(false);
     const [plagarismValue,setPlagarismValue]=useState(0);
     const [plagarismErrorMessage,setPlagarismErrorMessage]=useState('');
 
@@ -252,6 +251,7 @@ export default function ProjectUploadForm(){
           }
           const handlePlagarism = () => {
             setPlagarismValue(2);
+            setPlagarismErrorMessage('Checking Please Wait')
             console.log(description);
             setPercent(100);
             if(description.length!==0){
@@ -268,14 +268,16 @@ export default function ProjectUploadForm(){
             console.log("percent is ",percent);
             if(percent<30){
                 setPlagarismValue(3);
+                setPlagarismErrorMessage('plagarised content found')
             }
             else{
                 setPlagarismValue(1);
+                setPlagarismErrorMessage('Original Noice')
             }
           };
 
 
-          function saveDetails(event) {
+          function saveDetails() {
             console.log(photos.length);
             try {
                 if((fileSize+videoSize+profilePhotoSize)>40){
@@ -284,7 +286,12 @@ export default function ProjectUploadForm(){
                 else if(plagarismValue!==3){
                     alert('plagarism check failed!');
                 }
-
+                else if(plagarismValue!==2){
+                    alert('running plagarism test wait');
+                }
+                else if(plagarismValue!==0){
+                    alert('You need to check plagarism');
+                }
                 else if(videoname.length===0){
                     alert('video required!');
                 }
@@ -337,7 +344,7 @@ export default function ProjectUploadForm(){
         <div className="bodyy">
             <Filters sendDataToParent={FilterData}/>
             
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={()=>handleSubmit()}>
                 <div className="studetails">
                     <div className="sdetails">
                         <div className="probackground">
@@ -390,9 +397,9 @@ export default function ProjectUploadForm(){
                                     <label htmlFor="description">Description:</label>
                                     <textarea name="description" id="description" rows="5" required className="dscrpt-textarea" onChange={(e) => setDescription(e.target.value)}></textarea>
                                     <button onClick={()=>handlePlagarism()}>
-                                        check for palgrism
+                                        Run Plagarism Test
                                     </button>
-                                    <p>Hello all</p>
+                                    <p>{plagarismErrorMessage}</p>
                                 </p>
                                 <div className="file-upload">
                                     <label htmlFor="file-upload" className="file-upload-label"  >
@@ -475,13 +482,7 @@ export default function ProjectUploadForm(){
                                         <button type="submit" className="submit-button">Submit</button>
                                     </div>
                                 </div>
-                            </div>
-
-                           
-                            
-                           
-                            
-                            
+                            </div>      
                 </div>
                 </form>
         </div>
