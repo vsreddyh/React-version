@@ -5,9 +5,8 @@ hrmain less than 2 or 10 white page
 hrmain search fixing optional if time allows
 project upload form add plagarism div
 password pattern
+check email css
 student main profile div
-make things greater replacement
-copy link for projects not working
 random button student main
 logo loading animation
 delete comment

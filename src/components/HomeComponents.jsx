@@ -8,10 +8,9 @@ import StudentProfile from "./StudentProfile.jsx";
 import ProjectDisplay from "./ProjectDisplay.jsx";
 import { Input } from "@mui/material";
 import DomainClick from "./DomainClick.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import axios from 'axios';
 import StudentProjectProfile from "./studentProjectPortfolio.jsx";
-import { useParams } from "react-router-dom";
 import AboutUs from "./AboutUs.jsx";
 import { MdOutlineHome } from "react-icons/md";
 export default function HomeComponents({checkSession}) {
@@ -223,6 +222,10 @@ export default function HomeComponents({checkSession}) {
         if (!projid) {
             setDisplay(prevdisplay); // Reset display to 0 when projid is null
             setSendDataToStudent(null);
+        }
+        else if (projid){
+            console.log('got itttt')
+            handleprojectprofile(projid)
         }
     }, [projid]);
     
