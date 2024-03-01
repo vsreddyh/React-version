@@ -126,9 +126,6 @@ const FrontPage = () => {
                 <div className="jjjjj">
                   <p>DEPLOY YOUR PROJECTS</p>
                 </div>
-                <div className="aaaaa">
-                  <p>Create</p>
-                </div>
               </div>
               <div className="jdetimage">
                 <img src="../Deploying.jpg" alt="community-students" />
@@ -143,9 +140,6 @@ const FrontPage = () => {
               <div id="jdetdetail" className="jdetimage">
                 <div className="jjjjj">
                   <p>LET OTHERS KNOW ABOUT YOUR PROJECTS</p>
-                </div>
-                <div className="aaaaa">
-                  <p>Create</p>
                 </div>
               </div>
             </div>
