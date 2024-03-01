@@ -6,7 +6,7 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 
 
-export default function StudentProjectProfile({ dis, studata }) {
+export default function StudentProjectProfile({ dis, studata , handlestuclick }) {
     const projid = studata;
     const [photolist, setPhotolist] = useState([]);
     const [projdata, setProjdata] = useState(null);
@@ -25,7 +25,7 @@ export default function StudentProjectProfile({ dis, studata }) {
 
     const share = async () => {
         try {
-            await navigator.clipboard.writeText(`http://localhost:3000/clgmain/${projid}`);
+            await navigator.clipboard.writeText(`http://localhost:3000/share/${projid}`);
             setShowCopyMessage(true);
         } catch (err) {
             console.error('Failed to copy: ', err);
@@ -157,7 +157,7 @@ export default function StudentProjectProfile({ dis, studata }) {
                             <div className="studentsworking1">
                                 <h3>Students worked:</h3>
                                 {students.map((student, index) => (
-                                    <div className="names1" key={index} onClick={()=>navigate(`/clgmain/${student.id}`)}><p>{student.stuname}</p></div>
+                                    <div className="names1" key={index} onClick={()=>handlestuclick(student.id)}><p>{student.stuname}</p></div>
                                 ))}
                             </div>
                         </div>

@@ -51,9 +51,24 @@ function HRMAIN({ checkSession }) {
                 setDisplay(2)
                 handlesearch(data.search)
             }
+            else if(data.type==='Student Search'){
+                setDisplay(2)
+                handlestusearch(data.search)
+            }
         }
         setsearchData(prevData => ({ ...prevData, ...data }));
     };
+    const handlestusearch = async (data) => {
+        console.log("clicked");
+        try {
+            const queryString = `?type=${'Student Search'}&search=${data}`;
+            const response = await axios.get(`/en/hrmainsearch${queryString}`);
+            console.log(response.data);
+        
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+};
     const updateReceivedData = (data) => {
         setReceivedData(prevData => ({ ...prevData, ...data }));
     };

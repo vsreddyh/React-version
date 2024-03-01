@@ -23,11 +23,6 @@ export default function Header({takedata, toggleDashboard1,handlehrdetail, toggl
             search: event.target.value
         });
     };
-    
-
-    useEffect(() => {
-        takedata(formData);
-    }, [formData, takedata]);
     function adjustSelectSize() {
         const selectElement = document.getElementById('cars');
         const selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -64,16 +59,9 @@ export default function Header({takedata, toggleDashboard1,handlehrdetail, toggl
         });
     };
    const handlesearch = async (event) => {
-    event.preventDefault();
-    console.log("clicked");
-    try {
-        const queryString = `?type=${formData.type}&search=${formData.search}`;
-        const response = await axios.get(`/en/hrmainsearch${queryString}`);
-        console.log(response.data);
-       
-    } catch (error) {
-        console.error("Error fetching data:", error);
-    }
+        if (formData.search!==''){
+            takedata(formData);
+        }
 };
     
     return(

@@ -38,12 +38,9 @@ const CollegeMain =({checkSession}) => {
         return () => clearInterval(intervalId);
       }, [checkSession]);
       
-      const [display,setDisplay]=useState(0);
-      const [sugesstions,setSugesstions]=useState([]);
-      const [sendDataToStudent, setSendDataToStudent] = useState(null);
-      const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
-    const [projects, setProjects] = useState([]);
+    const [display,setDisplay]=useState(0);
+    const [sugesstions,setSugesstions]=useState([]);
+    const [sendDataToStudent, setSendDataToStudent] = useState(null);
     const [collegedetail,setCollegedetail]=useState([]);
     const [isProfileVisible,setIsProfileVisible]=useState(false);
     const toggleDashboard1 = () => {
@@ -54,14 +51,13 @@ const CollegeMain =({checkSession}) => {
       const handlesearch = async (inputData) => {
         
         try {
-            
-    
-            const response = await axios.get(`/en/getsearchbycollege?term=${inputData}`);
-            const data=response.data;
-            console.log(data);
-            setSugesstions(data);
-            
-            setDisplay(1);
+            if (inputData!==''){
+                const response = await axios.get(`/en/getsearchbycollege?term=${inputData}`);
+                const data=response.data;
+                console.log(data);
+                setSugesstions(data);
+                setDisplay(1);
+            }
         } catch (error) {
             console.error("Error fetching suggestions:", error);
         }
@@ -83,7 +79,10 @@ const CollegeMain =({checkSession}) => {
         console.log(data);
         setSendDataToStudent(data);
     }
-
+    const handlestuclick=(data)=>{
+        setDisplay(3)
+        setSendDataToStudent(data)
+    }
     const handlebackClick=async()=>
     {
         setDisplay(0);
@@ -172,8 +171,8 @@ const CollegeMain =({checkSession}) => {
             
             {display===0 && <Graph receivedData={receivedData} handleclick={handleclick}/>}
             {display===1 && <DomainClick handleclick={handleclick} handlebackClick={handlebackClick} sugesstions={sugesstions}/>}
-            {display===2 && <Collegeprojectportfolio studata={sendDataToStudent} dis={killpage}/>}
-            {display===3 && <StudentDataclg studata={sendDataToStudent} dis={killpage}/>}
+            {display===2 && <Collegeprojectportfolio studata={sendDataToStudent} dis={killpage} handlestuclick={handlestuclick}/>}
+            {display===3 && <StudentDataclg studata={sendDataToStudent} dis={killpage} handleclick={handleclick}/>}
         </div>
         </div>
     );

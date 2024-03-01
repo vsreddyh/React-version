@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { GoLink } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 
-export default function StudentDataclg({ dis, ...props }) {
+export default function StudentDataclg({ dis, handleclick, ...props }) {
     const navigate = useNavigate()
     const projid = props.studata;
     const [showCopyMessage, setShowCopyMessage] = useState(false);
@@ -30,9 +30,6 @@ export default function StudentDataclg({ dis, ...props }) {
     
     let [studata, setstudata] = useState('null')
     let [projects, setprojects] = useState([])
-    const handleclick = (data) => {
-        console.log(data)//need to link to projectportfolio
-    }
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.post('/en/getstudendata', { data: projid });
@@ -120,7 +117,7 @@ export default function StudentDataclg({ dis, ...props }) {
                     </div>
                 </div>
                 {projects.length > 0 ? (projects.map((project, index) => (
-                <div className="project-card1" key={index} onClick={()=>navigate(`/clgmain/${project._id}`)}>
+                <div className="project-card1" key={index} onClick={()=>handleclick(project._id)}>
                     <div className="cardpart1">
                         <img className="profile-picture1" src="https://placekitten.com/300/200"/*{`/en/image/${project.photo}`}*/ alt="Profile Picture1"/>
                         <div className="pdiscript1">
