@@ -373,6 +373,10 @@
     color:aliceblue
 }
 
+.detailinformation p{
+    color:rgb(12, 90, 145) ;
+
+}
 .detailphoto{
     height: 25px;
     width: 25px;

@@ -39,12 +39,14 @@ export default function SignUp(){
         <div className="abc15">
             <div className="content115" id="header15">
                 <div className="header-logo15">
+                    <div className="lll22">
                     <div className="logo15">
                         {/* <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8",}} /> */}
-                        <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }}/>
+                        <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '0px' }}/>
                     </div>
                     <div className="title15">
                         <p>project</p>
+                    </div>
                     </div>
                 </div>
             </div>
