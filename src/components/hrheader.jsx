@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from "react";
 import "./hr-page.css";
+import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,15 +16,13 @@ export default function Header({takedata, toggleDashboard1,handlehrdetail, toggl
         type: 'Project Search',
         search:'',
     });
-    const [searchterm,setSearchTerm]=useState('');
-    const handlesearchchange=async (event)=>
-    {
-        event.preventDefault();
-        setSearchTerm(event.target.value);
-        
-
-    }
     
+    const handlesearchchange = (event) => {
+        setFormData({
+            ...formData,
+            search: event.target.value
+        });
+    };
     
 
     useEffect(() => {
@@ -50,19 +49,33 @@ export default function Header({takedata, toggleDashboard1,handlehrdetail, toggl
         const metrics = context.measureText(text);
         return metrics.width;
         }
-    const save = (event) => {
+    /*const save = (event) => {
         setFormData({
             ...formData,
             type: event.target.value
         });
         adjustSelectSize();
-    };
-    const handlesearch = ()=>{
+        
+    };*/
+    const save = (event) => {
         setFormData({
             ...formData,
-            search: searchterm
+            type: event.target.value
         });
+    };
+   const handlesearch = async (event) => {
+    event.preventDefault();
+    console.log("clicked");
+    try {
+        const queryString = `?type=${formData.type}&search=${formData.search}`;
+        const response = await axios.get(`/en/hrmainsearch${queryString}`);
+        console.log(response.data);
+       
+    } catch (error) {
+        console.error("Error fetching data:", error);
     }
+};
+    
     return(
         <div className="header1" id="hhhhead">
             <div className="headerset1">
@@ -83,17 +96,17 @@ export default function Header({takedata, toggleDashboard1,handlehrdetail, toggl
                     <div className="domain1">
                         <form id="domain">
                             <select name="type" id="cars" value={formData.type} onChange={save}>
-                                <option>Project Search</option>
-                                <option>Student Search</option>
+                                <option value="Project Search">Project Search</option>
+                                <option value="Student Search">Student Search</option>
                             </select>
                         </form>
                     </div>
             
                     <div className="searchbar1">
-                        <input type="search" className="searchs1" spellcheck="false" placeholder="Search for projects" value={searchterm} onChange={(event)=>{handlesearchchange(event)}}></input>
+                        <input type="search" className="searchs1" spellcheck="false" placeholder="Search for projects" value={formData.search} onChange={handlesearchchange}></input>
                     </div>
                     <div className="search-icon1">
-                        <FontAwesomeIcon className="i" icon={faSearch} style={{color: "white"}} onClick={()=>{handlesearch()}}/>
+                        <FontAwesomeIcon className="i" icon={faSearch} style={{color: "white"}} onClick={handlesearch}/>
                     </div>
                 </div>
                 <div className="profileset1">

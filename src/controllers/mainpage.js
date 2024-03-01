@@ -455,6 +455,28 @@ const getNoofprojects=async(req,res)=>
     res.json(total);
 
 }
+const hrmainsearch = async (req, res) => {
+   
+    const { type,search } = req.query;
+    console.log("Search term:", search);
+    console.log("Type:", type);
+    if(type==="Student Search")
+    {
+        const search1=await Course.findOne({student_name:search});
+       /* console.log(search1);*/
+        res.json(search1);
+    }
+    else if(type==="Project Search")
+    {
+        
+        const tokens = tokenizer.tokenize(search);
+        const term1= await projects.find({ $text: { $search: tokens.join(' ') } });
+        /*console.log(term1);*/
+        res.json(term1);
+
+    }
+    
+};
 
 
 
@@ -493,6 +515,7 @@ module.exports = {
     gethrdetails,
     getCollDetails,
     getSearchProjectscollege,
-    getNoofprojects
+    getNoofprojects,
+    hrmainsearch
     
 };
