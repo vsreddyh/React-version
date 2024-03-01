@@ -48,7 +48,7 @@ export default function CollegeHeader({takedata,handlesearch,toggleDashboard1,ha
                 <div className="logosetCollege">
                     <div className="logoCollege">
                         {/* <FontAwesomeIcon icon={faProductHunt} style={{ color: "#0db1f8", }} /> */}
-                        <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '17px' }}/>
+                        <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '0px' }}/>
                     </div>
                     <div className="titleCollege">
                         <p>Project</p>

@@ -149,11 +149,6 @@ export default function HomeComponents({checkSession}) {
             console.error('Error deleting session:', error);
         }
     };
-    
-    
-    
-    
-    
     const handlestudentdetail=async ()=>
     {
         

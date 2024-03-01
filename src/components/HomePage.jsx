@@ -86,9 +86,9 @@ export default function HomePage({ handleOptionClick ,handleDomainClick,handlecl
                 <div key={index} className="grid-item">
                     <div onClick={()=>{handleclick(suggestion._id)}}>
                     <div class="details">
-                            <div class="detailphoto">
+                            {/* <div class="detailphoto">
 
-                            </div>
+                            </div> */}
                             <div class="detailinformation">
                                 <p>{suggestion.College} <span>posted on</span>  <span>{new Date(suggestion.Date).toLocaleDateString()}</span></p>
                             </div>

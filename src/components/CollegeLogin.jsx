@@ -69,7 +69,7 @@ export default function CollegeLogin() {
         <div className="header-logo8">
           <div className="logo8">
             {/* <FontAwesomeIcon icon={faProductHunt} style={{ color: "#0db1f8" }} /> */}
-            <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }}/>
+            <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '0px' }}/>
           </div>
           <div className="title8">
             <p>project</p>
