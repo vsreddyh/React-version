@@ -49,7 +49,6 @@ const CollegeMain =({checkSession}) => {
     };
       const navigate=useNavigate();
       const handlesearch = async (inputData) => {
-        
         try {
             if (inputData!==''){
                 const response = await axios.get(`/en/getsearchbycollege?term=${inputData}`);
