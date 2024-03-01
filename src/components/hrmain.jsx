@@ -275,7 +275,6 @@ function HRMAIN({ checkSession }) {
                 {display === 0 ? (<HomePage handleOptionClick={handleOptionClick}/>) :
                     (
                         <>
-                            <Filters sendDataToParent={FilterData} />
                             {display === 1 ? (
                                 <ProjectPortfolio studata={sendDataToStudent} dis={killpage} />
                             ) 
@@ -284,6 +283,7 @@ function HRMAIN({ checkSession }) {
                                 <StudentData studata={sendDataToStudent} dis={killpage} />
                             ) : display === 2 ? (
                                 <div>
+                                    <Filters sendDataToParent={FilterData} />
                                     <div className="sbackbutton">
                                         <p onClick={() => setDisplay(0)}><span>&#8592;</span>Go Back</p>
                                     </div>
