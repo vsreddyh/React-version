@@ -283,13 +283,10 @@ export default function ProjectUploadForm(){
                 if((fileSize+videoSize+profilePhotoSize)>40){
                     alert("size exceeded");
                 }
-                else if(plagarismValue!==3){
+                else if(plagarismValue===2){
                     alert('plagarism check failed!');
                 }
-                else if(plagarismValue!==2){
-                    alert('running plagarism test wait');
-                }
-                else if(plagarismValue!==0){
+                else if(plagarismValue===1){
                     alert('You need to check plagarism');
                 }
                 else if(videoname.length===0){
@@ -344,7 +341,7 @@ export default function ProjectUploadForm(){
         <div className="bodyy">
             <Filters sendDataToParent={FilterData}/>
             
-            <form onSubmit={()=>handleSubmit()}>
+            <form onSubmit={handleSubmit}>
                 <div className="studetails">
                     <div className="sdetails">
                         <div className="probackground">
@@ -396,7 +393,7 @@ export default function ProjectUploadForm(){
                                 <p className="description">
                                     <label htmlFor="description">Description:</label>
                                     <textarea name="description" id="description" rows="5" required className="dscrpt-textarea" onChange={(e) => setDescription(e.target.value)}></textarea>
-                                    <button onClick={()=>handlePlagarism()}>
+                                    <button type="button" onClick={ ()=>handlePlagarism()}>
                                         Run Plagarism Test
                                     </button>
                                     <p>{plagarismErrorMessage}</p>
