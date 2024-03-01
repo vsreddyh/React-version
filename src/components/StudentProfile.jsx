@@ -9,12 +9,17 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
         <div className="mprofile">
             <div className="mpcontainer">
                 <div className="mpprofile">
-                    <div className="mpbg"></div>
+                    <div className="mpbg">
+                        
+                    </div>
                     <div className="mpphoto"><FontAwesomeIcon icon={faUser} className="profileset-icon1"/></div>
                     <div className="mpdetails">
                         <div className="mpdet">
                             
-                            <p className="mpname">{studentdetail.student_name}</p>
+                            <div className="mpname">
+                                <div className="mprealname"><p>{studentdetail.student_name}</p></div>
+                                <div className="editoption">Edit <span>&#128393;</span></div>
+                            </div>
                             <p className="mpgmname">{studentdetail.email_address}</p>
                             <p className="mpgmname">{studentdetail.field_name}</p>
                             <p className="mpgmname">{studentdetail.college_name}</p>
