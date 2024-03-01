@@ -14,8 +14,9 @@ export default function StudentProjectProfile({ dis, ...props }) {
     const [showCopyMessage, setShowCopyMessage] = useState(false);
     const [commentdata,setcommentdata]= useState('');
     const [like,setLike]=useState(0);
-    const navigate = useNavigate();
     const [key,setKey]=useState(0);
+    const [dotclick,setdotclick]=useState(false)
+    const [studname,setstudname]=useState('')
     const exit = async () => {
         console.log('yo')
         dis()
@@ -38,6 +39,26 @@ export default function StudentProjectProfile({ dis, ...props }) {
         const response = await axios.post('/en/addcomment',{commentdata,projid})
         setcommentdata('')
         fetchData()
+    }
+    const getstudentdetails = async() => {
+        const response=await axios.get("/en/getstudentdetails");
+        setstudname(response.data.student_name)
+    }
+    const deletecomment=async(index,id)=>{
+        const response = await axios.post('/en/delcomment',{index,id})
+        if (response.data==='success'){
+            fetchData()
+        }
+    }
+    const setdot = async()=>{
+        if (dotclick){
+            setdotclick(false)
+        }
+        else{
+            setdotclick(true)
+            await new Promise(resolve => setTimeout(resolve, 6000));
+            setdotclick(false)
+        }
     }
     const transformdate = (date)=>{
         const dateObj = new Date(date);
@@ -116,17 +137,10 @@ export default function StudentProjectProfile({ dis, ...props }) {
         setKey(response.data.Likes)
     };
     useEffect(() => {
+        getstudentdetails();
         fetchData();
     }, [projid]);
     console.log(projdata)
-
-    
-    function handleSubmit(event) {
-        event.preventDefault()
-    }
-    
-
-    
     return (
         <div className="ourprojectdetails1">
             <div className="opbuttons1">
@@ -223,13 +237,17 @@ export default function StudentProjectProfile({ dis, ...props }) {
                                                 </div>
                                             </div>
                                             <div className="deletecommentbut1">
-                                                <div className="threedots1">
+                                                {
+                                                (comment.studentname===studname)&&
+                                                <div className="threedots1" onClick={()=>setdot()}>
                                                     <p><span>&#65049;</span></p>
-                                                    <div className="deletenamebut1">
+                                                    { dotclick&&(
+                                                    <div className="deletenamebut1" onClick={()=>deletecomment(index,projdata._id)}>
                                                         <p>Delete comment <span>&#128465;</span></p>
                                                     </div>
+                                                    )}
                                                 </div>
-                                                
+                                                }
                                             </div>
                                         </div>
                                         <div className="realcomment1">

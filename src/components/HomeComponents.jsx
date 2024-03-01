@@ -55,15 +55,13 @@ export default function HomeComponents({checkSession}) {
         setDisplay(index);
     }
     const handlesearchClick = async (inputData) => {
-        if (inputData===''){
+        if (inputData!==''){
             setTerm(inputData);
             try {
-                
-        
                 const response = await axios.get(`/en/getsearchbyclick?term=${inputData}`);
-                const data=response.data;
-                setSugesstions(data);
-                setPrevdisplay(display);
+                const data=response.data
+                setSugesstions(data)
+                setPrevdisplay(display)
                 setDisplay(3);
             } catch (error) {
                 console.error("Error fetching suggestions:", error);
