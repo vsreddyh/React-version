@@ -43,6 +43,7 @@ const CollegeMain =({checkSession}) => {
     const [sendDataToStudent, setSendDataToStudent] = useState(null);
     const [collegedetail,setCollegedetail]=useState([]);
     const [isProfileVisible,setIsProfileVisible]=useState(false);
+    const [stack,setstack]=useState([0])
     const toggleDashboard1 = () => {
         setIsProfileVisible(prevState => !prevState);
        
@@ -56,6 +57,7 @@ const CollegeMain =({checkSession}) => {
                 console.log(data);
                 setSugesstions(data);
                 setDisplay(1);
+
             }
         } catch (error) {
             console.error("Error fetching suggestions:", error);
@@ -147,7 +149,7 @@ const CollegeMain =({checkSession}) => {
     return(
         <div className="body1">
         <CollegeHeader takedata={CategoryData} handlesearch={handlesearch} handlecollegedetail={handlecollegedetail} toggleDashboard1={toggleDashboard1}/>
-        <FiltersCollege sendDataToParent={FilterData} />
+        {display===0 && <FiltersCollege sendDataToParent={FilterData} />}
         <div className={`pbox ${isProfileVisible ? 'unblurred-content' : ''}`} style={{ display: isProfileVisible ? 'block' : 'none' }}>
                     <div className="two">
                         <div className="pp">
