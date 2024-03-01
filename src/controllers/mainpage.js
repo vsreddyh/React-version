@@ -280,6 +280,15 @@ const addcomment = async(req,res)=>{
     }
     res.json("success")
 }
+const deletecomment = async(req,res)=>{
+    const {index,id} = req.body;
+    const projinfo = await projects.findOne({_id:id})
+    let comments = projinfo.Comments
+    comments.splice(index,index);
+    projinfo.Comments=comments
+    projinfo.save()
+    res.json('success')
+}
 
 //get project by skills
 const getskillproject = async (req, res) => {
@@ -501,6 +510,7 @@ module.exports = {
     getstudentdetails,
     getstudentproject,
     addcomment,
+    deletecomment,
     getskillproject,
     getmostlikedprj,
     addlike,
