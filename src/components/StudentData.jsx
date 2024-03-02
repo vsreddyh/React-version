@@ -4,6 +4,7 @@ import "./sp.css";
 import { Link } from "react-router-dom";
 import { GoLink } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import NothingHere from "./nothinghere";
 
 export default function StudentData({ dis,openproject, ...props }) {
     const navigate = useNavigate()
@@ -159,7 +160,7 @@ export default function StudentData({ dis,openproject, ...props }) {
                 </div>
                  ))
                  ) : (
-                     <p>Loading projects...</p>
+                     <NothingHere />
                  )}
             </div>
     )

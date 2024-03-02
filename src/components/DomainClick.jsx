@@ -1,5 +1,6 @@
 import React from "react";
 import "./domainclick.css";
+import NothingHere from "./nothinghere";
 
 export default function DomainClick({ sugesstions ,handlebackClick, handleclick}) {
     return (
@@ -28,6 +29,7 @@ export default function DomainClick({ sugesstions ,handlebackClick, handleclick}
                     </div>
                 </div>
             ))}
+            {sugesstions.length===0 && <NothingHere/>}
         </div>
     );
 }
