@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useEffect } from "react";
-export default function HomePage({ handleOptionClick ,handleDomainClick,handleclick}) {
+export default function HomePage({ handleOptionClick ,handleDomainClick ,handleclick}) {
     const [randomprj,setRandomprj]=useState([]);
     useEffect(() => {
         const getrecentprj = async () => {

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { GoLink } from "react-icons/go";
 import axios from "axios";
 
-export default function ProjectPortfolio({ dis, ...props }) {
+export default function ProjectPortfolio({ dis,openstuinfo, ...props }) {
     const projid = props.studata;
     const [photolist,setphotolist] = useState([])
     const [comments,setcomments]=useState([])
@@ -168,7 +168,7 @@ export default function ProjectPortfolio({ dis, ...props }) {
                         <div className="studentsworking">
                             <h3>Students worked:</h3>
                             {students.map((student,index)=>(
-                                    <div className="names" key={index} onClick={()=>navigate(`/hrmain/${student.id}`)}><p>{student.stuname}</p></div>
+                                    <div className="names" key={index} onClick={()=>openstuinfo(student.id)}><p>{student.stuname}</p></div>
                             ))}
                         </div>
                         <div className="commentsection">

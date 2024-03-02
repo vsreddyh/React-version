@@ -486,13 +486,21 @@ const hrmainsearch = async (req, res) => {
     }
     
 };
-
-
-
-
-  
-  
-  
+const getbookmarks = async (req,res)=>{
+    const mail = req.session.loggedInemail;
+    const search = await recruiter.findOne({email_address:mail}).select('bookmarks')
+    console.log(search)
+    const list = search.bookmarks;
+    console.log(list)
+    const array = [];
+    for(let key in list){
+        let key1 = list[key];
+        let stuId = new mongoose.Types.ObjectId(key1);
+        let stuinfo = await Course.findOne({_id:stuId});
+        array.push(stuinfo)
+    }
+    res.json(array)
+}  
 
 module.exports = {
     getdata,
@@ -526,6 +534,6 @@ module.exports = {
     getCollDetails,
     getSearchProjectscollege,
     getNoofprojects,
-    hrmainsearch
-    
+    hrmainsearch,
+    getbookmarks,
 };

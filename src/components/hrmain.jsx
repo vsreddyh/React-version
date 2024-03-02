@@ -3,6 +3,7 @@ import "./hr-page.css";
 // import Hrsider from "./hrsider";
 import Header from "./hrheader";
 import Filters from "./filters"
+import "./studentcard.css"
 import axios from "axios";
 import StudentData from "./StudentData";
 import ProjectPortfolio from "./ProjectPortfolio";
@@ -10,12 +11,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight ,faUser} from '@fortawesome/free-solid-svg-icons';
 import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
-import DomainClick from "./DomainClick";
 import HomePage from "./HomePage";
 import NothingHere from "./nothinghere";
 function HRMAIN({ checkSession }) {
     const navigate = useNavigate();
     const [display, setDisplay] = useState(0)
+    const [students,setstudents]=useState([])
+    const [bookmarks,setbookmarks]=useState([])
     const [receivedData, setReceivedData] = useState({
         category: 'Any',
         college_name: 'Any',
@@ -33,14 +35,19 @@ function HRMAIN({ checkSession }) {
     };
     const FilterData = useCallback((data) => {
         console.log(data)
-        if (display!==0){
-            console.log('got filter data')
-            setDisplay(2)
-        }
         updateReceivedData(data);
         setCurrentPage(1);
     }, []);
-
+    const handleDomainClick = (data)=>{
+        FilterData({
+            college_name: 'Any',
+            category:data,
+            sort_by: 'Upload Date',
+            order: false
+        })
+        console.log('got filter data')
+        setDisplay(2)
+    }
     const CategoryData = useCallback((data) => {
         updatesearchData(data);
         setCurrentPage(1);
@@ -52,7 +59,7 @@ function HRMAIN({ checkSession }) {
                 handlesearch(data.search)
             }
             else if(data.type==='Student Search'){
-                setDisplay(2)
+                setDisplay(3)
                 handlestusearch(data.search)
             }
         }
@@ -63,7 +70,9 @@ function HRMAIN({ checkSession }) {
         try {
             const queryString = `?type=${'Student Search'}&search=${data}`;
             const response = await axios.get(`/en/hrmainsearch${queryString}`);
-            console.log(response.data);
+            setDisplay(3)
+            console.log(response.data)
+            setstudents(response.data);
         
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -81,10 +90,15 @@ function HRMAIN({ checkSession }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [sendDataToStudent, setSendDataToStudent] = useState(null);
-    const [sugesstion, setSugesstions] = useState([]);
     const [hrdetails, setHrdetails] = useState([]);
-    const [term, setTerm] = useState('');
-
+    const openproject = async(data)=>{
+        setDisplay(1)
+        setSendDataToStudent(data)
+    }
+    const openstuinfo = async(data)=>{
+        setDisplay(4)
+        setSendDataToStudent(data)
+    }
     const fetchData = async () => {
         try {
             if (projid) {
@@ -166,6 +180,12 @@ function HRMAIN({ checkSession }) {
             setSendDataToStudent(null)
         }
     }
+    const ShowBookmarks=async()=>{
+        const response = await axios.get("/en/getbookmarks");
+        setDisplay(6)
+        console.log(response.data)
+        setbookmarks(response.data);
+    }
     const handlehrdetail = async () => {
         try {
             const response = await axios.get("/en/gethrdetails");
@@ -242,7 +262,7 @@ function HRMAIN({ checkSession }) {
                         Explore
                     </p>
                 </div>
-                <div className="option3" id="option" onClick={()=>setDisplay(3)}>
+                <div className="option3" id="option" onClick={()=>ShowBookmarks()}>
                     <p>
                         Bookmarks
                     </p>
@@ -272,15 +292,72 @@ function HRMAIN({ checkSession }) {
             <div  className={`bodyy121 ${isProfileVisible ? 'blur-background' : ''}`} style={{ gridColumn: bodyGridColumn }}>
                 
 
-                {display === 0 ? (<HomePage handleOptionClick={handleOptionClick}/>) :
+                {display === 0 ? (<HomePage handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} handleclick={openproject}/>) :
                     (
                         <>
                             {display === 1 ? (
-                                <ProjectPortfolio studata={sendDataToStudent} dis={killpage} />
+                                <ProjectPortfolio studata={sendDataToStudent} dis={killpage} openstuinfo={openstuinfo}/>
                             ) 
-                            // : display === 3 ? (<DomainClick sugesstions={sugesstion} handleclick={handleclick} handlebackClick={handlebackClick} />) 
+                            : display === 6 ? (
+                                <div>
+                                    <div className="sbackbutton">
+                                        <p onClick={() => setDisplay(0)}><span>&#8592;</span>Go Back</p>
+                                    </div>
+                                    <div className="grid-container1">
+                                        {bookmarks.map((student, index) => (
+                                            <div key={index} className="grid-item1">
+                                                <div>
+                                                <div className="user-cardSC">
+                                                    <div className="user-card-imgSC">
+                                                        <img src="test.png"/*{`/en/image/${project.photo}`}*/ alt="" />
+                                                    </div>
+                                                    <div className="user-card-infoSC" onClick={() => openstuinfo(student._id)}>
+                                                    <h2>{student.student_name}</h2>
+                                                    <p><span>Email:</span>{student.email_address}</p>
+                                                    <p><span>college:</span>{student.college_name}</p>
+                                                    <p><span>Languages known:</span>{
+                                                        student.skills.toString()||'None'
+                                                    }</p>
+                                                    <p><span>project count:</span>{student.projects?.length||0}</p>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )
+                            : display === 3 ? (
+                                <div>
+                                    <div className="sbackbutton">
+                                        <p onClick={() => setDisplay(0)}><span>&#8592;</span>Go Back</p>
+                                    </div>
+                                    <div className="grid-container1">
+                                        {students.map((student, index) => (
+                                            <div key={index} className="grid-item1">
+                                                <div>
+                                                <div className="user-cardSC">
+                                                    <div className="user-card-imgSC">
+                                                        <img src="test.png"/*{`/en/image/${project.photo}`}*/ alt="" />
+                                                    </div>
+                                                    <div className="user-card-infoSC" onClick={() => openstuinfo(student._id)}>
+                                                    <h2>{student.student_name}</h2>
+                                                    <p><span>Email:</span>{student.email_address}</p>
+                                                    <p><span>college:</span>{student.college_name}</p>
+                                                    <p><span>Languages known:</span>{
+                                                        student.skills.toString()||'None'
+                                                    }</p>
+                                                    <p><span>project count:</span>{student.projects?.length||0}</p>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ) 
                             : display === 4 ? (
-                                <StudentData studata={sendDataToStudent} dis={killpage} />
+                                <StudentData studata={sendDataToStudent} dis={killpage} openproject={openproject}/>
                             ) : display === 2 ? (
                                 <div>
                                     <Filters sendDataToParent={FilterData} />
@@ -300,7 +377,7 @@ function HRMAIN({ checkSession }) {
                                                                 </p>
                                                             </div>
                                                         </div>
-                                                        <div className="pname2" onClick={() => navigate(`/hrmain/${project._id}`)}>
+                                                        <div className="pname2" onClick={() => openproject(project._id)}>
                                                             <p>
                                                                 {project.Project_Name}
                                                             </p>
