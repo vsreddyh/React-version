@@ -3,7 +3,7 @@ import "./collegemain.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { faSearch ,faUser} from '@fortawesome/free-solid-svg-icons';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -41,7 +41,11 @@ export default function CollegeHeader({takedata,handlesearch,toggleDashboard1,ha
         
 
     }
-    
+   
+    const projectadd=async()=>
+    {
+        window.open('http://localhost:3000/ProjectUploadForm', '_blank');
+    }
     return (
         <div className="headerCollege">
             <div className="headersetCollege">
@@ -66,7 +70,7 @@ export default function CollegeHeader({takedata,handlesearch,toggleDashboard1,ha
                 </div>
                 <div className="profilesetCollege">
                     <div className="okiaddproject">
-                    + <span className="okitext">Add Project</span>
+                    + <span className="okitext" onClick={()=>projectadd()}>Add Project</span>
                     </div>
                     <div className="ppp">
                     <FontAwesomeIcon icon={faUser} className="profileset-iconCollege" onClick={() => {toggleDashboard1();handlecollegedetail()}}/>
