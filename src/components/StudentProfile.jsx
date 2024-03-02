@@ -36,7 +36,7 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
                 <div className="mpheading">
                     <h5 className="myprj">MY PROJECTS</h5>
                 </div>
-                <div>
+                <div className="mlkmj">
                     {studentproj && studentproj.map((project, index) => (
                         <div key={index} className="grid-item">
                             <div  onClick={()=>{handleclick(project._id)}}>

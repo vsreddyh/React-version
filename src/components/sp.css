@@ -1,6 +1,7 @@
 .sprofile{ 
     /* display:block; */
     margin: 20px 8%;
+    position: relative;
 }
 
 .sbuttons{
@@ -88,7 +89,7 @@
 .sdetails1{
     display: flex;
     height: auto;
-    max-height: 250px;
+    min-height: 250px;
     width: 900px;
     max-width: 100%;
     border: 0.1px solid #3C445C;
@@ -305,4 +306,19 @@
     overflow: hidden;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+}
+
+.notfoundvid{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    justify-content: center;
+}
+
+.nothingherep{
+    font-size: 15px;
+    color: aliceblue;
 }
