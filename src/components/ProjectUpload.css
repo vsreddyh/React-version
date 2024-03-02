@@ -147,7 +147,7 @@
 
 .bodyy{
     background-color: #0E1525;
-    width: calc(100%-100px);
+    width: calc(100%-60px);
     height:1200px;
     padding: 30px;
 }
