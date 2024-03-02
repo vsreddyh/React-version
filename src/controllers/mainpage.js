@@ -472,7 +472,7 @@ const hrmainsearch = async (req, res) => {
     if(type==="Student Search")
     {   
         const name=tokenizer.tokenize(search);
-        const search1=await Course.findOne({student_name:name});
+        const search1=await Course.find({ $text: { $search: name.join(' ') } });
        //console.log(search1);
         res.json(search1);
     }
