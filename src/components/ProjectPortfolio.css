@@ -89,6 +89,7 @@
 } */
 @media screen  and (max-width: 1024px){
     .opprojects{
+        display: block;
         flex-direction: column;
         height: auto;
     }
@@ -107,7 +108,7 @@
     flex-basis: auto;
     flex-direction: column;
     flex-shrink: 0;
-    border-right: 2px solid  #3C445C;
+    /* border-right: 2px solid  #3C445C; */
     height: 100%;
     overflow-y: auto;
     margin-right: 5px;
@@ -385,8 +386,8 @@
 }
 
 .slectimage{
-    height: 30px;
-    width: 30px;
+    height: 60px;
+    width: 60px;
     border-radius: 50%;
 }
 
@@ -424,4 +425,8 @@
     font-size: 14px;
     right: 15px;
     white-space: nowrap;
+}
+
+.opprojectvideo video{
+    width: -webkit-fill-available;
 }
