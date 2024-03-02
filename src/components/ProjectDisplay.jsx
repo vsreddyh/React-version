@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faSearch } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useEffect } from "react";
+import ProjectCard from "./ProjectCard";
 export default function ProjectDisplay({ handleskillprj, handleclick, handleskillList }) {
     const [suggestions, setSuggestions] = useState([]);
     const [searchterm, setSearchterm] = useState("");
@@ -211,34 +212,9 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
             <div className="maincard">
                 {randomprj.map((suggestion, index) => (
                     <div key={index} className="grid-item">
-                        <div
-                            onClick={() => {
-                                handleclick(suggestion._id);
-                            }}
-                        >
-                            <div class="details">
-                            <div class="detailphoto">
+                        <div onClick={()=>{handleclick(suggestion._id)}}>
 
-                            </div>
-                            <div class="detailinformation">
-                                <p>{suggestion.College}</p>
-                            </div>
-                        </div>
-                            <div className="project-card">
-                                <div className="cardpart">
-                                    <img
-                                        className="profile-picture"
-                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${suggestion.photo}`}*/
-                                        alt="Profile Picture"
-                                    />
-                                    <div className="pdiscript">
-                                        <p>{suggestion.Description}</p>
-                                    </div>
-                                </div>
-                                <div className="pname">
-                                    <p>{suggestion.Project_Name}</p>
-                                </div>
-                            </div>
+                        <ProjectCard projinfo={suggestion} index={index}/>
                         </div>
                     </div>
                 ))}

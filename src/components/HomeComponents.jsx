@@ -13,6 +13,8 @@ import axios from 'axios';
 import StudentProjectProfile from "./studentProjectPortfolio.jsx";
 import AboutUs from "./AboutUs.jsx";
 import { MdOutlineHome } from "react-icons/md";
+import ProjectCard from "./ProjectCard.jsx";
+import "./ProjectCard.css";
 export default function HomeComponents({checkSession}) {
 
 
@@ -339,6 +341,7 @@ export default function HomeComponents({checkSession}) {
                 {display === 1 && <StudentProfile  studentproj={studentproj} studentdetail={studentdetail} handleclick={handleclick}/>}
                 {display === 2 && <ProjectDisplay handleskillprj={handleskillprj} handleskillList={handleskillList} handlesearchchange={handlesearchchange}  handleclick={handleclick}/>}
                 {display===3 && <DomainClick sugesstions={sugesstions} handlebackClick={handlebackClick} handleclick={handleclick}/>}
+                
                 {display===4 && <StudentProjectProfile studata={sendDataToStudent} dis={killpage} handleprojectprofile={handleprojectprofile}/>}
                 {display===5 && <AboutUs /> }
 

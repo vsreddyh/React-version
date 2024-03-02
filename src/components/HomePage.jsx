@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useEffect } from "react";
+import ProjectCard from "./ProjectCard";
 export default function HomePage({ handleOptionClick ,handleDomainClick ,handleclick}) {
     const [randomprj,setRandomprj]=useState([]);
     useEffect(() => {
@@ -93,22 +94,8 @@ export default function HomePage({ handleOptionClick ,handleDomainClick ,handlec
                                 <p>{suggestion.College} <span>posted on</span>  <span>{new Date(suggestion.Date).toLocaleDateString()}</span></p>
                             </div>
                         </div>
-                        <div className="project-card">
-                            <div className="cardpart">
-                                <img className="profile-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${suggestion.photo}`}*/ alt="Profile Picture"/>
-                                <div className="pdiscript">
-                                    <p>
-                                        {suggestion.Description}
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="pname" >
-                                <p>
-                                    {suggestion.Project_Name}
-                                </p>
-                            </div>
+              <ProjectCard projinfo={suggestion} index={index}/>
                         </div>
-                    </div>
                 </div>
             ))}
              

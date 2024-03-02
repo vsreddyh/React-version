@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart ,faUser, faCamera} from '@fortawesome/free-solid-svg-icons';
 import NothingHere from "./nothinghere";
-
+import ProjectCard from "./ProjectCard";
 
 export default function StudentProfile({ studentproj, studentdetail ,handleclick}) {
     
@@ -37,26 +37,13 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
                     <h5 className="myprj">MY PROJECTS</h5>
                 </div>
                 <div className="mlkmj">
-                    {studentproj && studentproj.map((project, index) => (
+                    {studentproj && studentproj.map((suggestion, index) => (
                         <div key={index} className="grid-item">
-                            <div  onClick={()=>{handleclick(project._id)}}>
-                                <div className="project-card">
-                                    <div className="cardpart">
-                                        <div className="profile-section">
-                                            <img className="profile-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${project.photo}`}*/ alt="Profile Picture" />
-                                            <br />
-                                            <span><FontAwesomeIcon icon={faHeart} /></span>
-                                        </div>
-                                        <div className="pnamedis">
-                                            <div className="pname">
-                                                <p>{project.Project_Name}</p> 
-                                            </div>
-                                            <div className="pdiscript">
-                                                <p>{project.Description}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            
+                            <div onClick={()=>{handleclick(suggestion._id)}}>
+                            <ProjectCard projinfo={suggestion} index={index}/>
+
+
                             </div>
                         </div>
                     ))}
