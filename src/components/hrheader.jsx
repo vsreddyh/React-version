@@ -94,7 +94,7 @@ export default function Header({takedata, toggleDashboard1,handlehrdetail, toggl
                         <input type="search" className="searchs1" spellcheck="false" placeholder="Search for projects" value={formData.search} onChange={handlesearchchange}></input>
                     </div>
                     <div className="search-icon1">
-                        <FontAwesomeIcon className="i" icon={faSearch} style={{color: "white"}} onClick={handlesearch}/>
+                        <FontAwesomeIcon className="ic" icon={faSearch} style={{color: "white"}} onClick={handlesearch}/>
                     </div>
                 </div>
                 <div className="profileset1">

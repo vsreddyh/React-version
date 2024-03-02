@@ -138,10 +138,10 @@
 .option{
     height:40px;
     background-color:#0E1525;
-    /* margin: 8px; */
-    border: 1px solid rgb(63, 83, 99);
+    margin: 8px;
+    border: 0.4px solid rgb(63, 83, 99);
     justify-content: center;
-    /* border-radius: 5px; */
+    border-radius: 5px;
     align-items: center;
     display: flex;
     /* display: block; */
@@ -154,13 +154,13 @@
     color: aliceblue;
 }
 
-#option:hover{
-    border:1.5px solid rgb(37, 101, 147) ;
+.option:hover{
+    border:1.4px solid rgb(40, 109, 158) ;
 
 }
 
-#option:active{
-    border:2.5px solid rgb(37, 101, 147) ;
+.option:active{
+    border:2px solid rgb(40, 109, 158) ;
 }
 #bodyy4{
     background-color:   #0E1525;
@@ -361,9 +361,11 @@
 .seemore{
     margin: 15px;
     display: inline-block;
-    border: 0.1px solid rgb(28, 60, 88);
+    border: 0.2px solid rgb(28, 60, 88);
     width: auto;
 }
+
+
 .seemore p{
     margin: 5px;
     color: aliceblue;
@@ -390,7 +392,7 @@
 }
 
 #bodyy4::-webkit-scrollbar {
-    width: 12px;
+    width: 9px;
   }
   
 #bodyy4::-webkit-scrollbar-thumb {
@@ -497,14 +499,12 @@
     height: 35px;
     width: 500px;
     margin-top: 15px;
-    margin-left: 10px;
-    border-radius: 5px;
     background-color: #21293b;
     box-sizing: border-box;
     border: 0.5px solid;
     border-color: rgb(4, 67, 112);
     border-right: 0px;
-    border-radius: 5px;
+    border-radius: 0px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     padding: 10px;
@@ -527,6 +527,7 @@
     margin-left: 5px;
     border: 5px;
 }
+
 @media only screen and (max-width:768px){
     .searchbar1 input{
         width: 100%;
@@ -588,18 +589,18 @@
 .mpprofile {
     margin: 10px 25px;
     width: 100%;
-    border: 2px solid rgb(132, 128, 128);
+    border: 2px solid rgb(56 91 120);
     height: auto;
     min-height: 300px;
     position: relative;
- 
+    border-radius: 9px;
 }
 
 .mpbg{
     top: 0px;
     height: 110px;
     width: 100%;
-    background: linear-gradient(to right,rgb(28, 34, 101),rgb(42, 126, 252));
+    background:linear-gradient(to right, rgb(10 34 67), rgb(18 109 181));
 }
 
 .mpphoto {
@@ -848,5 +849,6 @@
 .myprj
 {
     color: aliceblue;
+    font-size: 30px;
 }
 

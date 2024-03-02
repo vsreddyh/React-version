@@ -339,7 +339,7 @@ export default function ProjectUploadForm(){
     <div className="bod">
         <Header takedata={CategoryData}/>
         <div className="bodyy">
-            <Filters sendDataToParent={FilterData}/>
+        
             
             <form onSubmit={handleSubmit}>
                 <div className="studetails">
@@ -393,10 +393,7 @@ export default function ProjectUploadForm(){
                                 <p className="description">
                                     <label htmlFor="description">Description:</label>
                                     <textarea name="description" id="description" rows="5" required className="dscrpt-textarea" onChange={(e) => setDescription(e.target.value)}></textarea>
-                                    <button type="button" onClick={ ()=>handlePlagarism()}>
-                                        Run Plagarism Test
-                                    </button>
-                                    <p>{plagarismErrorMessage}</p>
+                                    
                                 </p>
                                 <div className="file-upload">
                                     <label htmlFor="file-upload" className="file-upload-label"  >
@@ -413,6 +410,13 @@ export default function ProjectUploadForm(){
 
 
                             </div>
+                            <div className="plagrism">
+                                <button className="plag" type="button" onClick={ ()=>handlePlagarism()}>
+                                        Run Plagarism Test
+                                </button>
+                                <p>{plagarismErrorMessage}</p>
+                            </div>
+                           
                             <div className="lang">
                                 <p className="lang-p">
                                     Languages used:
@@ -475,12 +479,14 @@ export default function ProjectUploadForm(){
                                     
                                     
                                     </div>
-                                    <div>
-                                        <button type="submit" className="submit-button">Submit</button>
-                                    </div>
+                                    
                                 </div>
-                            </div>      
+                            </div>  
+                            <div>
+                                        <button type="submit" className="submit-button">Submit</button>
+                                    </div>    
                 </div>
+                
                 </form>
         </div>
     </div>
