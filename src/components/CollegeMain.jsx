@@ -18,7 +18,6 @@ const CollegeMain =({checkSession}) => {
         const intervalId = setInterval(async () => {
           try {
             const response = await axios.get("/checksessionexpiry");
-            console.log(response.data)
             if (response.data === 0) {
                 try{
                     clearInterval(intervalId);
@@ -43,21 +42,24 @@ const CollegeMain =({checkSession}) => {
     const [sendDataToStudent, setSendDataToStudent] = useState(null);
     const [collegedetail,setCollegedetail]=useState([]);
     const [isProfileVisible,setIsProfileVisible]=useState(false);
-    const [stack,setstack]=useState([0])
+    const [stack,setstack]=useState([[0,'Upload Date',false,2004]])
+    const [selectedYear, setSelectedYear] = useState('2004');
     const toggleDashboard1 = () => {
         setIsProfileVisible(prevState => !prevState);
-       
     };
-      const navigate=useNavigate();
-      const handlesearch = async (inputData) => {
+    const navigate=useNavigate();
+    const handlesearch = async (inputData) => {
         try {
             if (inputData!==''){
                 const response = await axios.get(`/en/getsearchbycollege?term=${inputData}`);
                 const data=response.data;
-                console.log(data);
                 setSugesstions(data);
                 setDisplay(1);
-
+                setstack(prevStack => {
+                    const newStack = [...prevStack];
+                    newStack.push([1,inputData])
+                    return newStack;
+                    }); 
             }
         } catch (error) {
             console.error("Error fetching suggestions:", error);
@@ -77,44 +79,76 @@ const CollegeMain =({checkSession}) => {
     });
     const handleclick=(data)=>{
         setDisplay(2);
-        console.log(data);
         setSendDataToStudent(data);
+        setstack(prevStack => {
+            const newStack = [...prevStack];
+            newStack.push([2,data])
+            return newStack;
+            });
     }
     const handlestuclick=(data)=>{
         setDisplay(3)
         setSendDataToStudent(data)
-    }
-    const handlebackClick=async()=>
-    {
-        setDisplay(0);
+        setstack(prevStack => {
+            const newStack = [...prevStack];
+            newStack.push([3,data])
+            return newStack;
+            });
     }
     const FilterData = useCallback((data) => {
-        
-        console.log(receivedData);
         updateReceivedData(data);
     }, []);
 
     const CategoryData = useCallback((data) => {
-        
         updateReceivedData(data);
     }, []);
     const updateReceivedData = (data) => {
-        
         setReceivedData(prevData => ({ ...prevData, ...data }));
+        setstack((prevStack) => {
+            const newStack = [...prevStack];
+            newStack[0][1] = data.sort_by;
+            newStack[0][2] = data.order;
+            return newStack;
+        });
     };
-    const killpage = () => {
+    const killpage = async() => {
+        const len = stack.length
         if(projid){
             navigate(`/clgmain`)
         }
-        setDisplay(0)
-        setSendDataToStudent(null)
+        else if (stack[len-2][0]===0){
+            setDisplay(0)
+            updateReceivedData({
+                sort_by:stack[len-2][1],
+                order:stack[len-2][2]
+            })
+            setSelectedYear(stack[len-2][3])
+        }
+        else if (stack[len-2][0]===1){
+            const response = await axios.get(`/en/getsearchbycollege?term=${stack[len-2][1]}`);
+            const data=response.data;
+            setSugesstions(data);
+            setDisplay(1);
+        }
+        else if (stack[len-2][0]===2){
+            setDisplay(2)
+            setSendDataToStudent(stack[len-2][1])
+        }
+        else if (stack[len-2][0]===3){
+            setDisplay(3)
+            setSendDataToStudent(stack[len-2][1])
+        }
+        setstack(prevStack => {
+            const newStack = [...prevStack];
+            newStack.pop();
+            return newStack;
+          });
     }
     const handlecollegedetail=async()=>
     {
         try{
             const response=await axios.get("/en/getcollegedetails");
             const data=response.data;
-            console.log(data);
             setCollegedetail(data);
         }
         catch(error)
@@ -127,12 +161,10 @@ const CollegeMain =({checkSession}) => {
             if(projid){
                 const response = await axios.get(`/en/validateurl?projid=${projid}`)
                 if (response.data===1){
-                    setDisplay(2)
-                    setSendDataToStudent(projid)
+                    handleclick(projid)
                 }
                 else if(response.data==2){
-                    setDisplay(3)
-                    setSendDataToStudent(projid)
+                    handlestuclick(projid)
                 }
                 else{
                     navigate('clgmain')
@@ -142,10 +174,17 @@ const CollegeMain =({checkSession}) => {
             console.error('Error fetching data:', error);
         }
     };
+    const handleYearChange = event => {
+        setSelectedYear(event.target.value);
+        setstack(prevStack => {
+            const newStack = [...prevStack];
+            newStack[0][3] = event.target.value;
+          });
+    };
     useEffect(()=>{
         fetchData()
     },[projid])
-    console.log(projid,display)
+    console.log(display,stack)
     return(
         <div className="body1">
         <CollegeHeader takedata={CategoryData} handlesearch={handlesearch} handlecollegedetail={handlecollegedetail} toggleDashboard1={toggleDashboard1}/>
@@ -170,8 +209,8 @@ const CollegeMain =({checkSession}) => {
             
  
             
-            {display===0 && <Graph receivedData={receivedData} handleclick={handleclick}/>}
-            {display===1 && <DomainClick handleclick={handleclick} handlebackClick={handlebackClick} sugesstions={sugesstions}/>}
+            {display===0 && <Graph receivedData={receivedData} selectedYear={selectedYear} handleYearChange={handleYearChange} handleclick={handleclick} />}
+            {display===1 && <DomainClick handleclick={handleclick} handlebackClick={killpage} sugesstions={sugesstions}/>}
             {display===2 && <Collegeprojectportfolio studata={sendDataToStudent} dis={killpage} handlestuclick={handlestuclick}/>}
             {display===3 && <StudentDataclg studata={sendDataToStudent} dis={killpage} handleclick={handleclick}/>}
         </div>

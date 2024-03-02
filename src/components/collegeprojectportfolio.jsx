@@ -18,7 +18,6 @@ export default function StudentProjectProfile({ dis, studata , handlestuclick })
     const navigate=useNavigate();
 
     const exit = () => {
-        console.log('yo');
         dis();
     };
     
