@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart ,faUser} from '@fortawesome/free-solid-svg-icons';
+import { faHeart ,faUser, faCamera} from '@fortawesome/free-solid-svg-icons';
 
 
 export default function StudentProfile({ studentproj, studentdetail ,handleclick}) {
@@ -10,7 +10,7 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
             <div className="mpcontainer">
                 <div className="mpprofile">
                     <div className="mppicedit">
-                        <span>&#128247;</span>
+                        <span><FontAwesomeIcon icon={faCamera} /></span>
                     </div>
                     <div className="mpbg">
                         
