@@ -3,6 +3,7 @@
     align-items: stretch;
     display: flex;
     margin: 0px;
+    height:100%;
     min-height: 0;
     min-width: 0;
     box-sizing: border-box;
@@ -33,6 +34,13 @@
 
 .opbuttons1 p:hover{
     border-color: #4e5569;
+}
+
+.image1{
+    height:300px;
+    width: 200px;
+    margin: 20px;
+    border-radius: 5px;
 }
 
 @media  screen and (min-width: 1024px) {
@@ -114,12 +122,12 @@
 }
 
 .opimvid1::-webkit-scrollbar {
-    width: 12px;
+    width: 9px;
   }
   
 .opimvid1::-webkit-scrollbar-thumb {
     background-color: rgb(15, 83, 142);
-    border-radius: 6px;
+    border-radius: 9px;
   }
   
 .opimvid1::-webkit-scrollbar-track {
@@ -157,12 +165,12 @@
 
 }
 .opdetail1::-webkit-scrollbar {
-    width: 12px;
+    width: 9px;
   }
   
 .opdetail1::-webkit-scrollbar-thumb {
     background-color: rgb(15, 83, 142);
-    border-radius: 6px;
+    border-radius: 9px;
   }
   
 .opdetail1::-webkit-scrollbar-track {
@@ -180,9 +188,9 @@
     /* width: 100%; */
 }
 .oppic1{
-    height: 60px;
-    width: 60px;
-    border: 2px solid white;
+    height: 50px;
+    width: 50px;
+    border: 3px solid white;
     border-radius: 50%;
 
 }.oprealpro1{
@@ -394,8 +402,8 @@
 }
 
 .slectimage1{
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
 }
 

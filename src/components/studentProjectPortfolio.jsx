@@ -165,7 +165,7 @@ export default function StudentProjectProfile({ dis, ...props }) {
                         </div>
                         {(photolist.length!==0)&&(
                             photolist.map((photo,index)=>(
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${photo}`}*/ key={index} alt="VS" className="slectimage1" />
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${photo}`}*/ key={index} alt="VS" className="image1" />
                             ))
                         )}
                     </div>
