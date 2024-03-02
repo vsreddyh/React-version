@@ -12,9 +12,11 @@ export default function ProjectCard({ projinfo, index }) {
             <div className="cardpartPC">
                 <div className="profile-sectionPC">
                     <img className="profile-picturePC" src="https://placekitten.com/300/200"/*{/en/image/${projinfo.photo}}*/ alt="Profile Picture" />
-                    <FontAwesomeIcon icon={faHeart} style={{ color: "#436f91" }} />
-                    <FontAwesomeIcon icon={faComment} style={{ color: "#436f91" }} />
-                    <FontAwesomeIcon icon={faShareNodes} style={{ color: "#3d6583" }} /> {/* Changed faShareNodes to faShare */}
+                    <div className="getlifedude">
+                        <div><FontAwesomeIcon icon={faHeart} style={{ color: "#436f91" }} /></div>
+                        <div><FontAwesomeIcon icon={faComment} style={{ color: "#436f91" }} /></div>
+                        <div><FontAwesomeIcon icon={faShareNodes} style={{ color: "#3d6583" }} /></div> {/* Changed faShareNodes to faShare */}
+                    </div>
                 </div>
                 <div className="pnamedisPC">
                     <div className="pnamePC">
@@ -25,7 +27,9 @@ export default function ProjectCard({ projinfo, index }) {
                     </div>
                     <div className="langcontPC">
                         <div className="langPC">
-                            <p>{projinfo.Skills}</p>
+                            <div className="notlikethis">{projinfo.Skills && projinfo.Skills.map((skill)=>(
+                                <div className="huh">#{skill}</div>
+                            ))}</div>
                         </div>
                     </div>
                 </div>

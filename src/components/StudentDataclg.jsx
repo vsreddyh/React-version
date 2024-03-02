@@ -11,7 +11,6 @@ export default function StudentDataclg({ dis, handleclick, ...props }) {
     const projid = props.studata;
     const [showCopyMessage, setShowCopyMessage] = useState(false);
     const exit = async () => {
-        console.log('yo')
         dis()
     }
     const printDivRef = useRef(null);
