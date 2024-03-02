@@ -172,6 +172,9 @@ useEffect(() => {
             <div className="cmainheading">
                 <h2>{college}</h2>
             </div>
+            <div id="cmainnp" >
+                    <p>{noofprj} projects this year</p>
+            </div>
             <div className="cmaingraph">
                 <div id="cmainrealgraph" className="justincase">
                     <label htmlFor="yearSelector" className='year'>Select Year:</label>
@@ -203,13 +206,13 @@ useEffect(() => {
 
                         
                     </select>
-                    <canvas id="monthlyChart"></canvas>
-                    <canvas id="domainChart"></canvas>
+                    <div className='myselfanu'>
+                    <div className='inmine'><canvas id="monthlyChart"></canvas></div>
+                    <div className='inmine'><canvas id="domainChart"></canvas></div>
+                    </div>
 
                 </div>
-                <div id="cmainnp" className="justincase">
-                    <p>{noofprj} projects this year</p>
-                </div>
+              
             </div>
             <div className="cprojects" >
                 {suggestions.map((suggestion, index) => (

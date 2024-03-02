@@ -269,12 +269,17 @@
 }
 
 .cmaintotal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     margin: 20px 5%;
 
 }
 
 
 .cmaingraph {
+    height: 350px;
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
@@ -286,8 +291,20 @@
 }
 
 .justincase {
-    flex: 1;
-    height: auto;
+    width: 100%;
+    /* flex: 1; */
+    height: au350pxo;
+}
+
+.inmine{
+    flex-grow: 1;
+}
+.myselfanu{
+    gap: 50px;
+    display: flex;
+    flex-direction: row;
+    height: 350px;
+
 }
 
 .chart-container {
