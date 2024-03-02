@@ -4,7 +4,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import NothingHere from "./nothinghere";
-
+import ProjectCard from './ProjectCard';
 const Graph = ({handleclick, receivedData}) => {
     const [suggestions, setsuggestions] = useState([]);
     const [college, setCollege] = useState('');
@@ -225,27 +225,11 @@ useEffect(() => {
             </div>
             <div className="cprojects" >
                 {suggestions.map((suggestion, index) => (
-                    <div className="project-card" key={index}>
-                        <div className="cardpart" onClick={()=>{handleclick(suggestion._id)}}>
-                            <div className="profile-section">
-                                <img className="profile-picture" src="https://placekitten.com/300/200" alt="Profile Picture" />
-                                <br />
-                                <span><FontAwesomeIcon icon={faHeart} /></span>
-                            </div>
-                            <div className="pnamedis">
-                                <div className="pname">
-                                    <p>
-                                        {suggestion.Project_Name}
-                                    </p>
-                                </div>
-                                <div className="pdiscript">
-                                    <p>
-                                        {suggestion.Description}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    <div onClick={()=>{handleclick(suggestion._id)}}>
+
+                    <ProjectCard projinfo={suggestion} index={index}/>
                     </div>
+
                 ))}
                 {suggestions.length===0 && <NothingHere/>}
             </div>
