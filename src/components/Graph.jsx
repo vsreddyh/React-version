@@ -5,23 +5,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import NothingHere from "./nothinghere";
 import ProjectCard from './ProjectCard';
-const Graph = ({handleclick, receivedData}) => {
+const Graph = ({handleclick,  receivedData, selectedYear, handleYearChange }) => {
     const [suggestions, setsuggestions] = useState([]);
     const [college, setCollege] = useState('');
     const [collegeprj, setCollegePrj] = useState([]);
-    const [selectedYear, setSelectedYear] = useState('2004');
     const [noofprj,setNoofprj]=useState(0);
     const [domainprj,setDomainprj]=useState([]);
 
     useEffect(() => {
-        console.log("new data:",receivedData);
         getproj();
     }, [receivedData]);
 
     const getproj = async () => {
         try {
             const response = await axios.post('/en/collegeprojectsdisplay', {receivedData: receivedData});
-            console.log("recev data:",receivedData);
             setsuggestions(response.data.list);
             setCollege(response.data.college);
         } catch (error) {
@@ -48,7 +45,6 @@ const Graph = ({handleclick, receivedData}) => {
             try {
                 const response = await axios.get(`/en/getcollegeprojects?term=${selectedYear}`);
                 const data = response.data;
-                console.log("data", data);
                 setCollegePrj(data);
             } catch (error) {
                 console.error('Error fetching college projects:', error);
@@ -64,7 +60,6 @@ const Graph = ({handleclick, receivedData}) => {
             try {
                 const response = await axios.get(`/en/getcolldomainprojects?term=${selectedYear}`);
                 const data = response.data;
-                console.log("data", data);
                 setDomainprj(data);
             } catch (error) {
                 console.error('Error fetching college projects:', error);
@@ -127,7 +122,6 @@ useEffect(() => {
 
 //bar graph
 useEffect(() => {
-    console.log('domainprj:', domainprj);
     if (!domainprj) {
         console.warn(`Data for year ${selectedYear} not available yet.`);
         return;
@@ -173,12 +167,6 @@ useEffect(() => {
         },
     });
 }, [selectedYear, domainprj]);
-
-
-    const handleYearChange = event => {
-        setSelectedYear(event.target.value);
-    };
-
     return (
         <div className="cmaintotal">
             <div className="cmainheading">
