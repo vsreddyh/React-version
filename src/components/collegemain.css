@@ -490,14 +490,53 @@
 }
 
 .profilesetCollege{
-    width: 30%;
-    height: 100%;
+    position: absolute;
+    right: 5px;
+    gap: 15px;
+    align-items: center;
+    display: flex;
+    /* width: 30%;
+    height: 100%; */
 }
 
+.okiaddproject{
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 45px;
+    position: relative;
+}
+.okitext{
+    text-wrap: nowrap;
+    color: aliceblue;
+    font-size: 20px;
+    visibility: hidden;
+    /* width: 120px; */
+    /* background-color: #555; */
+    /* color: #fff; */
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    border: 1px solid aliceblue;
+    /* bottom: 100%; */
+    /* left: 50%; */
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+.okiaddproject:hover .okitext{
+    visibility: visible;
+    opacity: 1;
+}
 .ppp{
+    display: flex;
+    align-items: center;
     /* text-align: right; */
     margin-right: 10px;
-    margin-top: 13px;
+    /* margin-top: 13px; */
 }
 
 .filtersCollege{

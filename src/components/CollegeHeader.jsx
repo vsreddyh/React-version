@@ -65,8 +65,8 @@ export default function CollegeHeader({takedata,handlesearch,toggleDashboard1,ha
                     </div>
                 </div>
                 <div className="profilesetCollege">
-                    <div>
-                    &#43;
+                    <div className="okiaddproject">
+                    + <span className="okitext">Add Project</span>
                     </div>
                     <div className="ppp">
                     <FontAwesomeIcon icon={faUser} className="profileset-iconCollege" onClick={() => {toggleDashboard1();handlecollegedetail()}}/>

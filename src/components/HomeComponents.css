@@ -295,6 +295,9 @@
 
 .maincard{
     margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 .maincard1{
     margin: 10px;
@@ -379,10 +382,15 @@
     color:aliceblue
 }
 
-.detailinformation p{
-    font-size: 23px;
+.maincard
+
+.detailinformation span{
+    font-size: 15px;
     color:rgb(12, 90, 145) ;
 
+}
+.detailinformation p{
+    font-size: 20px;
 }
 .detailphoto{
     height: 25px;
