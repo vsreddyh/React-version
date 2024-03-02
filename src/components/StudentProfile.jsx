@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart ,faUser, faCamera} from '@fortawesome/free-solid-svg-icons';
+import NothingHere from "./nothinghere";
 
 
 export default function StudentProfile({ studentproj, studentdetail ,handleclick}) {
@@ -59,6 +60,7 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
                             </div>
                         </div>
                     ))}
+                    {studentproj.length === 0 && <NothingHere/>}
                 </div>
             </div>
         </div>

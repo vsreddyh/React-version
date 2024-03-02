@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import NothingHere from "./nothinghere";
 
 const Graph = ({handleclick, receivedData}) => {
     const [suggestions, setsuggestions] = useState([]);
@@ -246,6 +247,7 @@ useEffect(() => {
                         </div>
                     </div>
                 ))}
+                {suggestions.length===0 && <NothingHere/>}
             </div>
         </div>
     );
