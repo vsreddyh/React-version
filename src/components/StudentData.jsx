@@ -4,8 +4,9 @@ import "./sp.css";
 import { Link } from "react-router-dom";
 import { GoLink } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import NothingHere from "./nothinghere";
 
-export default function StudentData({ dis, ...props }) {
+export default function StudentData({ dis,openproject, ...props }) {
     const navigate = useNavigate()
     const projid = props.studata;
     const [bookmark, setbookmark] = useState(0)
@@ -142,7 +143,7 @@ export default function StudentData({ dis, ...props }) {
                     </div>
                 </div>
                 {projects.length > 0 ? (projects.map((project, index) => (
-                <div className="project-card1" key={index} onClick={()=>navigate(`/hrmain/${project._id}`)}>
+                <div className="project-card1" key={index} onClick={()=>openproject(project._id)}>
                     <div className="cardpart1">
                         <img className="profile-picture1" src="https://placekitten.com/300/200"/*{`/en/image/${project.photo}`}*/ alt="Profile Picture1"/>
                         <div className="pdiscript1">
@@ -159,7 +160,7 @@ export default function StudentData({ dis, ...props }) {
                 </div>
                  ))
                  ) : (
-                     <p>Loading projects...</p>
+                     <NothingHere />
                  )}
             </div>
     )

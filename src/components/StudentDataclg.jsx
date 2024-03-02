@@ -4,6 +4,7 @@ import "./sp.css";
 import { Link } from "react-router-dom";
 import { GoLink } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import NothingHere from "./nothinghere";
 
 export default function StudentDataclg({ dis, handleclick, ...props }) {
     const navigate = useNavigate()
@@ -134,7 +135,7 @@ export default function StudentDataclg({ dis, handleclick, ...props }) {
                 </div>
                  ))
                  ) : (
-                     <p>Loading projects...</p>
+                     <NothingHere />
                  )}
             </div>
     )

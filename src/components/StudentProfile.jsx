@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart ,faUser} from '@fortawesome/free-solid-svg-icons';
+import { faHeart ,faUser, faCamera} from '@fortawesome/free-solid-svg-icons';
+import NothingHere from "./nothinghere";
 
 
 export default function StudentProfile({ studentproj, studentdetail ,handleclick}) {
@@ -9,9 +10,13 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
         <div className="mprofile">
             <div className="mpcontainer">
                 <div className="mpprofile">
+                    <div className="mppicedit">
+                        <span><FontAwesomeIcon icon={faCamera} /></span>
+                    </div>
                     <div className="mpbg">
                         
                     </div>
+                    
                     <div className="mpphoto"><FontAwesomeIcon icon={faUser} className="profileset-icon1"/></div>
                     <div className="mpdetails">
                         <div className="mpdet">
@@ -55,6 +60,7 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
                             </div>
                         </div>
                     ))}
+                    {studentproj.length === 0 && <NothingHere/>}
                 </div>
             </div>
         </div>

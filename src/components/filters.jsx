@@ -18,12 +18,14 @@ export default function Filters({ sendDataToParent }) {
     //const [dropdownOptions, setDropdownOptions] = useState([]);
     const [term, setTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+    const [state,setstate]=useState(false)
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({
             ...formData,
             [name]: value
         });
+        setstate(true)
     };
     const handleChange1 = async (event) => {
         const inputdata = event.target.value;
@@ -41,6 +43,7 @@ export default function Filters({ sendDataToParent }) {
                 ["college_name"]: 'Any'
             });
         }
+        setstate(true)
     };
     const handleSuggestionClick = (selectedSuggestion) => {
         setFormData({
@@ -49,17 +52,23 @@ export default function Filters({ sendDataToParent }) {
         });
         setTerm(selectedSuggestion);
         setSuggestions([]);
+        sendDataToParent(formData);
+        setstate(true)
     };
 
     useEffect(() => {
-        sendDataToParent(formData);
-    }, [formData, sendDataToParent]);
+        if (state){
+            sendDataToParent(formData);
+        }
+    }, [formData]);
 
     const handleToggle = () => {
         setFormData({
             ...formData,
             order: !formData.order
         });
+        sendDataToParent(formData);
+        setstate(true)
     };
     // const change=(event) => {
     //     const { name, value } = event.target;
@@ -90,7 +99,7 @@ export default function Filters({ sendDataToParent }) {
                     <option value="Data Science and Analytics">Data Science and Analytics</option>
                     <option value="Game development">Game development</option>
                     <option value="Cyber Security">Cyber Security</option>
-                    <option value="Artificial Intelligence and Robotic">Artificial Intelligence and Robotics</option>
+                    <option value="Artificial Intelligence and Robotics">Artificial Intelligence and Robotics</option>
                     <option value="Embedded systems and IOT(Sensors)">Embedded systems and IOT(Sensors)</option>
                     <option value="E-Commerce and Marketplace development">E-Commerce and Marketplace development</option>
                     <option value="Healthcare">Healthcare</option>
