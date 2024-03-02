@@ -42,8 +42,8 @@
 
 .logo1{
     font-size: 40px;
-    margin-top: 16px;
-    margin-left: 20px;
+    /* margin-top: 16px; */
+    margin-left: 9px;
 }
 
 .title1 {
@@ -52,21 +52,26 @@
     color: aliceblue;
     font-family:'Courier New', Courier, monospace;
     margin-left: 5px;
-    margin-top: 28px;
+    /* margin-top: 28px; */
 }
 
 .logoset1{
     display: flex;
+    align-items: center;
     width: 30%;
     height: 100%;
 }
 
 .searchbarset1{
-    width: 40%;
+    height: 65px;
+    /* width: 40%; */
     display: flex;
 }
 
 .profileset1{
+    position: absolute;
+    right: 0px;
+
     width: 30%;
     height: 100%;
 }
@@ -78,6 +83,9 @@
 }
 
 .headerset1 { 
+    width: 100%;
+    position: relative;
+    height: 65px;
     font-size: 25px;
     align-items: center;
     display: flex;
@@ -130,7 +138,7 @@
 }
 
 .search-icon1{
-    margin-top: 15px;
+    /* margin-top: 15px; */
     font-size: 17px;
     height: 35px;
     width: 50px;
@@ -1036,7 +1044,7 @@
     border:2.5px solid rgb(37, 101, 147) ;
 }
 .dash1{
-    margin-top: 10px;
+    /* margin-top: 10px; */
     margin-left: 8px;
 }
 .hidden{
