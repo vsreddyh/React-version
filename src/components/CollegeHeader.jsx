@@ -65,9 +65,12 @@ export default function CollegeHeader({takedata,handlesearch,toggleDashboard1,ha
                     </div>
                 </div>
                 <div className="profilesetCollege">
-                    <p>
+                    <div>
+                    &#43;
+                    </div>
+                    <div className="ppp">
                     <FontAwesomeIcon icon={faUser} className="profileset-iconCollege" onClick={() => {toggleDashboard1();handlecollegedetail()}}/>
-                    </p>
+                    </div>
 
                 </div>
 
