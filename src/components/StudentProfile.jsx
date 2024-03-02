@@ -9,9 +9,13 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
         <div className="mprofile">
             <div className="mpcontainer">
                 <div className="mpprofile">
+                    <div className="mppicedit">
+                        <span>&#128247;</span>
+                    </div>
                     <div className="mpbg">
                         
                     </div>
+                    
                     <div className="mpphoto"><FontAwesomeIcon icon={faUser} className="profileset-icon1"/></div>
                     <div className="mpdetails">
                         <div className="mpdet">

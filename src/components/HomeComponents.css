@@ -639,6 +639,12 @@
     color:  rgb(255, 255, 255);
 }
 
+.mppicedit{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
 .mprealname{
     font-size: 35px;
     font-weight: 300;
