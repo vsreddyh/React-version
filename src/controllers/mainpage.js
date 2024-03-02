@@ -490,10 +490,8 @@ const hrmainsearch = async (req, res) => {
 const getbookmarks = async (req,res)=>{
     const mail = req.session.loggedInemail;
     const search = await recruiter.findOne({email_address:mail}).select('bookmarks')
-    console.log(search)
     const list = search.bookmarks;
-    console.log(list)
-    const array = [];
+    const array = []
     for(let key in list){
         let key1 = list[key];
         let stuId = new mongoose.Types.ObjectId(key1);
