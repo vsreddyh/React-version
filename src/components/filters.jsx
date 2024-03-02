@@ -18,14 +18,12 @@ export default function Filters({ sendDataToParent }) {
     //const [dropdownOptions, setDropdownOptions] = useState([]);
     const [term, setTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
-    const [state,setstate]=useState(false)
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({
             ...formData,
             [name]: value
         });
-        setstate(true)
     };
     const handleChange1 = async (event) => {
         const inputdata = event.target.value;
@@ -43,7 +41,6 @@ export default function Filters({ sendDataToParent }) {
                 ["college_name"]: 'Any'
             });
         }
-        setstate(true)
     };
     const handleSuggestionClick = (selectedSuggestion) => {
         setFormData({
@@ -53,13 +50,10 @@ export default function Filters({ sendDataToParent }) {
         setTerm(selectedSuggestion);
         setSuggestions([]);
         sendDataToParent(formData);
-        setstate(true)
     };
 
     useEffect(() => {
-        if (state){
-            sendDataToParent(formData);
-        }
+        sendDataToParent(formData);
     }, [formData]);
 
     const handleToggle = () => {
@@ -68,7 +62,6 @@ export default function Filters({ sendDataToParent }) {
             order: !formData.order
         });
         sendDataToParent(formData);
-        setstate(true)
     };
     // const change=(event) => {
     //     const { name, value } = event.target;

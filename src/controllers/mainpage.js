@@ -470,9 +470,10 @@ const hrmainsearch = async (req, res) => {
     console.log("Search term:", search);
     console.log("Type:", type);
     if(type==="Student Search")
-    {
-        const search1=await Course.findOne({student_name:search});
-       /* console.log(search1);*/
+    {   
+        const name=tokenizer.tokenize(search);
+        const search1=await Course.findOne({student_name:name});
+       //console.log(search1);
         res.json(search1);
     }
     else if(type==="Project Search")
@@ -480,7 +481,7 @@ const hrmainsearch = async (req, res) => {
         
         const tokens = tokenizer.tokenize(search);
         const term1= await projects.find({ $text: { $search: tokens.join(' ') } });
-        /*console.log(term1);*/
+        //console.log(term1);
         res.json(term1);
 
     }
@@ -489,10 +490,8 @@ const hrmainsearch = async (req, res) => {
 const getbookmarks = async (req,res)=>{
     const mail = req.session.loggedInemail;
     const search = await recruiter.findOne({email_address:mail}).select('bookmarks')
-    console.log(search)
     const list = search.bookmarks;
-    console.log(list)
-    const array = [];
+    const array = []
     for(let key in list){
         let key1 = list[key];
         let stuId = new mongoose.Types.ObjectId(key1);

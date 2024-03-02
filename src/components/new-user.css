@@ -11,6 +11,18 @@
     height: 100vh;
 }
 
+.sighnup20 p{
+    color: rgb(134, 137, 137);
+    font-size: 15px;
+    text-align: center;
+}
+
+.sighnup20 a{
+    text-decoration: none;
+    color: #417ce1;
+    margin-left: 5px;
+}
+
 #header20{
     background-color: #1c2333;
     grid-column: span 2;

@@ -57,6 +57,13 @@ export default function ForgotPassword(){
                 <div className="err20">
                     {errorMessage && <p>{errorMessage}</p>}
                 </div>
+                <div className="sighnup20">
+                <p>
+                    New to project?<Link to="/">Sign up</Link>
+                    
+                </p>
+                
+                </div>
                 <div className="terms20">
                    <hr />
                        <p>

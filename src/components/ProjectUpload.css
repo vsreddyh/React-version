@@ -147,10 +147,9 @@
 
 .bodyy{
     background-color: #0E1525;
-    width: calc(100%-100px);
+    width: calc(100%-60px);
     height:1200px;
     padding: 30px;
-    padding-top: 0px;
 }
 
 .filters{
@@ -205,17 +204,23 @@
 .sdetails{
     display: flex;
     flex-direction: column;
-    min-height: 250px;
+    min-height: 280px;
     border: 2px;
+    border-radius:0px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     position: relative;
     background-color: #1c2333 ;  
     margin-top: 20px;
  }
+
+ .lang{
+    display: flex;
+ }
+
  #suggestions::-webkit-scrollbar {
     width: 12px;
-  }
+}
   
 #suggestions::-webkit-scrollbar-thumb {
     background-color: rgb(15, 83, 142);
@@ -325,6 +330,7 @@
 
 .pform{
     min-height: 30px;
+    padding-bottom:30px;
     height: auto;
     width:100%;
     background-color: #1c2333;
@@ -383,30 +389,32 @@
     margin-top: 70px;
 }
 
-.file-upload-p{
+
+.file-upload p{
+    margin-top: 5px;
     text-align: center;
-    margin-top: 50px;
     font-size: 17px;
     color: #a6a5a5;
 }
 
-.file-upload-button{
+.file-upload label{
     text-align: center;
     background-color:rgb(11, 79, 139) ;
     border-style: none;
     color: whitesmoke;
-    height: 43px;
-    width: 170px;
+    height: 25px;
+    width: 130px;
     border-radius: 6px;
-    margin-bottom: 10px;
+    margin-top: 50px;
+    margin-left: 155px;
     font-size: 20px;
 }
 
-.file-upload-button:hover {
+.file-upload button:hover {
     background-color: rgb(24, 106, 177);
 }
 
-.file-upload-button:active {
+.file-upload button:active {
     border:2px solid rgb(66, 157, 237);
 }
 .file-upload-input {
@@ -423,6 +431,7 @@
     color: white;
     cursor: pointer;
     border-radius: 5px;
+    margin:10px;
 }
   
   /* Style the label to resemble a button */
@@ -499,10 +508,25 @@
     border:2px solid rgb(66, 157, 237);
 }
 
+#searchGroupmem{
+    padding: 8px;
+    font-size: 16px;
+    border-radius:5px;
+    background-color:#20293d;
+    border: 1.5px solid rgb(6, 60, 107);
+    height: 25px;
+    color:aliceblue;
+    margin-left:10px;
+}
+
+.video{
+    margin-left:15px;
+}
 
 .team-mem{
     height:200px;
     width: 500px;
+    display: flex;
 }
 
 .tagContainer {
@@ -519,14 +543,26 @@
     align-items: center;
 }
 
-.tagContainer button{
+.submit-button{
+    padding: 10px 15px;
+    background-color: rgb(194, 71, 46);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block; /* Ensure the button takes full width of its container */
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+/* .tagContainer button{
     margin:0px;
     margin-left: 5px;
     cursor: pointer;
     border-radius: 50%;
     border:0px;
     background-color: rgb(8, 63, 111);
-}
+} */
 
 .tagText{
     font-size: 15px;

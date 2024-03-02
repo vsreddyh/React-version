@@ -17,7 +17,6 @@ function HRMAIN({ checkSession }) {
     const navigate = useNavigate();
     const [display, setDisplay] = useState(0)
     const [students,setstudents]=useState([])
-    const [bookmarks,setbookmarks]=useState([])
     const [receivedData, setReceivedData] = useState({
         category: 'Any',
         college_name: 'Any',
@@ -38,15 +37,11 @@ function HRMAIN({ checkSession }) {
         updateReceivedData(data);
         setCurrentPage(1);
     }, []);
-    const handleDomainClick = (data)=>{
-        FilterData({
-            college_name: 'Any',
-            category:data,
-            sort_by: 'Upload Date',
-            order: false
-        })
+    const handleDomainClick = async(data)=>{
+        const response = await axios.get(`/en/getdomainbyclick?term=${data}`);
+        setProjects(response.data);
         console.log('got filter data')
-        setDisplay(2)
+        setDisplay(6)
     }
     const CategoryData = useCallback((data) => {
         updatesearchData(data);
@@ -136,7 +131,7 @@ function HRMAIN({ checkSession }) {
         try {
             const response = await axios.get(`/en/getsearchbyclick?term=${inputData}`);
             const data = response.data;
-            setDisplay(2);
+            setDisplay(6);
             setProjects(data);
         } catch (error) {
             console.error("Error fetching suggestions:", error);
@@ -182,9 +177,9 @@ function HRMAIN({ checkSession }) {
     }
     const ShowBookmarks=async()=>{
         const response = await axios.get("/en/getbookmarks");
-        setDisplay(6)
+        setDisplay(3)
         console.log(response.data)
-        setbookmarks(response.data);
+        setstudents(response.data);
     }
     const handlehrdetail = async () => {
         try {
@@ -298,29 +293,30 @@ function HRMAIN({ checkSession }) {
                             {display === 1 ? (
                                 <ProjectPortfolio studata={sendDataToStudent} dis={killpage} openstuinfo={openstuinfo}/>
                             ) 
-                            : display === 6 ? (
+                            :display ===6?(
                                 <div>
                                     <div className="sbackbutton">
                                         <p onClick={() => setDisplay(0)}><span>&#8592;</span>Go Back</p>
                                     </div>
                                     <div className="grid-container1">
-                                        {bookmarks.map((student, index) => (
+                                        {projects.map((project, index) => (
                                             <div key={index} className="grid-item1">
                                                 <div>
-                                                <div className="user-cardSC">
-                                                    <div className="user-card-imgSC">
-                                                        <img src="test.png"/*{`/en/image/${project.photo}`}*/ alt="" />
+                                                    <div className="project-card2">
+                                                        <div className="cardpart2">
+                                                            <img className="profile-picture2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${project.photo}`}*/ alt="Profile Picture" />
+                                                            <div className="pdiscript2">
+                                                                <p>
+                                                                    {project.Description}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="pname2" onClick={() => openproject(project._id)}>
+                                                            <p>
+                                                                {project.Project_Name}
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div className="user-card-infoSC" onClick={() => openstuinfo(student._id)}>
-                                                    <h2>{student.student_name}</h2>
-                                                    <p><span>Email:</span>{student.email_address}</p>
-                                                    <p><span>college:</span>{student.college_name}</p>
-                                                    <p><span>Languages known:</span>{
-                                                        student.skills.toString()||'None'
-                                                    }</p>
-                                                    <p><span>project count:</span>{student.projects?.length||0}</p>
-                                                    </div>
-                                                </div>
                                                 </div>
                                             </div>
                                         ))}

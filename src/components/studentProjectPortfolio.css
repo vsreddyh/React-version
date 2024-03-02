@@ -11,10 +11,15 @@
     /* border: 2px solid white; */
 }
 
+
 .opbuttons1{
     height: 55px;
     display: block;
     color: aliceblue;
+}
+
+video{
+    border-radius: 10px;
 }
 
 .opbtn1{
@@ -122,11 +127,11 @@
 }
 
 .opimvid1::-webkit-scrollbar {
-    width: 9px;
+    width: 7px;
   }
   
 .opimvid1::-webkit-scrollbar-thumb {
-    background-color: rgb(15, 83, 142);
+    background-color: rgb(33, 61, 86);
     border-radius: 9px;
   }
   
@@ -169,8 +174,8 @@
   }
   
 .opdetail1::-webkit-scrollbar-thumb {
-    background-color: rgb(15, 83, 142);
-    border-radius: 9px;
+    background-color: rgb(33, 61, 86);
+    border-radius: 6px;
   }
   
 .opdetail1::-webkit-scrollbar-track {
