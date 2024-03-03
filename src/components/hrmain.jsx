@@ -291,7 +291,7 @@ function HRMAIN({ checkSession }) {
                 <div className="option2" id="option" onClick={() => stackexplore()}>
                     <p>Explore</p>
                 </div>
-                <div className="option3" id="option" onClick={ShowBookmarks()}>
+                <div className="option3" id="option" onClick={()=>ShowBookmarks()}>
                     <p>Bookmarks</p>
                 </div>
             </div>
@@ -316,7 +316,7 @@ function HRMAIN({ checkSession }) {
             </div>
             <div className={`bodyy121 ${isProfileVisible ? 'blur-background' : ''}`} style={{ gridColumn: bodyGridColumn }}>
                 {display === 0 ? (
-                    <HomePage handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} handleclick={openproject} />
+                    <HomePage handleOptionClick={handleOptionClick()} handleDomainClick={handleDomainClick} handleclick={openproject} />
                 ) : (
                     <>
                         {display === 1 ? (
