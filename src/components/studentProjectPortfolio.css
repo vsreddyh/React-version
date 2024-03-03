@@ -50,7 +50,7 @@ video{
 
 @media  screen and (min-width: 1024px) {
     .opprojects1{
-        height: calc(100vh - 160px);
+        height: calc(100vh - 151px);
         flex-direction: row;
 
     }
@@ -92,6 +92,11 @@ video{
     
     
 }
+.opprojectvideo1 video{
+    max-width: 800px;
+    width: auto;
+}
+
 /* @media  screen and (min-width: 480px) {
     .opimvid{
         display: flex;
@@ -102,8 +107,9 @@ video{
 } */
 @media screen  and (max-width: 1024px){
     .opprojects1{
-        flex-direction: column;
-        height: auto;
+        display: block;
+        /* flex-direction: column;
+        height: auto; */
     }
     .opdiv1{
         flex-direction: column;
