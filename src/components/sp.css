@@ -96,7 +96,7 @@
     border-radius: 10px;
     margin: 10px;
     position: relative;
-    background-color: #070b13 ;   
+    background-color: #141e2f;   
     z-index: 2;
  }
  
@@ -126,6 +126,11 @@
     flex-shrink: 1;
 }
 
+.sphoto img{
+    height:150px;
+    width: 150px;
+}
+
 .sname1{
     margin-top: 190px;
     margin-left:20px ;
@@ -146,7 +151,7 @@
     max-height: 250px;
     width: 430px;
     color: #a6a5a5;
-    background-color: #070b13;
+    background-color: #141e2f;
     z-index: 1;
     overflow-y: auto;
 }

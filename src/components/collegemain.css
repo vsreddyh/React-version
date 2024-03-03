@@ -514,33 +514,37 @@
 }
 
 .okiaddproject{
-    color: white;
+    color: #919499;
     display: flex;
     align-items: center;
-    font-size: 45px;
+    font-size: 40px;
     position: relative;
+    margin-top: 3px;
 }
 .okitext{
     text-wrap: nowrap;
-    color: aliceblue;
+    background: black;
+    color: #909fad;
+    padding: 5px;
     font-size: 20px;
     visibility: hidden;
-    /* width: 120px; */
-    /* background-color: #555; */
-    /* color: #fff; */
+    background-color: #1a222b;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 0;
+    padding: 5px;
     position: absolute;
     z-index: 1;
     top: 50px;
-    border: 1px solid aliceblue;
-    /* bottom: 100%; */
-    /* left: 50%; */
+    border: 1px solid #2e4b63;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s, visibility 0.3s;
 }
+
+.okitext :hover{
+    border: 1px solid white;
+}
+
 .okiaddproject:hover .okitext{
     visibility: visible;
     opacity: 1;
