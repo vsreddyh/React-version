@@ -110,7 +110,7 @@ export default function Header({ takedata, toggleDashboard1, handlehrdetail, tog
                         }}></input>
                     </div>
                     <div className="search-icon1">
-                        <FontAwesomeIcon className="ic" icon={faSearch} style={{ color: "white" }} onClick={handlesearch} />
+                        <FontAwesomeIcon className="ic" icon={faSearch} style={{ color: "white" }} onClick={()=>handlesearch()} />
                     </div>
                 </div>
                 <div className="profileset1">
