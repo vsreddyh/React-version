@@ -225,7 +225,7 @@ function HRMAIN({ checkSession }) {
     };
 
     useEffect(() => {
-        if (display !== 0 && searchData.search === '') {
+        if (display == 2) {
             console.log('fetching dataaa');
             fetchData();
         }
@@ -269,6 +269,7 @@ function HRMAIN({ checkSession }) {
     }
     const stackexplore = ()=>{
         setDisplay(2)
+        fetchData()
         setstack(prevStack => {
             const newStack = [...prevStack];
             newStack.push([2,{

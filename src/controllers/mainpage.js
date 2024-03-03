@@ -74,7 +74,7 @@ const projectlist = async(req,res)=>{
     else if (sort_by==='Upload Date'){
         sortquery={Date:order}
     }
-    const projlists = await projects.find({$and:[clgquery,catquery]}).sort(sortquery).select('photo Project_Name Description')
+    const projlists = await projects.find({$and:[clgquery,catquery]}).sort(sortquery)
     const a=~~((projlists.length)/10)
     let m;
     if (projlists.length===0){
