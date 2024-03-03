@@ -304,7 +304,7 @@ function HRMAIN({ checkSession }) {
                                             <div>
                                                 <div className="user-cardSC">
                                                     <div className="user-card-imgSC">
-                                                        <img src="test.png"/*{/en/image/${project.photo}}*/ alt="" />
+                                                        <img src={`/en/image/${student.photo}`} alt="" />
                                                     </div>
                                                     <div className="user-card-infoSC" onClick={() => openstuinfo(student._id)}>
                                                         <h2>{student.student_name}</h2>

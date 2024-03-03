@@ -114,16 +114,32 @@ const collegeprojdisplay = async (req, res) => {
 
 //pipe image
 const image = async(req, res) => {
-    // try 
-    // {
-    //     const fileId = new mongoose.Types.ObjectId(req.params.id);
-    //     await gfs.openDownloadStream(fileId).pipe(res);
-    // }
-    // catch(error)
-    // {
-    //     console.log(error);
-    // }
+    try 
+    {
+        const fileId = new mongoose.Types.ObjectId(req.params.id);
+        await gfs.openDownloadStream(fileId).pipe(res);
+    }
+    catch(error)
+    {
+        console.log(error);
+    }
 };
+
+const commentimage = async(req,res)=>{
+    const Id = new mongoose.Types.ObjectId(req.params.id);
+    if(req.session.typeofuser===0){
+        const stinfo = await Course.findOne({_id:Id})
+        const photoid = stinfo.photo
+        const fileId = new mongoose.Types.ObjectId(photoid);
+        await gfs.openDownloadStream(fileId).pipe(res);
+    }
+    else if(req.session.typeofuser===2){
+        const stinfo = await recruiter.findOne({_id:Id})
+        const photoid = stinfo.photo
+        const fileId = new mongoose.Types.ObjectId(photoid);
+        await gfs.openDownloadStream(fileId).pipe(res);
+    }
+}
 const getstudata = async(req,res)=>{
     const data =req.body.data;
     const studentId = new mongoose.Types.ObjectId(data);
@@ -505,6 +521,7 @@ module.exports = {
     getdata,
     projectlist,
     image,
+    commentimage,
     getstudata,
     getprojectdata,
     fetchprojdata,

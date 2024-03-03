@@ -108,12 +108,12 @@ export default function StudentProjectProfile({ dis, studata , handlestuclick })
                         <div className="opvidname1"></div>
                         <div className="opprojectvideo1">
                             {projdata && (
-                                <video height="500px" width="600px" src={`http://localhost:3000/en/image/${projdata.Video}`} type="video/mp4" controls />
+                                <video height="500px" width="600px" src={`/en/image/${projdata.Video}`} type="video/mp4" controls />
                             )}
                         </div>
                         {photolist.length !== 0 && (
                             photolist.map((photo, index) => (
-                                <img key={index} src={`http://localhost:3000/en/image/${photo}`} alt="VS" className="slectimage1" />
+                                <img key={index} src={`/en/image/${photo}`} alt="VS" className="slectimage1" />
                             ))
                         )}
                     </div>
@@ -121,7 +121,7 @@ export default function StudentProjectProfile({ dis, studata , handlestuclick })
                         <div className="opdetail1">
                             <div className="opprojectname1">
                                 <div className="oppic1">
-                                    {projdata && <img src={`http://localhost:3000/en/image/${projdata.photo}`} alt="VS" className="slectimage1" />}
+                                    {projdata && <img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage1" />}
                                 </div>
                                 <div className="oprealpro1">
                                     <p>{projdata.Project_Name}</p>

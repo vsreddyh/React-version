@@ -161,18 +161,18 @@ export default function StudentProjectProfile({ dis, ...props }) {
 
                         </div>
                         <div className="opprojectvideo1">
-                            {projdata && (<video height="500px" width="600px" src="https://www.youtube.com/watch?v=Ki_0iES2cGI&t=73s"/*{`/en/image/${projdata.Video}`}*/ controls />)}
+                            {projdata && (<video height="500px" width="600px" src={`/en/image/${projdata.Video}`} controls />)}
                         </div>
                         {(photolist.length !== 0) && (
                             photolist.map((photo, index) => (
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${photo}`}*/ key={index} alt="VS" className="image1" />
+                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="image1" />
                             ))
                         )}
                     </div>
                     {projdata && (<div className="opdetail1">
                         <div className="opprojectname1">
                             <div className="oppic1">
-                                {projdata && (<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${projdata.photo}`}*/ alt="VS" className="slectimage1" />)}
+                                {projdata && (<img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage1" />)}
                             </div>
                             <div className="oprealpro1">
                                 <p>{projdata.Project_Name}</p>
@@ -227,7 +227,7 @@ export default function StudentProjectProfile({ dis, ...props }) {
                                         <div className="commentdetails1">
                                             <div className="letcomdetails1">
                                                 <div className="commentpic1">
-                                                    <img src={`/en/image/${comment.photoid}`} alt="VS" className="slectimage1" />
+                                                    <img src={`/en/commentimage/${comment.id}`} alt="VS" className="slectimage1" />
                                                 </div>
                                                 <div className="commentname1">
                                                     <p>{comment.studentname}</p>

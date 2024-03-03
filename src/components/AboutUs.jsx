@@ -31,32 +31,32 @@ const AboutUs=()=>{
                   <h3>Meet Our Team</h3>
                   <div className="Auteam-section">
                     <div className="Auteam-member">
-                      <img src="test.png" alt="Team Member 1" width="120" height="120" />
+                      <img src="/en/image/65e346b62001871ffa879971" alt="Team Member 1" width="120" height="120" />
                       <p>Nithin</p>
                       
                     </div>
                     <div className="Auteam-member">
-                      <img src="test.png" alt="Team Member 2" width="120" height="120" />
+                      <img src="/en/image/65e346b62001871ffa879971" alt="Team Member 2" width="120" height="120" />
                       <p>Vishnu</p>
                     
                     </div>
                     <div className="Auteam-member">
-                      <img src="test.png" alt="Team Member 2" width="120" height="120" />
+                      <img src="/en/image/65e346b62001871ffa879971" alt="Team Member 2" width="120" height="120" />
                       <p>Hrishita</p>
                     
                     </div>
                     <div className="Auteam-member">
-                      <img src="test.png" alt="Team Member 2" width="120" height="120" />
+                      <img src="/en/image/65e346b62001871ffa879971" alt="Team Member 2" width="120" height="120" />
                       <p>Naga Sai</p>
                     
                     </div>
                     <div className="Auteam-member">
-                      <img src="test.png" alt="Team Member 2" width="120" height="120" />
+                      <img src="/en/image/65e346b62001871ffa879971" alt="Team Member 2" width="120" height="120" />
                       <p>Florence</p>
                     
                     </div>
                     <div className="Auteam-member">
-                      <img src="test.png" alt="Team Member 2" width="120" height="120" />
+                      <img src="/en/image/65e346b62001871ffa879971" alt="Team Member 2" width="120" height="120" />
                       <p>Sanjeeva</p>
                     
                     </div>
