@@ -64,7 +64,6 @@
     color: rgb(154, 170, 183);
     margin-top: 13px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    margin-right: 100px;
 }
 .title8 {
     font-size: 1rem;
@@ -78,6 +77,15 @@
     font-size: 25px;
     margin-top: 15%; 
 }
+.uiux{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* width: 25%; */
+    box-sizing: border-box;
+}
+
 .z{
     display: flex;
     justify-content: center;
@@ -85,6 +93,7 @@
     position: relative;
 }
 #body-content8 input{
+    color: white;
     height: 40px;
     width: 250px;
     margin: 7px;

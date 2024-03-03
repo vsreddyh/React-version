@@ -1,9 +1,8 @@
 const mongoose = require('mongoose')
-const ObjectId = mongoose.Types.ObjectId; //importing objectid
-url='mongodb+srv://Project:Florencemidhebaramvesam@project.tbx2krn.mongodb.net/projectpalace' //database link
-mongoose.connect(url); //database is connected to server
+const ObjectId = mongoose.Types.ObjectId;
+url='mongodb+srv://Project:Florencemidhebaramvesam@project.tbx2krn.mongodb.net/projectpalace'
+mongoose.connect(url);
 
-//schemas are like classes
 const loginSchema = new mongoose.Schema({
     student_name : String,
     email_address : String,
