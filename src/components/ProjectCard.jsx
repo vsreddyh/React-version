@@ -27,7 +27,7 @@ export default function ProjectCard({ projinfo, index }) {
                     </div>
                     <div className="langcontPC">
                         <div className="langPC">
-                            <div className="notlikethis">{projinfo.Skills && projinfo.Skills.map((skill,)=>(
+                            <div className="notlikethis">{projinfo.Skills && projinfo.Skills.map((skill)=>(
                                 <div className="huh">#{skill}</div>
                             ))}</div>
                         </div>

@@ -6,8 +6,7 @@ import { GoLink } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import NothingHere from "./nothinghere";
 
-export default function StudentData({ dis,openproject, ...props }) {
-    const navigate = useNavigate()
+export default function StudentData({ dis,isSiderVisible,toggleDashboard,openproject, ...props }) {
     const projid = props.studata;
     const [bookmark, setbookmark] = useState(0)
     const [showCopyMessage, setShowCopyMessage] = useState(false);
@@ -15,8 +14,10 @@ export default function StudentData({ dis,openproject, ...props }) {
         console.log('yo')
         dis()
     }
-    const printDivRef = useRef(null);
     const handleDownload = async () => {
+        if(isSiderVisible){
+            await toggleDashboard()
+        }
         alert("Please enable background graphics in more settings for better output.");
         window.print();
     };
@@ -52,9 +53,6 @@ export default function StudentData({ dis,openproject, ...props }) {
     }, [projid])
     let [studata, setstudata] = useState('null')
     let [projects, setprojects] = useState([])
-    const handleclick = (data) => {
-        console.log(data)//need to link to projectportfolio
-    }
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.post('/en/getstudendata', { data: projid });
@@ -73,7 +71,7 @@ export default function StudentData({ dis,openproject, ...props }) {
     console.log(studata)
     return (
         <div className="sprofile">
-                <div className="sbuttons">
+                <div className="sbuttons no-print">
                     <div className="stubutton">
                         <div className="bookmark">
                             <div style={{color: "aliceblue"}} className="nby" onClick={()=>togglebookmark()}><p>Bookmark <span>{bookmark === 0 ? '\u2606' : '\u2605'}</span></p></div>

@@ -47,7 +47,7 @@ export default function CollegeHeader({takedata,handlesearch,toggleDashboard1,ha
         window.open('http://localhost:3000/ProjectUploadForm', '_blank');
     }
     return (
-        <div className="headerCollege">
+        <div className="headerCollege no-print">
             <div className="headersetCollege">
                 <div className="logosetCollege">
                     <div className="logoCollege">

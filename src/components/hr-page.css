@@ -907,7 +907,7 @@
     }
 }
 @media print {
-    .header1 ,.filters{
+    .no-print {
         display: none !important;
     }
 }

@@ -418,8 +418,8 @@
 }
 
 @media print {
-    .headerCollege ,.filtersCollege{
-        display: none !important;
+    .no-print {
+        display: none;
     }
 }
 

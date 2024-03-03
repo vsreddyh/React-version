@@ -66,7 +66,7 @@ export default function Header({takedata, toggleDashboard1,handlehrdetail, toggl
     
     return(
         <div className="header1" id="hhhhead">
-            <div className="headerset1">
+            <div className="headerset1 no-print">
                 <div className="logoset1">
                     <div className="dash1">
                             <span className="btn1" onClick={toggleDashboard}><FontAwesomeIcon icon={faBars} style={{ color: "aliceblue" }} /></span>
