@@ -127,15 +127,15 @@ const image = async(req, res) => {
 
 const commentimage = async(req,res)=>{
     const Id = new mongoose.Types.ObjectId(req.params.id);
-    if(req.session.typeofuser===0){
-        const stinfo = await Course.findOne({_id:Id})
+    const stinfo = await Course.findOne({_id:Id})
+    const hrinfo = await recruiter.findOne({_id:Id})
+    if(stinfo){
         const photoid = stinfo.photo
         const fileId = new mongoose.Types.ObjectId(photoid);
         await gfs.openDownloadStream(fileId).pipe(res);
     }
-    else if(req.session.typeofuser===2){
-        const stinfo = await recruiter.findOne({_id:Id})
-        const photoid = stinfo.photo
+    else if(hrinfo){
+        const photoid = hrinfo.photo
         const fileId = new mongoose.Types.ObjectId(photoid);
         await gfs.openDownloadStream(fileId).pipe(res);
     }
