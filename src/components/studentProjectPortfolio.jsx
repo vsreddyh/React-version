@@ -165,7 +165,7 @@ export default function StudentProjectProfile({ dis, ...props }) {
                         </div>
                         {(photolist.length !== 0) && (
                             photolist.map((photo, index) => (
-                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="image1" />
+                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="stdpimg" />
                             ))
                         )}
                     </div>

@@ -93,7 +93,7 @@ video{
     
 }
 .opprojectvideo1 video{
-    max-width: 800px;
+    max-width: 700px;
     width: auto;
 }
 
@@ -447,11 +447,22 @@ video{
     border-radius: 50%;
 }
 
-.slectimage2{
-    height: 300px;
-    width: auto;
-    margin:10px;
+.stdpimg{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
 
+.slectimage2{
+    height: 250px;
+    border: 1px solid #375672;
+    width: auto;
+    border-radius: 9px;
+    margin: 10px;
+}
+
+.slectimage2 :hover{
+    border: 1px solid #8bb1d2;
 }
 
 .commentname1{

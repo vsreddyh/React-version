@@ -263,14 +263,15 @@
 }
 
 .sugessions{
-
     max-height: 250px;
     overflow-y: auto;
-    width:fit-content;
-    background-color: #031945;
+    width: -moz-fit-content;
+    width: fit-content;
+    background-color: #131e2d;
     z-index: 99;
+    border-radius: 9px;
+    border: 1px solid #2d434f;
 }
-
 .sugessions p{
     margin: 10px;
     padding: 2px;
@@ -647,6 +648,14 @@
     margin-left: 5px;
 }
 
+.shopbutton1 {
+    background-color: #732d03;
+    color: #eee;
+    border: 0.1px solid #5c7990;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
 .shopnm{
     background-color: #0e273b;
     border: 1px solid #fff;
@@ -770,18 +779,18 @@
     background-color: #d0d0d0;
 } 
 .pbox{
-    
-    box-sizing: content-box;
-    border: 2px solid rgb(7, 90, 149);
+    background-color: #182835;
+    border: 1px solid #08558c;
     border-radius: 10px;
-    max-width: 220px;
-    max-height: 2000px;
-    background-color: rgb(33, 32, 32);
-    position:absolute ;
-    right: 0;
-    z-index: 999;
+    box-sizing: initial;
     display: none;
-    top:60px;
+    max-height: 2000px;
+    max-width: 220px;
+    margin-right: 10px;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    z-index: 999;
     
     /* left: 100%; */
     /* box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.3); */
@@ -810,7 +819,7 @@
     color: rgb(236, 236, 242);
 }
 .two:hover{
-    background-color: rgb(70, 71, 71);
+    background-color: rgb(52, 80, 105);
     color: rgb(236, 236, 242);
 }
 .pp{
@@ -879,7 +888,7 @@
 
 .blur-background
 {
-    filter: blur(1.6px);
+    filter: blur(1.9px);
 }
 .unblurred-content
 {

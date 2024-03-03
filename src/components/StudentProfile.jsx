@@ -97,7 +97,7 @@ export default function StudentProfile({ studentproj, handlestudentdetail, stude
                                                 value={studentDescription}
                                                 onChange={handleStudentDescription}
                                             />
-                                            <button className="shopbutton" onClick={handleCancelEdit}>Cancel</button>
+                                            <button className="shopbutton1" onClick={handleCancelEdit}>Cancel</button>
                                         </React.Fragment>
                                     ) : (
                                         <React.Fragment>

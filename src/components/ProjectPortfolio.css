@@ -23,7 +23,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0px 30px;
+    margin: 20px 30px;
 }
 
 .opbuttons p{
@@ -120,8 +120,10 @@
 }
 
 .opprojectvideo video{
-    max-width: 800px;
+    max-width: 700px;
     width: auto;
+    height: 400px;
+    margin-top: 20px;
 }
 
 .opimvid{
@@ -142,7 +144,7 @@
   }
   
 .opimvid::-webkit-scrollbar-thumb {
-    background-color: rgb(15, 83, 142);
+    background-color: rgb(34, 53, 69);
     border-radius: 6px;
   }
   
@@ -185,7 +187,7 @@
   }
   
 .opdetail::-webkit-scrollbar-thumb {
-    background-color: rgb(15, 83, 142);
+    background-color: rgb(34, 53, 69);
     border-radius: 6px;
   }
   
@@ -420,6 +422,12 @@
 .slectimage{
     height: 60px;
     width: 60px;
+    border-radius: 50%;
+}
+
+.slectimage5{
+    height: 31.33px;
+    width: 31.33px;
     border-radius: 50%;
 }
 

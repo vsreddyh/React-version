@@ -128,7 +128,7 @@ export default function ProjectPortfolio({ dis,openstuinfo, ...props }) {
                         </div>
                         {(photolist.length!==0)&&(
                             photolist.map((photo,index)=>(
-                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="slectimage" />
+                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="slectimage2" />
                             ))
                         )}
                     </div>
@@ -193,7 +193,7 @@ export default function ProjectPortfolio({ dis,openstuinfo, ...props }) {
                                         <div className="commentdetails">
                                             <div className="letcomdetails">
                                                 <div className="commentpic">
-                                                    <img src={`/en/commentimage/${comment.id}`} alt="VS" className="slectimage" />
+                                                    <img src={`/en/commentimage/${comment.id}`} alt="VS" className="slectimage5" />
                                                 </div>
                                                 <div className="commentname">
                                                     <p>{comment.studentname}</p>

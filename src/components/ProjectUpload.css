@@ -579,3 +579,23 @@
     margin-left: 19px;
     color: rgb(4, 67, 112)
 }
+
+.team-member-tag {
+     background-color: #192a3b;
+    border: 1px solid;
+    border-radius: 6px;
+    margin-left: 7px;
+    margin-bottom: 5px;
+    width: fit-content;
+    /* padding-left: 2px; */
+}
+
+
+
+.team-member-tag button {
+    border-radius: 8px;
+    margin: 4px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    background-color: #d64848;
+}
