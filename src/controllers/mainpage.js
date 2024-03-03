@@ -467,8 +467,33 @@ const  getSearchProjectscollege=async(req,res)=>
     const name=req.session.loggedInCollege;
     const term=req.query.term;
     const tokens=tokenizer.tokenize(term);
+    const partialSearchResults = await projects.find({ 
+        $or: [
+            { Project_Name: { $regex: term, $options: 'i' } },
+            
+            { Description: { $regex:  term, $options: 'i' } },
+            { Domain: { $regex:  term, $options: 'i' } },
+            { Comments: { $regex:  term, $options: 'i' } }
+            
+        ],
+        $and: [
+            { College: name }
+        ]
+    });
     const term1 = await projects.find({$and: [ { $text: { $search: tokens.join(' ') } },{ College: name }]});
-    res.json(term1);
+    
+
+    let combinedResults1 = [...term1];
+
+    partialSearchResults.forEach(result => {
+        if (!combinedResults1.some(item => item._id.equals(result._id))) {
+            combinedResults1.push(result);
+        }
+    });
+
+    
+    res.json(combinedResults1);
+    
 }
 const getNoofprojects=async(req,res)=>
 {
