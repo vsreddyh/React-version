@@ -70,7 +70,11 @@ export default function CollegeHeader({ takedata, handlesearch, toggleDashboard1
 
 
                     <div className="searchbarCollege">
-                        <input type="search" className="searchsCollege" spellcheck="false" placeholder="Search for projects" value={searchterm} onChange={(event) => { handlesearchchange(event) }}></input>
+                        <input type="search" className="searchsCollege" spellcheck="false" placeholder="Search for projects" value={searchterm} onChange={(event) => { handlesearchchange(event) }} onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                handlesearch(searchterm);
+                            }
+                        }}></input>
                     </div>
                     <div className="search-iconCollege">
                         <FontAwesomeIcon className="iCollege" icon={faSearch} style={{ color: "white" }} onClick={() => { handlesearch(searchterm) }} />

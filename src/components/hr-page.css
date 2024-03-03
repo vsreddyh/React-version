@@ -58,7 +58,7 @@
 .logoset1{
     display: flex;
     align-items: center;
-    width: 30%;
+    width: 25%;
     height: 100%;
 }
 
@@ -71,6 +71,7 @@
 .profileset1{
     position: absolute;
     right: 0px;
+    width: 20%;
     height: 100%;
 }
 
@@ -91,7 +92,7 @@
 
 .domain1 select{
     height: 35px;
-    width: 70px;
+    width: 125px;
     margin-top: 15px;
     margin-left: 0px;
     background-color: #21293b;
@@ -218,7 +219,6 @@
     background-color: #0E1525;
     min-height: calc(100%-96px);
     height: auto;
-    padding: 30px;
     padding-top: 0px;
     overflow: scroll;
     position: relative;
