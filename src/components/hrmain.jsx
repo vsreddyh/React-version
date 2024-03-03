@@ -160,6 +160,7 @@ function HRMAIN({ checkSession }) {
                 newStack.push([6,inputData])
                 return newStack;
                 });
+            console.log(data);
             setProjects(data);
         } catch (error) {
             console.error("Error fetching suggestions:", error);
