@@ -92,12 +92,12 @@ export default function StudentProfile({ studentproj, handlestudentdetail, stude
                                 <div className="mpgmname">
                                     {editMode ? (
                                         <React.Fragment>
-                                            <input
+                                            <input className="shopnm"
                                                 type="text"
                                                 value={studentDescription}
                                                 onChange={handleStudentDescription}
                                             />
-                                            <button onClick={handleCancelEdit}>Cancel</button>
+                                            <button className="shopbutton" onClick={handleCancelEdit}>Cancel</button>
                                         </React.Fragment>
                                     ) : (
                                         <React.Fragment>
@@ -106,7 +106,7 @@ export default function StudentProfile({ studentproj, handlestudentdetail, stude
                                         </React.Fragment>
                                     )}
                                     {editMode && (
-                                        <button onClick={handleStudentDescriptionSave}>Save</button>
+                                        <button className="shopbutton" onClick={handleStudentDescriptionSave}>Save</button>
                                     )}
                                 </div>
                             </div>

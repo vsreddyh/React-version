@@ -638,6 +638,18 @@
     color: #a6a5a5;
 
 }
+
+.shopbutton{
+    background-color: #8e8a8a;
+    color: white;
+}
+
+.shopnm{
+    border: 1px solid white;
+    background-color: #2B2929;
+}
+
+
 .mpname{
     display: flex;
     flex-direction: row;
