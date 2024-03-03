@@ -316,6 +316,8 @@ export default function HomeComponents({ checkSession }) {
                         <div className="pphoto">
                             <FontAwesomeIcon icon={faUser} className="profileset-icon1" />
                             
+                            {/*<img src={`/en/image/${studentdetail.photo}`} alt="" />*/}
+                            
                         </div>
 
                     </div>

@@ -10,6 +10,7 @@ const natural=require('natural');
 const GridFS = Grid(mongoose.connection, mongoose.mongo);
 const {college,projects,Course,url, recruiter,skills} = require('../settings/env.js');
 const { constants } = require('fs/promises');
+const { ObjectId } = require('mongodb');
 
 const app = express();
 app.use(express.static('./public'));
@@ -116,7 +117,13 @@ const collegeprojdisplay = async (req, res) => {
 const image = async(req, res) => {
     try 
     {
-        const fileId = new mongoose.Types.ObjectId(req.params.id);
+        const id = req.params.id;
+        if (!id || id.length !== 24) {
+            throw new Error('Invalid ObjectId format');
+        }
+        
+        const fileId = new mongoose.Types.ObjectId(id);
+        //console.log(fileId);
         await gfs.openDownloadStream(fileId).pipe(res);
     }
     catch(error)
@@ -124,6 +131,7 @@ const image = async(req, res) => {
         console.log(error);
     }
 };
+
 
 const commentimage = async(req,res)=>{
     const Id = new mongoose.Types.ObjectId(req.params.id);
@@ -529,8 +537,8 @@ const getNoofprojects=async(req,res)=>
 }
 const hrmainsearch = async (req, res) => {
     const { type, search } = req.query;
-    console.log("Search term:", search);
-    console.log("Type:", type);
+    //console.log("Search term:", search);
+    //console.log("Type:", type);
 
     
 

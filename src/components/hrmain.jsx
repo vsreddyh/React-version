@@ -134,6 +134,7 @@ function HRMAIN({ checkSession }) {
             const response = await axios.get(`/en/getsearchbyclick?term=${inputData}`);
             const data = response.data;
             setDisplay(6);
+            console.log(data);
             setProjects(data);
         } catch (error) {
             console.error("Error fetching suggestions:", error);
