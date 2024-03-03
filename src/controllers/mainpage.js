@@ -312,7 +312,7 @@ const addcomment = async(req,res)=>{
         const stuinfo = await Course.findOne({email_address:mail})
         const naame = stuinfo.student_name
         const photo = stuinfo.photo
-        comments.push({id:projid,photoid:photo,studentname:naame,Date:Daate,comment:commentdata})
+        comments.push({id:projId,studentname:naame,Date:Daate,comment:commentdata})
         projinfo.Comments=comments
         projinfo.save()
     }

@@ -457,7 +457,7 @@ export default function ProjectUploadForm() {
                         </div>
                         <div className="team-mem">
                             <p>
-                                Add your team members:
+                                Add team members:
                             </p>
                             <div id="groupContainer">
                                 <div id="tagGroupmem">

@@ -889,3 +889,14 @@
     font-size: 15px;
     color: aliceblue;
 }
+
+.plag{
+    background-color: #c2472e;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 15px;
+    margin-left: 360px;
+    margin-bottom: 10px;
+}

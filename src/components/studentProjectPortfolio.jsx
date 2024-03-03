@@ -172,7 +172,7 @@ export default function StudentProjectProfile({ dis, ...props }) {
                     {projdata && (<div className="opdetail1">
                         <div className="opprojectname1">
                             <div className="oppic1">
-                                {projdata && (<img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage1" />)}
+                                {projdata && (<img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage2" />)}
                             </div>
                             <div className="oprealpro1">
                                 <p>{projdata.Project_Name}</p>

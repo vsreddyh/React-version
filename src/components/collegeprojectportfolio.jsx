@@ -113,7 +113,7 @@ export default function StudentProjectProfile({ dis, studata , handlestuclick })
                         </div>
                         {photolist.length !== 0 && (
                             photolist.map((photo, index) => (
-                                <img key={index} src={`/en/image/${photo}`} alt="VS" className="slectimage1" />
+                                <img key={index} src={`/en/image/${photo}`} alt="VS" className="slectimage2" />
                             ))
                         )}
                     </div>

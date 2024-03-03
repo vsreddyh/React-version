@@ -415,6 +415,12 @@ video{
 }
 
 .slectimage1{
+    height: 31.33px;
+    width: 31.33px;
+    border-radius: 50%;
+}
+
+.slectimage2{
     height: 50px;
     width: 50px;
     border-radius: 50%;
