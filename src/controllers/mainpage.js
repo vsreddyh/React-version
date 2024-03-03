@@ -102,7 +102,7 @@ const collegeprojdisplay = async (req, res) => {
 
         sortOrder = receivedData.order ? 1 : -1;
 
-        const projlists = await projects.find(query).sort({ [sortField]: sortOrder }).select('photo Project_Name Description');
+        const projlists = await projects.find(query).sort({ [sortField]: sortOrder }).select('photo Project_Name Description Skills');
 
         res.json({ list: projlists, college: college });
     } catch (error) {
