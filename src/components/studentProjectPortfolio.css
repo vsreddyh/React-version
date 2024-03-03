@@ -50,7 +50,7 @@ video{
 
 @media  screen and (min-width: 1024px) {
     .opprojects1{
-        height: calc(100vh - 180px);
+        height: calc(100vh - 160px);
         flex-direction: row;
 
     }
@@ -233,7 +233,7 @@ video{
     margin-left: 5px;
 }
 .gettingdescription1{
-    font-size: 15px;
+    font-size: 19px;
     color: #f8f8f8;
     margin: 13px;
     padding-bottom: 10px;
@@ -267,7 +267,7 @@ video{
     border-top: 2px solid #3C445C;
     color: #f8f8f8;
     margin: 13px;
-    font-size: 16px;
+    font-size: 21px;
 }
 
 .ourdomain1 p{
@@ -277,7 +277,7 @@ video{
 .ourtechnology1{
     color: #f8f8f8;
     margin: 13px;
-    font-size: 16px;
+    font-size: 19px;
 }
 
 .studentsworking1{
@@ -415,8 +415,8 @@ video{
 }
 
 .slectimage1{
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
 }
 
