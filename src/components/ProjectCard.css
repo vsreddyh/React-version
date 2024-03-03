@@ -99,7 +99,7 @@
 }
 
 .notlikethis{
-    gap: 3px;
+    gap: 5px;
     display: flex;
     flex-direction: row;
 }
