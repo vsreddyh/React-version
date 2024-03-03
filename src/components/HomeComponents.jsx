@@ -295,7 +295,7 @@ export default function HomeComponents({ checkSession }) {
                 </div>
                 <div id="option3" className="option" onClick={() => handleOptionClick(2)}>
                     <p><span></span>
-                        likes
+                        Explore
                     </p>
                 </div>
                 <div id="option3" className="option" onClick={() => handlelikeClick()}>

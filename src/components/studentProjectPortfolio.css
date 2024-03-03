@@ -448,9 +448,10 @@ video{
 }
 
 .slectimage2{
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
+    height: 300px;
+    width: auto;
+    margin:10px;
+
 }
 
 .commentname1{

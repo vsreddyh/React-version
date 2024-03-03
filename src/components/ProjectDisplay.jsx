@@ -167,7 +167,7 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
 
                         </div>
                         <div
-                            className="search-icon1"
+                            className="search-icon2"
                             onClick={() => {
                                 handleskillList(tags);
                             }}
