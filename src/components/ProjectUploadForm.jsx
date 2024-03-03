@@ -148,6 +148,7 @@ export default function ProjectUploadForm() {
             let temp = event.target.value;
             const profilePhotoName = temp.replace("C:\\fakepath\\", "");
             setProfilePhotoName(profilePhotoName);
+            alert('photo uploaded')
         } else {
             alert('No photo selected');
         }
@@ -169,7 +170,7 @@ export default function ProjectUploadForm() {
             let temp3 = event.target.value;
             const videoname = temp3.replace("C:\\fakepath\\", "");
             setVideoName(videoname);
-
+            alert('uploaded video')
 
             // Perform further actions with the selected video here
         } else {
@@ -189,8 +190,8 @@ export default function ProjectUploadForm() {
                 setPhotos(prevPhotos => [...prevPhotos, photoDataUrl]);
             };
             reader.readAsDataURL(selectedPhoto);
+            alert('photos selected')
         }
-
         else {
             alert('No photo selected');
         }
@@ -243,6 +244,7 @@ export default function ProjectUploadForm() {
             const zipname = temp1.replace("C:\\fakepath\\", "");
             setFileName(zipname);
             console.log(filename);
+            alert('file uploaded')
             // You can perform further actions with the selected file here
         } else {
             alert('please select a valid .zip file');
