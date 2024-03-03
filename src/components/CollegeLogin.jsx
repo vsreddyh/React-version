@@ -141,8 +141,8 @@ export default function CollegeLogin() {
         </div>
         <div className="sighnup8">
           <p>Already have an account?  <Link to="/SignIn">Login</Link></p>
+          <p>Can't find your College name here? <Link to="/Ins">Click here</Link></p>
         </div>
-
         <div className="terms8">
           <hr />
           <p>

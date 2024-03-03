@@ -22,6 +22,7 @@ import FileExplorer from "./fileExplorer";
 import FrontPage from "./FrontPage";
 import HomeComponents from "./HomeComponents";
 import TermsAndConditions from "./TermsAndConditions";
+import Instructions from "./Instructions";
 
 export default function App() {
     const [userData, setUserData] = useState(null); //session data
@@ -76,6 +77,7 @@ export default function App() {
                 <Route path="/ProjectUploadForm" element={(userData && userData[1]===1 && userData[2]===1) ? <ProjectUploadForm/> : <Navigate to="/" />}/>
                 <Route path="/showFiles/:data" element={ (userData &&userData[2]===1) ? <FileExplorer/> : <Navigate to="/" />}/>
                 <Route path="/t&c" element={<TermsAndConditions/>}/>
+                <Route path="/Ins" element={<Instructions/>}/>
                 <Route path="/*" element={<Navigate to="/" />} />
                 <Route path="/" element=
                     {userData ?

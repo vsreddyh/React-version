@@ -330,7 +330,12 @@ const deletecomment = async(req,res)=>{
     const {index,id} = req.body;
     const projinfo = await projects.findOne({_id:id})
     let comments = projinfo.Comments
-    comments.splice(index,index);
+    if(index===0){
+        comments.pop()
+    }
+    else{
+        comments.splice(index,index);
+    }
     projinfo.Comments=comments
     projinfo.save()
     res.json('success')
