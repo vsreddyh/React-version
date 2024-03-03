@@ -261,7 +261,11 @@ export default function HomeComponents({ checkSession }) {
                     </div>
                     <div className="searchbarset4">
                         <div className="searchbar4">
-                            <input type="search" className="searchs4" placeholder="Search for projects" value={searchterm} onChange={handlesearchchange} />
+                            <input type="search" className="searchs4" placeholder="Search for projects" value={searchterm} onChange={handlesearchchange} onKeyDown={(event) => {
+                                if (event.key === 'Enter') {
+                                    handlesearchClick(searchterm);
+                                }
+                            }} />
                             <div className="search-icon4" onClick={() => { handlesearchClick(searchterm) }}>
                                 <FontAwesomeIcon className="search-icon4-i" icon={faSearch} style={{ color: "white" }} />
                             </div>
