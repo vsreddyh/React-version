@@ -1,11 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart ,faUser, faCamera} from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faUser, faCamera } from '@fortawesome/free-solid-svg-icons';
 import NothingHere from "./nothinghere";
 import ProjectCard from "./ProjectCard";
 
-export default function StudentProfile({ studentproj, studentdetail ,handleclick}) {
-    
+export default function StudentProfile({ studentproj, studentdetail, handleclick }) {
+
     return (
         <div className="mprofile">
             <div className="mpcontainer">
@@ -14,13 +14,13 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
                         <span><FontAwesomeIcon icon={faCamera} /></span>
                     </div>
                     <div className="mpbg">
-                        
+
                     </div>
-                    
-                    <div className="mpphoto"><FontAwesomeIcon icon={faUser} className="profileset-icon1"/></div>
+
+                    <div className="mpphoto"><FontAwesomeIcon icon={faUser} className="profileset-icon1" /></div>
                     <div className="mpdetails">
                         <div className="mpdet">
-                            
+
                             <div className="mpname">
                                 <div className="mprealname"><p>{studentdetail.student_name}</p></div>
                                 <div className="editoption">Edit <span>&#128393;</span></div>
@@ -39,15 +39,15 @@ export default function StudentProfile({ studentproj, studentdetail ,handleclick
                 <div className="mlkmj">
                     {studentproj && studentproj.map((suggestion, index) => (
                         <div key={index} className="grid-item">
-                            
-                            <div onClick={()=>{handleclick(suggestion._id)}}>
-                            <ProjectCard projinfo={suggestion} index={index}/>
+
+                            <div onClick={() => { handleclick(suggestion._id) }}>
+                                <ProjectCard projinfo={suggestion} index={index} />
 
 
                             </div>
                         </div>
                     ))}
-                    {studentproj.length === 0 && <NothingHere/>}
+                    {studentproj.length === 0 && <NothingHere />}
                 </div>
             </div>
         </div>

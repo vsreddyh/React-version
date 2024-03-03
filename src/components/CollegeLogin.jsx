@@ -22,13 +22,13 @@ export default function CollegeLogin() {
       setSuggestions1([]);
       return;
     }
-    else{
+    else {
       try {
         const response = await axios.get(`/en/signup_college?term=${inputValue}`);
         const data = response.data; // Get data directly from the response
         setSuggestions1(data);
-  
-  
+
+
       } catch (error) {
         console.error('Error fetching autocomplete data:', error);
       }
@@ -52,7 +52,7 @@ export default function CollegeLogin() {
         setErrorMessage('User Already Exists');
       }
       else {
-        const mailid=response.data.mail
+        const mailid = response.data.mail
         navigate(`/Check-email/${mailid}`)
       }
     } catch (error) {
@@ -61,7 +61,13 @@ export default function CollegeLogin() {
 
   };
 
+  const handleLogoClick = () => {
+    navigate('/');
+  };
 
+  const handleTitleClick = () => {
+    navigate('/');
+  };
 
   return (
     <div className="abc8">
@@ -69,9 +75,9 @@ export default function CollegeLogin() {
         <div className="header-logo8">
           <div className="logo8">
             {/* <FontAwesomeIcon icon={faProductHunt} style={{ color: "#0db1f8" }} /> */}
-            <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '0px' }}/>
+            <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '0px' }} onClick={handleLogoClick} />
           </div>
-          <div className="title8">
+          <div className="title8" onClick={handleTitleClick}>
             <p>project</p>
           </div>
         </div>
@@ -80,7 +86,7 @@ export default function CollegeLogin() {
       <div className="content18" id="sider8">
         <div className="sider-slogan8">
           <p>
-          From Concept to Completion
+            From Concept to Completion
           </p>
         </div>
         <div className="sider-contents8">
