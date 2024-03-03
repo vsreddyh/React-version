@@ -48,7 +48,7 @@ export default function StudentDataclg({ dis, handleclick, ...props }) {
     console.log(studata)
     return (
         <div className="sprofile">
-                <div className="sbuttons">
+                <div className="sbuttons no-print">
                     <div className="stubutton">
                         <div className="bookmark">
                             <div style={{color: "aliceblue"}} className="nby" onClick={() => handleDownload()}><p>Download <span>&#11123;</span></p></div>

@@ -238,7 +238,7 @@ function HRMAIN({ checkSession }) {
     return (
         <div className="body19">
             <Header takedata={CategoryData} handlehrdetail={handlehrdetail} toggleDashboard1={toggleDashboard1} toggleDashboard={toggleDashboard} />
-            <div className="content14" id="sider4" style={{ display: isSiderVisible ? 'block' : 'none' }} >
+            <div className="content14 no-print" id="sider4" style={{ display: isSiderVisible ? 'block' : 'none' }} >
                 <div className="option1" id="option" onClick={() => setDisplay(0)}>
                     <p>Home</p>
                 </div>
@@ -250,7 +250,7 @@ function HRMAIN({ checkSession }) {
                 </div>
             </div>
 
-            <div className={`pbox ${isProfileVisible ? 'unblurred-content' : ''}`} style={{ display: isProfileVisible ? 'block' : 'none' }}>
+            <div className={`pbox no-print ${isProfileVisible ? 'unblurred-content' : ''}`} style={{ display: isProfileVisible ? 'block' : 'none' }}>
                 <div className="two">
                     <div className="pp">
                         <div className="pphoto">
@@ -320,7 +320,7 @@ function HRMAIN({ checkSession }) {
                                 </div>
                             </div>
                         ) : display === 4 ? (
-                            <StudentData studata={sendDataToStudent} dis={killpage} openproject={openproject} />
+                            <StudentData studata={sendDataToStudent} dis={killpage} openproject={openproject} isSiderVisible={isSiderVisible} toggleDashboard={toggleDashboard}/>
                         ) : display === 2 ? (
                             <div>
                                 <Filters sendDataToParent={FilterData} />

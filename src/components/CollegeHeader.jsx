@@ -55,7 +55,7 @@ export default function CollegeHeader({ takedata, handlesearch, toggleDashboard1
         navigate('/');
     };
     return (
-        <div className="headerCollege">
+        <div className="headerCollege no-print">
             <div className="headersetCollege">
                 <div className="logosetCollege">
                     <div className="logoCollege">

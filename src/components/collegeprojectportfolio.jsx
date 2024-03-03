@@ -24,7 +24,7 @@ export default function StudentProjectProfile({ dis, studata , handlestuclick })
 
     const share = async () => {
         try {
-            await navigator.clipboard.writeText(`http://localhost:3000/share/${projid}`);
+            await navigator.clipboard.writeText(`http://localhost:3000/clgmain/${projid}`);
             setShowCopyMessage(true);
         } catch (err) {
             console.error('Failed to copy: ', err);
