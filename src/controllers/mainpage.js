@@ -118,6 +118,7 @@ const image = async(req, res) => {
     try 
     {
         const id = req.params.id;
+        console.log(id)
         if (!id || id.length !== 24) {
             throw new Error('Invalid ObjectId format');
         }

@@ -87,6 +87,7 @@ export default function StudentProfile({ studentproj, studentdetail, handleclick
                                 </div>
                                 <p className="mpgmname">{studentdetail.email_address}</p>
                                 <p className="mpgmname">{studentdetail.field_name}</p>
+                                <p className="mpgmname">{studentdetail.college_name}</p>
                                 <div className="mpgmname">
                                     {editMode ? (
                                         <React.Fragment>
@@ -99,7 +100,7 @@ export default function StudentProfile({ studentproj, studentdetail, handleclick
                                         </React.Fragment>
                                     ) : (
                                         <React.Fragment>
-                                            <p>{studentdetail.college_name}</p>
+                                            <p className="mpgmname">{studentdetail.Description}</p>
                                             <div className="editoption" onClick={handleEditClick}>Edit <span>&#128393;</span></div>
                                         </React.Fragment>
                                     )}
