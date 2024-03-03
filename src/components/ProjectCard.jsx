@@ -11,7 +11,7 @@ export default function ProjectCard({ projinfo, index }) {
         <div key={index} className="project-cardPC">
             <div className="cardpartPC">
                 <div className="profile-sectionPC">
-                    <img className="profile-picturePC" src="https://placekitten.com/300/200"/*{/en/image/${projinfo.photo}}*/ alt="Profile Picture" />
+                    <img className="profile-picturePC" src={`/en/image/${projinfo.photo}`} alt="Profile Picture" />
                     <div className="getlifedude">
                         {<div><FontAwesomeIcon icon={faHeart} style={{ color: "#436f91" }} /></div>}
                         {<div><FontAwesomeIcon icon={faComment} style={{ color: "#436f91" }} /></div>}
@@ -27,7 +27,7 @@ export default function ProjectCard({ projinfo, index }) {
                     </div>
                     <div className="langcontPC">
                         <div className="langPC">
-                            <div className="notlikethis">{projinfo.Skills && projinfo.Skills.map((skill,)=>(
+                            <div className="notlikethis">{projinfo.Skills && projinfo.Skills.map((skill)=>(
                                 <div className="huh">#{skill}</div>
                             ))}</div>
                         </div>

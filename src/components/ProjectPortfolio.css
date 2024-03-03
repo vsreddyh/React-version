@@ -115,7 +115,7 @@
 }
 
 .opimvid::-webkit-scrollbar {
-    width: 12px;
+    width: 6px;
   }
   
 .opimvid::-webkit-scrollbar-thumb {
@@ -158,7 +158,7 @@
 
 }
 .opdetail::-webkit-scrollbar {
-    width: 12px;
+    width: 6px;
   }
   
 .opdetail::-webkit-scrollbar-thumb {
@@ -229,6 +229,10 @@
     font-size: 18px;
     
     align-items: center;
+}
+
+.opfolder :hover{
+    border: 1px solid white;
 }
 
 .opfolder p{
@@ -340,6 +344,11 @@
     color: #f8f8f8;
 
 }
+
+.decide :hover{
+    border: 1px solid rgb(128, 195, 242);
+}
+
 .decide button{
     background-color: rgb(4, 67, 112);
     height: 40px;

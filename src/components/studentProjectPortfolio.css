@@ -247,8 +247,11 @@ video{
     margin: 13px;
     color: #f8f8f8;
     font-size: 18px;
-    
     align-items: center;
+}
+
+.opfolder1 :hover{
+    border:0.3px solid rgb(159, 159, 159);
 }
 
 .opfolder1 p{
@@ -368,6 +371,11 @@ video{
     color: #f8f8f8;
     font-size: 15px;
 }
+
+.decide1 :hover{
+    border:0.1px solid rgb(166, 213, 247);
+}
+
 .personcomments1{
     -webkit-box-align: stretch;
     align-items: stretch;

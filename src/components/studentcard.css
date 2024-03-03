@@ -114,11 +114,16 @@
     }   
     .user-card-imgSC {
       margin-right: 20px;
+      margin-left: 150px;
       margin-bottom: 0;
     }
   
     .user-card-infoSC {
-      text-align: left;
+    text-align: left;
+    width: 250px;
+    height: 100%;
+    overflow-x: hidden;
+    color: white;
     }
   }
  

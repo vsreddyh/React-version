@@ -1,22 +1,22 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./studentProjectPortfolio.css"
 import { useNavigate } from "react-router-dom";
 import { GoLink } from "react-icons/go";
-import { FaRegHeart,FaHeart } from 'react-icons/fa';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import axios from "axios";
 
 export default function StudentProjectProfile({ dis, ...props }) {
     const projid = props.studata;
-    const [photolist,setphotolist] = useState([])
-    const [comments,setcomments]=useState([])
-    const [skills,setskills]=useState([])
-    const [students,setstudents]=useState([])
+    const [photolist, setphotolist] = useState([])
+    const [comments, setcomments] = useState([])
+    const [skills, setskills] = useState([])
+    const [students, setstudents] = useState([])
     const [showCopyMessage, setShowCopyMessage] = useState(false);
-    const [commentdata,setcommentdata]= useState('');
-    const [like,setLike]=useState(0);
-    const [key,setKey]=useState(0);
-    const [dotclick,setdotclick]=useState(false)
-    const [studname,setstudname]=useState('')
+    const [commentdata, setcommentdata] = useState('');
+    const [like, setLike] = useState(0);
+    const [key, setKey] = useState(0);
+    const [dotclick, setdotclick] = useState(false)
+    const [studname, setstudname] = useState('')
     const exit = async () => {
         console.log('yo')
         dis()
@@ -31,36 +31,36 @@ export default function StudentProjectProfile({ dis, ...props }) {
             });
     }
     let [projdata, setprojdata] = useState(null)
-    const handlecomment = async (event) =>{
+    const handlecomment = async (event) => {
         setcommentdata(event.target.value)
     }
     const AddComment = async (event) => {
         event.preventDefault();
-        const response = await axios.post('/en/addcomment',{commentdata,projid})
+        const response = await axios.post('/en/addcomment', { commentdata, projid })
         setcommentdata('')
         fetchData()
     }
-    const getstudentdetails = async() => {
-        const response=await axios.get("/en/getstudentdetails");
+    const getstudentdetails = async () => {
+        const response = await axios.get("/en/getstudentdetails");
         setstudname(response.data.student_name)
     }
-    const deletecomment=async(index,id)=>{
-        const response = await axios.post('/en/delcomment',{index,id})
-        if (response.data==='success'){
+    const deletecomment = async (index, id) => {
+        const response = await axios.post('/en/delcomment', { index, id })
+        if (response.data === 'success') {
             fetchData()
         }
     }
-    const setdot = async()=>{
-        if (dotclick){
+    const setdot = async () => {
+        if (dotclick) {
             setdotclick(false)
         }
-        else{
+        else {
             setdotclick(true)
             await new Promise(resolve => setTimeout(resolve, 6000));
             setdotclick(false)
         }
     }
-    const transformdate = (date)=>{
+    const transformdate = (date) => {
         const dateObj = new Date(date);
         const day = dateObj.getDate();
         const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -73,17 +73,17 @@ export default function StudentProjectProfile({ dis, ...props }) {
             dayWithSuffix = day + 'th';
         } else {
             switch (day % 10) {
-            case 1:
-                dayWithSuffix = day + 'st';
-                break;
-            case 2:
-                dayWithSuffix = day + 'nd';
-                break;
-            case 3:
-                dayWithSuffix = day + 'rd';
-                break;
-            default:
-                dayWithSuffix = day + 'th';
+                case 1:
+                    dayWithSuffix = day + 'st';
+                    break;
+                case 2:
+                    dayWithSuffix = day + 'nd';
+                    break;
+                case 3:
+                    dayWithSuffix = day + 'rd';
+                    break;
+                default:
+                    dayWithSuffix = day + 'th';
             }
         }
 
@@ -91,27 +91,27 @@ export default function StudentProjectProfile({ dis, ...props }) {
     }
     const handlelike = async () => {
         try {
-          if (like === 1) {
-            const response = await axios.post("/en/removelike", { data: projid });
-            if (response.data === "success") {
-              setLike(0);
-              setKey(prevKey => prevKey - 1);
+            if (like === 1) {
+                const response = await axios.post("/en/removelike", { data: projid });
+                if (response.data === "success") {
+                    setLike(0);
+                    setKey(prevKey => prevKey - 1);
+                }
+            } else {
+                const response = await axios.post("/en/addlike", { data: projid });
+                if (response.data === "success") {
+                    setLike(1);
+                    setKey(prevKey => prevKey + 1);
+                }
             }
-          } else {
-            const response = await axios.post("/en/addlike", { data: projid });
-            if (response.data === "success") {
-              setLike(1);
-              setKey(prevKey => prevKey + 1);
-            }
-          }
-    
-          
-         
+
+
+
         } catch (error) {
-          console.error("Error updating like:", error);
+            console.error("Error updating like:", error);
         }
-      };
-    
+    };
+
     useEffect(() => {
         const checklike = async () => {
             try {
@@ -126,7 +126,7 @@ export default function StudentProjectProfile({ dis, ...props }) {
     const handleFile = (data) => {
         window.open(`/showFiles/${data}`, '_blank');
     }
-    
+
     const fetchData = async () => {
         const response = await axios.post('/en/getprojectdata', { data: projid });
         setprojdata(response.data);
@@ -161,18 +161,18 @@ export default function StudentProjectProfile({ dis, ...props }) {
 
                         </div>
                         <div className="opprojectvideo1">
-                            {projdata&&(<video height="500px" width="600px" src="https://www.youtube.com/watch?v=Ki_0iES2cGI&t=73s"/*{`/en/image/${projdata.Video}`}*/ controls />)}
+                            {projdata && (<video height="500px" width="600px" src={`/en/image/${projdata.Video}`} controls />)}
                         </div>
-                        {(photolist.length!==0)&&(
-                            photolist.map((photo,index)=>(
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${photo}`}*/ key={index} alt="VS" className="image1" />
+                        {(photolist.length !== 0) && (
+                            photolist.map((photo, index) => (
+                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="image1" />
                             ))
                         )}
                     </div>
                     {projdata && (<div className="opdetail1">
                         <div className="opprojectname1">
                             <div className="oppic1">
-                            {projdata&&(<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${projdata.photo}`}*/ alt="VS" className="slectimage1" />)}
+                                {projdata && (<img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage1" />)}
                             </div>
                             <div className="oprealpro1">
                                 <p>{projdata.Project_Name}</p>
@@ -182,12 +182,12 @@ export default function StudentProjectProfile({ dis, ...props }) {
                             <p>{projdata.College}</p>
                         </div>
                         <div className="gettingdate1">
-                            <div><p> Posted on {transformdate(new Date(projdata.Date))}<span className="oplikes1" onClick={()=>handlelike()}>{like===0?<FaRegHeart />:<FaHeart color="red" />}</span><span className="opnlikes1">{key} Likes</span> </p></div>
+                            <div><p> Posted on {transformdate(new Date(projdata.Date))}<span className="oplikes1" onClick={() => handlelike()}>{like === 0 ? <FaRegHeart /> : <FaHeart color="red" />}</span><span className="opnlikes1">{key} Likes</span> </p></div>
                         </div>
                         <div className="gettingdescription1">
                             <p>{projdata.Description}</p>
                         </div>
-                        <div className="opfolder1" onClick={()=>handleFile('65b497569dc7f9d4ea86dfca')}>
+                        <div className="opfolder1" onClick={() => handleFile('65b497569dc7f9d4ea86dfca')}>
                             <p>FOLDER<span>&#128193;</span></p>
                             {/* need to add explorer hyper link here */}
                         </div>
@@ -197,15 +197,15 @@ export default function StudentProjectProfile({ dis, ...props }) {
                         <div className="ourtechnology1">
                             <p>Technologies used: </p>
                             <ul>
-                                {skills.map((skill,index)=>(
+                                {skills.map((skill, index) => (
                                     <li key={index}>{skill}</li>
                                 ))}
                             </ul>
                         </div>
                         <div className="studentsworking1">
                             <h3>Students worked:</h3>
-                            {students.map((student,index)=>(
-                                    <div className="names1" key={index} ><p>{student.stuname}</p></div>
+                            {students.map((student, index) => (
+                                <div className="names1" key={index} ><p>{student.stuname}</p></div>
                             ))}
                         </div>
                         <div className="commentsection1">
@@ -213,21 +213,21 @@ export default function StudentProjectProfile({ dis, ...props }) {
                                 <p>{comments.length} comments</p>
                             </div>
                             <form onSubmit={AddComment}>
-                            <div className="thereal1">
-                                <input type="text" placeholder="Comment" className="commentinput" value={commentdata} onChange={handlecomment} required/>
-                            </div>
-                            <div className="decide1">
-                                <button type="submit">Submit</button>
-                            </div>
-                            
+                                <div className="thereal1">
+                                    <input type="text" placeholder="Comment" className="commentinput" value={commentdata} onChange={handlecomment} required />
+                                </div>
+                                <div className="decide1">
+                                    <button type="submit">Submit</button>
+                                </div>
+
                             </form>
-                            {(comments.length!==0)&&(
-                                comments.map((comment,index)=>(
+                            {(comments.length !== 0) && (
+                                comments.map((comment, index) => (
                                     <div className="personcomments1" key={index}>
                                         <div className="commentdetails1">
                                             <div className="letcomdetails1">
                                                 <div className="commentpic1">
-                                                    <img src={`/en/image/${comment.photoid}`} alt="VS" className="slectimage1" />
+                                                    <img src={`/en/commentimage/${comment.id}`} alt="VS" className="slectimage1" />
                                                 </div>
                                                 <div className="commentname1">
                                                     <p>{comment.studentname}</p>
@@ -238,15 +238,15 @@ export default function StudentProjectProfile({ dis, ...props }) {
                                             </div>
                                             <div className="deletecommentbut1">
                                                 {
-                                                (comment.studentname===studname)&&
-                                                <div className="threedots1" onClick={()=>setdot()}>
-                                                    <p><span>&#65049;</span></p>
-                                                    { dotclick&&(
-                                                    <div className="deletenamebut1" onClick={()=>deletecomment(index,projdata._id)}>
-                                                        <p>Delete comment <span>&#128465;</span></p>
+                                                    (comment.studentname === studname) &&
+                                                    <div className="threedots1" onClick={() => setdot()}>
+                                                        <p><span>&#65049;</span></p>
+                                                        {dotclick && (
+                                                            <div className="deletenamebut1" onClick={() => deletecomment(index, projdata._id)}>
+                                                                <p>Delete comment <span>&#128465;</span></p>
+                                                            </div>
+                                                        )}
                                                     </div>
-                                                    )}
-                                                </div>
                                                 }
                                             </div>
                                         </div>
@@ -256,7 +256,7 @@ export default function StudentProjectProfile({ dis, ...props }) {
                                     </div>
                                 ))
                             )}
-                            
+
                         </div>
 
 

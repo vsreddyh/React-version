@@ -366,6 +366,7 @@
     display: inline-block;
     border: 0.2px solid rgb(28, 60, 88);
     width: auto;
+    border-radius:5px;
 }
 
 
@@ -813,6 +814,9 @@
 .profileset-icon1 {
     font-size: 40px; 
     color: rgb(4, 67, 112); 
+   /* height:80px;
+    width:80px;
+    border-radius: 50%;*/
 }
 .pelement{
     display: block;

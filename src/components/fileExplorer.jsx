@@ -58,7 +58,7 @@ const FileExplorer = () => {
       <div class="febodyy">
         { sider &&
           (<div className="sider">
-            <button onClick={()=>fetchFolderStructure(data)}>Fetch Folder Structure</button>
+            <button className="filesiderbutton" onClick={()=>fetchFolderStructure(data)}>Fetch Folder Structure</button>
             {folderStructure && <FileOrFolder fileName={fileName} name={fileName} contents={folderStructure} fileContents={fileContents} setcde={setcde} setopenforpath={setopenforpath} openforpath={openforpath}/>}
           </div>)
         }
@@ -91,8 +91,8 @@ const FileExplorer = () => {
       </div>
       ):(
         <div className="festage1">
-          <button onClick={()=>setsider(true)}>
-            sid
+          <button className='fileback' onClick={()=>setsider(true)}>
+            back
           </button>
         <div className="file-content1">
           <div>

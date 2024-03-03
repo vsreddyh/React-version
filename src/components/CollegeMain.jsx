@@ -113,10 +113,7 @@ const CollegeMain =({checkSession}) => {
     };
     const killpage = async() => {
         const len = stack.length
-        if(projid){
-            navigate(`/clgmain`)
-        }
-        else if (stack[len-2][0]===0){
+        if (stack[len-2][0]===0){
             setDisplay(0)
             updateReceivedData({
                 sort_by:stack[len-2][1],
@@ -179,6 +176,7 @@ const CollegeMain =({checkSession}) => {
         setstack(prevStack => {
             const newStack = [...prevStack];
             newStack[0][3] = event.target.value;
+            return newStack;
           });
     };
     useEffect(()=>{
@@ -189,7 +187,7 @@ const CollegeMain =({checkSession}) => {
         <div className="body1">
         <CollegeHeader takedata={CategoryData} handlesearch={handlesearch} handlecollegedetail={handlecollegedetail} toggleDashboard1={toggleDashboard1}/>
         {display===0 && <FiltersCollege sendDataToParent={FilterData} />}
-        <div className={`pbox ${isProfileVisible ? 'unblurred-content' : ''}`} style={{ display: isProfileVisible ? 'block' : 'none' }}>
+        <div className={`pbox no-print ${isProfileVisible ? 'unblurred-content' : ''}`} style={{ display: isProfileVisible ? 'block' : 'none' }}>
                     <div className="two">
                         <div className="pp">
                             <div className="pphoto">

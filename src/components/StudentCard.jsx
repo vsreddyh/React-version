@@ -36,8 +36,19 @@ export default function StudentCard() {
   };
 
   return (
+    
 
     <div className="bodySC">
+      <Helmet>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+          rel="stylesheet"
+        />
+      </Helmet>
       <div className="bodyySC">
         
         <div className="stageSC">

@@ -14,7 +14,7 @@ export default function ProjectPortfolio({ dis,openstuinfo, ...props }) {
     const [commentdata,setcommentdata]= useState('')
     const [dotclick,setdotclick]=useState(false)
     const [studname,setstudname]=useState('')
-    const navigate = useNavigate();
+    
     const exit = async () => {
         console.log('yo')
         dis()
@@ -124,18 +124,18 @@ export default function ProjectPortfolio({ dis,openstuinfo, ...props }) {
 
                         </div>
                         <div className="opprojectvideo">
-                            {projdata&&(<video height="500px" width="600px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${projdata.Video}`}*/ type="video/mp4" controls />)}
+                            {projdata&&(<video height="500px" width="600px" src={`/en/image/${projdata.Video}`} type="video/mp4" controls />)}
                         </div>
                         {(photolist.length!==0)&&(
                             photolist.map((photo,index)=>(
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${photo}`}*/ key={index} alt="VS" className="slectimage" />
+                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="slectimage" />
                             ))
                         )}
                     </div>
                     {projdata && (<div className="opdetail">
                         <div className="opprojectname">
                             <div className="oppic">
-                            {projdata&&(<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o461un_JYPQUjER98Rd8Pswe7SX4hQoRGA&usqp=CAU"/*{`/en/image/${projdata.photo}`}*/ alt="VS" className="slectimage" />)}
+                            {projdata&&(<img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage" />)}
                             </div>
                             <div className="oprealpro">
                                 <p>{projdata.Project_Name}</p>
@@ -189,7 +189,7 @@ export default function ProjectPortfolio({ dis,openstuinfo, ...props }) {
                                         <div className="commentdetails">
                                             <div className="letcomdetails">
                                                 <div className="commentpic">
-                                                    <img src={`/en/image/${comment.photoid}`} alt="VS" className="slectimage" />
+                                                    <img src={`/en/commentimage/${comment.id}`} alt="VS" className="slectimage" />
                                                 </div>
                                                 <div className="commentname">
                                                     <p>{comment.studentname}</p>

@@ -154,31 +154,27 @@
 
 .filters {
     display: block;
-    width: 70%;
+    width: 50%;
     height: 25px;
     margin: auto;
     display: flex;
     position: relative;
-    background-color: #1c2333;
+    background-color:#0E1525;
     border-radius: 9px;
     box-sizing: border-box;
 
 }
 
-.filter1,
-.filter2,
+
 .filter3,
 .filter4 {
     width: 25%;
     height: 100%;
-    margin: 0;
-    padding: 0
+    /* margin: 0;
+    padding: 0 */
 }
 
 
-.filter1 select {
-    border-bottom-left-radius: 10px;
-}
 
 .filter4 select {
     border-bottom-right-radius: 10px;
@@ -418,8 +414,8 @@
 }
 
 @media print {
-    .headerCollege ,.filtersCollege{
-        display: none !important;
+    .no-print {
+        display: none;
     }
 }
 
@@ -477,7 +473,8 @@
     padding: 10px;
     outline: rgb(255, 255, 255);
     color: #a6a5a5;
-    border-radius: 0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .searchbarCollege input:hover {
@@ -517,33 +514,37 @@
 }
 
 .okiaddproject{
-    color: white;
+    color: #919499;
     display: flex;
     align-items: center;
-    font-size: 45px;
+    font-size: 40px;
     position: relative;
+    margin-top: 3px;
 }
 .okitext{
     text-wrap: nowrap;
-    color: aliceblue;
+    background: black;
+    color: #909fad;
+    padding: 5px;
     font-size: 20px;
     visibility: hidden;
-    /* width: 120px; */
-    /* background-color: #555; */
-    /* color: #fff; */
+    background-color: #1a222b;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 0;
+    padding: 5px;
     position: absolute;
     z-index: 1;
     top: 50px;
-    border: 1px solid aliceblue;
-    /* bottom: 100%; */
-    /* left: 50%; */
+    border: 1px solid #2e4b63;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s, visibility 0.3s;
 }
+
+.okitext :hover{
+    border: 1px solid white;
+}
+
 .okiaddproject:hover .okitext{
     visibility: visible;
     opacity: 1;
@@ -557,38 +558,22 @@
 }
 
 .filtersCollege{
-    width:70%;
+    width:100%;
     height: 30px;
-    margin: auto;
     display: flex;
+    justify-content: center; /* Center the items horizontally */
     position: relative;
-    background-color:  #1c2333;
-    border-radius: 9px;
-    margin-bottom: 10px;
-
+    background-color:  #0E1525;
+    margin-bottom: 0px;
 }
 
-.filter1College,.filter2College,.filter3College,.filter4College{
+.filter3College,.filter4College{
     width: 25%;
     height: 100%;
-    margin: 0;
-    padding: 0
-}
-
-.filter1College input{
-    border-bottom-left-radius: 10px;
-    text-align: center;
-    width: 100%;
-    border: none;
-    height: 28px;
-    background-color: #1c2333;
-    color: #a3a2a2;
-    outline: rgb(255, 255, 255);
-    
-}
-
-.filter1College input::placeholder{
-    text-align: center;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
 }
 
 .filter4College button{

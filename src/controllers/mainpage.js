@@ -10,6 +10,7 @@ const natural=require('natural');
 const GridFS = Grid(mongoose.connection, mongoose.mongo);
 const {college,projects,Course,url, recruiter,skills} = require('../settings/env.js');
 const { constants } = require('fs/promises');
+const { ObjectId } = require('mongodb');
 
 const app = express();
 app.use(express.static('./public'));
@@ -114,16 +115,40 @@ const collegeprojdisplay = async (req, res) => {
 
 //pipe image
 const image = async(req, res) => {
-     try 
-     {
-         const fileId = new mongoose.Types.ObjectId(req.params.id);
-         await gfs.openDownloadStream(fileId).pipe(res);
-     }
-     catch(error)
-     {
-         console.log(error);
-     }
+    try 
+    {
+        const id = req.params.id;
+        if (!id || id.length !== 24) {
+            throw new Error('Invalid ObjectId format');
+        }
+        
+        const fileId = new mongoose.Types.ObjectId(id);
+        //console.log(fileId);
+        await gfs.openDownloadStream(fileId).pipe(res);
+    }
+    catch(error)
+    {
+        console.log(error);
+    }
 };
+
+
+const commentimage = async(req,res)=>{
+    const Id = new mongoose.Types.ObjectId(req.params.id);
+    const stinfo = await Course.findOne({_id:Id})
+    const hrinfo = await recruiter.findOne({_id:Id})
+    if(stinfo){
+        const photoid = stinfo.photo
+        const fileId = new mongoose.Types.ObjectId(photoid);
+        await gfs.openDownloadStream(fileId).pipe(res);
+    }
+    else if(hrinfo){
+        const photoid = hrinfo.photo
+        const fileId = new mongoose.Types.ObjectId(photoid);
+        await gfs.openDownloadStream(fileId).pipe(res);
+    }
+}
+
 const getstudata = async(req,res)=>{
     const data =req.body.data;
     const studentId = new mongoose.Types.ObjectId(data);
@@ -183,7 +208,7 @@ const checkbookmark = async(req,res)=>{
 const validateurl = async(req,res)=>{
     let {projid}=req.query;
     try{
-        const oid = new mongoose.Types.ObjectId(projid);
+    const oid = new mongoose.Types.ObjectId(projid);
     const projlist = await projects.find({_id:oid})
     const stulist = await Course.find({_id:oid})
     if (projlist.length!==0){
@@ -206,8 +231,29 @@ const tokenizer = new natural.WordTokenizer();
 const getSearchProjects = async (req, res) => {
     const term = req.query.term;
     const tokens = tokenizer.tokenize(term);
+    const partialSearchResults = await projects.find({ 
+        $or: [
+            { Project_Name: { $regex: term, $options: 'i' } },
+            { College: { $regex: term, $options: 'i' } },
+            { Description: { $regex:  term, $options: 'i' } },
+            { Domain: { $regex:  term, $options: 'i' } },
+            { Comments: { $regex:  term, $options: 'i' } }
+            
+        ],
+        
+    });
     const term1= await projects.find({ $text: { $search: tokens.join(' ') } });
-    res.json(term1);
+    let combinedResults1 = [...term1];
+
+    partialSearchResults.forEach(result => {
+        if (!combinedResults1.some(item => item._id.equals(result._id))) {
+            combinedResults1.push(result);
+        }
+    });
+
+    
+    res.json(combinedResults1);
+   
 };
 
 //return proects by domain
@@ -450,8 +496,33 @@ const  getSearchProjectscollege=async(req,res)=>
     const name=req.session.loggedInCollege;
     const term=req.query.term;
     const tokens=tokenizer.tokenize(term);
+    const partialSearchResults = await projects.find({ 
+        $or: [
+            { Project_Name: { $regex: term, $options: 'i' } },
+            
+            { Description: { $regex:  term, $options: 'i' } },
+            { Domain: { $regex:  term, $options: 'i' } },
+            { Comments: { $regex:  term, $options: 'i' } }
+            
+        ],
+        $and: [
+            { College: name }
+        ]
+    });
     const term1 = await projects.find({$and: [ { $text: { $search: tokens.join(' ') } },{ College: name }]});
-    res.json(term1);
+    
+
+    let combinedResults1 = [...term1];
+
+    partialSearchResults.forEach(result => {
+        if (!combinedResults1.some(item => item._id.equals(result._id))) {
+            combinedResults1.push(result);
+        }
+    });
+
+    
+    res.json(combinedResults1);
+    
 }
 const getNoofprojects=async(req,res)=>
 {
@@ -465,28 +536,50 @@ const getNoofprojects=async(req,res)=>
 
 }
 const hrmainsearch = async (req, res) => {
-   
-    const { type,search } = req.query;
-    console.log("Search term:", search);
-    console.log("Type:", type);
-    if(type==="Student Search")
-    {   
-        const name=tokenizer.tokenize(search);
-        const search1=await Course.find({ $text: { $search: name.join(' ') } });
-       //console.log(search1);
-        res.json(search1);
-    }
-    else if(type==="Project Search")
-    {
-        
-        const tokens = tokenizer.tokenize(search);
-        const term1= await projects.find({ $text: { $search: tokens.join(' ') } });
-        //console.log(term1);
-        res.json(term1);
+    const { type, search } = req.query;
+    //console.log("Search term:", search);
+    //console.log("Type:", type);
 
-    }
     
-};
+
+    if (type === "Student Search") {
+        const name = tokenizer.tokenize(search);
+        const regex = new RegExp(name.join('|'), 'i');
+        const search1 = await Course.find({ $text: { $search: name.join(' ') } });
+       
+        const searchResultsRegex = await Course.find({ 
+            $or: [
+                { student_name: { $regex: regex } },
+                { email_address: { $regex: regex } },
+                { field_name: { $regex: regex } },
+                { Description: { $regex: regex } }                
+            ]
+        });
+        
+        let combinedResults = [];
+
+        combinedResults.push(...search1);
+
+        searchResultsRegex.forEach(result => {
+            if (!combinedResults.some(item => item._id.equals(result._id))) {
+                combinedResults.push(result);
+            }
+        });
+
+        res.json(combinedResults);
+    } 
+        else if (type === "Project Search") {
+            console.log("Entered 'Project Search' condition");
+        
+            const tokens = tokenizer.tokenize(search);
+            const textSearchResults1 = await projects.find({ $text: { $search: tokens.join(' ') } });
+        
+            res.json(textSearchResults1);
+        }
+        
+    
+    };
+
 const getbookmarks = async (req,res)=>{
     const mail = req.session.loggedInemail;
     const search = await recruiter.findOne({email_address:mail}).select('bookmarks')
@@ -505,6 +598,7 @@ module.exports = {
     getdata,
     projectlist,
     image,
+    commentimage,
     getstudata,
     getprojectdata,
     fetchprojdata,
