@@ -567,6 +567,8 @@ const collegeDetails = async (req, res) => {
                 password: req.session.password,
                 field_name: req.session.third,
                 college_name: req.session.fourth,
+                photo: new mongoose.Types.ObjectId('65e346b62001871ffa879971'),
+                Description:`Hi I am ${req.session.username} from ${req.session.fourth} ${req.session.third} department`,
                 versionKey: false
             })
             await course.save();
@@ -609,6 +611,7 @@ const companyDetails = async (req, res) => {
             email_address: req.session.loggedInemail,
             password: req.session.password,
             company_name: req.session.third,
+            photo: new mongoose.Types.ObjectId("65e346b62001871ffa879971"),
             versionKey: false
         })
         await course.save();
