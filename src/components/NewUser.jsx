@@ -23,7 +23,7 @@ export default function NewUser({ setUserData }){
             else{
                 setemail(response.data.email)
             }}
-            validateToken();
+        validateToken();
     }, [token]);
     useEffect(() => {
         if(errorMessage) {

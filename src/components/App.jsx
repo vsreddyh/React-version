@@ -73,8 +73,8 @@ export default function App() {
                 <Route path="/SignIn" element={userData ? <Navigate to="/" /> : <SignIn setUserData={setUserData}/>}/>
                 <Route path="/hrsignup/:errorMessage" element={userData ? <Navigate to="/" /> :<HrSignUp />} />
                 <Route path="/hrsignup" element={userData ? <Navigate to="/" /> : <HrSignUp />} />
-                <Route path="/ProjectUploadForm" element={<ProjectUploadForm/>}/>
-                <Route path="/showFiles/:data" element={<FileExplorer/>}/>
+                <Route path="/ProjectUploadForm" element={(userData && userData[1]===1 && userData[2]===1) ? <ProjectUploadForm/> : <Navigate to="/" />}/>
+                <Route path="/showFiles/:data" element={ (userData &&userData[2]===1) ? <FileExplorer/> : <Navigate to="/" />}/>
                 <Route path="/t&c" element={<TermsAndConditions/>}/>
                 <Route path="/*" element={<Navigate to="/" />} />
                 <Route path="/" element=

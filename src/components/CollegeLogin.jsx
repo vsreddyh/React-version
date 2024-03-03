@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./signin.css";
+import "./collegelogin-page.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -115,7 +115,10 @@ export default function CollegeLogin() {
           </p>
 
           <form onSubmit={handle} method="post">
+            <div className="uiux">
+            <div className="clkj">
             <input name="serverCollegeName" className="collegename" type="text" id="collegeInput8" placeholder="College Name" value={term} onChange={handleInputChange} minLength="3" required />
+            </div>
             <br />
             <div id="suggestions8">
               {suggestions1.map((suggestion1, index) =>
@@ -124,6 +127,7 @@ export default function CollegeLogin() {
                   {suggestion1}
                 </p>
               ))}
+            </div>
             </div>
             <button type="submit">
 
