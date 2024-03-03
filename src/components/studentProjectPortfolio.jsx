@@ -227,7 +227,7 @@ export default function StudentProjectProfile({ dis, ...props }) {
                                         <div className="commentdetails1">
                                             <div className="letcomdetails1">
                                                 <div className="commentpic1">
-                                                    <img src={`/en/commentimage/${comment.id}`} alt="VS" className="slectimage1" />
+                                                    <img src={`/en/commentimage/${comment.id}`} alt="VS" className="slectimage12" />
                                                 </div>
                                                 <div className="commentname1">
                                                     <p>{comment.studentname}</p>

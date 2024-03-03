@@ -406,9 +406,15 @@ video{
 .commentpic1{
     height: 30px;
     width: 30px;
-    border: 1px solid #3C445C;
+    /* border: 1px solid #3C445C; */
     border-radius: 50%;
     margin: 2px;
+}
+
+.slectimage12{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
 }
 .deletecommentbut1{
     color: #cfcfcf;
