@@ -67,7 +67,7 @@ export default function StudentLogin({ setUserData }) {
                 <div className="header-logo8">
                     <div className="logo8">
                         {/* <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8"}} /> */}
-                        <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }} onClick={handleLogoClick} />
+                        <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '0px' }} onClick={handleLogoClick} />
                     </div>
                     <div className="title8" onClick={handleTitleClick}>
                         <p>project</p>
