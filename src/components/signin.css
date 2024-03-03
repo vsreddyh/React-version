@@ -145,9 +145,10 @@
     color: antiquewhite;
 }
 
-#body-content15 input :hover{
-    border: 1px solid white;
+#body-content15 :hover{
+    border-color: rgb(49, 120, 182);
 }
+
 
 #body-content15 button{
     background-color:#004182 ;
@@ -158,6 +159,10 @@
     border-radius: 5px;
     font-size: 15px;
     color: #417ce1;
+}
+
+.signinsubmit{
+    background-color:#29629b ;
 }
 
 .err15 {

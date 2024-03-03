@@ -126,7 +126,7 @@ export default function SignIn({ setUserData }) {
                         <br />
                         <input type="password" name="password" placeholder="Password" minLength={8} pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}" value={formData.password} onChange={handleInputChange} required autoComplete="current-password" title="should atleast conatin 1 capital 1 small 1 special char 1 number total of 8 char minimum" />
                         <br />
-                        <button type="submit">
+                        <button type="submit" className="signinsubmit">
 
                             Log in <i className="fa-solid fa-arrow-right"></i>
 

@@ -62,8 +62,8 @@
     flex-direction: row;
     margin: 2px 20px;
     gap: 20px;
-
 }
+
 .fsignup{
 
     color: aliceblue;
@@ -73,6 +73,9 @@
     background-color: #141e2f;
 }
 
+.fsignup:hover{
+    border:0.1px solid rgb(156, 156, 156);
+}
 
 .fbodyy{
     display: flex;

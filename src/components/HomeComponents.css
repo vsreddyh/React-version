@@ -366,6 +366,7 @@
     display: inline-block;
     border: 0.2px solid rgb(28, 60, 88);
     width: auto;
+    border-radius:5px;
 }
 
 
