@@ -114,15 +114,15 @@ const collegeprojdisplay = async (req, res) => {
 
 //pipe image
 const image = async(req, res) => {
-    // try 
-    // {
-    //     const fileId = new mongoose.Types.ObjectId(req.params.id);
-    //     await gfs.openDownloadStream(fileId).pipe(res);
-    // }
-    // catch(error)
-    // {
-    //     console.log(error);
-    // }
+     try 
+     {
+         const fileId = new mongoose.Types.ObjectId(req.params.id);
+         await gfs.openDownloadStream(fileId).pipe(res);
+     }
+     catch(error)
+     {
+         console.log(error);
+     }
 };
 const getstudata = async(req,res)=>{
     const data =req.body.data;

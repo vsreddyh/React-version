@@ -1,53 +1,128 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart ,faUser, faCamera} from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faUser, faCamera } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios'; // Import Axios
 import NothingHere from "./nothinghere";
 import ProjectCard from "./ProjectCard";
 
-export default function StudentProfile({ studentproj, studentdetail ,handleclick}) {
-    
+export default function StudentProfile({ studentproj, studentdetail, handleclick }) {
+    const [editMode, setEditMode] = useState(false);
+    const [studentDescription, setStudentDescription] = useState('');
+    const handlePhotoChange = async (event) => {
+        const selectedProfilePhoto = event.target.files[0]; // Get the selected photo file
+        if (selectedProfilePhoto) {
+            const reader = new FileReader();
+            reader.onloadend = async () => {
+                // The file's text will be printed here
+                const base64data = reader.result.split(',')[1]; // Get the Base64 string without the data URL prefix
+                console.log(base64data);
+
+                let temp = event.target.value;
+                const profilePhotoName = temp.replace("C:\\fakepath\\", "");
+
+
+                try {
+                    const response = await axios.post(`/en/uploadProfilePhoto`, {
+                        profilePhoto: base64data, // Send the Base64 string
+                        pphotoname: profilePhotoName, // Send the photo name
+                        userId: studentdetail._id,
+                    });
+                    console.log("Photo saved successfully");
+                    const ppid = response.data.fileId;
+                } catch (error) {
+                    console.error('Error uploading photo:', error);
+                }
+            };
+            reader.readAsDataURL(selectedProfilePhoto);
+        }
+    };
+    const handleEditClick = () => {
+        setEditMode(true);
+    };
+
+    const handleStudentDescription = (event) => {
+        setStudentDescription(event.target.value);
+       
+    };
+
+    const handleStudentDescriptionSave = () => {
+        // Call your function to save the edited college name
+        console.log("Edited College Name:", studentDescription);
+        setEditMode(false);
+        try {
+            const response =  axios.post(`/en/uploadDescription`, {
+                studentDescription:studentDescription,
+                userId: studentdetail._id
+            });
+            console.log("description saved succesfully");
+            
+        } catch (error) {
+            console.error('Error uploading photo:', error);
+        }
+        
+    };
+
+
+
+
+
+
     return (
         <div className="mprofile">
-            <div className="mpcontainer">
-                <div className="mpprofile">
-                    <div className="mppicedit">
-                        <span><FontAwesomeIcon icon={faCamera} /></span>
-                    </div>
-                    <div className="mpbg">
-                        
-                    </div>
-                    
-                    <div className="mpphoto"><FontAwesomeIcon icon={faUser} className="profileset-icon1"/></div>
-                    <div className="mpdetails">
-                        <div className="mpdet">
-                            
-                            <div className="mpname">
-                                <div className="mprealname"><p>{studentdetail.student_name}</p></div>
-                                <div className="editoption">Edit <span>&#128393;</span></div>
+            {studentdetail && (
+                <div className="mpcontainer">
+                    <div className="mpprofile">
+                        <div className="mppicedit">
+                            <label htmlFor="fileInput">
+                                <span><FontAwesomeIcon icon={faCamera} /></span>
+                            </label>
+                            <input id="fileInput" type="file" accept="image/*" onChange={handlePhotoChange} style={{ display: 'none' }} />
+                        </div>
+                        <div className="mpbg"></div>
+                        <div className="mpphoto">
+                            <img className="profile-picture" src={`/en/image/${studentdetail.photo}`} alt="Profile Picture" />
+                        </div>
+                        <div className="mpdetails">
+                            <div className="mpdet">
+                                <div className="mpname">
+                                    <div className="mprealname"><p>{studentdetail.student_name}</p></div>
+                                    <div className="editoption" onClick={handleEditClick}>Edit <span>&#128393;</span></div>
+                                </div>
+                                <p className="mpgmname">{studentdetail.email_address}</p>
+                                <p className="mpgmname">{studentdetail.field_name}</p>
+                                <div className="mpgmname">
+                                    {editMode ? (
+                                        <input
+                                            type="text"
+                                            value={studentDescription}
+                                            onChange={handleStudentDescription}
+                                        />
+                                    ) : (
+                                        <React.Fragment>
+                                            <p>{studentdetail.college_name}</p>
+                                            <div className="editoption" onClick={handleEditClick}>Edit <span>&#128393;</span></div>
+                                        </React.Fragment>
+                                    )}
+                                    {editMode && (
+                                        <button onClick={handleStudentDescriptionSave}>Save</button>
+                                    )}
+                                </div>
                             </div>
-                            <p className="mpgmname">{studentdetail.email_address}</p>
-                            <p className="mpgmname">{studentdetail.field_name}</p>
-                            <p className="mpgmname">{studentdetail.college_name}</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            )}
             <div className="mpprojects">
                 <div className="mpheading">
                     <h5 className="myprj">MY PROJECTS</h5>
                 </div>
                 <div className="mlkmj">
                     {studentproj && studentproj.map((suggestion, index) => (
-                        <div key={index} className="grid-item">
-                            
-                            <div onClick={()=>{handleclick(suggestion._id)}}>
-                            <ProjectCard projinfo={suggestion} index={index}/>
-
-
-                            </div>
+                        <div key={index} className="grid-item" onClick={() => handleclick(suggestion._id)}>
+                            <ProjectCard projinfo={suggestion} index={index} />
                         </div>
                     ))}
-                    {studentproj.length === 0 && <NothingHere/>}
+                    {studentproj.length === 0 && <NothingHere />}
                 </div>
             </div>
         </div>

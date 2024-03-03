@@ -66,12 +66,11 @@ const details = async (req, res) => {
 
     let updatedTeams = teams.map(student => {
       return {
-        _id: new mongoose.Types.ObjectId(student._id),
-        student_name: student.student_name
+        id: new mongoose.Types.ObjectId(student._id),
+        stuname: student.student_name
       };
     });
-
-    let studentIds = updatedTeams.map(ite => ite._id);
+    let studentIds = updatedTeams.map(ite => ite.id);
 
     // Upload file to GridFS
     const uploadFile = async (data, name) => {
@@ -123,6 +122,71 @@ const details = async (req, res) => {
 
     await course.save();
     console.log("Project details saved successfully");
+    const updateStudentSkills = async (studentId, newSkills, domain, projectId) => {
+
+      try {
+    
+        const studentsCollection = db.collection('students');
+    
+        const student = await studentsCollection.findOne({ _id: studentId });
+    
+    
+    
+        if (student) {
+    
+          const existingSkills = new Set(student.skills);
+    
+          newSkills.forEach(skill => existingSkills.add(skill)); // Add new skills avoiding duplicates
+    
+    
+    
+          const updatedDomains = Array.from(new Set([...student.Domains, domain])); // Add new domain avoiding duplicates
+    
+    
+    
+          await studentsCollection.updateOne(
+    
+            { _id: studentId },
+    
+            {
+    
+              $set: {
+    
+                skills: [...existingSkills],
+    
+                projects: [...student.projects, projectId],
+    
+                Domains: updatedDomains
+    
+              }
+    
+            }
+    
+          );
+    
+          console.log(`Skills, projects, and domain updated for student with ID: ${studentId}`);
+    
+        } else {
+    
+          console.log(`Student with ID ${studentId} not found`);
+    
+        }
+    
+      } catch (error) {
+    
+        console.error('Error updating student skills, projects, and domain:', error);
+    
+      }
+    
+    };
+    
+    
+    
+    connectWithRetry().catch(error => {
+    
+      console.error('MongoDB connection error:', error);
+    
+    });
 
     const projectId = new mongoose.Types.ObjectId(course._id);
 
@@ -137,40 +201,6 @@ const details = async (req, res) => {
     res.status(500).json({ error: "Error uploading project details" });
   }
 };
-
-const updateStudentSkills = async (studentId, newSkills, domain, projectId) => {
-  try {
-    const studentsCollection = db.collection('students');
-    const student = await studentsCollection.findOne({ _id: studentId });
-
-    if (student) {
-      const existingSkills = new Set(student.skills);
-      newSkills.forEach(skill => existingSkills.add(skill)); // Add new skills avoiding duplicates
-
-      const updatedDomains = Array.from(new Set([...student.Domains, domain])); // Add new domain avoiding duplicates
-
-      await studentsCollection.updateOne(
-        { _id: studentId },
-        {
-          $set: {
-            skills: [...existingSkills],
-            projects: [...student.projects, projectId],
-            Domains: updatedDomains
-          }
-        }
-      );
-      console.log(`Skills, projects, and domain updated for student with ID: ${studentId}`);
-    } else {
-      console.log(`Student with ID ${studentId} not found`);
-    }
-  } catch (error) {
-    console.error('Error updating student skills, projects, and domain:', error);
-  }
-};
-
-connectWithRetry().catch(error => {
-  console.error('MongoDB connection error:', error);
-});
 
 
 const getFile = async (req,res) => {
@@ -377,11 +407,128 @@ const checkPlagarism = async (req,res) => {
 
   
 };
+const Grid = require('gridfs-stream');
+Grid.mongo = mongoose.mongo;
 
+// Assuming you have a Mongoose connection established
+const conn = mongoose.connection;
+db = client.db(databaseName);
+const gfs = Grid(db);
 
+const getPhoto = async (req, res) => {
+  console.log(req.body);
+  try {
+    const photoId = req.body.photoId; // Your photoId
+    const bucket = new GridFSBucket(db);
+
+    // Check if photoId is valid
+    if (!ObjectId.isValid(photoId)) {
+      return res.status(400).json({ message: 'Invalid photoId' });
+    }
+
+    const fileId = new ObjectId(photoId);
+    const file = await bucket.find({ _id: fileId }).next();
+
+    // Check if file exists
+    if (!file) {
+      return res.status(404).json({ message: 'File not found' });
+    }
+
+    // Set appropriate content type
+    res.set('Content-Type', file.contentType);
+
+    // Read output to browser
+    
+    const downloadStream = bucket.openDownloadStream(fileId);
+    downloadStream.pipe(res);
+  } catch (error) {
+    console.error('Error getting photo:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+const uploadProfilePhoto = async (req, res) => {
+  const { profilePhoto, pphotoname, userId } = req.body;
+  console.log(userId);
+  const buffer = Buffer.from(profilePhoto, 'base64');
+  const bucket = new GridFSBucket(db);
+
+  // Adjust the content type based on your actual content type
+  const contentType = 'image/jpeg'; 
+
+  const uploadStream = bucket.openUploadStream(pphotoname, { contentType });
+  const fileId = uploadStream.id;
+
+  await new Promise((resolve, reject) => {
+    uploadStream.end(buffer, (error) => {
+      if (error) {
+        console.error(`Error uploading ${pphotoname}:`, error);
+        reject(error);
+      } else {
+        console.log(`${pphotoname} uploaded successfully, stored under id:`, fileId);
+        resolve(fileId);
+      }
+    });
+  });
+
+  // Update student document with fileId
+  const studentsCollection = db.collection("students");
+  const filter = { _id: new ObjectId(userId) };
+  const updateDoc = { $set: { photo: fileId } };
+  const result = await studentsCollection.updateOne(filter, updateDoc);
+
+  if (result.modifiedCount === 1) {
+    res.json({ success: true, message: 'Profile photo updated successfully.' });
+  } else {
+    res.status(404).json({ success: false, message: 'Student not found.' });
+  }
+};
+
+const updateDescription = async (req, res) => {
+  const { studentDescription, userId } = req.body;
+  console.log(userId)
+
+  // Connect to MongoDB
+  const client = new MongoClient(url);
+  await client.connect();
+
+  try {
+    const db = client.db('projectpalace');
+    const studentsCollection = db.collection('students');
+
+    // Find the document with the provided userId
+    const query = { _id: new ObjectId(userId) };
+    const existingStudent = await studentsCollection.findOne(query);
+
+    if (existingStudent) {
+      // Check if the document contains a description field
+      if (!existingStudent.Description) {
+        // If description field is not present, create it
+        await studentsCollection.updateOne(query, { $set: { Description: studentDescription } });
+      } else {
+        // If description field is present, update its value
+        await studentsCollection.updateOne(query, { $set: { Description: studentDescription } });
+      }
+      console.log("Description saved succesfully")
+      res.status(200).send('Description updated successfully.');
+    } else {
+      res.status(404).send('Student not found.');
+    }
+  } catch (error) {
+    console.error('Error updating description:', error);
+    res.status(500).send('An error occurred while updating description.');
+  } finally {
+    // Close the MongoDB connection
+    await client.close();
+  }
+};
+
+ 
 module.exports = {
   details,
   getFile,
   explainCode,
-  checkPlagarism
+  checkPlagarism,
+  getPhoto,
+  uploadProfilePhoto,
+  updateDescription
 };

@@ -13,9 +13,9 @@ export default function ProjectCard({ projinfo, index }) {
                 <div className="profile-sectionPC">
                     <img className="profile-picturePC" src="https://placekitten.com/300/200"/*{/en/image/${projinfo.photo}}*/ alt="Profile Picture" />
                     <div className="getlifedude">
-                        <div><FontAwesomeIcon icon={faHeart} style={{ color: "#436f91" }} /></div>
-                        <div><FontAwesomeIcon icon={faComment} style={{ color: "#436f91" }} /></div>
-                        <div><FontAwesomeIcon icon={faShareNodes} style={{ color: "#3d6583" }} /></div> {/* Changed faShareNodes to faShare */}
+                        {<div><FontAwesomeIcon icon={faHeart} style={{ color: "#436f91" }} /></div>}
+                        {<div><FontAwesomeIcon icon={faComment} style={{ color: "#436f91" }} /></div>}
+                        {<div><FontAwesomeIcon icon={faShareNodes} style={{ color: "#3d6583" }} /></div>} {/* Changed faShareNodes to faShare */}
                     </div>
                 </div>
                 <div className="pnamedisPC">
