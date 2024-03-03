@@ -150,10 +150,14 @@ export default function ProjectPortfolio({ dis,openstuinfo, ...props }) {
                         <div className="gettingdescription">
                             <p>{projdata.Description}</p>
                         </div>
-                        <div className="opfolder" onClick={()=>handleFile('65b497569dc7f9d4ea86dfca')}>
+                        {projdata.File ? <div className="opfolder" onClick={()=>handleFile('65b497569dc7f9d4ea86dfca')}>
                             <p>FOLDER<span>&#128193;</span></p>
-                            {/* need to add explorer hyper link here */}
                         </div>
+                        :
+                        <div className="opfolder" onClick={()=>handleFile(projdata.File)}>
+                            <p>FOLDER<span>&#128193;</span></p>
+                        </div>
+                        }
                         <div className="ourdomain">
                             <p>DOMAIN:{projdata.Domain}</p>
                         </div>

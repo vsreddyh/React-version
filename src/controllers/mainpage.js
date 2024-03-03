@@ -118,7 +118,6 @@ const image = async(req, res) => {
     try 
     {
         const id = req.params.id;
-        console.log(id)
         if (!id || id.length !== 24) {
             throw new Error('Invalid ObjectId format');
         }
@@ -313,7 +312,7 @@ const addcomment = async(req,res)=>{
         const stuinfo = await Course.findOne({email_address:mail})
         const naame = stuinfo.student_name
         const photo = stuinfo.photo
-        comments.push({id:projId,studentname:naame,Date:Daate,comment:commentdata})
+        comments.push({id:stuinfo._id,studentname:naame,Date:Daate,comment:commentdata})
         projinfo.Comments=comments
         projinfo.save()
     }
@@ -321,7 +320,7 @@ const addcomment = async(req,res)=>{
         const stuinfo = await recruiter.findOne({email_address:mail})
         const naame =  stuinfo.hr_name
         const photo = stuinfo.photo
-        comments.push({id:projid,photoid:photo,studentname:naame,Date:Daate,comment:commentdata})
+        comments.push({id:stuinfo._id,photoid:photo,studentname:naame,Date:Daate,comment:commentdata})
         projinfo.Comments=comments
         projinfo.save()
     }
