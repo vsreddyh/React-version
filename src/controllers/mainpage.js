@@ -223,8 +223,29 @@ const tokenizer = new natural.WordTokenizer();
 const getSearchProjects = async (req, res) => {
     const term = req.query.term;
     const tokens = tokenizer.tokenize(term);
+    const partialSearchResults = await projects.find({ 
+        $or: [
+            { Project_Name: { $regex: term, $options: 'i' } },
+            { College: { $regex: term, $options: 'i' } },
+            { Description: { $regex:  term, $options: 'i' } },
+            { Domain: { $regex:  term, $options: 'i' } },
+            { Comments: { $regex:  term, $options: 'i' } }
+            
+        ],
+        
+    });
     const term1= await projects.find({ $text: { $search: tokens.join(' ') } });
-    res.json(term1);
+    let combinedResults1 = [...term1];
+
+    partialSearchResults.forEach(result => {
+        if (!combinedResults1.some(item => item._id.equals(result._id))) {
+            combinedResults1.push(result);
+        }
+    });
+
+    
+    res.json(combinedResults1);
+   
 };
 
 //return proects by domain
