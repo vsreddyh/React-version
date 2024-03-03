@@ -337,7 +337,7 @@ export default function HomeComponents({ checkSession }) {
 
 
                 {display === 0 && <HomePage handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} handleclick={handleclick} />}
-                {display === 1 && <StudentProfile studentproj={studentproj} studentdetail={studentdetail} handleclick={handleclick} />}
+                {display === 1 && <StudentProfile studentproj={studentproj} handlestudentdetail={handlestudentdetail} studentdetail={studentdetail} handleclick={handleclick} />}
                 {display === 2 && <ProjectDisplay handleskillprj={handleskillprj} handleskillList={handleskillList} handlesearchchange={handlesearchchange} handleclick={handleclick} />}
                 {display === 3 && <DomainClick sugesstions={sugesstions} handlebackClick={handlebackClick} handleclick={handleclick} />}
 
