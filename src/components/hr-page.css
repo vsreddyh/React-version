@@ -371,9 +371,11 @@
 }
   
 .grid-item1 {
-    /* border: 3px solid #20283b; */
-    padding-right: 20px;
+        /* border: 3px solid #20283b; */
+        padding-right: 0px;
+        margin-left: 20px;
 }
+
 .project-card2{
     height: 200px;
     width: 100%;
