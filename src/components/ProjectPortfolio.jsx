@@ -14,7 +14,7 @@ export default function ProjectPortfolio({ dis,openstuinfo, ...props }) {
     const [commentdata,setcommentdata]= useState('')
     const [dotclick,setdotclick]=useState(false)
     const [studname,setstudname]=useState('')
-    const navigate = useNavigate();
+    
     const exit = async () => {
         console.log('yo')
         dis()

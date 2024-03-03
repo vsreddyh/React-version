@@ -36,7 +36,7 @@ function HRMAIN({ checkSession }) {
     const [hrdetails, setHrdetails] = useState([]);
     const [isSiderVisible, setIsSiderVisible] = useState(false);
     const [bodyGridColumn, setBodyGridColumn] = useState('span 2');
-
+    const [stack,setstack]=useState([[0]])
     const toggleDashboard1 = () => {
         setIsProfileVisible(prevState => !prevState);
     };
@@ -52,6 +52,11 @@ function HRMAIN({ checkSession }) {
         setProjects(response.data);
         console.log('got filter data');
         setDisplay(6);
+        setstack(prevStack => {
+            const newStack = [...prevStack];
+            newStack.push([6,data])
+            return newStack;
+            });
     };
 
     const CategoryData = useCallback((data) => {
@@ -62,10 +67,8 @@ function HRMAIN({ checkSession }) {
     const updatesearchData = (data) => {
         if (data.search !== '') {
             if (data.type === 'Project Search') {
-                setDisplay(2);
                 handlesearch(data.search);
             } else if (data.type === 'Student Search') {
-                setDisplay(3);
                 handlestusearch(data.search);
             }
         }
@@ -78,6 +81,11 @@ function HRMAIN({ checkSession }) {
             const queryString = `?type=${'Student Search'}&search=${data}`;
             const response = await axios.get(`/en/hrmainsearch${queryString}`);
             setDisplay(3);
+            setstack(prevStack => {
+                const newStack = [...prevStack];
+                newStack.push([3,data])
+                return newStack;
+                });
             console.log(response.data);
             setStudents(response.data);
         } catch (error) {
@@ -94,11 +102,21 @@ function HRMAIN({ checkSession }) {
     const openproject = async (data) => {
         setDisplay(1);
         setSendDataToStudent(data);
+        setstack(prevStack => {
+            const newStack = [...prevStack];
+            newStack.push([1,data])
+            return newStack;
+            });
     };
 
     const openstuinfo = async (data) => {
         setDisplay(4);
         setSendDataToStudent(data);
+        setstack(prevStack => {
+            const newStack = [...prevStack];
+            newStack.push([4,data])
+            return newStack;
+            });
     };
 
     const fetchData = async () => {
@@ -106,13 +124,11 @@ function HRMAIN({ checkSession }) {
             if (projid) {
                 const response = await axios.get(`/en/validateurl?projid=${projid}`);
                 if (response.data === 1) {
-                    setDisplay(1);
-                    setSendDataToStudent(projid);
+                    openproject(projid);
                 } else if (response.data === 2) {
-                    setDisplay(4);
-                    setSendDataToStudent(projid);
+                    openstuinfo(projid);
                 } else {
-                    navigate('hrmain');
+                    navigate('/hrmain');
                 }
             } else {
                 const queryParams = new URLSearchParams({
@@ -123,6 +139,11 @@ function HRMAIN({ checkSession }) {
                 setProjects(response.data.list);
                 setTotalPages(response.data.total_pages);
                 setDisplay(response.data.display);
+                setstack(prevStack => {
+                    const newStack = [...prevStack];
+                    newStack.push([2,queryParams])
+                    return newStack;
+                    });
             }
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -134,6 +155,11 @@ function HRMAIN({ checkSession }) {
             const response = await axios.get(`/en/getsearchbyclick?term=${inputData}`);
             const data = response.data;
             setDisplay(6);
+            setstack(prevStack => {
+                const newStack = [...prevStack];
+                newStack.push([6,inputData])
+                return newStack;
+                });
             console.log(data);
             setProjects(data);
         } catch (error) {
@@ -142,10 +168,7 @@ function HRMAIN({ checkSession }) {
     };
 
     const handleOptionClick = (inputval) => {
-        setDisplay(inputval);
-        if (inputval === 2) {
-            fetchData();
-        }
+        fetchData();
     };
 
     const handleNextPage = () => {
@@ -172,6 +195,11 @@ function HRMAIN({ checkSession }) {
     const ShowBookmarks = async () => {
         const response = await axios.get("/en/getbookmarks");
         setDisplay(3);
+        setstack(prevStack => {
+            const newStack = [...prevStack];
+            newStack.push([3,1,"bookmark"])
+            return newStack;
+            });
         console.log(response.data);
         setStudents(response.data);
     };
@@ -235,18 +263,35 @@ function HRMAIN({ checkSession }) {
         setIsSiderVisible(prevState => !prevState);
         setBodyGridColumn(prevState => prevState === 'span 1' ? 'span 2' : 'span 1');
     };
-
+    const stackclear = () =>{
+        setDisplay(0)
+        setstack([[0]])
+    }
+    const stackexplore = ()=>{
+        setDisplay(2)
+        setstack(prevStack => {
+            const newStack = [...prevStack];
+            newStack.push([2,{
+                category: 'Any',
+                college_name: 'Any',
+                sort_by: 'Upload Date',
+                order: false,
+                page:0
+            }])
+            return newStack;
+            });
+    }
     return (
         <div className="body19">
             <Header takedata={CategoryData} handlehrdetail={handlehrdetail} toggleDashboard1={toggleDashboard1} toggleDashboard={toggleDashboard} />
             <div className="content14 no-print" id="sider4" style={{ display: isSiderVisible ? 'block' : 'none' }} >
-                <div className="option1" id="option" onClick={() => setDisplay(0)}>
+                <div className="option1" id="option" onClick={() => stackclear()}>
                     <p>Home</p>
                 </div>
-                <div className="option2" id="option" onClick={() => setDisplay(2)}>
+                <div className="option2" id="option" onClick={() => stackexplore()}>
                     <p>Explore</p>
                 </div>
-                <div className="option3" id="option" onClick={ShowBookmarks}>
+                <div className="option3" id="option" onClick={ShowBookmarks()}>
                     <p>Bookmarks</p>
                 </div>
             </div>
@@ -264,7 +309,7 @@ function HRMAIN({ checkSession }) {
                     <div className="para"><p>{hrdetails.email_address}</p></div>
                     <div className="para"><p>{hrdetails.company_name}</p></div>
                     <hr />
-                    <div className="logout" onClick={deletesession}>
+                    <div className="logout" onClick={deletesession()}>
                         <p>LogOut<span><i className='fas fa-sign-out-alt'></i></span></p>
                     </div>
                 </div>
