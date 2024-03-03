@@ -814,6 +814,9 @@
 .profileset-icon1 {
     font-size: 40px; 
     color: rgb(4, 67, 112); 
+    height:80px;
+    width:80px;
+    border-radius: 50%;
 }
 .pelement{
     display: block;
