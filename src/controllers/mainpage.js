@@ -573,9 +573,33 @@ const hrmainsearch = async (req, res) => {
             console.log("Entered 'Project Search' condition");
         
             const tokens = tokenizer.tokenize(search);
-            const textSearchResults1 = await projects.find({ $text: { $search: tokens.join(' ') } });
+            
         
-            res.json(textSearchResults1);
+           
+            const partialSearchResults = await projects.find({ 
+                $or: [
+                    { Project_Name: { $regex: search, $options: 'i' } },
+                    {College: { $regex: search, $options: 'i' } },
+                    { Description: { $regex:  search, $options: 'i' } },
+                    { Domain: { $regex:  search, $options: 'i' } },
+                    { Comments: { $regex: search, $options: 'i' } }
+                    
+                ],
+                
+            });
+            
+            const term1 = await projects.find({ $text: { $search: tokens.join(' ') } });
+        
+            let combinedResults1 = [...term1];
+        
+            partialSearchResults.forEach(result => {
+                if (!combinedResults1.some(item => item._id.equals(result._id))) {
+                    combinedResults1.push(result);
+                }
+            });
+        
+            
+            res.json(combinedResults1);
         }
         
     

@@ -148,6 +148,7 @@ export default function ProjectUploadForm() {
             let temp = event.target.value;
             const profilePhotoName = temp.replace("C:\\fakepath\\", "");
             setProfilePhotoName(profilePhotoName);
+            alert('photo uploaded')
         } else {
             alert('No photo selected');
         }
@@ -169,7 +170,7 @@ export default function ProjectUploadForm() {
             let temp3 = event.target.value;
             const videoname = temp3.replace("C:\\fakepath\\", "");
             setVideoName(videoname);
-
+            alert('uploaded video')
 
             // Perform further actions with the selected video here
         } else {
@@ -189,8 +190,8 @@ export default function ProjectUploadForm() {
                 setPhotos(prevPhotos => [...prevPhotos, photoDataUrl]);
             };
             reader.readAsDataURL(selectedPhoto);
+            alert('photos selected')
         }
-
         else {
             alert('No photo selected');
         }
@@ -243,19 +244,20 @@ export default function ProjectUploadForm() {
             const zipname = temp1.replace("C:\\fakepath\\", "");
             setFileName(zipname);
             console.log(filename);
+            alert('file uploaded')
             // You can perform further actions with the selected file here
         } else {
             alert('please select a valid .zip file');
         }
     }
-    const handlePlagarism = () => {
+    const handlePlagarism = async() => {
         setPlagarismValue(2);
-        setPlagarismErrorMessage('Checking Please Wait')
+        setPlagarismErrorMessage('Running Plagarism Test Please Wait')
         console.log(description);
         setPercent(100);
         if (description.length !== 0) {
 
-            const response = axios.post('/en/checkPlagiarism', { textToCheck: description });
+            const response = await axios.post('/en/checkPlagiarism', { textToCheck: description });
             response.then(function (result) {
                 setPercent(result.data);
 
@@ -267,11 +269,11 @@ export default function ProjectUploadForm() {
         console.log("percent is ", percent);
         if (percent < 30) {
             setPlagarismValue(3);
-            setPlagarismErrorMessage('plagarised content found')
+            setPlagarismErrorMessage('No Plagarised COntent FOund')
         }
         else {
             setPlagarismValue(1);
-            setPlagarismErrorMessage('Original Noice')
+            setPlagarismErrorMessage('Plagarised Content Found')
         }
     };
 
@@ -283,10 +285,10 @@ export default function ProjectUploadForm() {
                 alert("size exceeded");
             }
             else if (plagarismValue === 2) {
-                alert('plagarism check failed!');
+                alert('Checking Plagrism Wait');
             }
             else if (plagarismValue === 1) {
-                alert('You need to check plagarism');
+                alert('Your Description is Plagarised. It cannot be Submitted');
             }
             else if (videoname.length === 0) {
                 alert('video required!');

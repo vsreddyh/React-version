@@ -309,14 +309,14 @@ function HRMAIN({ checkSession }) {
                     <div className="para"><p>{hrdetails.email_address}</p></div>
                     <div className="para"><p>{hrdetails.company_name}</p></div>
                     <hr />
-                    <div className="logout" onClick={deletesession()}>
+                    <div className="logout" onClick={()=>deletesession()}>
                         <p>LogOut<span><i className='fas fa-sign-out-alt'></i></span></p>
                     </div>
                 </div>
             </div>
             <div className={`bodyy121 ${isProfileVisible ? 'blur-background' : ''}`} style={{ gridColumn: bodyGridColumn }}>
                 {display === 0 ? (
-                    <HomePage handleOptionClick={handleOptionClick()} handleDomainClick={handleDomainClick} handleclick={openproject} />
+                    <HomePage handleOptionClick={handleOptionClick} handleDomainClick={handleDomainClick} handleclick={openproject} />
                 ) : (
                     <>
                         {display === 1 ? (
@@ -330,7 +330,7 @@ function HRMAIN({ checkSession }) {
                                     {projects.map((suggestion, index) => (
                                         <div key={index} className="grid-item1">
                                             <div>
-                                            <div onClick={()=>{openproject(suggestion._id)}}>
+                                            <div onClick={()=>openproject(suggestion._id)}>
 
                                             <ProjectCard projinfo={suggestion} index={index}/>
                                        </div>

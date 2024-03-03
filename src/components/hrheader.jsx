@@ -103,14 +103,14 @@ export default function Header({ takedata, toggleDashboard1, handlehrdetail, tog
                     </div>
 
                     <div className="searchbar1">
-                        <input type="search" className="searchs1" spellcheck="false" placeholder="Search for projects" value={formData.search} onChange={handlesearchchange} onKeyDown={(event) => {
+                        <input type="search" className="searchs1" spellCheck="false" placeholder="Search for projects" value={formData.search} onChange={handlesearchchange} onKeyDown={(event) => {
                             if (event.key === 'Enter') {
                                 handlesearch();
                             }
                         }}></input>
                     </div>
                     <div className="search-icon1">
-                        <FontAwesomeIcon className="ic" icon={faSearch} style={{ color: "white" }} onClick={handlesearch} />
+                        <FontAwesomeIcon className="ic" icon={faSearch} style={{ color: "white" }} onClick={()=>handlesearch()} />
                     </div>
                 </div>
                 <div className="profileset1">

@@ -33,6 +33,7 @@ const Graph = ({handleclick,  receivedData, selectedYear, handleYearChange }) =>
         {
             const response=await axios.get(`/en/getnoofprj?term=${selectedYear}`);
             const data=response.data;
+            //console.log(data);
             setNoofprj(data);
         };
         getNoofprojects();
