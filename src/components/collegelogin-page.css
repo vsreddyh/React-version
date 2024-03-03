@@ -78,6 +78,15 @@
     font-size: 25px;
     margin-top: 15%; 
 }
+.uiux{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* width: 25%; */
+    box-sizing: border-box;
+}
+
 .z{
     display: flex;
     justify-content: center;
@@ -85,6 +94,7 @@
     position: relative;
 }
 #body-content8 input{
+    color: white;
     height: 40px;
     width: 250px;
     margin: 7px;
