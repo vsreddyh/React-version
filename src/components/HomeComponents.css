@@ -912,3 +912,11 @@
     margin-left: 360px;
     margin-bottom: 10px;
 }
+
+.plagrism {
+    display: flex;
+}
+
+.plagrism p{
+    margin-left: 20px;
+}
