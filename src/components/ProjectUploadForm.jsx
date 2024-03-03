@@ -6,6 +6,8 @@ import { faSearch, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import Header from './hrheader'
 import Filters from "./filters";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Uploadsucess from "./uploadsucess";
 
 
 export default function ProjectUploadForm() {
@@ -35,6 +37,7 @@ export default function ProjectUploadForm() {
     const CategoryData = useCallback((data) => {
 
     }, []);
+    const navigate =useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevents the default form submission behavior
@@ -54,7 +57,7 @@ export default function ProjectUploadForm() {
     const [domain, setDomain] = useState("");
     const [plagarismValue, setPlagarismValue] = useState(0);
     const [plagarismErrorMessage, setPlagarismErrorMessage] = useState('');
-
+    const [display,setDisplay]=useState(0);
 
 
     const handleInputChange = async (event) => {
@@ -321,6 +324,7 @@ export default function ProjectUploadForm() {
                     teams: teams,
                 })
                 console.log("successfully uploaded.")
+                setDisplay(1);
             };
 
 
@@ -339,7 +343,7 @@ export default function ProjectUploadForm() {
     return (
         <div className="bod">
             <Header takedata={CategoryData} />
-            <div className="bodyy">
+            {display===0 && (<div className="bodyy">
 
 
                 <form onSubmit={handleSubmit}>
@@ -490,7 +494,11 @@ export default function ProjectUploadForm() {
 
                 </form>
             </div>
-        </div>
-    );
+ )}
+ {display === 1 && (
+            <Uploadsucess/>
+        )}
+ </div>
+                                    );
 }
 
