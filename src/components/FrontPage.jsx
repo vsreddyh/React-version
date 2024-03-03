@@ -3,19 +3,19 @@ import './frontpage.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { get } from 'mongoose';
 
 const FrontPage = () => {
-  const [data,setdata]=useState([])
-  const getdata = async()=>{
+  const [data, setdata] = useState([])
+  const getdata = async () => {
     const response = await axios.get('/en/count')
     setdata(response.data)
   }
-  useEffect(()=>{
+  useEffect(() => {
     getdata()
   })
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   useEffect(() => {
 
     let lastScrollTop = 0;
@@ -65,7 +65,15 @@ const FrontPage = () => {
     };
   }, []);
 
-  
+
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
+  const handleTitleClick = () => {
+    navigate('/');
+  };
+
 
   return (
     <div className="fpage1">
@@ -75,15 +83,15 @@ const FrontPage = () => {
             <div className="flogo">
               <div className="fflogo">
                 {/* <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8"}} /> */}
-                <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '17px' }}/>
+                <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '17px' }} onClick={handleLogoClick} />
               </div>
-              <div className="ftitle">
+              <div className="ftitle" onClick={handleTitleClick}>
                 <p>project</p>
               </div>
             </div>
             <div className="fbuttons">
-              <button className="fsignup" onClick={()=>navigate('/wru')} name='signup'><p>Sign Up</p></button>
-              <button className="fsignup" onClick={()=>navigate('/SignIn')} name='signin'><p>Sign In</p></button>
+              <button className="fsignup" onClick={() => navigate('/wru')} name='signup'><p>Sign Up</p></button>
+              <button className="fsignup" onClick={() => navigate('/SignIn')} name='signin'><p>Sign In</p></button>
             </div>
           </div>
         </header>
@@ -101,7 +109,7 @@ const FrontPage = () => {
               <div>
                 JOIN THE COMMUNITY OF 2500+ STUDENTS
               </div>
-              <div className="aaaaa" onClick={()=>navigate('/wru')}>
+              <div className="aaaaa" onClick={() => navigate('/wru')}>
                 <p>Create</p>
               </div>
             </div>

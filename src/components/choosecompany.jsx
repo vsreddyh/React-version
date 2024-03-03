@@ -6,75 +6,83 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-export default function Company({setUserData}){
-    const year= new Date().getFullYear();
-    
+export default function Company({ setUserData }) {
+    const year = new Date().getFullYear();
+
     const [term1, setTerm1] = useState('');
     const [suggestions1, setSuggestions1] = useState([]);
- 
-    const navigate =useNavigate();
-    const handleInputChange= async (event) => {
+
+    const navigate = useNavigate();
+    const handleInputChange = async (event) => {
         const inputValue = event.target.value;
         setTerm1(inputValue);
         if (inputValue.length === 0) {
             setSuggestions1([]);
             return;
         }
-    
+
         try {
             const response = await axios.get(`/en/company-details?term1=${term1}`);
             const data = response.data; // Get data directly from the response
             setSuggestions1(data);
-            
-           
+
+
         } catch (error) {
             console.error('Error fetching autocomplete data:', error);
         }
     };
-    const submit = async() => {
-        
+    const submit = async () => {
+
         try {
-            const collegevalue=term1;
-            const response=await axios.post("/en/company-details",{ college: collegevalue});
-            if(response.data.message==="user saved")
-            {
-                setUserData([response.data.email,2,1])
+            const collegevalue = term1;
+            const response = await axios.post("/en/company-details", { college: collegevalue });
+            if (response.data.message === "user saved") {
+                setUserData([response.data.email, 2, 1])
                 navigate("/hrmain");
             }
-            
-        } 
+
+        }
         catch (error) {
             console.error('Error navigating:', error);
         }
     };
-        
-    
-    
-  
-      
+
+
+    const handleLogoClick = () => {
+        navigate('/');
+    };
+
+    const handleTitleClick = () => {
+        navigate('/');
+    };
+
+
+
+
+
     const handleSuggestionClick = (suggestion1) => {
         setTerm1(suggestion1);
         setSuggestions1([]);
-        };
-      
-    return(
+    };
+
+    return (
         <div className="abc">
             <div className="content1" id="header">
                 <div className="header-logo">
                     <div className="logo">
                         {/* <FontAwesomeIcon icon={faProductHunt} style={{color: "#0db1f8"}} /> */}
-                        <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }}/>
+                        <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }} onClick={handleLogoClick} />
                     </div>
-                    <div className="title">
+                    <div className="title" onClick={handleTitleClick}>
                         <p>project</p>
                     </div>
                 </div>
             </div>
-        
+
             <div className="content1" id="sider">
                 <div className="sider-slogan">
                     <p>
-                    From Concept to Completion
+                        From Concept to Completion
                     </p>
                 </div>
                 <div className="sider-contents">
@@ -99,34 +107,34 @@ export default function Company({setUserData}){
             <div className="content1" id="bodyy">
                 <div id="body-content">
                     <p className="create">
-                        Enter your Company name 
+                        Enter your Company name
                     </p>
-                    
+
                     <form action="/college-details" method="post" onSubmit={(e) => e.preventDefault()}>
                         <input className="collegename" type="text" id="collegeInput" placeholder="company name" minlength="3" name="college" value={term1} onChange={handleInputChange} required />
                         <br />
-                        
-                        
+
+
                         <div id="suggestions">
-                            {suggestions1.map((suggestion1,index)=>
+                            {suggestions1.map((suggestion1, index) =>
                             (
-                                <p key={index} className="suggestion" onClick={()=>handleSuggestionClick(suggestion1)}>
+                                <p key={index} className="suggestion" onClick={() => handleSuggestionClick(suggestion1)}>
                                     {suggestion1}
                                 </p>
                             ))}
-                            
+
                         </div>
                         <br />
                         <button type="submit" value="submit" className="submit" onClick={submit}>Next</button>
-                    </form>  
+                    </form>
                 </div>
-            
+
                 <div className="terms">
-                   <hr />
-                       <p>
-                         By signing-up in you are accepting
-                         <br /> <Link to='/t&c'>Terms and conditions</Link>
-                       </p>
+                    <hr />
+                    <p>
+                        By signing-up in you are accepting
+                        <br /> <Link to='/t&c'>Terms and conditions</Link>
+                    </p>
                 </div>
                 <div className="copyrights">
                     <p>
