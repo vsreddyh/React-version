@@ -19,6 +19,7 @@ const Graph = ({handleclick,  receivedData, selectedYear, handleYearChange }) =>
     const getproj = async () => {
         try {
             const response = await axios.post('/en/collegeprojectsdisplay', {receivedData: receivedData});
+            
             setsuggestions(response.data.list);
             setCollege(response.data.college);
         } catch (error) {

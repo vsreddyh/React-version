@@ -314,9 +314,9 @@ export default function HomeComponents({ checkSession }) {
                 <div className="two">
                     <div className="pp">
                         <div className="pphoto">
-                            {/*<FontAwesomeIcon icon={faUser} className="profileset-icon1" />*/}
+                            <FontAwesomeIcon icon={faUser} className="profileset-icon1" />
                             
-                            <img src={`/en/image/${studentdetail.photo}`} alt="" className="profileset-icon1" />
+                            {/*<img src={`/en/image/${studentdetail.photo}`} alt="" className="profileset-icon1" />*/}
                             
                         </div>
 
