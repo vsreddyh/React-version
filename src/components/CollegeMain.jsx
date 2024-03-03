@@ -113,10 +113,7 @@ const CollegeMain =({checkSession}) => {
     };
     const killpage = async() => {
         const len = stack.length
-        if(projid){
-            navigate(`/clgmain`)
-        }
-        else if (stack[len-2][0]===0){
+        if (stack[len-2][0]===0){
             setDisplay(0)
             updateReceivedData({
                 sort_by:stack[len-2][1],
