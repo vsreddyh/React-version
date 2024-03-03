@@ -5,7 +5,7 @@ import axios from 'axios'; // Import Axios
 import NothingHere from "./nothinghere";
 import ProjectCard from "./ProjectCard";
 
-export default function StudentProfile({ studentproj, studentdetail, handleclick }) {
+export default function StudentProfile({ studentproj, handlestudentdetail, studentdetail, handleclick }) {
     const [editMode, setEditMode] = useState(false);
     const [studentDescription, setStudentDescription] = useState('');
 
@@ -59,10 +59,10 @@ export default function StudentProfile({ studentproj, studentdetail, handleclick
                 studentDescription: studentDescription,
                 userId: studentdetail._id
             });
-            console.log("description saved successfully");
         } catch (error) {
             console.error('Error uploading photo:', error);
         }
+        handlestudentdetail()
     };
 
     return (
