@@ -8,6 +8,7 @@ import ProjectCard from "./ProjectCard";
 export default function StudentProfile({ studentproj, studentdetail, handleclick }) {
     const [editMode, setEditMode] = useState(false);
     const [studentDescription, setStudentDescription] = useState('');
+
     const handlePhotoChange = async (event) => {
         const selectedProfilePhoto = event.target.files[0]; // Get the selected photo file
         if (selectedProfilePhoto) {
@@ -19,7 +20,6 @@ export default function StudentProfile({ studentproj, studentdetail, handleclick
 
                 let temp = event.target.value;
                 const profilePhotoName = temp.replace("C:\\fakepath\\", "");
-
 
                 try {
                     const response = await axios.post(`/en/uploadProfilePhoto`, {
@@ -36,36 +36,34 @@ export default function StudentProfile({ studentproj, studentdetail, handleclick
             reader.readAsDataURL(selectedProfilePhoto);
         }
     };
+
     const handleEditClick = () => {
         setEditMode(true);
     };
 
     const handleStudentDescription = (event) => {
         setStudentDescription(event.target.value);
-       
     };
 
-    const handleStudentDescriptionSave = () => {
+    const handleCancelEdit = () => {
+        setEditMode(false);
+        setStudentDescription(''); // Clear the input field
+    };
+
+    const handleStudentDescriptionSave = async () => {
         // Call your function to save the edited college name
         console.log("Edited College Name:", studentDescription);
         setEditMode(false);
         try {
-            const response =  axios.post(`/en/uploadDescription`, {
-                studentDescription:studentDescription,
+            const response = await axios.post(`/en/uploadDescription`, {
+                studentDescription: studentDescription,
                 userId: studentdetail._id
             });
-            console.log("description saved succesfully");
-            
+            console.log("description saved successfully");
         } catch (error) {
             console.error('Error uploading photo:', error);
         }
-        
     };
-
-
-
-
-
 
     return (
         <div className="mprofile">
@@ -89,17 +87,19 @@ export default function StudentProfile({ studentproj, studentdetail, handleclick
                                 </div>
                                 <p className="mpgmname">{studentdetail.email_address}</p>
                                 <p className="mpgmname">{studentdetail.field_name}</p>
-                                <p>{studentdetail.college_name}</p>
                                 <div className="mpgmname">
                                     {editMode ? (
-                                        <input
-                                            type="text"
-                                            value={studentDescription}
-                                            onChange={handleStudentDescription}
-                                        />
+                                        <React.Fragment>
+                                            <input
+                                                type="text"
+                                                value={studentDescription}
+                                                onChange={handleStudentDescription}
+                                            />
+                                            <button onClick={handleCancelEdit}>Cancel</button>
+                                        </React.Fragment>
                                     ) : (
                                         <React.Fragment>
-                                            <p className="mpgmname">{studentdetail.Description}</p>
+                                            <p>{studentdetail.college_name}</p>
                                             <div className="editoption" onClick={handleEditClick}>Edit <span>&#128393;</span></div>
                                         </React.Fragment>
                                     )}
