@@ -340,7 +340,7 @@ export default function ProjectUploadForm() {
 
                                     <br />
                                     <p className="sphoto-p">
-                                        add photo
+                                        Add photo
                                     </p>
                                 </label>
                                 <input type="file" name="profilePic" id="profilePic" accept="image/*" className="sphoto-input" onChange={handleProfilePhoto} />
@@ -348,7 +348,7 @@ export default function ProjectUploadForm() {
                             </div>
                             <div className="sname">
 
-                                <p>project title:   <input type="text" spellcheck="false" className="sname-input" onChange={(e) => setTitle(e.target.value)} required /></p>
+                                <p>Project title:   <input type="text" spellcheck="false" className="sname-input" onChange={(e) => setTitle(e.target.value)} required /></p>
 
 
                             </div>
