@@ -72,7 +72,7 @@ export default function StudentProfile({ studentproj, handlestudentdetail, stude
                             <label htmlFor="fileInput">
                                 <span><FontAwesomeIcon icon={faCamera} /></span>
                             </label>
-                            {/* <input id="fileInput" type="file" accept="image/*" onChange={handlePhotoChange} style={{ display: 'none' }} /> */}
+                            <input id="fileInput" type="file" accept="image/*" onChange={handlePhotoChange} style={{ display: 'none' }} />
                         </div>
                         <div className="mpbg"></div>
                         <div className="mpphoto">
