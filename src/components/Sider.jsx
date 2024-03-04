@@ -13,11 +13,11 @@ export default function Sider() {
             <div className="sider-contents20">
                 <p>
                     <FontAwesomeIcon icon={faCircleCheck} size="lg" />
-                    lCode empowers evolution
+                    Code empowers evolution
                 </p>
                 <p>
                     <FontAwesomeIcon icon={faCircleCheck} size="lg" />
-                    lWhere Imagination meets Achievement
+                    Where Imagination meets Achievement
                 </p>
                 <p>
                     <FontAwesomeIcon icon={faCircleCheck} size="lg" />
