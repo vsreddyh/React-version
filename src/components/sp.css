@@ -87,17 +87,15 @@
 }
 
 .sdetails1{
-   display: block;
-    border: 0.1px solid #3C445C;
-    margin: 10px;
-    border-left: 2px solid #505b7b;
+    display: flex;
     height: auto;
-    max-height: 250px;
-    width: 430px;
-    color: #a6a5a5;
-    background-color: #141e2f;
-    z-index: 1;
-    overflow-y: auto;
+    min-height: 250px;
+    width: 900px;
+    max-width: 100%;
+    border-radius: 10px;
+    position: relative;
+    background-color: #141e2f;   
+    z-index: 2;
  }
  
 .probackground{
