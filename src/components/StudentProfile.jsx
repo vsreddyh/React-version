@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faUser, faCamera } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios'; // Import Axios
+import axios from 'axios'; 
 import NothingHere from "./nothinghere";
 import ProjectCard from "./ProjectCard";
 
@@ -10,12 +10,11 @@ export default function StudentProfile({ studentproj, handlestudentdetail, stude
     const [studentDescription, setStudentDescription] = useState('');
 
     const handlePhotoChange = async (event) => {
-        const selectedProfilePhoto = event.target.files[0]; // Get the selected photo file
+        const selectedProfilePhoto = event.target.files[0];
         if (selectedProfilePhoto) {
             const reader = new FileReader();
             reader.onloadend = async () => {
-                // The file's text will be printed here
-                const base64data = reader.result.split(',')[1]; // Get the Base64 string without the data URL prefix
+                const base64data = reader.result.split(',')[1];
                 console.log(base64data);
 
                 let temp = event.target.value;
@@ -23,8 +22,8 @@ export default function StudentProfile({ studentproj, handlestudentdetail, stude
 
                 try {
                     const response = await axios.post(`/en/uploadProfilePhoto`, {
-                        profilePhoto: base64data, // Send the Base64 string
-                        pphotoname: profilePhotoName, // Send the photo name
+                        profilePhoto: base64data, 
+                        pphotoname: profilePhotoName, 
                         userId: studentdetail._id,
                     });
                     console.log("Photo saved successfully");
@@ -47,11 +46,10 @@ export default function StudentProfile({ studentproj, handlestudentdetail, stude
 
     const handleCancelEdit = () => {
         setEditMode(false);
-        setStudentDescription(''); // Clear the input field
+        setStudentDescription(''); 
     };
 
     const handleStudentDescriptionSave = async () => {
-        // Call your function to save the edited college name
         console.log("Edited College Name:", studentDescription);
         setEditMode(false);
         try {
@@ -102,7 +100,6 @@ export default function StudentProfile({ studentproj, handlestudentdetail, stude
                                     ) : (
                                         <React.Fragment>
                                             <p className="mpgmname">{studentdetail.Description}</p>
-                                            {/* <div className="editoption" onClick={handleEditClick}>Edit <span>&#128393;</span></div> */}
                                         </React.Fragment>
                                     )}
                                     {editMode && (

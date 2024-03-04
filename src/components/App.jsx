@@ -25,12 +25,12 @@ import TermsAndConditions from "./TermsAndConditions";
 import Instructions from "./Instructions";
 
 export default function App() {
-    const [userData, setUserData] = useState(null); //session data
+    const [userData, setUserData] = useState(null); 
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         checkSession();
-    }, []); //use effect to call function on rendering of app.jsx
+    }, []); 
     const checkSession = async () => {
         try {
             const response = await axios.get('/en/checkSessionEndpoint');
@@ -43,12 +43,12 @@ export default function App() {
             console.error("Error checking session:", error);
             setUserData(null);
         } finally {
-            setLoading(false); // Set loading to false regardless of success or failure
+            setLoading(false);
         }
     };
     console.log(userData)
     if (loading) {
-        return <div>Loading...</div>; // Render a loading indicator while checking the session
+        return <div>Loading...</div>;
     }
     return (
         <BrowserRouter>

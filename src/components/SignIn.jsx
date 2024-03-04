@@ -31,18 +31,15 @@ export default function SignIn({ setUserData }) {
             else if (response.data.message === 'Wrong Password') {
                 setErrorMessage('Wrong Password')
             }
-            //students login
             else if (response.data.checkstudent === 0) {
                 setUserData([response.data.user.username, 0, 1]);
                 navigate('/main');
             }
-            //college login
             else if (response.data.checkstudent === 1) {
 
                 setUserData([response.data.user.username, 1, 1]);
                 navigate('/clgmain');
             }
-            //hr login
             else if (response.data.checkstudent === 2) {
 
                 setUserData([response.data.user.username, 2, 1]);
@@ -52,7 +49,6 @@ export default function SignIn({ setUserData }) {
                 console.log(response.data.user.username);
             }
 
-            // Handle successful login (e.g., set user session, redirect, etc.)
         } catch (error) {
             console.log('catch working')
             console.log('Login error:', error);

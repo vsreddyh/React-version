@@ -8,14 +8,9 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 export default function FiltersCollege({ sendDataToParent }) {
     const [formData, setFormData] = useState({
-        //college_name: 'Any',
-        //type: 'Any',
         sort_by: 'Upload Date',
         order: false
     });
-
-    //const [inputValue, setInputValue] = useState('Any');
-    //const [dropdownOptions, setDropdownOptions] = useState([]);
     const [term, setTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const handleChange = (event) => {
@@ -28,13 +23,6 @@ export default function FiltersCollege({ sendDataToParent }) {
     const handleChange1 = async (event) => {
         const inputdata = event.target.value;
         setTerm(inputdata);
-        // try {
-        //     const response = await axios.get(`/en/data?term=${inputdata}`);
-        //     const data = response.data;
-        //     setSuggestions(data);
-        // } catch (error) {
-        //     console.log("error", error);
-        // }
     };
     const handleSuggestionClick = (selectedSuggestion) => {
       /*  setFormData({

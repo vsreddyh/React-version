@@ -23,7 +23,7 @@ export default function StudentLogin({ setUserData }) {
         }
         try {
             const response = await axios.get(`/en/departments?term=${term}`);
-            const data = response.data; // Get data directly from the response
+            const data = response.data;
             setSuggestions(data);
         } catch (error) {
             console.error('Error fetching autocomplete data:', error);

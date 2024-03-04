@@ -30,7 +30,7 @@ export default function Category() {
     };
     const handleInputChange = (event) => {
         setFormData({
-            ...formData, //this makes sure that the remaining previous data doesnt change
+            ...formData,
             [event.target.name]: event.target.value
         });
         console.log(event.target.value)

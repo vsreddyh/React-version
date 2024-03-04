@@ -16,17 +16,15 @@ export default function StudentCard() {
     const selectElement = document.getElementById('cars');
     const selectedOption = selectElement.options[selectElement.selectedIndex];
 
-    // Calculate the width based on the text content of the selected option
-    const width = getTextWidth(selectedOption.text) + 40; // Add some padding
+    const width = getTextWidth(selectedOption.text) + 40; 
 
-    // Set the width of the select element
     selectElement.style.width = width + 'px';
   }
 
   function getTextWidth(text) {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
-    context.font = getComputedStyle(document.body).font; // Match the font of the document body
+    context.font = getComputedStyle(document.body).font;
     const metrics = context.measureText(text);
     return metrics.width;
   }

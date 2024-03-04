@@ -33,11 +33,10 @@ const Graph = ({handleclick,  receivedData, selectedYear, handleYearChange }) =>
         {
             const response=await axios.get(`/en/getnoofprj?term=${selectedYear}`);
             const data=response.data;
-            //console.log(data);
             setNoofprj(data);
         };
         getNoofprojects();
-    },[noofprj])
+    },[selectedYear])
     
     
     
@@ -76,7 +75,6 @@ const Graph = ({handleclick,  receivedData, selectedYear, handleYearChange }) =>
     const domainChartRef=useRef(null);
     
 
-    //line graph
 useEffect(() => {
     if (!collegeprj) {
         console.warn(`Data for year ${selectedYear} not available yet.`);
@@ -122,7 +120,6 @@ useEffect(() => {
     });
 }, [selectedYear, collegeprj]);
 
-//bar graph
 useEffect(() => {
     if (!domainprj) {
         console.warn(`Data for year ${selectedYear} not available yet.`);
@@ -181,6 +178,7 @@ useEffect(() => {
                 <div id="cmainrealgraph" className="justincase">
                     <label htmlFor="yearSelector" className='year'>Select Year:</label>
                     <select id="yearSelector" onChange={handleYearChange} value={selectedYear} >
+                        <option value="2024">2024</option>
                         <option value="2023">2023</option>
                         <option value="2022">2022</option>
                         <option value="2021">2021</option>

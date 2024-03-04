@@ -384,7 +384,7 @@ const checkPlagarism = async (req,res) => {
         url: 'https://plagiarism-checker-and-auto-citation-generator-multi-lingual.p.rapidapi.com/plagiarism',
         headers: {
           'content-type': 'application/json',
-          'X-RapidAPI-Key': 'fee42b39c6mshf82915257919e4ap11ae16jsn0cd6205d2a1a',
+          'X-RapidAPI-Key': '6ac8aba9fcmsh58413014b14e402p1d6408jsn839d018b7b26',
           'X-RapidAPI-Host': 'plagiarism-checker-and-auto-citation-generator-multi-lingual.p.rapidapi.com'
         },
         data: {

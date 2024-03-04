@@ -44,7 +44,7 @@ if (selectedPhoto) {
 }
 }
 function handlechange(event) {
-const selectedFile = event.target.files[0]; // Get the first selected file
+const selectedFile = event.target.files[0];
 if (selectedFile && selectedFile.name.endsWith('.zip')) {
     const reader=new FileReader();
     reader.onloadend=()=>{
@@ -55,7 +55,6 @@ if (selectedFile && selectedFile.name.endsWith('.zip')) {
     const zipname=temp1.replace("C:\\fakepath\\", "");
     setFileName(zipname);
     console.log(filename);
-    // You can perform further actions with the selected file here
 } else {
     alert('please select a valid .zip file');
 }

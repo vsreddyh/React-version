@@ -45,7 +45,6 @@ export default function ProjectPortfolio({ dis,openstuinfo, ...props }) {
         const month = monthNames[dateObj.getMonth()];
         const year = dateObj.getFullYear();
 
-        // Add correct suffix to day
         let dayWithSuffix;
         if (day === 11 || day === 12 || day === 13) {
             dayWithSuffix = day + 'th';
@@ -150,11 +149,11 @@ export default function ProjectPortfolio({ dis,openstuinfo, ...props }) {
                         <div className="gettingdescription">
                             <p>{projdata.Description}</p>
                         </div>
-                        {projdata.File ? <div className="opfolder" onClick={()=>handleFile('65b497569dc7f9d4ea86dfca')}>
+                        {projdata.File ? <div className="opfolder" onClick={()=>handleFile(projdata.File)}>
                             <p>FOLDER<span>&#128193;</span></p>
                         </div>
                         :
-                        <div className="opfolder" onClick={()=>handleFile(projdata.File)}>
+                        <div className="opfolder" onClick={()=>handleFile('65b497569dc7f9d4ea86dfca')}>
                             <p>FOLDER<span>&#128193;</span></p>
                         </div>
                         }

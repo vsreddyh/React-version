@@ -1,6 +1,5 @@
-// ProjectPlatformAboutUs.js
 import React from 'react';
-import './TermsAndConditions.css'; // Import the new CSS file
+import './TermsAndConditions.css';
 
 const TermsAndConditions = () => {
   return (

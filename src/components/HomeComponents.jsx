@@ -203,7 +203,7 @@ export default function HomeComponents({ checkSession }) {
     }
     useEffect(() => {
         if (!projid) {
-            setDisplay(prevdisplay); // Reset display to 0 when projid is null
+            setDisplay(prevdisplay); 
             setSendDataToStudent(null);
         }
         else if (projid) {
