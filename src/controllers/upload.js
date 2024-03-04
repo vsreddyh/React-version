@@ -171,6 +171,7 @@ const details = async (req, res) => {
           console.log(`Student with ID ${studentId} not found`);
     
         }
+        res.json("success")
       } catch (error) {
     
         console.error('Error updating student skills, projects, and domain:', error);

@@ -8,7 +8,7 @@ import Filters from "./filters";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Uploadsucess from "./uploadsucess";
-
+import uploadpending from "./uploadpending";
 
 export default function ProjectUploadForm() {
 
@@ -303,7 +303,9 @@ export default function ProjectUploadForm() {
                     teams: teams,
                 })
                 console.log("successfully uploaded.")
-                setDisplay(1);
+                if(response.data==="success"){
+                    setDisplay(1);
+                }
             };
 
 
