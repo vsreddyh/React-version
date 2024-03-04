@@ -24,7 +24,7 @@ export default function Header() {
 
                     </div>
                     <div className="title20" onClick={handleTitleClick} >
-                        <p>project</p>
+                        <p>Schedio</p>
                     </div>
                 </div>
             </div>

@@ -83,7 +83,7 @@ const FrontPage = () => {
                 <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '17px' }} onClick={handleLogoClick} />
               </div>
               <div className="ftitle" onClick={handleTitleClick}>
-                <p>project</p>
+                <p>Schedio</p>
               </div>
             </div>
             <div className="fbuttons">

@@ -256,7 +256,7 @@ export default function HomeComponents({ checkSession }) {
                             <img src='../Plogo.png' style={{ width: '35px', height: 'auto', }} onClick={handleLogoClick} />
                         </div>
                         <div className="title4" onClick={handleTitleClick}>
-                            <p>project</p>
+                            <p>Schedio</p>
                         </div>
                     </div>
                     <div className="searchbarset4">

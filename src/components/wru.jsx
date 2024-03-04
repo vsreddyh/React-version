@@ -55,7 +55,7 @@ export default function Category() {
                             <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '0px' }} onClick={handleLogoClick} />
                         </div>
                         <div className="title9" onClick={handleTitleClick}>
-                            <p>project</p>
+                            <p>Schedio</p>
                         </div>
                     </div>
                 </div>

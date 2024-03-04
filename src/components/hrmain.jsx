@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./hr-page.css";
-// import Hrsider from "./hrsider";
 import Header from "./hrheader";
 import Filters from "./filters";
 import "./studentcard.css";
@@ -42,7 +41,6 @@ function HRMAIN({ checkSession }) {
     };
 
     const FilterData = useCallback((data) => {
-        console.log(data);
         updateReceivedData(data);
         setCurrentPage(1);
     }, []);
@@ -268,20 +266,9 @@ function HRMAIN({ checkSession }) {
         setstack([[0]])
     }
     const stackexplore = ()=>{
-        setDisplay(2)
         fetchData()
-        setstack(prevStack => {
-            const newStack = [...prevStack];
-            newStack.push([2,{
-                category: 'Any',
-                college_name: 'Any',
-                sort_by: 'Upload Date',
-                order: false,
-                page:0
-            }])
-            return newStack;
-            });
     }
+    console.log('Stack is',stack)
     return (
         <div className="body19">
             <Header takedata={CategoryData} handlehrdetail={handlehrdetail} toggleDashboard1={toggleDashboard1} toggleDashboard={toggleDashboard} />
@@ -325,7 +312,7 @@ function HRMAIN({ checkSession }) {
                         ) : display === 6 ? (
                             <div>
                                 <div className="sbackbutton">
-                                    <p onClick={() => setDisplay(0)}><span>&#8592;</span>Go Back</p>
+                                    <p onClick={() => killpage}><span>&#8592;</span>Go Back</p>
                                 </div>
                                 
                                     {projects.map((suggestion, index) => (
@@ -343,7 +330,7 @@ function HRMAIN({ checkSession }) {
                         ) : display === 3 ? (
                             <div>
                                 <div className="sbackbutton">
-                                    <p onClick={() => setDisplay(0)}><span>&#8592;</span>Go Back</p>
+                                    <p onClick={() => killpage}><span>&#8592;</span>Go Back</p>
                                 </div>
                                 <div className="grid-container1">
                                     {students.map((student, index) => (
@@ -372,7 +359,7 @@ function HRMAIN({ checkSession }) {
                             <div>
                                 <Filters sendDataToParent={FilterData} />
                                 <div className="sbackbutton">
-                                    <p onClick={() => setDisplay(0)}><span>&#8592;</span>Go Back</p>
+                                    <p onClick={() => killpage}><span>&#8592;</span>Go Back</p>
                                 </div>
                                 
                                     {projects.map((suggestion, index) => (
