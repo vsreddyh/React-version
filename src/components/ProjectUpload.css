@@ -543,9 +543,10 @@
     align-items: center;
 }
 
-#tagcontainer{
+#tagContainer{
     display:flex;
 }
+
 
 .submit-button{
     padding: 10px 15px;

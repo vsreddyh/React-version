@@ -239,8 +239,8 @@ video{
 }
 
 .oplikes1{
-    margin-left: 25px;
-    font-size: 35px;
+    margin-left: 15px;
+    font-size: 23px;
 }
 
 .opnlikes{
@@ -454,6 +454,40 @@ video{
 }
 
 .slectimage2{
+    height: 250px;
+    border: 1px solid #375672;
+    width: auto;
+    border-radius: 9px;
+    margin: 10px;
+}
+
+.stdpimg{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.stcmimg{
+    height:31px;
+    width: 31px;
+    border-radius:50%;
+}
+
+.stphimg{
+    height: 250px;
+    border: 1px solid #375672;
+    width: auto;
+    border-radius: 9px;
+    margin: 10px;
+}
+
+.cldpimg{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.clphimg{
     height: 250px;
     border: 1px solid #375672;
     width: auto;

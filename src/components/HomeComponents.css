@@ -762,6 +762,10 @@
     border-radius: 4px;
 }
 
+#tagcontainer{
+    display:flex;
+}
+
 .tagText {
     margin-right: 8px;
     color: black;

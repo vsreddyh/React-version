@@ -87,17 +87,17 @@
 }
 
 .sdetails1{
-    display: flex;
-    height: auto;
-    min-height: 250px;
-    width: 900px;
-    max-width: 100%;
+   display: block;
     border: 0.1px solid #3C445C;
-    border-radius: 10px;
     margin: 10px;
-    position: relative;
-    background-color: #141e2f;   
-    z-index: 2;
+    border-left: 2px solid #505b7b;
+    height: auto;
+    max-height: 250px;
+    width: 430px;
+    color: #a6a5a5;
+    background-color: #141e2f;
+    z-index: 1;
+    overflow-y: auto;
  }
  
 .probackground{
@@ -145,6 +145,8 @@
 
 .sprojects1{
     display: block;
+    border: 0.1px solid #3C445C;
+    border-radius: 6px;
     margin: 10px;
     border-left: 2px solid #505b7b;
     height: auto;

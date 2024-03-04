@@ -165,14 +165,14 @@ export default function StudentProjectProfile({ dis, ...props }) {
                         </div>
                         {(photolist.length !== 0) && (
                             photolist.map((photo, index) => (
-                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="stdpimg" />
+                                <img src={`/en/image/${photo}`} key={index} alt="VS" className="stphimg" />
                             ))
                         )}
                     </div>
                     {projdata && (<div className="opdetail1">
                         <div className="opprojectname1">
                             <div className="oppic1">
-                                {projdata && (<img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage2" />)}
+                                {projdata && (<img src={`/en/image/${projdata.photo}`} alt="VS" className="stdpimg" />)}
                             </div>
                             <div className="oprealpro1">
                                 <p>{projdata.Project_Name}</p>
@@ -227,7 +227,7 @@ export default function StudentProjectProfile({ dis, ...props }) {
                                         <div className="commentdetails1">
                                             <div className="letcomdetails1">
                                                 <div className="commentpic1">
-                                                    <img src={`/en/commentimage/${comment.id}`} alt="VS" className="slectimage12" />
+                                                    <img src={`/en/commentimage/${comment.id}`} alt="VS" className="stcmimg" />
                                                 </div>
                                                 <div className="commentname1">
                                                     <p>{comment.studentname}</p>

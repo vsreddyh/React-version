@@ -1,5 +1,8 @@
 import React,{useState} from "react";
 import "./studentcard.css"
+import "@fontsource/bebas-neue"; 
+import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap'
+
 
 export default function StudentCard() {
 

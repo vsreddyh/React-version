@@ -265,7 +265,7 @@
 .filter1 input{
     border-bottom-left-radius: 10px;
     text-align: center;
-    width: 100%;
+    width: 100px;
     border: none;
     height: 28px;
     background-color: #1c2333;
@@ -369,11 +369,10 @@
 }
   
 .grid-item1 {
-        /* border: 3px solid #20283b; */
         padding-right: 0px;
         margin-left: 20px;
+        margin-right: 40px;
 }
-
 .project-card2{
     height: 200px;
     width: 100%;

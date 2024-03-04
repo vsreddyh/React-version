@@ -113,7 +113,7 @@ export default function StudentProjectProfile({ dis, studata , handlestuclick })
                         </div>
                         {photolist.length !== 0 && (
                             photolist.map((photo, index) => (
-                                <img key={index} src={`/en/image/${photo}`} alt="VS" className="slectimage2" />
+                                <img key={index} src={`/en/image/${photo}`} alt="VS" className="clphimg" />
                             ))
                         )}
                     </div>
@@ -121,7 +121,7 @@ export default function StudentProjectProfile({ dis, studata , handlestuclick })
                         <div className="opdetail1">
                             <div className="opprojectname1">
                                 <div className="oppic1">
-                                    {projdata && <img src={`/en/image/${projdata.photo}`} alt="VS" className="slectimage1" />}
+                                    {projdata && <img src={`/en/image/${projdata.photo}`} alt="VS" className="cldpimg" />}
                                 </div>
                                 <div className="oprealpro1">
                                     <p>{projdata.Project_Name}</p>
