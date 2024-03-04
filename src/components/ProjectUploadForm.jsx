@@ -243,18 +243,14 @@ export default function ProjectUploadForm() {
         if (description.length !== 0) {
 
             const response = await axios.post('/en/checkPlagiarism', { textToCheck: description });
-            response.then(function (result) {
-                setPercent(result.data);
-
-            }).catch(function (error) {
-                console.error("Error: ", error);
-            });
+            console.log(response);
+            setPercent(response.data);
         }
 
         console.log("percent is ", percent);
         if (percent < 30) {
             setPlagarismValue(3);
-            setPlagarismErrorMessage('No Plagarised COntent FOund')
+            setPlagarismErrorMessage('No Plagarised Content Found')
         }
         else {
             setPlagarismValue(1);
