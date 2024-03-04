@@ -312,7 +312,7 @@ function HRMAIN({ checkSession }) {
                         ) : display === 6 ? (
                             <div>
                                 <div className="sbackbutton">
-                                    <p onClick={() => killpage}><span>&#8592;</span>Go Back</p>
+                                    <p onClick={() => setDisplay(0)}><span>&#8592;</span>Go Back</p>
                                 </div>
                                 
                                     {projects.map((suggestion, index) => (
@@ -330,7 +330,7 @@ function HRMAIN({ checkSession }) {
                         ) : display === 3 ? (
                             <div>
                                 <div className="sbackbutton">
-                                    <p onClick={() => killpage}><span>&#8592;</span>Go Back</p>
+                                    <p onClick={() => setDisplay(0)}><span>&#8592;</span>Go Back</p>
                                 </div>
                                 <div className="grid-container1">
                                     {students.map((student, index) => (
@@ -359,7 +359,7 @@ function HRMAIN({ checkSession }) {
                             <div>
                                 <Filters sendDataToParent={FilterData} />
                                 <div className="sbackbutton">
-                                    <p onClick={() => killpage}><span>&#8592;</span>Go Back</p>
+                                    <p onClick={() => setDisplay(0)}><span>&#8592;</span>Go Back</p>
                                 </div>
                                 
                                     {projects.map((suggestion, index) => (
