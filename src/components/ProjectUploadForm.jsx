@@ -9,6 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Uploadsucess from "./uploadsucess";
 import uploadpending from "./uploadpending";
+import Uploadpending from "./uploadpending";
 
 export default function ProjectUploadForm() {
 
@@ -266,6 +267,9 @@ export default function ProjectUploadForm() {
             if ((fileSize + videoSize + profilePhotoSize) > 40) {
                 alert("size exceeded");
             }
+            else if (plagarismValue === 0) {
+                alert('Please run Plagarism Check');
+            }
             else if (plagarismValue === 2) {
                 alert('Checking Plagrism Wait');
             }
@@ -303,7 +307,8 @@ export default function ProjectUploadForm() {
                     teams: teams,
                 })
                 console.log("successfully uploaded.")
-                if(response.data==="success"){
+                setDisplay(2)
+                if(response.data.message==="Project details saved successfully"){
                     setDisplay(1);
                 }
             };
@@ -476,6 +481,9 @@ export default function ProjectUploadForm() {
                 </form>
             </div>
  )}
+ {display === 2 && (
+            <Uploadpending/>
+        )}
  {display === 1 && (
             <Uploadsucess/>
         )}
