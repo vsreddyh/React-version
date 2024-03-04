@@ -42,8 +42,8 @@ const CollegeMain =({checkSession}) => {
     const [sendDataToStudent, setSendDataToStudent] = useState(null);
     const [collegedetail,setCollegedetail]=useState([]);
     const [isProfileVisible,setIsProfileVisible]=useState(false);
-    const [stack,setstack]=useState([[0,'Upload Date',false,2004]])
-    const [selectedYear, setSelectedYear] = useState('2004');
+    const [stack,setstack]=useState([[0,'Upload Date',false,2024]])
+    const [selectedYear, setSelectedYear] = useState('2024');
     const toggleDashboard1 = () => {
         setIsProfileVisible(prevState => !prevState);
     };

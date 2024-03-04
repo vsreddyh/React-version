@@ -90,6 +90,7 @@ export default function ProjectUploadForm() {
         }
         else {
             try {
+                console.log(teamInputValue,teams)
                 const response = await axios.get(`/en/getteam?term=${encodeURIComponent(teamInputValue)}&teams=${teams}`);
                 const data = response.data;
                 setSugesstions3(data);

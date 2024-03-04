@@ -678,6 +678,7 @@ const getSkill = async (req, res) => {
 const getteam = async (req, res) => {
     try {
         const term1 = decodeURIComponent(req.query.term);
+        const tims=req.query.teams
         if (term1.trim()===""){
             res.json([])
         }
@@ -687,8 +688,8 @@ const getteam = async (req, res) => {
                 college_name: req.session.loggedInCollege,
                 student_name: regex1
             }).select('student_name').limit(3);
+            res.json(teams);
         }
-        res.json(teams);
     } catch (err) {
         console.error('Error retrieving colleges:', err);
         res.status(500).json({ error: 'Error in retrieving colleges' });
