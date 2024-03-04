@@ -12,7 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import StudentProjectProfile from "./studentProjectPortfolio.jsx";
 import AboutUs from "./AboutUs.jsx";
-import { MdOutlineHome } from "react-icons/md";
+// import { MdOutlineHome } from "react-icons/md";
 import ProjectCard from "./ProjectCard.jsx";
 import "./ProjectCard.css";
 export default function HomeComponents({ checkSession }) {
@@ -284,7 +284,6 @@ export default function HomeComponents({ checkSession }) {
                 <div id="option1" className="option" onClick={() => handleOptionClick(0)}>
                     <p>
                         {/* <span><FontAwesomeIcon icon={faHouse} /></span> */}
-                        <span><MdOutlineHome /></span>
                         Home
                     </p>
                 </div>
