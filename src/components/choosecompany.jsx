@@ -78,7 +78,7 @@ export default function Company({ setUserData }) {
                         <img src='../Plogo.png' style={{ width: '100px', height: 'auto', paddingTop: '17px' }} onClick={handleLogoClick} />
                     </div>
                     <div className="title" onClick={handleTitleClick}>
-                        <p>project</p>
+                        <p>Schedio</p>
                     </div>
                 </div>
             </div>

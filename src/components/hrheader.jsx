@@ -84,7 +84,7 @@ export default function Header({ takedata, toggleDashboard1, handlehrdetail, tog
                         <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '0px' }} onClick={handleLogoClick} />
                     </div>
                     <div className="title1" onClick={handleTitleClick}>
-                        <p>Project</p>
+                        <p>Schedio</p>
                     </div>
                 </div>
                 <div className="searchbarset1">

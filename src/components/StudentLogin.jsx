@@ -70,7 +70,7 @@ export default function StudentLogin({ setUserData }) {
                         <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '0px' }} onClick={handleLogoClick} />
                     </div>
                     <div className="title8" onClick={handleTitleClick}>
-                        <p>project</p>
+                        <p>Schedio</p>
                     </div>
                 </div>
             </div>

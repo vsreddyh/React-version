@@ -45,7 +45,7 @@ export default function CollegeHeader({ takedata, handlesearch, toggleDashboard1
                         <img src='../Plogo.png' style={{ width: '35px', height: 'auto', paddingTop: '0px' }} onClick={handleLogoClick} />
                     </div>
                     <div className="titleCollege" onClick={handleTitleClick}>
-                        <p>Project</p>
+                        <p>Schedio</p>
                     </div>
                 </div>
                 <div className="searchbarsetCollege">
