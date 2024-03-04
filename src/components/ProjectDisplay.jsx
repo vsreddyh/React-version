@@ -83,7 +83,7 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
                         id="njava"
                         className="ntechelements"
                         onClick={() => {
-                            handleskillprj("java");
+                            handleskillprj("html");
                         }}
                     >
                         <img
@@ -95,7 +95,7 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
                         id="ncpp"
                         className="ntechelements"
                         onClick={() => {
-                            handleskillprj("c++");
+                            handleskillprj("html");
                         }}
                     >
                         <img
@@ -107,7 +107,7 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
                         id="nkotlin"
                         className="ntechelements"
                         onClick={() => {
-                            handleskillprj("kotlin");
+                            handleskillprj("html");
                         }}
                     >
                         <img
@@ -119,7 +119,7 @@ export default function ProjectDisplay({ handleskillprj, handleclick, handleskil
                         id="nmern"
                         className="ntechelements"
                         onClick={() => {
-                            handleskillprj("mern");
+                            handleskillprj("html");
                         }}
                     >
                         <img
