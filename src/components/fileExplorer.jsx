@@ -36,6 +36,9 @@ const FileExplorer = () => {
       console.error('Error fetching folder structure:', error);
     }
   };
+  useEffect(()=>{
+    fetchFolderStructure(data)
+  },[data])
   const handleCodeExplain = () => {
     setCodeExplain('')
     setsider(false);
@@ -50,7 +53,6 @@ const FileExplorer = () => {
       console.error("Error: ", error);
   });
     console.log("reponse is ",response);
-   // setCodeExplain(response.data.ans);
 
   };
   console.log("a",data)
@@ -58,7 +60,6 @@ const FileExplorer = () => {
       <div class="febodyy">
         { sider &&
           (<div className="sider">
-            <button className="filesiderbutton" onClick={()=>fetchFolderStructure(data)}>Fetch Folder Structure</button>
             {folderStructure && <FileOrFolder fileName={fileName} name={fileName} contents={folderStructure} fileContents={fileContents} setcde={setcde} setopenforpath={setopenforpath} openforpath={openforpath}/>}
           </div>)
         }

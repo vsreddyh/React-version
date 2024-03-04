@@ -25,7 +25,7 @@ export default function CollegeDetails({ setUserData }) {
 
         try {
             const response = await axios.get(`/en/college-details?term1=${term1}`);
-            const data = response.data; // Get data directly from the response
+            const data = response.data; 
             setSuggestions1(data);
 
 

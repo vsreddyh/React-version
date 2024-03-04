@@ -25,7 +25,7 @@ export default function CollegeLogin() {
     else {
       try {
         const response = await axios.get(`/en/signup_college?term=${inputValue}`);
-        const data = response.data; // Get data directly from the response
+        const data = response.data;
         setSuggestions1(data);
 
 

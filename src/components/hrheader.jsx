@@ -3,10 +3,7 @@ import "./hr-page.css";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { faSearch, faUser, faUserPlus, faBars, faHeart, faHouse } from '@fortawesome/free-solid-svg-icons';
-// import { faSearch ,faUser} from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
 
 
@@ -29,10 +26,8 @@ export default function Header({ takedata, toggleDashboard1, handlehrdetail, tog
         const selectedOption = selectElement.options[selectElement.selectedIndex];
 
 
-        // Calculate the width based on the text content of the selected option
-        const width = getTextWidth(selectedOption.text) + 40; // Add some padding
+        const width = getTextWidth(selectedOption.text) + 40; 
 
-        // Set the width of the select element
         selectElement.style.width = width + 'px';
     }
 
@@ -41,7 +36,7 @@ export default function Header({ takedata, toggleDashboard1, handlehrdetail, tog
     function getTextWidth(text) {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.font = getComputedStyle(document.body).font; // Match the font of the document body
+        context.font = getComputedStyle(document.body).font;
         const metrics = context.measureText(text);
         return metrics.width;
     }

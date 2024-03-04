@@ -25,10 +25,8 @@ const FrontPage = () => {
       const body = document.body;
 
       if (st > lastScrollTop && st > 0) {
-        // Scrolling down, apply transitions
         body.classList.remove('scrolling-up');
       } else {
-        // Scrolling up, remove transitions
         body.classList.add('scrolling-up');
       }
 
@@ -42,7 +40,6 @@ const FrontPage = () => {
         const isVisible = entry.isIntersecting;
 
         if (isVisible) {
-          // Exclude jdet and jdetimage elements from adding the active class
           if (!target.classList.contains('jdet') && !target.classList.contains('jdetimage')) {
             target.classList.add('active');
           }

@@ -16,24 +16,6 @@ export default function CollegeHeader({ takedata, handlesearch, toggleDashboard1
     useEffect(() => {
         takedata(formData);
     }, [formData, takedata]);
-    /*function adjustSelectSize() {
-        const selectElement = document.getElementById('cars');
-        const selectedOption = selectElement.options[selectElement.selectedIndex];
-
-        // Calculate the width based on the text content of the selected option
-        const width = getTextWidth(selectedOption.text) + 40; // Add some padding
-
-        // Set the width of the select element
-        selectElement.style.width = width + 'px';
-    }
-
-    function getTextWidth(text) {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        context.font = getComputedStyle(document.body).font; // Match the font of the document body
-        const metrics = context.measureText(text);
-        return metrics.width;
-    }*/
     const handlesearchchange = async (event) => {
         event.preventDefault();
         setSearchTerm(event.target.value);

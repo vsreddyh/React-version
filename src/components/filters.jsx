@@ -13,9 +13,6 @@ export default function Filters({ sendDataToParent }) {
         sort_by: 'Upload Date',
         order: false
     });
-
-    //const [inputValue, setInputValue] = useState('Any');
-    //const [dropdownOptions, setDropdownOptions] = useState([]);
     const [term, setTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const handleChange = (event) => {
@@ -63,12 +60,6 @@ export default function Filters({ sendDataToParent }) {
         });
         sendDataToParent(formData);
     };
-    // const change=(event) => {
-    //     const { name, value } = event.target;
-    //     setFormData({
-    //         ...formData,
-    //         [name]: value
-    //     });
     return (
         <div className="filters">
             <div className="y">

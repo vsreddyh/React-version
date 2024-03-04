@@ -138,10 +138,14 @@ export default function StudentProjectProfile({ dis, studata , handlestuclick })
                             <div className="gettingdescription1">
                                 <p>{projdata.Description}</p>
                             </div>
-                            <div className="opfolder1" onClick={()=>handleFile('65b497569dc7f9d4ea86dfca')}>
+                            {projdata.File ? <div className="opfolder" onClick={()=>handleFile(projdata.File)}>
                                 <p>FOLDER<span>&#128193;</span></p>
-                                {/* need to add explorer hyperlink here */}
                             </div>
+                            :
+                            <div className="opfolder" onClick={()=>handleFile('65b497569dc7f9d4ea86dfca')}>
+                                <p>FOLDER<span>&#128193;</span></p>
+                            </div>
+                            }
                             <div className="ourdomain1">
                                 <p>DOMAIN: {projdata.Domain}</p>
                             </div>

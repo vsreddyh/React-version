@@ -42,10 +42,8 @@ const FileOrFolder = ({ fileName, path, name, contents, fileContents, setcde, op
     <div className='folder'>
       <div  className="folders" onClick={handleClick}>
         {isFolder(contents) ? (
-          // Use the folder image for folders
           <img src="../folder.png" alt="Folder" style={{ width: '20px', marginRight: '5px' }} />
         ) : (
-          // Use the file image for files
           <img src="../file (1).png" alt="File" style={{ width: '20px', marginRight: '5px' }} />
         )}
         <div className='p'> <p>{name} </p> </div>

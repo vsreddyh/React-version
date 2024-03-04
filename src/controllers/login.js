@@ -677,13 +677,17 @@ const getSkill = async (req, res) => {
 //suggest students
 const getteam = async (req, res) => {
     try {
-        const term1 = req.query.term;
-
-        const regex1 = new RegExp(term1, 'i');
-        const teams = await Course.find({
-            college_name: req.session.loggedInCollege,
-            student_name: regex1
-        }).select('student_name').limit(3);
+        const term1 = decodeURIComponent(req.query.term);
+        if (term1.trim()===""){
+            res.json([])
+        }
+        else{
+            const regex1 = new RegExp(term1, 'i');
+            const teams = await Course.find({
+                college_name: req.session.loggedInCollege,
+                student_name: regex1
+            }).select('student_name').limit(3);
+        }
         res.json(teams);
     } catch (err) {
         console.error('Error retrieving colleges:', err);

@@ -27,7 +27,7 @@ export default function Company({ setUserData }) {
 
         try {
             const response = await axios.get(`/en/company-details?term1=${term1}`);
-            const data = response.data; // Get data directly from the response
+            const data = response.data;
             setSuggestions1(data);
 
 

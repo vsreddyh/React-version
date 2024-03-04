@@ -40,12 +40,9 @@ export default function ProjectUploadForm() {
     const navigate =useNavigate();
 
     const handleSubmit = (event) => {
-        event.preventDefault(); // Prevents the default form submission behavior
+        event.preventDefault(); 
         saveDetails();
     };
-    // useEffect(() => {
-    //     takedata(formData);
-    // }, [formData, takedata]);
     const [languages, setLanguages] = useState([]);
     const [teams, setTeams] = useState([]);
     const [inputValue, setInputValue] = useState("");
@@ -93,7 +90,7 @@ export default function ProjectUploadForm() {
         }
         else {
             try {
-                const response = await axios.get(`/en/getteam?term=${teamInputValue}`);
+                const response = await axios.get(`/en/getteam?term=${encodeURIComponent(teamInputValue)}&teams=${teams}`);
                 const data = response.data;
                 setSugesstions3(data);
             } catch (error) {
@@ -137,7 +134,7 @@ export default function ProjectUploadForm() {
     };
 
     function handleProfilePhoto(event) {
-        const selectedProfilePhoto = event.target.files[0]; // Get the selected photo file
+        const selectedProfilePhoto = event.target.files[0];
         setProfilePhotoSize(selectedProfilePhoto.size / (1024 * 1024))
 
         if (selectedProfilePhoto) {
@@ -146,7 +143,6 @@ export default function ProjectUploadForm() {
                 setProfilePhoto(reader.result.split(',')[1]);
             };
             reader.readAsDataURL(selectedProfilePhoto);
-            // Perform further actions with the selected photo here
 
             let temp = event.target.value;
             const profilePhotoName = temp.replace("C:\\fakepath\\", "");
@@ -161,7 +157,7 @@ export default function ProjectUploadForm() {
 
 
     function handleVideoChange(event) {
-        const selectedVideo = event.target.files[0]; // Get the selected video file
+        const selectedVideo = event.target.files[0];
         setVideoSize(selectedVideo.size / (1024 * 1024));
 
         if (selectedVideo) {
@@ -175,21 +171,19 @@ export default function ProjectUploadForm() {
             setVideoName(videoname);
             alert('uploaded video')
 
-            // Perform further actions with the selected video here
         } else {
             alert('No video selected');
         }
     }
 
     function handlePhotoChange(event) {
-        const selectedPhoto = event.target.files[0]; // Get the selected photo files
+        const selectedPhoto = event.target.files[0]; 
 
         console.log("photo");
         if (selectedPhoto) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 const photoDataUrl = reader.result.split(',')[1];
-                // Update the state with the data URL of the photo
                 setPhotos(prevPhotos => [...prevPhotos, photoDataUrl]);
             };
             reader.readAsDataURL(selectedPhoto);
@@ -204,17 +198,15 @@ export default function ProjectUploadForm() {
         const selectElement = document.getElementById('cars');
         const selectedOption = selectElement.options[selectElement.selectedIndex];
 
-        // Calculate the width based on the text content of the selected option
-        const width = getTextWidth(selectedOption.text) + 40; // Add some padding
+        const width = getTextWidth(selectedOption.text) + 40;
 
-        // Set the width of the select element
         selectElement.style.width = width + 'px';
     }
 
     function getTextWidth(text) {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.font = getComputedStyle(document.body).font; // Match the font of the document body
+        context.font = getComputedStyle(document.body).font;
         const metrics = context.measureText(text);
         return metrics.width;
     }
@@ -225,17 +217,8 @@ export default function ProjectUploadForm() {
         });
         adjustSelectSize();
     };
-    /*const handleVideoUploadClick = () => {
-        // Trigger the input click event for video upload
-        document.getElementById('video-upload').click();
-    };
-
-    const handlePhotoUploadClick = () => {
-        // Trigger the input click event for photo upload
-        document.getElementById('photo-upload').click();
-    };*/
     function handlechange(event) {
-        const selectedFile = event.target.files[0]; // Get the first selected file
+        const selectedFile = event.target.files[0];
         setFileSize(selectedFile.size / (1024 * 1024))
         if (selectedFile && selectedFile.name.endsWith('.zip')) {
             const reader = new FileReader();
@@ -248,7 +231,6 @@ export default function ProjectUploadForm() {
             setFileName(zipname);
             console.log(filename);
             alert('file uploaded')
-            // You can perform further actions with the selected file here
         } else {
             alert('please select a valid .zip file');
         }
