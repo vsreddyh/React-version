@@ -3,7 +3,7 @@ import Header from "./Header";
 import Sider from "./Sider";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
-import axiosInstance from "../settings/axiosInstance";
+import axiosInstance from "../backend/settings/axiosInstance";
 import "./signin.css"
 import { Link, useNavigate } from "react-router-dom";
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
