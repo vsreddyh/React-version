@@ -5,6 +5,7 @@ import './fileExplorer.css';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useParams } from 'react-router-dom';
+import axiosInstance from "../settings/axiosInstance";
 
 
 
