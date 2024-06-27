@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId;
-url='mongodb+srv://Project:Florencemidhebaramvesam@project.tbx2krn.mongodb.net/projectpalace'
-mongoose.connect(url);
 
 const loginSchema = new mongoose.Schema({
     student_name : String,
@@ -63,10 +61,6 @@ const projects = mongoose.model('project',projectschema);
 const skills=mongoose.model('skill',skillSchema);
 
 module.exports = {
-    EMAIL : 'freemovies5247@gmail.com',
-    PASSWORD : 'btjqbzhxpulroavl',
-    JWT_SECRET :  'bV5zN2xZ4vU9nW6xZ7aB1vD3kF6gH8jK',
-    SESSION_KEY : '9a3jKL$#3jfk4kljg%2f7sJ@*Lmn2J7H',
     Course:Course,
     college:college,
     Department:Department,
@@ -74,5 +68,4 @@ module.exports = {
     recruiter:recruiter,
     companies:companies,
     skills:skills,
-    url:url,
 }

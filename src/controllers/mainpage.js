@@ -8,14 +8,14 @@ const jwt = require('jsonwebtoken');
 const Grid = require('gridfs-stream');
 const natural=require('natural');
 const GridFS = Grid(mongoose.connection, mongoose.mongo);
-const {college,projects,Course,url, recruiter,skills} = require('../settings/env.js');
+const {college,projects,Course,recruiter,skills} = require('../settings/env.js');
 const { constants } = require('fs/promises');
 const { ObjectId } = require('mongodb');
 
 const app = express();
 app.use(express.static('./public'));
 app.use(bodyParser.json());
-const conn = mongoose.createConnection(url);
+const conn = mongoose.createConnection(process.env.URL);
 let gfs;
 conn.once('open', () => {
   // Init stream

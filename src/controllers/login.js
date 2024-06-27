@@ -8,8 +8,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const Mailgen = require('mailgen');
 const nodemailer = require('nodemailer');
-const { EMAIL, PASSWORD, JWT_SECRET, SESSION_KEY, Course, college, Department, recruiter, companies, skills } = require('../settings/env.js');
-require('dotenv').config();
+const { Course, college, Department, recruiter, companies, skills } = require('../settings/env.js');
 
 app.use(express.static('../build'));
 app.use(bodyParser.json());
@@ -61,12 +60,12 @@ const signup_college = async (req, res) => {
         else if (result) {
             const username = result.email_address;
             //mail has found
-            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '10m' });
+            const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '10m' });
             let config = {
                 service: 'gmail',
                 auth: {
-                    user: EMAIL,
-                    pass: PASSWORD,
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD,
                 },
             };
             let transporter = nodemailer.createTransport(config);
@@ -94,7 +93,7 @@ const signup_college = async (req, res) => {
             };
             let mail = MailGenerator.generate(response);
             let message = {
-                from: EMAIL,
+                from: process.env.EMAIL,
                 to: username,
                 subject: "Your OTP for Verification",
                 html: mail,
@@ -141,12 +140,12 @@ const signup = async (req, res) => {
             res.json({ message: "User Already Exists", username: "null" })
         }
         else {
-            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '10m' }); //encodes mail with expiration time 10 min
+            const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '10m' }); //encodes mail with expiration time 10 min
             let config = {
                 service: 'gmail', //to use gmail for sending mail
                 auth: {
-                    user: EMAIL, //our email
-                    pass: PASSWORD, //our app-password
+                    user: process.env.EMAIL, //our email
+                    pass: process.env.PASSWORD, //our app-password
                 },
             };
             let transporter = nodemailer.createTransport(config);// adds configuration to a variable named transporter
@@ -174,7 +173,7 @@ const signup = async (req, res) => {
             };
             let mail = MailGenerator.generate(response); // generating mail
             let message = { //complete mail 
-                from: EMAIL,
+                from: process.env.EMAIL,
                 to: username,
                 subject: "Your OTP for Verification",
                 html: mail,
@@ -210,12 +209,12 @@ const hrsignup = async (req, res) => {
             res.json({ message: "User Already Exists", username: "null" })
         }
         else {
-            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '10m' });
+            const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '10m' });
             let config = {
                 service: 'gmail',
                 auth: {
-                    user: EMAIL,
-                    pass: PASSWORD,
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD,
                 },
             };
             let transporter = nodemailer.createTransport(config);
@@ -243,7 +242,7 @@ const hrsignup = async (req, res) => {
             };
             let mail = MailGenerator.generate(response);
             let message = {
-                from: EMAIL,
+                from: process.env.EMAIL,
                 to: username,
                 subject: "Your OTP for Verification",
                 html: mail,
@@ -302,7 +301,7 @@ const signin = async (req, res) => {
 //token validation
 const validate_token = function (req, res) {
     var token = req.params.token;
-    jwt.verify(token, JWT_SECRET, function (err, decoded) {
+    jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
         if (err) {
             if (err.name === 'TokenExpiredError') {
                 res.json({ message: 'Token expired', email: 'null' });
@@ -425,12 +424,12 @@ const fpassword = async (req, res) => {
             res.json({ message: 'User does not exist' });
         }
         else {
-            const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '10m' });
+            const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '10m' });
             let config = {
                 service: 'gmail',
                 auth: {
-                    user: EMAIL,
-                    pass: PASSWORD,
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD,
                 },
             };
             let transporter = nodemailer.createTransport(config);
@@ -461,7 +460,7 @@ const fpassword = async (req, res) => {
             let mail = MailGenerator.generate(response);
 
             let message = {
-                from: EMAIL,
+                from: process.env.EMAIL,
                 to: username,
                 subject: "Your OTP for Verification",
                 html: mail,

@@ -6,11 +6,13 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const approute=require("./route.js")
 const axios=require("axios")
+const mongoose = require('mongoose');
 var MongoDBStore = require('connect-mongodb-session')(session);
 
 
 require('dotenv').config();
-const {SESSION_KEY,url} = require('./settings/env.js');
+const url = process.env.URL;
+mongoose.connect(url);
 app.use(cors())
 
 app.use(express.static(path.join(__dirname,'../build')));
@@ -23,14 +25,14 @@ var store = new MongoDBStore({
   uri: url,
   collection: 'mySessions'
 });
-
+app.set("trust proxy", 1);
 app.use(session({
-  secret: SESSION_KEY,
+  secret: process.env.SESSION_KEY,
   resave: false,
   store: store,
   saveUninitialized: false,
   cookie: {
-      secure: false,
+      secure: process.env=== "production",
       maxAge: 6 * 60 * 60 * 1000, //6 hours
       rolling:true //whenever session is modified it resets expirytime
   }

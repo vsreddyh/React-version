@@ -9,10 +9,10 @@ const axios=require('axios');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
-const{projects,Course,url}=require('../settings/env.js');
+const{projects}=require('../settings/env.js');
 const { ObjectId } = require('mongodb');
 
-const mongoURI = url;
+const mongoURI = process.env.URL;
 const databaseName = 'projectpalace';
 
 // Create a MongoClient without the poolSize option
@@ -487,7 +487,7 @@ const updateDescription = async (req, res) => {
   console.log(userId)
 
   // Connect to MongoDB
-  const client = new MongoClient(url);
+  const client = new MongoClient(process.env.URL);
   await client.connect();
 
   try {
