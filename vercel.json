@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "builds": [
+    { 
+      "src": "src/server.js", 
+      "use": "@vercel/node", 
+      "config": { "zero-config": true },
+      "base": "./build",
+      "run": "npm run build && src/server.js"
+    }
+  ]
+}
